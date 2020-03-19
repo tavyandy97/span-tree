@@ -11,8 +11,8 @@
   "dependencies": {
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
-    "react-redux": "^4.4.10",
-    "redux": "^3.0.4",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5",
     "webext-redux": "^2.1.6"
   },
   "devDependencies": {
