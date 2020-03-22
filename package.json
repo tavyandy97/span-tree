@@ -1,13 +1,12 @@
 {
-  "name": "rcr-example",
+  "name": "span-tree",
   "version": "0.0.1",
-  "private": true,
-  "description": "",
+  "description": "Tree for Gitlab",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "./node_modules/.bin/gulp"
   },
-  "author": "Tyler Shaddix",
+  "author": "Taveesh Anand",
   "dependencies": {
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
