@@ -12,6 +12,7 @@
     "react-dom": "^16.13.0",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
+    "style-loader": "^1.1.3",
     "webext-redux": "^2.1.6"
   },
   "devDependencies": {
@@ -19,6 +20,7 @@
     "babel-loader": "^7.0.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "css-loader": "^3.4.2",
     "gulp": "^3.9.0",
     "gulp-load-plugins": "^1.6.0",
     "gulp-rename": "^1.2.2",
