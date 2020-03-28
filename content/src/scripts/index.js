@@ -10,7 +10,9 @@ const proxyStore = new Store();
 const anchor = document.createElement("div");
 anchor.id = "rcr-anchor";
 
-document.body.insertBefore(anchor, document.body.childNodes[0]);
+document
+  .querySelector(".layout-page")
+  .insertBefore(anchor, document.querySelector(".layout-page").childNodes[0]);
 
 proxyStore.ready().then(() => {
   render(

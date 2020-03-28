@@ -13,7 +13,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*/*"],
+      "matches": ["https://gitlab.com/*/*", "https://gitlab.com/*/*/-/tree/*"],
       "css": [],
       "js": ["content.js"]
     }

@@ -1,0 +1,1 @@
+export const TOGGLE_PINNED = "TOGGLE_PINNED";
