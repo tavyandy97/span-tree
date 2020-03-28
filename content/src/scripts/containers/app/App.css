@@ -1,4 +1,5 @@
 .panel {
-  position: fixed;
   background-color: red;
+  position: fixed;
+  top: 33%;
 }
