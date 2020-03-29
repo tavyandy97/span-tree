@@ -3,16 +3,22 @@ import { connect } from "react-redux";
 
 import Toggler from "../../components/Toggler";
 import { toggleOpened } from "../../../../../event/src/actions/UI";
+import { getInitialTree } from "../../../../../event/src/actions/API";
 
 import "./App.css";
 
 class App extends Component {
   componentDidMount() {
-    // console.log(this.props);
+    const pathLiterals = window.location.pathname
+      .split("/")
+      .filter(pathSub => pathSub.length !== 0);
+    getInitialTree(`${pathLiterals[0]}%2F${pathLiterals[1]}`);
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(prevProps.opened, this.props.opened);
+    if (prevProps.tree !== this.props.tree) {
+      console.log(this.props.tree);
+    }
   }
 
   render() {
@@ -25,17 +31,14 @@ class App extends Component {
   }
 }
 
-// function App({ opened, pinned, toggleOpened }) {
-//   return <Toggler handleClick={toggleOpened} pinned={pinned} />;
-// }
-
 const mapStateToProps = state => {
   return {
     opened: state.opened,
-    pinned: state.pinned
+    pinned: state.pinned,
+    tree: state.tree
   };
 };
 
-const mapDispatchToProps = { toggleOpened };
+const mapDispatchToProps = { toggleOpened, getInitialTree };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -1,9 +1,9 @@
 import thunk from "redux-thunk";
-import { createStore, applyMiddleware } from "redux";
+import { createStore } from "redux";
 import rootReducer from "./reducers";
 
-import { wrapStore } from "webext-redux";
+import { wrapStore, applyMiddleware } from "webext-redux";
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(rootReducer, {});
 
-wrapStore(store);
+wrapStore(applyMiddleware(store, thunk));
