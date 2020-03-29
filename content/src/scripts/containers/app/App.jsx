@@ -1,26 +1,41 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import Toggler from "../../components/Toggler";
+import { toggleOpened } from "../../../../../event/src/actions/UI";
+
 import "./App.css";
 
 class App extends Component {
   componentDidMount() {
-    document.addEventListener("click", () => {
-      this.props.dispatch({
-        type: "ADD_COUNT"
-      });
-    });
+    // console.log(this.props);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log(prevProps.opened, this.props.opened);
   }
 
   render() {
-    return <div className="panel">Count: {this.props.count}</div>;
+    return (
+      <Toggler
+        handleClick={this.props.toggleOpened}
+        pinned={this.props.pinned}
+      />
+    );
   }
 }
 
+// function App({ opened, pinned, toggleOpened }) {
+//   return <Toggler handleClick={toggleOpened} pinned={pinned} />;
+// }
+
 const mapStateToProps = state => {
   return {
-    count: state.count
+    opened: state.opened,
+    pinned: state.pinned
   };
 };
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = { toggleOpened };
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -1,0 +1,12 @@
+.spantree-toggler {
+  background-color: rgb(250, 250, 250);
+  position: fixed;
+  padding: 4px 8px;
+  top: 40%;
+  transform: rotate(-90deg);
+  transform-origin: top left;
+  border: 1px rgb(229, 229, 229) solid;
+  border-radius: 0px 0px 4px 4px;
+  cursor: pointer;
+  z-index: 10;
+}
