@@ -1,9 +1,11 @@
 import React from "react";
 
+import "./styles.css";
+
 function TreePane({}) {
   return (
-    <div>
-      <div className="pane-header"></div>
+    <div className="tree-pane">
+      <div className="pane-header">Gitlab Spantree</div>
     </div>
   );
 }
