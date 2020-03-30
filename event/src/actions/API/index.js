@@ -11,7 +11,7 @@ export const getInitialTree = id => {
     .then(res => {
       store.dispatch({
         type: types.FETCH_TREE,
-        payload: res
+        payload: res.data
       });
     })
     .catch(err => {});

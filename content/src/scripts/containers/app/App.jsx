@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import Toggler from "../../components/Toggler";
+import TreePane from "../../components/TreePane";
 import { toggleOpened } from "../../../../../event/src/actions/UI";
 import { getInitialTree } from "../../../../../event/src/actions/API";
 
@@ -22,7 +23,9 @@ class App extends Component {
   }
 
   render() {
-    return (
+    return this.props.opened ? (
+      <TreePane />
+    ) : (
       <Toggler
         handleClick={this.props.toggleOpened}
         pinned={this.props.pinned}

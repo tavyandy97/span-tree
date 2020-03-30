@@ -8,5 +8,6 @@ import tree from "./API/tree";
 export default combineReducers({
   count,
   opened,
-  pinned
+  pinned,
+  tree
 });
