@@ -11,6 +11,13 @@ const middleware = [thunkMiddleware];
 const storeWithMiddleware = applyMiddleware(proxyStore, ...middleware);
 
 const anchor = document.createElement("div");
+anchor.style.zIndex = "600";
+anchor.style.top = "40px";
+anchor.style.position = "fixed";
+anchor.style.left = "0px";
+anchor.style.display = "block";
+anchor.style.minWidth = "240px";
+
 anchor.id = "rcr-anchor";
 
 document

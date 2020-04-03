@@ -19,12 +19,13 @@
 }
 
 .tree-pane {
-  position: fixed;
+  position: absolute;
   display: block;
   background-color: red;
   box-sizing: border-box;
   width: 180px;
   height: 100%;
+  margin-right: 20px;
   /* right: 0px !important;
   top: 0px !important;
   bottom: 0px !important;
