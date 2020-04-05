@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 
 import Toggler from "../../components/Toggler";
@@ -8,11 +9,13 @@ import { getInitialTree } from "../../../../../event/src/actions/API";
 
 import "./App.css";
 
+const parentDiv = document.querySelector(".layout-page");
+
 class App extends Component {
   componentDidMount() {
     const pathLiterals = window.location.pathname
       .split("/")
-      .filter(pathSub => pathSub.length !== 0);
+      .filter((pathSub) => pathSub.length !== 0);
     getInitialTree(`${pathLiterals[0]}%2F${pathLiterals[1]}`);
   }
 
@@ -24,7 +27,7 @@ class App extends Component {
 
   render() {
     return this.props.opened ? (
-      <TreePane />
+      ReactDOM.createPortal(<TreePane />, parentDiv)
     ) : (
       <Toggler
         handleClick={this.props.toggleOpened}
@@ -34,11 +37,11 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     opened: state.opened,
     pinned: state.pinned,
-    tree: state.tree
+    tree: state.tree,
   };
 };
 
