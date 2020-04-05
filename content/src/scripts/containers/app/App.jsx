@@ -4,12 +4,16 @@ import { connect } from "react-redux";
 
 import Toggler from "../../components/Toggler";
 import TreePane from "../../components/TreePane";
+import {
+  applyClosedPageStyling,
+  applyOpenedPageStyling,
+} from "../../utils/styling";
 import { toggleOpened } from "../../../../../event/src/actions/UI";
 import { getInitialTree } from "../../../../../event/src/actions/API";
 
 import "./App.css";
 
-const parentDiv = document.querySelector(".layout-page");
+const parentDiv = document.querySelector("body");
 
 class App extends Component {
   componentDidMount() {
@@ -17,17 +21,31 @@ class App extends Component {
       .split("/")
       .filter((pathSub) => pathSub.length !== 0);
     getInitialTree(`${pathLiterals[0]}%2F${pathLiterals[1]}`);
+    if (this.props.opened) {
+      applyOpenedPageStyling();
+    } else {
+      applyClosedPageStyling();
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.tree !== this.props.tree) {
       console.log(this.props.tree);
     }
+    if (this.props.opened) {
+      applyOpenedPageStyling();
+    } else {
+      applyClosedPageStyling();
+    }
+  }
+
+  renderOpenPane() {
+    return ReactDOM.createPortal(<TreePane />, parentDiv);
   }
 
   render() {
     return this.props.opened ? (
-      ReactDOM.createPortal(<TreePane />, parentDiv)
+      this.renderOpenPane()
     ) : (
       <Toggler
         handleClick={this.props.toggleOpened}
