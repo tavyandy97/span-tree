@@ -40,7 +40,17 @@ class App extends Component {
   }
 
   renderOpenPane() {
-    return ReactDOM.createPortal(<TreePane />, parentDiv);
+    return ReactDOM.createPortal(
+      <TreePane
+        opened={this.props.opened}
+        pinned={this.props.pinned}
+        toggleOpened={this.props.toggleOpened}
+        pathLiterals={window.location.pathname
+          .split("/")
+          .filter((pathSub) => pathSub.length !== 0)}
+      />,
+      parentDiv
+    );
   }
 
   render() {

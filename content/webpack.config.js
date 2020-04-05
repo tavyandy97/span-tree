@@ -6,12 +6,12 @@ module.exports = {
   output: {
     filename: "content.js",
     path: path.join(__dirname, "../", "build"),
-    publicPath: "/"
+    publicPath: "/",
   },
 
   resolve: {
-    extensions: [".js", ".jsx", ".json", ".css"],
-    modules: ["node_modules"]
+    extensions: [".js", ".jsx", ".json", ".css", ".svg"],
+    modules: ["node_modules"],
   },
 
   module: {
@@ -23,9 +23,20 @@ module.exports = {
         exclude: /(node_modules)/,
         include: path.join(__dirname, "src"),
         query: {
-          presets: ["es2015", "react"]
-        }
-      }
-    ]
-  }
+          presets: ["es2015", "react"],
+        },
+      },
+      {
+        test: /\.(png|jp(e*)g|svg|gif)$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "images/[hash]-[name].[ext]",
+            },
+          },
+        ],
+      },
+    ],
+  },
 };
