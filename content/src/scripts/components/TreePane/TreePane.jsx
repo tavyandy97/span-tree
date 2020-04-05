@@ -1,16 +1,18 @@
 import React from "react";
 
+import { paneWidth } from "../../utils/styling";
+
 import "./styles.css";
 
 function TreePane({}) {
   return (
-    <div className="tree-pane">
+    <div className="tree-pane" style={{ width: paneWidth() }}>
       <div className="pane-header">Gitlab Spantree</div>
     </div>
   );
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {};
 };
 
