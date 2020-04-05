@@ -4,16 +4,21 @@ import { paneWidth } from "../../utils/styling";
 
 import "./styles.css";
 
-function TreePane({}) {
+function TreePane({ opened, pinned, toggleOpened, pathLiterals }) {
   return (
     <div className="tree-pane" style={{ width: paneWidth() }}>
-      <div className="pane-header">Gitlab Spantree</div>
+      <div className="pane-header">
+        <div className="spread">
+          <div>
+            {pathLiterals[0]} / {pathLiterals[1]}
+          </div>
+          <div onClick={toggleOpened}>X</div>
+        </div>
+        <div>master</div>
+      </div>
+      <div className="tree-body"></div>
     </div>
   );
 }
-
-const mapStateToProps = (state) => {
-  return {};
-};
 
 export default TreePane;

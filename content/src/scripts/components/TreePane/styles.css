@@ -2,7 +2,7 @@
   position: fixed;
   display: block;
   background-color: rgb(250, 250, 250);
-  border: 1px rgb(229, 229, 229) solid;
+  /* border: 1px rgb(229, 229, 229) solid; */
   box-sizing: border-box;
   height: 100%;
   /* margin-right: 20px; */
@@ -10,7 +10,26 @@
   top: 0px !important;
   bottom: 0px !important;
   left: 0px !important;
+  font-size: 0.9em;
   z-index: 1000;
   transform: translate3d(0px, 0px, 0px);
   transition: transform 0.2s ease 0s;
+}
+
+.pane-header {
+  height: 40px;
+  background-color: rgb(75, 75, 163);
+  color: white;
+  padding: 5px;
+}
+
+.spread {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tree-body {
+  border: 1px rgb(229, 229, 229) solid;
+  height: 100%;
+  width: 100%;
 }
