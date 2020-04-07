@@ -1,4 +1,5 @@
 import React from "react";
+import SVG from "../SVG";
 
 import { paneWidth } from "../../utils/styling";
 
@@ -10,11 +11,17 @@ function TreePane({ opened, pinned, toggleOpened, pathLiterals }) {
       <div className="pane-header">
         <div className="spread">
           <div>
-            {pathLiterals[0]} / {pathLiterals[1]}
+            <SVG icon="repo" height="12" /> {pathLiterals[0]} /{" "}
+            {pathLiterals[1]}
           </div>
-          <div onClick={toggleOpened}>X</div>
+          <div onClick={toggleOpened} className="close-button">
+            {/* <Octicon icon={Octicons.x} scale={0.8} /> */}
+            <SVG icon="close" height="12" />
+          </div>
         </div>
-        <div>master</div>
+        <div>
+          <SVG icon="branch" height="12" /> master
+        </div>
       </div>
       <div className="tree-body"></div>
     </div>
