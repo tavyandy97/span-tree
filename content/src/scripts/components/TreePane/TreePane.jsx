@@ -11,8 +11,8 @@ function TreePane({ opened, pinned, toggleOpened, pathLiterals }) {
       <div className="pane-header">
         <div className="spread">
           <div>
-            <SVG icon="repo" height="12" /> {pathLiterals[0]} /{" "}
-            {pathLiterals[1]}
+            <SVG icon="repo" height="12" style={{ verticalAlign: "middle" }} />{" "}
+            {pathLiterals[0]} / {pathLiterals[1]}
           </div>
           <div onClick={toggleOpened} className="close-button">
             {/* <Octicon icon={Octicons.x} scale={0.8} /> */}
@@ -20,7 +20,8 @@ function TreePane({ opened, pinned, toggleOpened, pathLiterals }) {
           </div>
         </div>
         <div>
-          <SVG icon="branch" height="12" /> master
+          <SVG icon="branch" height="12" style={{ verticalAlign: "middle" }} />{" "}
+          master
         </div>
       </div>
       <div className="tree-body"></div>
