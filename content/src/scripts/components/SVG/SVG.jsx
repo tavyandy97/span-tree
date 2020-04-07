@@ -3,14 +3,14 @@ import Branch from "./assets/Branch";
 import Repo from "./assets/Repo";
 import Close from "./assets/Close";
 
-function SVG({ icon, height }) {
+function SVG({ icon, height, style }) {
   switch (icon) {
     case "branch":
-      return <Branch height={height} />;
+      return <Branch height={height} style={style} />;
     case "repo":
-      return <Repo height={height} />;
+      return <Repo height={height} style={style} />;
     case "close":
-      return <Close height={height} />;
+      return <Close height={height} style={style} />;
     default:
       return "faulty svg";
   }

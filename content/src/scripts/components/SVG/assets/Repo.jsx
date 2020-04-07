@@ -1,16 +1,11 @@
 import React from "react";
 
-function Repo({ height }) {
-  let heightSVG = height ? height : "1024";
-  let widthSVG = height ? `${(768 * height) / 1024}` : "640";
+function Repo({ height, style }) {
+  let heightSVG = height ? height : "16";
+  let widthSVG = height ? `${(3 * height) / 4}` : "12";
   return (
-    <svg
-      enable-background="new 0 0 386.667 386.667"
-      height={heightSVG}
-      width={widthSVG}
-      viewBox="0 0 386.667 386.667"
-    >
-      <path d="M320 256h-64v64h64V256zM320 128h-64v64h64V128zM704 0H64C64 0 0 0 0 64v768c0 64 64 64 64 64h128v128l96-96 96 96V896h320c0 0 64-1.125 64-64V64C768 0 704 0 704 0zM704 768c0 61.625-64 64-64 64H384v-64H192v64h-64c-64 0-64-64-64-64v-64h640V768zM704 640H192V64h513L704 640zM320 512h-64v64h64V512zM320 384h-64v64h64V384z" />
+    <svg width={widthSVG} height={heightSVG} viewBox="0 0 12 16" style={style}>
+      <path d="M4 9H3V8h1v1zm0-3H3v1h1V6zm0-2H3v1h1V4zm0-2H3v1h1V2zm8-1v12c0 .55-.45 1-1 1H6v2l-1.5-1.5L3 16v-2H1c-.55 0-1-.45-1-1V1c0-.55.45-1 1-1h10c.55 0 1 .45 1 1zm-1 10H1v2h2v-1h3v1h5v-2zm0-10H2v9h9V1z" />
     </svg>
   );
 }
