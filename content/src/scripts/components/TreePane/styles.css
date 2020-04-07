@@ -10,7 +10,7 @@
   top: 0px !important;
   bottom: 0px !important;
   left: 0px !important;
-  font-size: 0.9em;
+  font-size: 0.8em;
   z-index: 1000;
   transform: translate3d(0px, 0px, 0px);
   transition: transform 0.2s ease 0s;
@@ -21,6 +21,10 @@
   background-color: rgb(75, 75, 163);
   color: white;
   padding: 5px;
+}
+
+.close-button {
+  cursor: pointer;
 }
 
 .spread {
