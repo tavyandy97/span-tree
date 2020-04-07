@@ -2,6 +2,7 @@ export const applyOpenedPageStyling = () => {
   document.querySelector("header").style.left = paneWidth();
   document.querySelector(".nav-sidebar").style.left = paneWidth();
   document.querySelector("body").style.marginLeft = paneWidth();
+  document.querySelector("body").style.overflowX = "auto";
 };
 
 export const applyClosedPageStyling = () => {
@@ -11,5 +12,5 @@ export const applyClosedPageStyling = () => {
 };
 
 export const paneWidth = () => {
-  return "180px";
+  return "220px";
 };
