@@ -1,0 +1,7 @@
+.tree-item {
+}
+
+.tree-item:hover {
+  background-color: rgb(162, 209, 255);
+  cursor: pointer;
+}

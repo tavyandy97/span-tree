@@ -16,9 +16,6 @@ const parentDiv = document.querySelector("body");
 
 class App extends Component {
   componentDidMount() {
-    const pathLiterals = window.location.pathname
-      .split("/")
-      .filter((pathSub) => pathSub.length !== 0);
     if (this.props.opened) {
       applyOpenedPageStyling();
     } else {

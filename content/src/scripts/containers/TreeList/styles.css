@@ -1,0 +1,13 @@
+.loader-wrapper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+.parent-list {
+  font-size: 0.875rem;
+  padding-left: 12px;
+  list-style-type: none;
+}
