@@ -4,8 +4,9 @@ import SVG from "../SVG";
 import { paneWidth } from "../../utils/styling";
 
 import "./styles.css";
+import TreeList from "../../containers/TreeList/TreeList";
 
-function TreePane({ opened, pinned, toggleOpened, pathLiterals }) {
+function Pane({ toggleOpened, pathLiterals }) {
   return (
     <div className="tree-pane" style={{ width: paneWidth() }}>
       <div className="pane-header">
@@ -15,7 +16,6 @@ function TreePane({ opened, pinned, toggleOpened, pathLiterals }) {
             {pathLiterals[0]} / {pathLiterals[1]}
           </div>
           <div onClick={toggleOpened} className="close-button">
-            {/* <Octicon icon={Octicons.x} scale={0.8} /> */}
             <SVG icon="close" height="12" />
           </div>
         </div>
@@ -24,9 +24,11 @@ function TreePane({ opened, pinned, toggleOpened, pathLiterals }) {
           master
         </div>
       </div>
-      <div className="tree-body"></div>
+      <div className="tree-body">
+        <TreeList />
+      </div>
     </div>
   );
 }
 
-export default TreePane;
+export default Pane;
