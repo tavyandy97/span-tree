@@ -3,13 +3,12 @@ import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 
 import Toggler from "../../components/Toggler";
-import TreePane from "../../components/TreePane";
+import Pane from "../../components/Pane";
 import {
   applyClosedPageStyling,
   applyOpenedPageStyling,
 } from "../../utils/styling";
 import { toggleOpened } from "../../../../../event/src/actions/UI";
-import { getInitialTree } from "../../../../../event/src/actions/API";
 
 import "./App.css";
 
@@ -20,7 +19,6 @@ class App extends Component {
     const pathLiterals = window.location.pathname
       .split("/")
       .filter((pathSub) => pathSub.length !== 0);
-    getInitialTree(`${pathLiterals[0]}%2F${pathLiterals[1]}`);
     if (this.props.opened) {
       applyOpenedPageStyling();
     } else {
@@ -28,10 +26,7 @@ class App extends Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.tree !== this.props.tree) {
-      console.log(this.props.tree);
-    }
+  componentDidUpdate(_prevProps, _prevState) {
     if (this.props.opened) {
       applyOpenedPageStyling();
     } else {
@@ -41,9 +36,10 @@ class App extends Component {
 
   renderOpenPane() {
     return ReactDOM.createPortal(
-      <TreePane
-        opened={this.props.opened}
-        pinned={this.props.pinned}
+      <Pane
+        // opened={this.props.opened}
+        // pinned={this.props.pinned}
+        tree={this.props.tree}
         toggleOpened={this.props.toggleOpened}
         pathLiterals={window.location.pathname
           .split("/")
@@ -69,10 +65,9 @@ const mapStateToProps = (state) => {
   return {
     opened: state.opened,
     pinned: state.pinned,
-    tree: state.tree,
   };
 };
 
-const mapDispatchToProps = { toggleOpened, getInitialTree };
+const mapDispatchToProps = { toggleOpened };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
