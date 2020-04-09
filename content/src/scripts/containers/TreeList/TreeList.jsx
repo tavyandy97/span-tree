@@ -9,13 +9,13 @@ import "./styles.css";
 
 const renderTreeItems = (tree) => {
   return (
-    <ul className="parent-list">
-      {tree
-        .filter((node) => node.name === node.path)
-        .map((node) => (
-          <TreeItem name={node.name} isTree={node.type === "tree"} />
+    <div className="tree-list">
+      <ul className="parent-list">
+        {tree.map((node) => (
+          <TreeItem name={node.name} isTree={node.isTree} />
         ))}
-    </ul>
+      </ul>
+    </div>
   );
 };
 

@@ -6,7 +6,7 @@ function TreeItem({ name, isTree }) {
   return (
     <li>
       <div className="tree-item">
-        {isTree ? "[]" : ""}
+        {isTree ? (isTree.isOpen ? "⯆" : "⯈") : ""}
         {name}
       </div>
     </li>

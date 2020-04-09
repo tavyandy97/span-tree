@@ -31,24 +31,21 @@ class App extends Component {
     }
   }
 
-  renderOpenPane() {
-    return ReactDOM.createPortal(
-      <Pane
-        // opened={this.props.opened}
-        // pinned={this.props.pinned}
-        tree={this.props.tree}
-        toggleOpened={this.props.toggleOpened}
-        pathLiterals={window.location.pathname
-          .split("/")
-          .filter((pathSub) => pathSub.length !== 0)}
-      />,
-      parentDiv
-    );
-  }
-
   render() {
+    const path = window.location.pathname
+      .split("/")
+      .filter((pathSub) => pathSub.length !== 0);
+    if (path[0] === "dashboard" || path[0] === "explore") return null;
+
     return this.props.opened ? (
-      this.renderOpenPane()
+      ReactDOM.createPortal(
+        <Pane
+          tree={this.props.tree}
+          toggleOpened={this.props.toggleOpened}
+          pathLiterals={path}
+        />,
+        parentDiv
+      )
     ) : (
       <Toggler
         handleClick={this.props.toggleOpened}
