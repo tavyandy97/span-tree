@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import Loader from "../../components/Loader";
 import TreeItem from "../../components/TreeItem";
+import { fetchURLDetails } from "../../utils/url";
 import { getInitialTree } from "../../../../../event/src/actions/API";
 
 import "./styles.css";
@@ -24,10 +25,17 @@ function TreeList({ tree, getInitialTree }) {
   const initialMount = useRef(true);
 
   useEffect(() => {
-    const pathLiterals = window.location.pathname
-      .split("/")
-      .filter((pathSub) => pathSub.length !== 0);
-    getInitialTree(`${pathLiterals[0]}%2F${pathLiterals[1]}`);
+    const URLDetails = fetchURLDetails();
+    getInitialTree(
+      URLDetails.dirURLParam,
+      {
+        ref: URLDetails.branchNameURL,
+      },
+      {
+        repoName: URLDetails.dirFormatted,
+        branchName: URLDetails.branchName,
+      }
+    );
   }, []);
 
   useEffect(() => {
@@ -45,7 +53,10 @@ function TreeList({ tree, getInitialTree }) {
       </div>
     );
 
-  return renderTreeItems(tree);
+  const URLDetails = fetchURLDetails();
+
+  console.log(tree);
+  return renderTreeItems(tree[URLDetails.dirFormatted][URLDetails.branchName]);
 }
 
 const mapStateToProps = (state) => {
