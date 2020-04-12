@@ -1,32 +1,20 @@
 import { FETCH_TREE } from "../../types/API";
 
-const initialState = [];
+const initialState = {};
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case FETCH_TREE:
-      if (state.length === 0) {
-        return action.payload.map((node) => {
-          return {
-            name: node.name,
-            path: node.path
-              .split("/")
-              .filter((pathSub) => pathSub.length !== 0),
-            isTree:
-              node.type === "tree"
-                ? {
-                    isOpen: false,
-                  }
-                : false,
-          };
-        });
-      } else {
-        return [
-          ...state,
-          ...action.payload.map((node) => {
+      return {
+        ...state,
+        [action.reducerDetails.repoName]: {
+          ...state[action.reducerDetails.repoName],
+          [action.reducerDetails.branchName]: action.payload.map((node) => {
             return {
               name: node.name,
-              path: node.path,
+              path: node.path
+                .split("/")
+                .filter((pathSub) => pathSub.length !== 0),
               isTree:
                 node.type === "tree"
                   ? {
@@ -35,8 +23,42 @@ export default (state = initialState, action) => {
                   : false,
             };
           }),
-        ];
-      }
+        },
+      };
+    // let tempState = JSON.parse(JSON.stringify(state));
+    // tempState[action.reducerDetails.repoName][
+    //   action.reducerDetails.branchName
+    // ] = action.payload.map((node) => {
+    //   return {
+    //     name: node.name,
+    //     path: node.path.split("/").filter((pathSub) => pathSub.length !== 0),
+    //     isTree:
+    //       node.type === "tree"
+    //         ? {
+    //             isOpen: false,
+    //           }
+    //         : false,
+    //   };
+    // });
+    // return tempState;
+    // return Object.assign({}, state, {
+    //   [action.reducerDetails.repoName]: {
+    //     [action.reducerDetails.branchName]: action.payload.map((node) => {
+    //       return {
+    //         name: node.name,
+    //         path: node.path
+    //           .split("/")
+    //           .filter((pathSub) => pathSub.length !== 0),
+    //         isTree:
+    //           node.type === "tree"
+    //             ? {
+    //                 isOpen: false,
+    //               }
+    //             : false,
+    //       };
+    //     }),
+    //   },
+    // });
     default:
       return state;
   }

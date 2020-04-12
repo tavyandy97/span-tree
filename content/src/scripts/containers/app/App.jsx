@@ -8,6 +8,7 @@ import {
   applyClosedPageStyling,
   applyOpenedPageStyling,
 } from "../../utils/styling";
+import { fetchURLDetails } from "../../utils/url";
 import { toggleOpened } from "../../../../../event/src/actions/UI";
 
 import "./App.css";
@@ -32,18 +33,12 @@ class App extends Component {
   }
 
   render() {
-    const path = window.location.pathname
-      .split("/")
-      .filter((pathSub) => pathSub.length !== 0);
-    if (path[0] === "dashboard" || path[0] === "explore") return null;
+    const URLDetails = fetchURLDetails();
+    if (!URLDetails.isRepo) return null;
 
     return this.props.opened ? (
       ReactDOM.createPortal(
-        <Pane
-          tree={this.props.tree}
-          toggleOpened={this.props.toggleOpened}
-          pathLiterals={path}
-        />,
+        <Pane toggleOpened={this.props.toggleOpened} />,
         parentDiv
       )
     ) : (
