@@ -3,7 +3,6 @@ import store from "../../../../content/src/scripts";
 import axios from "../../../axios";
 
 export const getInitialTree = (id, params, reducerDetails) => {
-  // TODO ref - get branch
   let url = `${id}/repository/tree`;
   url += "?per_page=10000";
   for (let param in params) {
@@ -19,4 +18,12 @@ export const getInitialTree = (id, params, reducerDetails) => {
       });
     })
     .catch((err) => {});
+};
+
+export const openDir = (path, reducerDetails) => {
+  store.dispatch({
+    type: types.OPEN_DIR,
+    payload: path,
+    reducerDetails,
+  });
 };
