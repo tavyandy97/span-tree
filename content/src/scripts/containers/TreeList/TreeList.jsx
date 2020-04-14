@@ -5,22 +5,29 @@ import Loader from "../../components/Loader";
 import TreeItem from "../../components/TreeItem";
 import { fetchURLDetails } from "../../utils/url";
 import { getInitialTree } from "../../../../../event/src/actions/API";
+import { closeDir } from "../../../../../event/src/actions/UI";
 
 import "./styles.css";
 
-const renderTreeItems = (tree) => {
+const renderTreeItems = (tree, close) => {
   return (
     <div className="tree-list">
       <ul className="parent-list">
-        {tree.map((node) => (
-          <TreeItem name={node.name} isTree={node.isTree} />
+        {Object.keys(tree).map((key) => (
+          <TreeItem
+            name={tree[key].name}
+            isTree={tree[key].isTree}
+            path={tree[key].path}
+            open={null}
+            close={close}
+          />
         ))}
       </ul>
     </div>
   );
 };
 
-function TreeList({ tree, getInitialTree }) {
+function TreeList({ tree, getInitialTree, closeDir }) {
   const [loading, setLoading] = useState(true);
   const initialMount = useRef(true);
 
@@ -55,8 +62,17 @@ function TreeList({ tree, getInitialTree }) {
 
   const URLDetails = fetchURLDetails();
 
-  console.log(tree);
-  return renderTreeItems(tree[URLDetails.dirFormatted][URLDetails.branchName]);
+  const closeDirectory = (path) => {
+    closeDir(path, {
+      repoName: URLDetails.dirFormatted,
+      branchName: URLDetails.branchName,
+    });
+  };
+
+  return renderTreeItems(
+    tree[URLDetails.dirFormatted][URLDetails.branchName],
+    closeDirectory
+  );
 }
 
 const mapStateToProps = (state) => {
@@ -65,6 +81,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = { getInitialTree };
+const mapDispatchToProps = { getInitialTree, closeDir };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TreeList);

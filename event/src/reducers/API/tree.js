@@ -1,4 +1,6 @@
-import { FETCH_TREE } from "../../types/API";
+import dotProp from "dot-prop-immutable";
+
+import { FETCH_TREE, OPEN_DIR } from "../../types/API";
 
 const initialState = {};
 
@@ -9,22 +11,33 @@ export default (state = initialState, action) => {
         ...state,
         [action.reducerDetails.repoName]: {
           ...state[action.reducerDetails.repoName],
-          [action.reducerDetails.branchName]: action.payload.map((node) => {
-            return {
-              name: node.name,
-              path: node.path
-                .split("/")
-                .filter((pathSub) => pathSub.length !== 0),
-              isTree:
-                node.type === "tree"
-                  ? {
-                      isOpen: false,
-                    }
-                  : false,
-            };
-          }),
+          [action.reducerDetails.branchName]: action.payload
+            .map((node) => {
+              return {
+                name: node.name,
+                path: node.path
+                  .split("/")
+                  .filter((pathSub) => pathSub.length !== 0),
+                isTree:
+                  node.type === "tree"
+                    ? {
+                        isOpen: false,
+                      }
+                    : false,
+                children: node.type === "tree" ? [] : undefined,
+              };
+            })
+            .reduce((map, obj) => {
+              map[obj.name] = obj;
+              return map;
+            }, {}),
         },
       };
+    case OPEN_DIR:
+      const objectPath = `${action.reducerDetails.repoName}.${action.reducerDetails.branchName}`;
+      action.payload.path[0];
+
+      return dotProp.set(state, objectPath, true);
     default:
       return state;
   }
