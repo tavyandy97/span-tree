@@ -12,11 +12,3 @@ export const toggleOpened = () => {
     type: types.TOGGLE_OPENED,
   });
 };
-
-export const closeDir = (path, reducerDetails) => {
-  store.dispatch({
-    type: types.CLOSE_DIR,
-    payload: path,
-    reducerDetails,
-  });
-};

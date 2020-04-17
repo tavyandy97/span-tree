@@ -4,21 +4,25 @@ import { connect } from "react-redux";
 import Loader from "../../components/Loader";
 import TreeItem from "../../components/TreeItem";
 import { fetchURLDetails } from "../../utils/url";
-import { getInitialTree } from "../../../../../event/src/actions/API";
-import { closeDir } from "../../../../../event/src/actions/UI";
+import {
+  getInitialTree,
+  openDir,
+  closeDir,
+} from "../../../../../event/src/actions/API";
 
 import "./styles.css";
 
-const renderTreeItems = (tree, close) => {
+const renderTreeItems = (tree, close, open) => {
   return (
     <div className="tree-list">
       <ul className="parent-list">
         {Object.keys(tree).map((key) => (
           <TreeItem
+            key={key}
             name={tree[key].name}
             isTree={tree[key].isTree}
             path={tree[key].path}
-            open={null}
+            open={open}
             close={close}
           />
         ))}
@@ -69,9 +73,17 @@ function TreeList({ tree, getInitialTree, closeDir }) {
     });
   };
 
+  const openDirectory = (path) => {
+    openDir(path, {
+      repoName: URLDetails.dirFormatted,
+      branchName: URLDetails.branchName,
+    });
+  };
+
   return renderTreeItems(
     tree[URLDetails.dirFormatted][URLDetails.branchName],
-    closeDirectory
+    closeDirectory,
+    openDirectory
   );
 }
 

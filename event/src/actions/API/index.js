@@ -27,3 +27,11 @@ export const openDir = (path, reducerDetails) => {
     reducerDetails,
   });
 };
+
+export const closeDir = (path, reducerDetails) => {
+  store.dispatch({
+    type: types.CLOSE_DIR,
+    payload: path,
+    reducerDetails,
+  });
+};
