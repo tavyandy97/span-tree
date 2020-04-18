@@ -12,5 +12,5 @@ export const applyClosedPageStyling = () => {
 };
 
 export const paneWidth = () => {
-  return "260px";
+  return "250px";
 };
