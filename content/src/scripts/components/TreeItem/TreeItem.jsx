@@ -20,7 +20,7 @@ function TreeItem({ name, isTree, path, close, open, children }) {
         className="tree-item"
         onClick={() => handleClick(path, open, close, isTree)}
       >
-        <div className="tree-icon">{isTree ? (isTree.isOpen ? "v"  : ">") : " "}</div>
+        <div className="tree-icon">{isTree ? (isTree.isOpen ? "▼"  : "▶") : " "}</div>
         <div className="item-name">{name}</div>
       </div>
       {isTree && isTree.isOpen && (
