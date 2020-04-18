@@ -2,9 +2,8 @@ import React, { useEffect, cloneElement } from "react";
 
 import "./styles.css";
 
-function TreeItem({ name, isTree, path, close, open }) {
+function TreeItem({ name, isTree, path, close, open, children }) {
   const handleClick = (path, open, close, isTree) => {
-    console.log(isTree);
     if (isTree) {
       if (isTree.isOpen) {
         close(path);
@@ -16,11 +15,29 @@ function TreeItem({ name, isTree, path, close, open }) {
   };
 
   return (
-    <li onClick={() => handleClick(path, open, close, isTree)}>
-      <div className="tree-item">
+    <li>
+      <div
+        className="tree-item"
+        onClick={() => handleClick(path, open, close, isTree)}
+      >
         {isTree ? (isTree.isOpen ? "⯆" : "⯈") : ""}
         {name}
       </div>
+      {isTree && isTree.isOpen && (
+        <ul>
+          {Object.keys(children).map((key) => (
+            <TreeItem
+              key={key}
+              name={children[key].name}
+              isTree={children[key].isTree}
+              path={children[key].path}
+              children={children[key].children}
+              open={open}
+              close={close}
+            />
+          ))}
+        </ul>
+      )}
     </li>
   );
 }

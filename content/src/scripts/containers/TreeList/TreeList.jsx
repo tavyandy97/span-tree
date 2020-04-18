@@ -22,6 +22,7 @@ const renderTreeItems = (tree, close, open) => {
             name={tree[key].name}
             isTree={tree[key].isTree}
             path={tree[key].path}
+            children={tree[key].children}
             open={open}
             close={close}
           />
@@ -50,6 +51,7 @@ function TreeList({ tree, getInitialTree, closeDir }) {
   }, []);
 
   useEffect(() => {
+    console.log(tree);
     if (initialMount.current) {
       initialMount.current = false;
     } else {
@@ -74,10 +76,19 @@ function TreeList({ tree, getInitialTree, closeDir }) {
   };
 
   const openDirectory = (path) => {
-    openDir(path, {
-      repoName: URLDetails.dirFormatted,
-      branchName: URLDetails.branchName,
-    });
+    openDir(
+      URLDetails.dirURLParam,
+      path,
+      {
+        ref: URLDetails.branchNameURL,
+        path: path.join("%2F"),
+      },
+      {
+        repoName: URLDetails.dirFormatted,
+        branchName: URLDetails.branchName,
+        path: path,
+      }
+    );
   };
 
   return renderTreeItems(

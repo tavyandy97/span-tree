@@ -20,12 +20,27 @@ export const getInitialTree = (id, params, reducerDetails) => {
     .catch((err) => {});
 };
 
-export const openDir = (path, reducerDetails) => {
+export const openDir = (id, path, params, reducerDetails) => {
   store.dispatch({
     type: types.OPEN_DIR,
     payload: path,
     reducerDetails,
   });
+  let url = `${id}/repository/tree`;
+  url += "?per_page=10000";
+  for (let param in params) {
+    url += `&${param}=${params[param]}`;
+  }
+  axios
+    .get(url)
+    .then((res) => {
+      store.dispatch({
+        type: types.UPDATE_TREE,
+        payload: res.data,
+        reducerDetails,
+      });
+    })
+    .catch((err) => {});
 };
 
 export const closeDir = (path, reducerDetails) => {
