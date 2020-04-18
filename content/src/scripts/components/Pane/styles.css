@@ -14,6 +14,7 @@
   z-index: 1000;
   transform: translate3d(0px, 0px, 0px);
   transition: transform 0.2s ease 0s;
+  box-shadow: 2px 0px 8px darkslategrey;
 }
 
 .pane-header {
