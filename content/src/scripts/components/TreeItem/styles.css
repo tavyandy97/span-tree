@@ -1,6 +1,6 @@
 .tree-item {
   padding: 2px 0px;
-  display: inline-flex;
+  display: flex;
 }
 
 .tree-item:hover {
