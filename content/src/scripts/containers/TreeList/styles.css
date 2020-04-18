@@ -32,4 +32,6 @@
   font-size: 0.875rem;
   padding: 0px 0px 0px 10px;
   list-style-type: none;
+  width: fit-content;
+  min-width: 100%;
 }
