@@ -1,5 +1,5 @@
 .tree-item {
-  padding: 2px 0px;
+  padding: 2px 10px 2px 0px;
   display: flex;
 }
 
@@ -13,7 +13,26 @@
   padding: 0px 0px 0px 20px;
 }
 
-.tree-icon{
+.tree-icon {
   width: 20px;
   text-align: center;
+}
+
+.arrow {
+  border: solid black;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.arrow-right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  transition: all 0.5s;
+}
+
+.arrow-down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transition: all 0.5s;
 }
