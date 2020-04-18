@@ -24,7 +24,7 @@ function TreeItem({ name, isTree, path, close, open, children }) {
         {name}
       </div>
       {isTree && isTree.isOpen && (
-        <ul>
+        <ul className="child-list">
           {Object.keys(children).map((key) => (
             <TreeItem
               key={key}

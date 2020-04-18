@@ -1,8 +1,13 @@
 .tree-item {
-  margin-left: 8px;
+  padding: 2px 0px;
 }
 
 .tree-item:hover {
   background-color: rgb(219, 238, 254);
   cursor: pointer;
+}
+
+.child-list {
+  list-style-type: none;
+  padding: 0px 20px;
 }
