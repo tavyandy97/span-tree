@@ -1,11 +1,8 @@
 .tree-element {
   padding: 2px 10px 2px 0px;
   display: flex;
-}
-
-.tree-element:hover {
-  background-color: rgb(219, 238, 254);
-  cursor: pointer;
+  height: 24px;
+  align-items: center;
 }
 
 .child-list {
@@ -48,4 +45,18 @@
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
   transition: all 0.2s;
+}
+
+.full-width-row {
+  position: absolute;
+  height: 24px;
+  width: 100%;
+  left: 0px;
+  z-index: 5;
+}
+
+.full-width-row:hover {
+  background: blue;
+  cursor: pointer;
+  opacity: 20%;
 }

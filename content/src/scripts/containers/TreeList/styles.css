@@ -34,4 +34,5 @@
   list-style-type: none;
   width: fit-content;
   min-width: 100%;
+  position: relative;
 }
