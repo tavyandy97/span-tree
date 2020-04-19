@@ -18,7 +18,7 @@ function TreeItem({ name, isTree, path, close, open, children }) {
   return (
     <li>
       <div
-        className="tree-item"
+        className="tree-element"
         onClick={() => handleClick(path, open, close, isTree)}
       >
         <div className="tree-icon">

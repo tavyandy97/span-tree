@@ -1,9 +1,9 @@
-.tree-item {
+.tree-element {
   padding: 2px 10px 2px 0px;
   display: flex;
 }
 
-.tree-item:hover {
+.tree-element:hover {
   background-color: rgb(219, 238, 254);
   cursor: pointer;
 }
@@ -14,8 +14,8 @@
 }
 
 .tree-icon {
-  width: 20px;
-  text-align: center;
+  width: 10px;
+  text-align: start;
 }
 
 .file-icon {
