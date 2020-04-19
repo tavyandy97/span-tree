@@ -24,6 +24,10 @@
   font-style: normal;
 }
 
+.item-name {
+  width: max-content;
+}
+
 .arrow {
   border: solid black;
   border-width: 0 2px 2px 0;
