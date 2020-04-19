@@ -14,13 +14,13 @@
 }
 
 .tree-icon {
-  width: 10px;
-  text-align: start;
+  width: 16px;
+  text-align: left;
 }
 
 .file-icon {
-  width: 30px;
-  text-align: center;
+  width: 22px;
+  text-align: left;
   font-style: normal;
 }
 
