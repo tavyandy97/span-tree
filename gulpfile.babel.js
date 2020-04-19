@@ -54,7 +54,14 @@ gulp.task("clean", (cb) => {
   rimraf("./build", cb);
 });
 
+gulp.task("copy-libs", () => {
+  return gulp
+    .src("./content/src/scripts/libs/**/*")
+    .pipe(gulp.dest("./build/libs"));
+});
+
 gulp.task("build", [
+  "copy-libs",
   "copy-manifest",
   "popup-js",
   "popup-html",
