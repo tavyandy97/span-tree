@@ -11,7 +11,6 @@
  */
 
 const fileIcons = () => {
-  console.log("factory icons called");
   var cache = {
     directoryName: {},
     directoryPath: {},
