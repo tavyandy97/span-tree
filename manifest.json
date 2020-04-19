@@ -4,33 +4,19 @@
   "description": "Tree for Gitlab",
   "version": "0.0.0.1",
   "background": {
-    "scripts": [
-      "event.js"
-    ],
+    "scripts": ["event.js"],
     "persistent": true
   },
   "browser_action": {
     "default_title": "SpanTree",
     "default_popup": "popup.html"
   },
-  "web_accessible_resources": [
-    "*.png",
-    "*.eot",
-    "*.woff",
-    "*.woff2",
-    "*.ttf",
-    "*.svg"
-  ],
+  "web_accessible_resources": ["*.png", "*.woff2", "*.svg"],
   "content_scripts": [
     {
-      "matches": [
-        "https://gitlab.com/*/*",
-        "https://gitlab.com/*/*/-/tree/*"
-      ],
+      "matches": ["https://gitlab.com/*/*", "https://gitlab.com/*/*/-/tree/*"],
       "css": [],
-      "js": [
-        "content.js"
-      ]
+      "js": ["content.js"]
     }
   ]
 }
