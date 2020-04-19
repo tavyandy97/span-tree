@@ -21,6 +21,9 @@
 .file-icon {
   width: 22px;
   text-align: left;
+}
+
+.file-icon i {
   font-style: normal;
 }
 
