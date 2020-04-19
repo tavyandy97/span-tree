@@ -1,8 +1,9 @@
-import React, {useEffect, cloneElement} from "react";
+import React from "react";
 
 import "./styles.css";
+import "./../../libs/file-icons.css";
 
-function TreeItem({name, isTree, path, close, open, children}) {
+function TreeItem({ name, isTree, path, close, open, children }) {
   const handleClick = (path, open, close, isTree) => {
     if (isTree) {
       if (isTree.isOpen) {
@@ -20,8 +21,20 @@ function TreeItem({name, isTree, path, close, open, children}) {
         className="tree-item"
         onClick={() => handleClick(path, open, close, isTree)}
       >
-        <div className="tree-icon">{isTree ? (isTree.isOpen ? <i className="arrow arrow-down"/> :
-          <i className="arrow arrow-right"/>) : " "}</div>
+        <div className="tree-icon">
+          {isTree ? (
+            isTree.isOpen ? (
+              <i className="arrow arrow-down" />
+            ) : (
+              <i className="arrow arrow-right" />
+            )
+          ) : (
+            " "
+          )}
+        </div>
+        <div className="tree-icon">
+          <i className="sass-icon"></i>
+        </div>
         <div className="item-name">{name}</div>
       </div>
       {isTree && isTree.isOpen && (
