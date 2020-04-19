@@ -10,18 +10,7 @@
  * @author    Adnan M.Sagar, <adnan@websemantics.ca>
  */
 
-(function (root, factory) {
-  if (typeof define === "function" && define.amd) {
-    define([], function () {
-      return (root.FileIcons = factory());
-    });
-  } else if (typeof module === "object" && module.exports) {
-    module.exports = factory();
-  } else {
-    root.FileIcons = factory();
-  }
-})(this, function () {
-  var root = this || global;
+const fileIcons = () => {
   var cache = {
     directoryName: {},
     directoryPath: {},
@@ -6325,10 +6314,20 @@
    * @public
    */
 
-  FileIcons.prototype.getClassWithColor = function (name) {
+  FileIcons.prototype.getClassWithColor = function (name, isTree) {
     var match = this.db.matchName(name);
-    return match ? match.getClass(0) : null;
+    return match ? match.getClass(0) : getGenericTreeIcons(isTree);
+  };
+
+  const getGenericTreeIcons = (isTree) => {
+    return isTree
+      ? isTree.isOpen
+        ? "folder-open-icon"
+        : "folder-closed-icon"
+      : "generic-file-icon";
   };
 
   return new FileIcons(icondb);
-});
+};
+
+export default fileIcons();
