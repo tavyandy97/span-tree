@@ -347,10 +347,28 @@
   content: "\f0ac";
   font-size: 15px;
 }
+.folder-open-icon:before {
+  font-family: FontAwesome;
+  font-size: 13px;
+  content: "\f07c";
+  font-size: 15px;
+}
+.folder-closed-icon:before {
+  font-family: FontAwesome;
+  font-size: 13px;
+  content: "\f07b";
+  font-size: 15px;
+}
 .gears-icon:before {
   font-family: FontAwesome;
   font-size: 13px;
   content: "\f085";
+  font-size: 15px;
+}
+.generic-file-icon:before {
+  font-family: FontAwesome;
+  font-size: 13px;
+  content: "\f15b";
   font-size: 15px;
 }
 .html5-icon:before {

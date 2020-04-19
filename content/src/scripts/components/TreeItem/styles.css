@@ -18,6 +18,12 @@
   text-align: center;
 }
 
+.file-icon {
+  width: 30px;
+  text-align: center;
+  font-style: normal;
+}
+
 .arrow {
   border: solid black;
   border-width: 0 2px 2px 0;
@@ -28,11 +34,11 @@
 .arrow-right {
   transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
-  transition: all 0.5s;
+  transition: all 0.2s;
 }
 
 .arrow-down {
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
-  transition: all 0.5s;
+  transition: all 0.2s;
 }
