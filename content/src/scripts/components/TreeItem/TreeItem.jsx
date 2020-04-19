@@ -1,6 +1,7 @@
 import React, {useEffect, cloneElement} from "react";
 
 import "./styles.css";
+import "./../../libs/file-icons.css"
 
 function TreeItem({name, isTree, path, close, open, children}) {
   const handleClick = (path, open, close, isTree) => {
@@ -22,6 +23,7 @@ function TreeItem({name, isTree, path, close, open, children}) {
       >
         <div className="tree-icon">{isTree ? (isTree.isOpen ? <i className="arrow arrow-down"/> :
           <i className="arrow arrow-right"/>) : " "}</div>
+        <div className="tree-icon"><i className="sass-icon"></i></div>
         <div className="item-name">{name}</div>
       </div>
       {isTree && isTree.isOpen && (
