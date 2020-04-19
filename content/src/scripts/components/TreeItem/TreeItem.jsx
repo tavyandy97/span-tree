@@ -3,6 +3,7 @@ import React, { useEffect, cloneElement } from "react";
 import "./styles.css";
 
 const importFileIconCSS = `chrome-extension://${chrome.runtime.id}/libs/file-icon.css`;
+import fileIcons from "../../utils/file-icons";
 
 function TreeItem({ name, isTree, path, close, open, children }) {
   const handleClick = (path, open, close, isTree) => {
@@ -20,7 +21,7 @@ function TreeItem({ name, isTree, path, close, open, children }) {
     <li>
       <link rel="stylesheet" type="text/css" href={importFileIconCSS} />
       <div
-        className="tree-item"
+        className="tree-element"
         onClick={() => handleClick(path, open, close, isTree)}
       >
         <div className="tree-icon">
@@ -34,8 +35,8 @@ function TreeItem({ name, isTree, path, close, open, children }) {
             " "
           )}
         </div>
-        <div className="tree-icon">
-          <i className="sass-icon"></i>
+        <div className="file-icon">
+          <i className={fileIcons.getClassWithColor(name, isTree)}></i>
         </div>
         <div className="item-name">{name}</div>
       </div>
