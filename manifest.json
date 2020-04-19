@@ -11,6 +11,7 @@
     "default_title": "SpanTree",
     "default_popup": "popup.html"
   },
+  "web_accessible_resources": ["*.png", "*.woff2", "*.svg"],
   "content_scripts": [
     {
       "matches": ["https://gitlab.com/*/*", "https://gitlab.com/*/*/-/tree/*"],

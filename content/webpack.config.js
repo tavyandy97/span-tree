@@ -32,7 +32,24 @@ module.exports = {
           {
             loader: "file-loader",
             options: {
-              name: "images/[hash]-[name].[ext]",
+              name: "[hash]-[name].[ext]",
+              outputPath: "images/",
+              publicPath:
+                "chrome-extension://gajbgipfccflpoeomhonmpjkmhlppdnh/images",
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(woff(2)?|ttf)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "[name].[ext]",
+              outputPath: "fonts/",
+              publicPath:
+                "chrome-extension://gajbgipfccflpoeomhonmpjkmhlppdnh/fonts",
             },
           },
         ],
