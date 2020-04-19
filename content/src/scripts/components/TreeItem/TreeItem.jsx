@@ -1,7 +1,8 @@
 import React, { useEffect, cloneElement } from "react";
 
 import "./styles.css";
-import "./../../libs/file-icons.css";
+
+const importFileIconCSS = `chrome-extension://${chrome.runtime.id}/libs/file-icon.css`;
 
 function TreeItem({ name, isTree, path, close, open, children }) {
   const handleClick = (path, open, close, isTree) => {
@@ -17,6 +18,7 @@ function TreeItem({ name, isTree, path, close, open, children }) {
 
   return (
     <li>
+      <link rel="stylesheet" type="text/css" href={importFileIconCSS} />
       <div
         className="tree-item"
         onClick={() => handleClick(path, open, close, isTree)}
