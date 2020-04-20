@@ -13,12 +13,14 @@ const Resizer = () => (
 
 const mouseDownListener = (event) => {
   console.log(event.clientX);
+  document.body.style.userSelect = "none";
   document.addEventListener("mousemove", mouseMoveListener);
   document.addEventListener("mouseup", mouseUpListener);
 };
 
 const mouseUpListener = (event) => {
   console.log("Mouse Up");
+  document.body.style.userSelect = "auto";
   document.removeEventListener("mousemove", mouseMoveListener);
   document.removeEventListener("mouseup", mouseUpListener);
 };
