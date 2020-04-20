@@ -66,8 +66,13 @@ export default (state = initialState, action) => {
     case CLOSE_DIR:
       objectPath = `${action.reducerDetails.repoName}.${action.reducerDetails.branchName}.`;
       objectPath += action.payload.join(".children.");
+      const intermediateState = dotProp.set(
+        state,
+        objectPath + ".children",
+        {}
+      );
       objectPath += ".isTree.isOpen";
-      return dotProp.set(state, objectPath, false);
+      return dotProp.set(intermediateState, objectPath, false);
 
     default:
       return state;
