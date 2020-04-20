@@ -60,8 +60,13 @@ gulp.task("copy-libs", ["clean"], () => {
     .pipe(gulp.dest("./build/libs"));
 });
 
+gulp.task("copy-icons", ["clean"], () => {
+  return gulp.src("./icons/**/*").pipe(gulp.dest("./build/icons"));
+});
+
 gulp.task("build", [
   "copy-libs",
+  "copy-icons",
   "copy-manifest",
   "popup-js",
   "popup-html",
