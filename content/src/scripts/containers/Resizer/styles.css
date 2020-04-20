@@ -1,0 +1,10 @@
+.resizer {
+  background: red;
+  width: 7px;
+  position: relative;
+  opacity: 30%;
+}
+
+.resizer:hover {
+  cursor: col-resize;
+}

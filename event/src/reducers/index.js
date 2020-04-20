@@ -9,5 +9,5 @@ export default combineReducers({
   count,
   opened,
   pinned,
-  tree
+  tree,
 });

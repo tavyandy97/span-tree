@@ -6,6 +6,7 @@ import { paneWidth } from "../../utils/styling";
 import { fetchURLDetails } from "../../utils/url";
 
 import "./styles.css";
+import Resizer from "../../containers/Resizer/Resizer";
 
 function Pane({ toggleOpened }) {
   const [realoading, setRealoading] = useState(true);
@@ -24,24 +25,35 @@ function Pane({ toggleOpened }) {
 
   return (
     <div className="tree-pane" style={{ width: paneWidth() }}>
-      <div className="pane-header">
-        <div className="spread">
+      <div className="pane-main">
+        <div className="pane-header">
+          <div className="spread">
+            <div>
+              <SVG
+                icon="repo"
+                height="12"
+                style={{ verticalAlign: "middle" }}
+              />{" "}
+              {URLDetails.dirFormatted}
+            </div>
+            <div onClick={toggleOpened} className="close-button">
+              <SVG icon="close" height="12" />
+            </div>
+          </div>
           <div>
-            <SVG icon="repo" height="12" style={{ verticalAlign: "middle" }} />{" "}
-            {URLDetails.dirFormatted}
-          </div>
-          <div onClick={toggleOpened} className="close-button">
-            <SVG icon="close" height="12" />
+            <SVG
+              icon="branch"
+              height="12"
+              style={{ verticalAlign: "middle" }}
+            />{" "}
+            {URLDetails.branchName}
           </div>
         </div>
-        <div>
-          <SVG icon="branch" height="12" style={{ verticalAlign: "middle" }} />{" "}
-          {URLDetails.branchName}
+        <div className="tree-body">
+          <TreeList />
         </div>
       </div>
-      <div className="tree-body">
-        <TreeList />
-      </div>
+      <Resizer />
     </div>
   );
 }
