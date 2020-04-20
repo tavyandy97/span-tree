@@ -18,7 +18,6 @@ function TreeItem({ name, isTree, path, close, open, children }) {
         open(path);
       }
     } else {
-      console.log(URLDetails);
       window.location.href = `https://www.gitlab.com/${
         URLDetails.dirFormatted
       }/-/blob/${URLDetails.branchName}/${path.join("/")}/`;
