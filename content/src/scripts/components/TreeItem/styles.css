@@ -53,10 +53,17 @@
   width: 100%;
   left: 0px;
   z-index: 5;
+  opacity: 25%;
+  background: transparent;
+  transition: 0.2s background;
+  box-sizing: border-box;
 }
 
 .full-width-row:hover {
-  background: blue;
+  background: #6464ff;
   cursor: pointer;
-  opacity: 20%;
+}
+
+.full-width-row:active {
+  background: blue;
 }
