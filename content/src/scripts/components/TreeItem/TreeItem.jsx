@@ -24,6 +24,7 @@ function TreeItem({ name, isTree, path, close, open, children }) {
         className="tree-element"
         onClick={() => handleClick(path, open, close, isTree)}
       >
+        <div className="full-width-row"></div>
         <div className="tree-icon">
           {isTree ? (
             isTree.isOpen ? (
