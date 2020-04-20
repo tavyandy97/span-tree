@@ -51,7 +51,6 @@ function TreeList({ tree, getInitialTree, closeDir }) {
   }, []);
 
   useEffect(() => {
-    console.log(tree);
     if (initialMount.current) {
       initialMount.current = false;
     } else {

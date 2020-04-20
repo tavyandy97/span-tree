@@ -1,4 +1,6 @@
-import React, { useEffect, cloneElement } from "react";
+import React from "react";
+
+import { fetchURLDetails } from "../../utils/url";
 
 import "./styles.css";
 
@@ -6,6 +8,8 @@ const importFileIconCSS = `chrome-extension://${chrome.runtime.id}/libs/file-ico
 import fileIcons from "../../utils/file-icons";
 
 function TreeItem({ name, isTree, path, close, open, children }) {
+  const URLDetails = fetchURLDetails();
+
   const handleClick = (path, open, close, isTree) => {
     if (isTree) {
       if (isTree.isOpen) {
@@ -14,6 +18,10 @@ function TreeItem({ name, isTree, path, close, open, children }) {
         open(path);
       }
     } else {
+      console.log(URLDetails);
+      window.location.href = `https://www.gitlab.com/${
+        URLDetails.dirFormatted
+      }/-/blob/${URLDetails.branchName}/${path.join("/")}/`;
     }
   };
 
