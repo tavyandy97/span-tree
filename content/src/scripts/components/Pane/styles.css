@@ -40,6 +40,6 @@
 
 .tree-body {
   border: 1px rgb(229, 229, 229) solid;
-  height: 100%;
+  height: calc(100vh - 40px);
   width: 100%;
 }
