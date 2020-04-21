@@ -1,32 +1,41 @@
 import React from "react";
 import "./styles.css";
-import { paneWidth } from "../../utils/styling";
+import { setWidth } from "../../../../../event/src/actions/UI";
+import { connect } from "react-redux";
 
-const Resizer = () => (
-  <div
-    className="resizer"
-    unselectable="on"
-    style={{ left: paneWidth() }}
-    onMouseDown={(event) => mouseDownListener(event)}
-  ></div>
-);
+const Resizer = ({ width, setWidth }) => {
+  const mouseDownListener = (event) => {
+    document.body.style.userSelect = "none";
+    document.addEventListener("mousemove", mouseMoveListener);
+    document.addEventListener("mouseup", mouseUpListener);
+  };
 
-const mouseDownListener = (event) => {
-  console.log(event.clientX);
-  document.body.style.userSelect = "none";
-  document.addEventListener("mousemove", mouseMoveListener);
-  document.addEventListener("mouseup", mouseUpListener);
+  const mouseUpListener = () => {
+    document.body.style.userSelect = "auto";
+    document.removeEventListener("mousemove", mouseMoveListener);
+    document.removeEventListener("mouseup", mouseUpListener);
+  };
+
+  const mouseMoveListener = (event) => {
+    setWidth(event.clientX);
+  };
+
+  return (
+    <div
+      className="resizer"
+      unselectable="on"
+      style={{ left: width + "px" }}
+      onMouseDown={mouseDownListener}
+    ></div>
+  );
 };
 
-const mouseUpListener = (event) => {
-  console.log("Mouse Up");
-  document.body.style.userSelect = "auto";
-  document.removeEventListener("mousemove", mouseMoveListener);
-  document.removeEventListener("mouseup", mouseUpListener);
+const mapStateToProps = (state) => {
+  return {
+    width: state.width,
+  };
 };
 
-const mouseMoveListener = (event) => {
-  console.log(event.clientX);
-};
+const mapDispatchToProps = { setWidth };
 
-export default Resizer;
+export default connect(mapStateToProps, mapDispatchToProps)(Resizer);

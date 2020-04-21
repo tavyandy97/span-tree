@@ -1,7 +1,7 @@
-export const applyOpenedPageStyling = () => {
-  document.querySelector("header").style.left = paneWidth();
-  document.querySelector(".nav-sidebar").style.left = paneWidth();
-  document.querySelector("body").style.marginLeft = paneWidth();
+export const applyOpenedPageStyling = (width) => {
+  document.querySelector("header").style.left = width + "px";
+  document.querySelector(".nav-sidebar").style.left = width + "px";
+  document.querySelector("body").style.marginLeft = width + "px";
   document.querySelector("body").style.overflowX = "auto";
 };
 

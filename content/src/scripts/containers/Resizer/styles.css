@@ -1,8 +1,8 @@
 .resizer {
-  background: red;
-  width: 7px;
+  /*background: red;*/
+  width: 8px;
   position: relative;
-  opacity: 30%;
+  opacity: 100%;
 }
 
 .resizer:hover {

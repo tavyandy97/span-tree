@@ -8,7 +8,7 @@ import { fetchURLDetails } from "../../utils/url";
 import "./styles.css";
 import Resizer from "../../containers/Resizer/Resizer";
 
-function Pane({ toggleOpened }) {
+function Pane({ toggleOpened, width }) {
   const [realoading, setRealoading] = useState(true);
   const [URLDetails, setURLDetails] = useState(fetchURLDetails());
 
@@ -24,7 +24,7 @@ function Pane({ toggleOpened }) {
   }, [realoading]);
 
   return (
-    <div className="tree-pane" style={{ width: paneWidth() }}>
+    <div className="tree-pane" style={{ width: width + "px" }}>
       <div className="pane-main">
         <div className="pane-header">
           <div className="spread">
