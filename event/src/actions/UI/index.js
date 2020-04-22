@@ -12,3 +12,10 @@ export const toggleOpened = () => {
     type: types.TOGGLE_OPENED,
   });
 };
+
+export const setWidth = (width) => {
+  store.dispatch({
+    type: types.SET_WIDTH,
+    payload: width,
+  });
+};

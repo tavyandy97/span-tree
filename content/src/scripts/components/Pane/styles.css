@@ -1,6 +1,6 @@
 .tree-pane {
   position: fixed;
-  display: block;
+  display: flex;
   background-color: rgb(250, 250, 250);
   /* border: 1px rgb(229, 229, 229) solid; */
   box-sizing: border-box;
@@ -15,6 +15,12 @@
   transform: translate3d(0px, 0px, 0px);
   transition: transform 0.2s ease 0s;
   box-shadow: 2px 0px 8px darkslategrey;
+}
+
+.pane-main {
+  height: 100%;
+  width: 100%;
+  position: absolute;
 }
 
 .pane-header {
