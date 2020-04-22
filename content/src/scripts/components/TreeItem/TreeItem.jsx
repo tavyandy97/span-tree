@@ -39,7 +39,6 @@ const tryTreeItemActiveBeforeReload = (
       }
       if (urlRemaining.length === 0) {
         isItemActive = true;
-        console.log("reload completed");
         setReloaded(false);
       }
     } else {
@@ -81,7 +80,6 @@ function TreeItem({
   setReloaded,
 }) {
   const URLDetails = fetchURLDetails();
-  console.log(name, remainingURL);
   let treeItemActive = null;
   if (reloaded) {
     treeItemActive = tryTreeItemActiveBeforeReload(
