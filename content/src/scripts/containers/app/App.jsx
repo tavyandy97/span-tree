@@ -18,7 +18,7 @@ const parentDiv = document.querySelector("body");
 class App extends Component {
   componentDidMount() {
     if (this.props.opened) {
-      applyOpenedPageStyling();
+      applyOpenedPageStyling(this.props.width);
     } else {
       applyClosedPageStyling();
     }
@@ -26,7 +26,7 @@ class App extends Component {
 
   componentDidUpdate(_prevProps, _prevState) {
     if (this.props.opened) {
-      applyOpenedPageStyling();
+      applyOpenedPageStyling(this.props.width);
     } else {
       applyClosedPageStyling();
     }
@@ -38,7 +38,10 @@ class App extends Component {
 
     return this.props.opened ? (
       ReactDOM.createPortal(
-        <Pane toggleOpened={this.props.toggleOpened} />,
+        <Pane
+          toggleOpened={this.props.toggleOpened}
+          width={this.props.width}
+        />,
         parentDiv
       )
     ) : (
@@ -54,6 +57,7 @@ const mapStateToProps = (state) => {
   return {
     opened: state.opened,
     pinned: state.pinned,
+    width: state.width,
   };
 };
 
