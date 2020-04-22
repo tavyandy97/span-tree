@@ -129,9 +129,7 @@ function TreeItem({
         <div className="file-icon">
           <i className={fileIcons.getClassWithColor(name, isTree)}></i>
         </div>
-        <div className="item-name">
-          {name + " ->" + treeItemActive.urlRemaining}
-        </div>
+        <div className="item-name">{name}</div>
       </div>
       {isTree && isTree.isOpen && (
         <ul className="child-list">
