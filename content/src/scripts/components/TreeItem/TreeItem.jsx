@@ -10,8 +10,7 @@ import fileIcons from "../../utils/file-icons";
 function TreeItem({ name, isTree, path, close, open, children, remainingURL }) {
   const URLDetails = fetchURLDetails();
 
-  // console.log(path, name, isTree, remainingURL);
-  const urlRemaining = tryTreeItemActive(
+  let treeItemActive = tryTreeItemActive(
     path,
     remainingURL,
     isTree,
@@ -26,7 +25,13 @@ function TreeItem({ name, isTree, path, close, open, children, remainingURL }) {
         className="tree-element"
         onClick={() => handleClick(path, open, close, isTree, URLDetails)}
       >
-        <div className="full-width-row"></div>
+        <div
+          className={
+            treeItemActive.isItemActive
+              ? "full-width-row active-row"
+              : "full-width-row"
+          }
+        ></div>
         <div className="tree-icon">
           {isTree ? (
             isTree.isOpen ? (
@@ -54,7 +59,7 @@ function TreeItem({ name, isTree, path, close, open, children, remainingURL }) {
               children={children[key].children}
               open={open}
               close={close}
-              remainingURL={urlRemaining}
+              remainingURL={treeItemActive.urlRemaining}
             />
           ))}
         </ul>
@@ -77,21 +82,23 @@ const handleClick = (path, open, close, isTree, URLDetails) => {
   }
 };
 
-const tryTreeItemActive = (path, remainingPath, isTree, name, open) => {
-  if (remainingPath.length != 0) {
-    const pathName = remainingPath.split("/")[0];
-    const pathRemaining = remainingPath.substring(pathName.length + 1);
-    // console.log(pathName);
-    if (pathName === name) {
+const tryTreeItemActive = (path, remainingURL, isTree, name, open) => {
+  let isItemActive = false;
+  if (remainingURL.length != 0) {
+    const activeIconName = remainingURL.split("/")[0];
+    const urlRemaining = remainingURL.substring(activeIconName.length + 1);
+    if (activeIconName === name) {
       if (isTree && isTree.isOpen != true) {
         isTree.isOpen = true;
-        console.log(name, "Open Called", pathRemaining);
         open(path);
       }
-      return pathRemaining;
+      if (urlRemaining.length === 0) {
+        isItemActive = true;
+      }
     }
+    return { urlRemaining, isItemActive };
   } else {
-    return "";
+    return { urlRemaining: "", isItemActive };
   }
 };
 

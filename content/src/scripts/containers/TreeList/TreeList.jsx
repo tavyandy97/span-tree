@@ -27,7 +27,7 @@ const renderTreeItems = (tree, close, open) => {
             children={tree[key].children}
             open={open}
             close={close}
-            remainingURL={URLDetails.urlBaseRemoved}
+            remainingURL={URLDetails.baseRemovedURL}
           />
         ))}
       </ul>

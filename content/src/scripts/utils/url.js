@@ -14,12 +14,12 @@ export const fetchURLDetails = () => {
     dir.push(pathNameSplit[i]);
   }
   const dirFormatted = dir.join("/");
-  const urlBaseRemoved = () => {
-    let baseRemovedUrl = pathName.substring(dirFormatted.length + 2);
-    if (baseRemovedUrl.length != 0) {
-      baseRemovedUrl = baseRemovedUrl.substring(branchName.length + 8);
+  const baseRemovedURL = () => {
+    let remainingUrl = pathName.substring(dirFormatted.length + 2);
+    if (remainingUrl.length != 0) {
+      remainingUrl = remainingUrl.substring(branchName.length + 8);
     }
-    return baseRemovedUrl;
+    return remainingUrl;
   };
 
   return {
@@ -29,6 +29,6 @@ export const fetchURLDetails = () => {
     branchName,
     branchNameURL: branchName.split("/").join("%2F"),
     isRepo: !(dir[0] === "dashboard" || dir[0] === "explore"),
-    urlBaseRemoved: urlBaseRemoved(),
+    baseRemovedURL: baseRemovedURL(),
   };
 };
