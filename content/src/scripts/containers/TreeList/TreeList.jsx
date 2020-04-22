@@ -12,7 +12,7 @@ import {
 
 import "./styles.css";
 
-const renderTreeItems = (tree, close, open) => {
+const renderTreeItems = (tree, close, open, reloaded, setReloaded) => {
   const URLDetails = fetchURLDetails();
 
   return (
@@ -28,6 +28,8 @@ const renderTreeItems = (tree, close, open) => {
             open={open}
             close={close}
             remainingURL={URLDetails.baseRemovedURL}
+            reloaded={reloaded}
+            setReloaded={setReloaded}
           />
         ))}
       </ul>
@@ -37,6 +39,7 @@ const renderTreeItems = (tree, close, open) => {
 
 function TreeList({ tree, getInitialTree, closeDir }) {
   const [loading, setLoading] = useState(true);
+  const [reloaded, setReloaded] = useState(true);
   const initialMount = useRef(true);
 
   useEffect(() => {
@@ -96,7 +99,9 @@ function TreeList({ tree, getInitialTree, closeDir }) {
   return renderTreeItems(
     tree[URLDetails.dirFormatted][URLDetails.branchName],
     closeDirectory,
-    openDirectory
+    openDirectory,
+    reloaded,
+    setReloaded
   );
 }
 

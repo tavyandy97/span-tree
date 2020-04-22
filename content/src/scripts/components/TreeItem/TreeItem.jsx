@@ -3,20 +3,103 @@ import React from "react";
 import { fetchURLDetails } from "../../utils/url";
 
 import "./styles.css";
-
 const importFileIconCSS = `chrome-extension://${chrome.runtime.id}/libs/file-icon.css`;
 import fileIcons from "../../utils/file-icons";
 
-function TreeItem({ name, isTree, path, close, open, children, remainingURL }) {
-  const URLDetails = fetchURLDetails();
+const handleClick = (path, open, close, isTree, URLDetails) => {
+  if (isTree) {
+    if (isTree.isOpen) {
+      close(path);
+    } else {
+      open(path);
+    }
+  } else {
+    window.location.href = `https://www.gitlab.com/${
+      URLDetails.dirFormatted
+    }/-/blob/${URLDetails.branchName}/${path.join("/")}/`;
+  }
+};
 
-  let treeItemActive = tryTreeItemActive(
-    path,
-    remainingURL,
-    isTree,
-    name,
-    open
-  );
+const tryTreeItemActiveBeforeReload = (
+  path,
+  remainingURL,
+  isTree,
+  name,
+  open,
+  setReloaded
+) => {
+  let isItemActive = false;
+  if (remainingURL.length != 0) {
+    let activeIconName = remainingURL.split("/")[0];
+    let urlRemaining = remainingURL.substring(activeIconName.length + 1);
+    if (activeIconName === name) {
+      if (isTree && isTree.isOpen != true) {
+        isTree.isOpen = true;
+        open(path);
+      }
+      if (urlRemaining.length === 0) {
+        isItemActive = true;
+        console.log("reload completed");
+        setReloaded(false);
+      }
+    } else {
+      urlRemaining = "";
+    }
+    return { urlRemaining, isItemActive };
+  } else {
+    return { urlRemaining: "", isItemActive };
+  }
+};
+
+const tryTreeItemActiveAfterReload = (path, remainingURL, isTree, name) => {
+  let isItemActive = false;
+  if (remainingURL.length != 0) {
+    let activeIconName = remainingURL.split("/")[0];
+    let urlRemaining = remainingURL.substring(activeIconName.length + 1);
+    if (activeIconName === name) {
+      if (urlRemaining.length === 0) {
+        isItemActive = true;
+      }
+    } else {
+      urlRemaining = "";
+    }
+    return { urlRemaining, isItemActive };
+  } else {
+    return { urlRemaining: "", isItemActive };
+  }
+};
+
+function TreeItem({
+  name,
+  isTree,
+  path,
+  close,
+  open,
+  children,
+  remainingURL,
+  reloaded,
+  setReloaded,
+}) {
+  const URLDetails = fetchURLDetails();
+  console.log(name, remainingURL);
+  let treeItemActive = null;
+  if (reloaded) {
+    treeItemActive = tryTreeItemActiveBeforeReload(
+      path,
+      remainingURL,
+      isTree,
+      name,
+      open,
+      setReloaded
+    );
+  } else {
+    treeItemActive = tryTreeItemActiveAfterReload(
+      path,
+      remainingURL,
+      isTree,
+      name
+    );
+  }
 
   return (
     <li>
@@ -46,7 +129,9 @@ function TreeItem({ name, isTree, path, close, open, children, remainingURL }) {
         <div className="file-icon">
           <i className={fileIcons.getClassWithColor(name, isTree)}></i>
         </div>
-        <div className="item-name">{name}</div>
+        <div className="item-name">
+          {name + " ->" + treeItemActive.urlRemaining}
+        </div>
       </div>
       {isTree && isTree.isOpen && (
         <ul className="child-list">
@@ -60,6 +145,8 @@ function TreeItem({ name, isTree, path, close, open, children, remainingURL }) {
               open={open}
               close={close}
               remainingURL={treeItemActive.urlRemaining}
+              reloaded={reloaded}
+              setReloaded={setReloaded}
             />
           ))}
         </ul>
@@ -67,39 +154,5 @@ function TreeItem({ name, isTree, path, close, open, children, remainingURL }) {
     </li>
   );
 }
-
-const handleClick = (path, open, close, isTree, URLDetails) => {
-  if (isTree) {
-    if (isTree.isOpen) {
-      close(path);
-    } else {
-      open(path);
-    }
-  } else {
-    window.location.href = `https://www.gitlab.com/${
-      URLDetails.dirFormatted
-    }/-/blob/${URLDetails.branchName}/${path.join("/")}/`;
-  }
-};
-
-const tryTreeItemActive = (path, remainingURL, isTree, name, open) => {
-  let isItemActive = false;
-  if (remainingURL.length != 0) {
-    const activeIconName = remainingURL.split("/")[0];
-    const urlRemaining = remainingURL.substring(activeIconName.length + 1);
-    if (activeIconName === name) {
-      if (isTree && isTree.isOpen != true) {
-        isTree.isOpen = true;
-        open(path);
-      }
-      if (urlRemaining.length === 0) {
-        isItemActive = true;
-      }
-    }
-    return { urlRemaining, isItemActive };
-  } else {
-    return { urlRemaining: "", isItemActive };
-  }
-};
 
 export default TreeItem;
