@@ -13,6 +13,8 @@ import {
 import "./styles.css";
 
 const renderTreeItems = (tree, close, open) => {
+  const URLDetails = fetchURLDetails();
+
   return (
     <div className="tree-list">
       <ul className="parent-list">
@@ -25,6 +27,7 @@ const renderTreeItems = (tree, close, open) => {
             children={tree[key].children}
             open={open}
             close={close}
+            remainingURL={URLDetails.urlBaseRemoved}
           />
         ))}
       </ul>
