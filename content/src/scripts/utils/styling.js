@@ -10,7 +10,3 @@ export const applyClosedPageStyling = () => {
   document.querySelector(".nav-sidebar").style.left = "0";
   document.querySelector("body").style.marginLeft = "0";
 };
-
-export const paneWidth = () => {
-  return "250px";
-};

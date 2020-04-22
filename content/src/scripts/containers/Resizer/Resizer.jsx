@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import "./styles.css";
-import { setWidth } from "../../../../../event/src/actions/UI";
 import { connect } from "react-redux";
+
+import { setWidth } from "../../../../../event/src/actions/UI";
+
+import "./styles.css";
 
 const Resizer = ({ width, setWidth }) => {
   const [transitionProps, setTransitionProps] = useState("");

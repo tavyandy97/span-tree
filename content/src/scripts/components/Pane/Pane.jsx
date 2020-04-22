@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import SVG from "../SVG";
 
 import TreeList from "../../containers/TreeList/TreeList";
-import { paneWidth } from "../../utils/styling";
+import Resizer from "../../containers/Resizer/Resizer";
 import { fetchURLDetails } from "../../utils/url";
 
 import "./styles.css";
-import Resizer from "../../containers/Resizer/Resizer";
 
 function Pane({ toggleOpened, width }) {
   const [realoading, setRealoading] = useState(true);
