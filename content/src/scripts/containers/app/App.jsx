@@ -34,7 +34,10 @@ class App extends Component {
 
   render() {
     const URLDetails = fetchURLDetails();
-    if (!URLDetails.isRepo) return null;
+    if (!URLDetails.isRepo || !URLDetails.isTreeVisible) {
+      if (this.props.opened) this.props.toggleOpened();
+      return null;
+    }
 
     return this.props.opened ? (
       ReactDOM.createPortal(
