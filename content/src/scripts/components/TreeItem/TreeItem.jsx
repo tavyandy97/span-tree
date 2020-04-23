@@ -3,7 +3,7 @@ import React from "react";
 import { fetchURLDetails } from "../../utils/url";
 
 import fileIcons from "../../utils/file-icons";
-import axios from "../../../../../event/axios";
+import axios from "axios";
 
 import "./styles.css";
 
@@ -32,9 +32,15 @@ function TreeItem({ name, isTree, path, close, open, children }) {
           },
         })
         .then((res) => {
-          console.log(res);
+          window.history.pushState(
+            { html: res.data.html, pageTitle: "YOYO HONEY SINGH" },
+            "",
+            URL
+          );
         })
-        .catch((err) => {});
+        .catch((err) => {
+          console.log(err);
+        });
     }
   };
 
