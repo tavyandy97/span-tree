@@ -2,10 +2,12 @@ import React from "react";
 
 import { fetchURLDetails } from "../../utils/url";
 
+import fileIcons from "../../utils/file-icons";
+import axios from "../../../../../event/axios";
+
 import "./styles.css";
 
 const importFileIconCSS = `chrome-extension://${chrome.runtime.id}/libs/file-icon.css`;
-import fileIcons from "../../utils/file-icons";
 
 function TreeItem({ name, isTree, path, close, open, children }) {
   const URLDetails = fetchURLDetails();
@@ -18,9 +20,21 @@ function TreeItem({ name, isTree, path, close, open, children }) {
         open(path);
       }
     } else {
-      window.location.href = `https://www.gitlab.com/${
-        URLDetails.dirFormatted
-      }/-/blob/${URLDetails.branchName}/${path.join("/")}/`;
+      // window.location.href
+      const URL = `https://www.gitlab.com/${URLDetails.dirFormatted}/blob/${
+        URLDetails.branchName
+      }/${path.join("/")}`;
+      axios
+        .get(URL, {
+          headers: {
+            accept: " application/json, text/javascript, */*; q=0.01",
+            ["x-requested-with"]: " XMLHttpRequest",
+          },
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {});
     }
   };
 
