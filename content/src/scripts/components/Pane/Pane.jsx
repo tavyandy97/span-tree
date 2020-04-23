@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import SVG from "../SVG";
 
 import TreeList from "../../containers/TreeList/TreeList";
-import { paneWidth } from "../../utils/styling";
+import Resizer from "../../containers/Resizer/Resizer";
 import { fetchURLDetails } from "../../utils/url";
 
 import "./styles.css";
 
-function Pane({ toggleOpened }) {
+function Pane({ toggleOpened, width }) {
   const [realoading, setRealoading] = useState(true);
   const [URLDetails, setURLDetails] = useState(fetchURLDetails());
 
@@ -23,25 +23,36 @@ function Pane({ toggleOpened }) {
   }, [realoading]);
 
   return (
-    <div className="tree-pane" style={{ width: paneWidth() }}>
-      <div className="pane-header">
-        <div className="spread">
+    <div className="tree-pane" style={{ width: width + "px" }}>
+      <div className="pane-main">
+        <div className="pane-header">
+          <div className="spread">
+            <div>
+              <SVG
+                icon="repo"
+                height="12"
+                style={{ verticalAlign: "middle" }}
+              />{" "}
+              {URLDetails.dirFormatted}
+            </div>
+            <div onClick={toggleOpened} className="close-button">
+              <SVG icon="close" height="12" />
+            </div>
+          </div>
           <div>
-            <SVG icon="repo" height="12" style={{ verticalAlign: "middle" }} />{" "}
-            {URLDetails.dirFormatted}
-          </div>
-          <div onClick={toggleOpened} className="close-button">
-            <SVG icon="close" height="12" />
+            <SVG
+              icon="branch"
+              height="12"
+              style={{ verticalAlign: "middle" }}
+            />{" "}
+            {URLDetails.branchName}
           </div>
         </div>
-        <div>
-          <SVG icon="branch" height="12" style={{ verticalAlign: "middle" }} />{" "}
-          {URLDetails.branchName}
+        <div className="tree-body">
+          <TreeList />
         </div>
       </div>
-      <div className="tree-body">
-        <TreeList />
-      </div>
+      <Resizer />
     </div>
   );
 }
