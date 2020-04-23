@@ -1,6 +1,12 @@
-# Setup
+## About
 
-Steps: 
+Browser extension that makes navigating a gitlab repo a breeze by providing a familiar tree directory structure.
+
+![](docs/demo.gif)
+
+## Development Setup
+
+Steps:
 
 1. Clone the repo to your local system
 
@@ -10,9 +16,7 @@ Steps:
    $	npm install
    ```
 
-   
-
-3. Now to start the server which shall compile the extension in realtime 
+3. Now to start the server which shall compile the extension in realtime
 
    ```
    $	gulp watch
@@ -23,4 +27,3 @@ Steps:
 4. Load the chrome extension from the build folder. ( first enable developer mode inside Chrome)
 
    (For reference follow: https://thoughtbot.com/blog/how-to-make-a-chrome-extension)
-
