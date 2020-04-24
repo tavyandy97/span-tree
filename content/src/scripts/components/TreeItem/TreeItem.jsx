@@ -20,23 +20,33 @@ function TreeItem({ name, isTree, path, close, open, children }) {
         open(path);
       }
     } else {
-      // window.location.href
       const URL = `https://www.gitlab.com/${URLDetails.dirFormatted}/blob/${
         URLDetails.branchName
       }/${path.join("/")}`;
       axios
-        .get(URL, {
-          headers: {
-            accept: " application/json, text/javascript, */*; q=0.01",
-            ["x-requested-with"]: " XMLHttpRequest",
-          },
-        })
+        .get(URL)
         .then((res) => {
-          window.history.pushState(
-            { html: res.data.html, pageTitle: "YOYO HONEY SINGH" },
+          history.pushState(
+            URL,
             "",
-            URL
+            `/${URLDetails.dirFormatted}/blob/${
+              URLDetails.branchName
+            }/${path.join("/")}`
           );
+          let el = document.createElement("html");
+          el.innerHTML = res.data;
+
+          const anchor = document.createElement("div");
+          anchor.id = "rcr-anchor";
+          anchor.innerHTML = document.getElementById("rcr-anchor").innerHTML;
+          el.querySelector(".layout-page").insertBefore(
+            anchor,
+            el.querySelector(".layout-page").childNodes[0]
+          );
+
+          document.querySelector("body").innerHTML = el.querySelector(
+            "body"
+          ).innerHTML;
         })
         .catch((err) => {
           console.log(err);
