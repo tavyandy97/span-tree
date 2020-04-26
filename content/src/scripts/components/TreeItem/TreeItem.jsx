@@ -26,7 +26,7 @@ const tryTreeItemActiveBeforeReload = (
   isTree,
   name,
   open,
-  setReloaded
+  setRendering
 ) => {
   let isItemActive = false;
   if (remainingURL.length != 0) {
@@ -39,7 +39,7 @@ const tryTreeItemActiveBeforeReload = (
       }
       if (urlRemaining.length === 0) {
         isItemActive = true;
-        setReloaded(false);
+        setRendering(false);
       }
     } else {
       urlRemaining = "";
@@ -76,19 +76,19 @@ function TreeItem({
   open,
   children,
   remainingURL,
-  reloaded,
-  setReloaded,
+  rendering,
+  setRendering,
 }) {
   const URLDetails = fetchURLDetails();
   let treeItemActive = null;
-  if (reloaded) {
+  if (rendering) {
     treeItemActive = tryTreeItemActiveBeforeReload(
       path,
       remainingURL,
       isTree,
       name,
       open,
-      setReloaded
+      setRendering
     );
   } else {
     treeItemActive = tryTreeItemActiveAfterReload(
@@ -141,8 +141,8 @@ function TreeItem({
               open={open}
               close={close}
               remainingURL={treeItemActive.urlRemaining}
-              reloaded={reloaded}
-              setReloaded={setReloaded}
+              rendering={rendering}
+              setRendering={setRendering}
             />
           ))}
         </ul>
