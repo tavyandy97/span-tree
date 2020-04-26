@@ -17,7 +17,12 @@ const renderTreeItems = (tree, close, open, rendering, setRendering) => {
 
   return (
     <div className="tree-list">
-      <ul className="parent-list">
+      {rendering ? (
+        <div className="loader-wrapper">
+          <Loader size="64px" />
+        </div>
+      ) : null}
+      <ul className={rendering ? "parent-list hidden" : "parent-list"}>
         {Object.keys(tree).map((key) => (
           <TreeItem
             key={key}
