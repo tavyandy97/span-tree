@@ -7,7 +7,7 @@ import "./styles.css";
 
 const importFileIconCSS = `chrome-extension://${chrome.runtime.id}/libs/file-icon.css`;
 
-function TreeItem({ name, isTree, path, close, open, children }) {
+function TreeItem({ width, name, isTree, path, close, open, children }) {
   const handleClick = (path, open, close, isTree) => {
     if (isTree) {
       if (isTree.isOpen) {
@@ -16,7 +16,7 @@ function TreeItem({ name, isTree, path, close, open, children }) {
         open(path);
       }
     } else {
-      refreshPage(path);
+      refreshPage(path, width);
     }
   };
 

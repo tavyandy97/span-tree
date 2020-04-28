@@ -1,5 +1,6 @@
 import axios from "axios";
 
+import { applyOpenedPageStyling } from "./styling";
 import { fetchURLDetails } from "./url";
 
 function arraysEqual(a, b) {
@@ -13,7 +14,7 @@ function arraysEqual(a, b) {
   return true;
 }
 
-function loadPageContent(path, URLDetails) {
+function loadPageContent(path, URLDetails, width) {
   const URL = `https://www.gitlab.com/${URLDetails.dirFormatted}/blob/${
     URLDetails.branchName
   }/${path.join("/")}?format=json&viewer=simple`;
@@ -25,14 +26,16 @@ function loadPageContent(path, URLDetails) {
       },
     })
     .then((res) => {
-      document.querySelector(".blob-viewer").innerHTML = res.data.html;
+      const blobViews = document.querySelectorAll(".blob-viewer");
+      blobViews[blobViews.length - 1].innerHTML = res.data.html;
+      applyOpenedPageStyling(width);
     })
     .catch((err) => {
       console.log(err);
     });
 }
 
-export const refreshPage = (path) => {
+export const refreshPage = (path, width) => {
   const URLDetails = fetchURLDetails();
   const URL = `https://www.gitlab.com/${URLDetails.dirFormatted}/blob/${
     URLDetails.branchName
@@ -78,7 +81,7 @@ export const refreshPage = (path) => {
           }
         }
       }
-      loadPageContent(path, URLDetails);
+      loadPageContent(path, URLDetails, width);
     })
     .catch((err) => {
       console.log(err);
