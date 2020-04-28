@@ -49,6 +49,7 @@ function TreeItem({ width, name, isTree, path, close, open, children }) {
           {Object.keys(children).map((key) => (
             <TreeItem
               key={key}
+              width={width}
               name={children[key].name}
               isTree={children[key].isTree}
               path={children[key].path}

@@ -14,7 +14,7 @@ function arraysEqual(a, b) {
   return true;
 }
 
-function loadPageContent(path, URLDetails, width) {
+function loadPageContent(path, URLDetails) {
   const URL = `https://www.gitlab.com/${URLDetails.dirFormatted}/blob/${
     URLDetails.branchName
   }/${path.join("/")}?format=json&viewer=simple`;
@@ -28,7 +28,6 @@ function loadPageContent(path, URLDetails, width) {
     .then((res) => {
       const blobViews = document.querySelectorAll(".blob-viewer");
       blobViews[blobViews.length - 1].innerHTML = res.data.html;
-      applyOpenedPageStyling(width);
     })
     .catch((err) => {
       console.log(err);
@@ -81,6 +80,7 @@ export const refreshPage = (path, width) => {
           }
         }
       }
+      applyOpenedPageStyling(width);
       loadPageContent(path, URLDetails, width);
     })
     .catch((err) => {
