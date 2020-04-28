@@ -40,11 +40,16 @@ const renderTreeItems = (tree, width, close, open, rendering, setRendering) => {
 
 function TreeList({ tree, width, getInitialTree, closeDir }) {
   const [loading, setLoading] = useState(true);
-  const [rendering, setRendering] = useState(true);
+  const [rendering, setRendering] = useState(false);
   const initialMount = useRef(true);
 
   useEffect(() => {
     const URLDetails = fetchURLDetails();
+    if (URLDetails.baseRemovedURL.length === 0) {
+      setRendering(false);
+    } else {
+      setRendering(true);
+    }
     getInitialTree(
       URLDetails.dirURLParam,
       {
