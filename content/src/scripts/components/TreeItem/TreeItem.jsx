@@ -1,24 +1,11 @@
 import React from "react";
 
-import { fetchURLDetails } from "../../utils/url";
-
-import "./styles.css";
-const importFileIconCSS = `chrome-extension://${chrome.runtime.id}/libs/file-icon.css`;
+import { refreshPage } from "../../utils/refreshPage";
 import fileIcons from "../../utils/file-icons";
 
-const handleClick = (path, open, close, isTree, URLDetails) => {
-  if (isTree) {
-    if (isTree.isOpen) {
-      close(path);
-    } else {
-      open(path);
-    }
-  } else {
-    window.location.href = `https://www.gitlab.com/${
-      URLDetails.dirFormatted
-    }/-/blob/${URLDetails.branchName}/${path.join("/")}/`;
-  }
-};
+import "./styles.css";
+
+const importFileIconCSS = `chrome-extension://${chrome.runtime.id}/libs/file-icon.css`;
 
 const tryTreeItemActiveBeforeReload = (
   path,
@@ -69,6 +56,7 @@ const tryTreeItemActiveAfterReload = (path, remainingURL, isTree, name) => {
 };
 
 function TreeItem({
+  width,
   name,
   isTree,
   path,
@@ -79,7 +67,18 @@ function TreeItem({
   rendering,
   setRendering,
 }) {
-  const URLDetails = fetchURLDetails();
+  const handleClick = (path, open, close, isTree) => {
+    if (isTree) {
+      if (isTree.isOpen) {
+        close(path);
+      } else {
+        open(path);
+      }
+    } else {
+      refreshPage(path, width);
+    }
+  };
+
   let treeItemActive = null;
   if (rendering) {
     treeItemActive = tryTreeItemActiveBeforeReload(
@@ -104,7 +103,7 @@ function TreeItem({
       <link rel="stylesheet" type="text/css" href={importFileIconCSS} />
       <div
         className="tree-element"
-        onClick={() => handleClick(path, open, close, isTree, URLDetails)}
+        onClick={() => handleClick(path, open, close, isTree)}
       >
         <div
           className={
@@ -134,6 +133,7 @@ function TreeItem({
           {Object.keys(children).map((key) => (
             <TreeItem
               key={key}
+              width={width}
               name={children[key].name}
               isTree={children[key].isTree}
               path={children[key].path}
