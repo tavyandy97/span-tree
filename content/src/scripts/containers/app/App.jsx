@@ -39,20 +39,21 @@ class App extends Component {
       return null;
     }
 
-    return this.props.opened ? (
-      ReactDOM.createPortal(
-        <Pane
-          toggleOpened={this.props.toggleOpened}
-          width={this.props.width}
-        />,
-        parentDiv
-      )
-    ) : (
-      <Toggler
-        handleClick={this.props.toggleOpened}
-        pinned={this.props.pinned}
-      />
-    );
+    return this.props.opened
+      ? ReactDOM.createPortal(
+          <Pane
+            toggleOpened={this.props.toggleOpened}
+            width={this.props.width}
+          />,
+          parentDiv
+        )
+      : ReactDOM.createPortal(
+          <Toggler
+            handleClick={this.props.toggleOpened}
+            pinned={this.props.pinned}
+          />,
+          document.getElementById("rcr-anchor")
+        );
   }
 }
 
