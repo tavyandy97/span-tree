@@ -12,12 +12,13 @@ import {
 
 import "./styles.css";
 
-const renderTreeItems = (tree, close, open) => {
+const renderTreeItems = (tree, width, close, open) => {
   return (
     <div className="tree-list">
       <ul className="parent-list">
         {Object.keys(tree).map((key) => (
           <TreeItem
+            width={width}
             key={key}
             name={tree[key].name}
             isTree={tree[key].isTree}
@@ -32,7 +33,7 @@ const renderTreeItems = (tree, close, open) => {
   );
 };
 
-function TreeList({ tree, getInitialTree, closeDir }) {
+function TreeList({ tree, width, getInitialTree, closeDir }) {
   const [loading, setLoading] = useState(true);
   const initialMount = useRef(true);
 
@@ -92,6 +93,7 @@ function TreeList({ tree, getInitialTree, closeDir }) {
 
   return renderTreeItems(
     tree[URLDetails.dirFormatted][URLDetails.branchName],
+    width,
     closeDirectory,
     openDirectory
   );
@@ -100,6 +102,7 @@ function TreeList({ tree, getInitialTree, closeDir }) {
 const mapStateToProps = (state) => {
   return {
     tree: state.tree,
+    width: state.width,
   };
 };
 

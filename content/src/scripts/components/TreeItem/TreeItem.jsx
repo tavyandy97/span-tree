@@ -1,15 +1,13 @@
 import React from "react";
 
-import { fetchURLDetails } from "../../utils/url";
+import { refreshPage } from "../../utils/refreshPage";
+import fileIcons from "../../utils/file-icons";
 
 import "./styles.css";
 
 const importFileIconCSS = `chrome-extension://${chrome.runtime.id}/libs/file-icon.css`;
-import fileIcons from "../../utils/file-icons";
 
-function TreeItem({ name, isTree, path, close, open, children }) {
-  const URLDetails = fetchURLDetails();
-
+function TreeItem({ width, name, isTree, path, close, open, children }) {
   const handleClick = (path, open, close, isTree) => {
     if (isTree) {
       if (isTree.isOpen) {
@@ -18,9 +16,7 @@ function TreeItem({ name, isTree, path, close, open, children }) {
         open(path);
       }
     } else {
-      window.location.href = `https://www.gitlab.com/${
-        URLDetails.dirFormatted
-      }/-/blob/${URLDetails.branchName}/${path.join("/")}/`;
+      refreshPage(path, width);
     }
   };
 
@@ -53,6 +49,7 @@ function TreeItem({ name, isTree, path, close, open, children }) {
           {Object.keys(children).map((key) => (
             <TreeItem
               key={key}
+              width={width}
               name={children[key].name}
               isTree={children[key].isTree}
               path={children[key].path}
