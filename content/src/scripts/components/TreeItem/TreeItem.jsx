@@ -75,7 +75,7 @@ function TreeItem({
         open(path);
       }
     } else {
-      refreshPage(path, width);
+      refreshPage(path, width, setRendering);
     }
   };
 

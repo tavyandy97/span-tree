@@ -34,7 +34,7 @@ function loadPageContent(path, URLDetails) {
     });
 }
 
-export const refreshPage = (path, width) => {
+export const refreshPage = (path, width, setRendering) => {
   const URLDetails = fetchURLDetails();
   const URL = `https://www.gitlab.com/${URLDetails.dirFormatted}/blob/${
     URLDetails.branchName
@@ -49,6 +49,7 @@ export const refreshPage = (path, width) => {
           "/"
         )}`
       );
+      setRendering(true);
       let el = document.createElement("html");
       el.innerHTML = res.data;
 
