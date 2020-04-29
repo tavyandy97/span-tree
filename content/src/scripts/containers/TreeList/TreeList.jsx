@@ -12,7 +12,9 @@ import {
 
 import "./styles.css";
 
-const renderTreeItems = (tree, width, close, open) => {
+const renderTreeItems = (tree, width, close, open, rendering, setRendering) => {
+  const URLDetails = fetchURLDetails();
+
   return (
     <div className="tree-list">
       <ul className="parent-list">
@@ -26,6 +28,9 @@ const renderTreeItems = (tree, width, close, open) => {
             children={tree[key].children}
             open={open}
             close={close}
+            remainingURL={URLDetails.baseRemovedURL}
+            rendering={rendering}
+            setRendering={setRendering}
           />
         ))}
       </ul>
@@ -35,10 +40,16 @@ const renderTreeItems = (tree, width, close, open) => {
 
 function TreeList({ tree, width, getInitialTree, closeDir }) {
   const [loading, setLoading] = useState(true);
+  const [rendering, setRendering] = useState(false);
   const initialMount = useRef(true);
 
   useEffect(() => {
     const URLDetails = fetchURLDetails();
+    if (URLDetails.baseRemovedURL.length === 0) {
+      setRendering(false);
+    } else {
+      setRendering(true);
+    }
     getInitialTree(
       URLDetails.dirURLParam,
       {
@@ -95,7 +106,9 @@ function TreeList({ tree, width, getInitialTree, closeDir }) {
     tree[URLDetails.dirFormatted][URLDetails.branchName],
     width,
     closeDirectory,
-    openDirectory
+    openDirectory,
+    rendering,
+    setRendering
   );
 }
 

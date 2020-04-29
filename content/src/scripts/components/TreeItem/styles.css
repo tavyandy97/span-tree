@@ -60,6 +60,11 @@
   box-sizing: border-box;
 }
 
+.active-row {
+  border: 3px solid black;
+  background: darkslategrey;
+}
+
 .full-width-row:hover {
   background: #6464ff;
   cursor: pointer;

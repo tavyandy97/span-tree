@@ -34,21 +34,22 @@ function loadPageContent(path, URLDetails) {
     });
 }
 
-export const refreshPage = (path, width) => {
+export const refreshPage = (path, width, setRendering) => {
   const URLDetails = fetchURLDetails();
   const URL = `https://www.gitlab.com/${URLDetails.dirFormatted}/blob/${
     URLDetails.branchName
   }/${path.join("/")}`;
+  history.pushState(
+    URL,
+    "",
+    `/${URLDetails.dirFormatted}/blob/${URLDetails.branchName}/${path.join(
+      "/"
+    )}`
+  );
+  setRendering(true);
   axios
     .get(URL)
     .then((res) => {
-      history.pushState(
-        URL,
-        "",
-        `/${URLDetails.dirFormatted}/blob/${URLDetails.branchName}/${path.join(
-          "/"
-        )}`
-      );
       let el = document.createElement("html");
       el.innerHTML = res.data;
 
