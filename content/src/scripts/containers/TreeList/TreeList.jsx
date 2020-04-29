@@ -38,9 +38,16 @@ const renderTreeItems = (tree, width, close, open, rendering, setRendering) => {
   );
 };
 
-function TreeList({ tree, width, getInitialTree, closeDir }) {
+function TreeList({
+  rendering,
+  setRendering,
+  tree,
+  width,
+  getInitialTree,
+  closeDir,
+}) {
   const [loading, setLoading] = useState(true);
-  const [rendering, setRendering] = useState(false);
+  // const [rendering, setRendering] = useState(false);
   const initialMount = useRef(true);
 
   useEffect(() => {
@@ -50,9 +57,9 @@ function TreeList({ tree, width, getInitialTree, closeDir }) {
     } else {
       setRendering(true);
     }
-    window.onpopstate = function (event) {
-      setRendering(true);
-    };
+    // window.onpopstate = function (event) {
+    //   setRendering(true);
+    // };
     getInitialTree(
       URLDetails.dirURLParam,
       {

@@ -16,7 +16,29 @@ import "./App.css";
 const parentDiv = document.querySelector("body");
 
 class App extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      rendering: true,
+      setRendering: (rendering) => {
+        console.log("Set Rendering Called");
+        this.setState((prevState) => {
+          return { rendering: rendering, setRendering: prevState.setRendering };
+        });
+      },
+    };
+    console.log("State set");
+  }
+
   componentDidMount() {
+    const bindToHistory = () => {
+      console.log(this.state);
+      this.state.setRendering(true);
+    };
+    console.log("Reloaded");
+    window.onpopstate = function (event) {
+      bindToHistory();
+    };
     if (this.props.opened) {
       applyOpenedPageStyling(this.props.width);
     } else {
@@ -45,6 +67,8 @@ class App extends Component {
           <Pane
             toggleOpened={this.props.toggleOpened}
             width={this.props.width}
+            rendering={this.state.rendering}
+            setRendering={this.state.setRendering}
           />,
           parentDiv
         )

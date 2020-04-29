@@ -62,7 +62,9 @@ function TreeItem({
         }
         if (urlRemaining.length === 0) {
           isItemActive = true;
-          refreshPage(path, width);
+          if (!isTree) {
+            refreshPage(path, width);
+          }
           setRendering(false);
         }
       } else {

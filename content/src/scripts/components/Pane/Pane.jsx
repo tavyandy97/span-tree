@@ -7,7 +7,7 @@ import { fetchURLDetails } from "../../utils/url";
 
 import "./styles.css";
 
-function Pane({ toggleOpened, width }) {
+function Pane({ toggleOpened, width, rendering, setRendering }) {
   const [realoading, setRealoading] = useState(true);
   const [URLDetails, setURLDetails] = useState(fetchURLDetails());
 
@@ -49,7 +49,7 @@ function Pane({ toggleOpened, width }) {
           </div>
         </div>
         <div className="tree-body">
-          <TreeList />
+          <TreeList rendering={rendering} setRendering={setRendering} />
         </div>
       </div>
       <Resizer />
