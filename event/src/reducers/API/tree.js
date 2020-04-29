@@ -1,5 +1,4 @@
 import produce from "immer";
-import dotProp from "dot-prop-immutable";
 
 import { FETCH_TREE, OPEN_DIR, CLOSE_DIR, UPDATE_TREE } from "../../types/API";
 

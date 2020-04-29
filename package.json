@@ -9,7 +9,6 @@
   "author": "Taveesh Anand",
   "dependencies": {
     "axios": "^0.19.2",
-    "dot-prop-immutable": "^2.1.0",
     "immer": "^6.0.3",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
