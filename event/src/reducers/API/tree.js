@@ -54,9 +54,19 @@ export default (state = initialState, action) => {
       });
       return nextState;
     case UPDATE_TREE:
-      objectPath = `${action.reducerDetails.repoName}.${action.reducerDetails.branchName}.`;
-      objectPath += action.reducerDetails.path.join(".children.");
-      objectPath += ".children";
+      objectPath = [
+        action.reducerDetails.repoName,
+        action.reducerDetails.branchName,
+      ];
+      for (let i = 0; i < action.reducerDetails.path.length; i++) {
+        objectPath.push(action.reducerDetails.path[i]);
+        if (i !== action.reducerDetails.path.length - 1) {
+          objectPath.push("children");
+        }
+      }
+
+      propName = objectPath.pop();
+
       const children = action.payload
         .map((node) => {
           return {
@@ -77,7 +87,14 @@ export default (state = initialState, action) => {
           map[obj.name] = obj;
           return map;
         }, {});
-      return dotProp.set(state, objectPath, children);
+
+      nextState = produce(state, (draft) => {
+        draft = objectPath.reduce((it, prop) => it[prop], draft);
+        if (Object.keys(draft[propName]["children"]) <= 0) {
+          draft[propName]["children"] = children;
+        }
+      });
+      return nextState;
     case CLOSE_DIR:
       objectPath = [
         action.reducerDetails.repoName,
@@ -89,13 +106,12 @@ export default (state = initialState, action) => {
           objectPath.push("children");
         }
       }
-      // objectPath = [...objectPath, "isTree", "isOpen"];
-      propName = objectPath.pop();
 
+      propName = objectPath.pop();
       nextState = produce(state, (draft) => {
         draft = objectPath.reduce((it, prop) => it[prop], draft);
         draft[propName]["isTree"]["isOpen"] = false;
-        draft[propName]["children"] = {};
+        // draft[propName]["children"] = {};
       });
       return nextState;
 
