@@ -35,7 +35,7 @@ export default (state = initialState, action) => {
         },
       };
     case OPEN_DIR:
-      let objectPath = [
+      objectPath = [
         action.reducerDetails.repoName,
         action.reducerDetails.branchName,
       ];
@@ -46,9 +46,9 @@ export default (state = initialState, action) => {
         }
       }
       objectPath = [...objectPath, "isTree", "isOpen"];
-      let propName = objectPath.pop();
+      propName = objectPath.pop();
 
-      let nextState = produce(state, (draft) => {
+      nextState = produce(state, (draft) => {
         draft = objectPath.reduce((it, prop) => it[prop], draft);
         draft[propName] = true;
       });
@@ -67,7 +67,7 @@ export default (state = initialState, action) => {
 
       propName = objectPath.pop();
 
-      const children = action.payload
+      children = action.payload
         .map((node) => {
           return {
             name: node.name,
