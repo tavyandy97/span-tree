@@ -4,19 +4,23 @@ export const fetchURLDetails = () => {
     .split("/")
     .filter((pathSub) => pathSub.length !== 0);
   let dir = [];
-  let branchName = "master";
+  let branchName = document.querySelector(".dropdown-toggle-text")
+    ? document.querySelector(".dropdown-toggle-text").innerText
+    : "master";
+  let branchNameSplit = branchName
+    .split("/")
+    .filter((pathSub) => pathSub.length !== 0);
   let branchFound = false;
   let isTreeVisible = true;
   let treeOrBlobOrHyphenFound = false;
   let baseRemovedURLItems = [];
   for (let i = 0; i < pathNameSplit.length; i++) {
     if (treeOrBlobOrHyphenFound) {
-      if (branchFound) {
-        baseRemovedURLItems.push(pathNameSplit[i]);
-      } else {
-        branchName = pathNameSplit[i];
+      if (!branchFound) {
+        i += branchNameSplit.length;
         branchFound = true;
       }
+      baseRemovedURLItems.push(pathNameSplit[i]);
     } else {
       if (pathNameSplit[i] === "-") {
         treeOrBlobOrHyphenFound = true;
