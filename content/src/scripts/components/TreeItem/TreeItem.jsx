@@ -4,6 +4,7 @@ import { refreshPage } from "../../utils/refreshPage";
 import fileIcons from "../../utils/file-icons";
 
 import "./styles.css";
+import { fetchURLDetails } from "../../utils/url";
 
 const importFileIconCSS = `chrome-extension://${chrome.runtime.id}/libs/file-icon.css`;
 
@@ -27,7 +28,18 @@ function TreeItem({
         open(path);
       }
     } else {
-      refreshPage(path, width, setRendering);
+      const URLDetails = fetchURLDetails();
+      const URL = `https://www.gitlab.com/${URLDetails.dirFormatted}/blob/${
+        URLDetails.branchName
+      }/${path.join("/")}`;
+      history.pushState(
+        URL,
+        "",
+        `/${URLDetails.dirFormatted}/blob/${URLDetails.branchName}/${path.join(
+          "/"
+        )}`
+      );
+      setRendering(true);
     }
   };
 
@@ -50,6 +62,7 @@ function TreeItem({
         }
         if (urlRemaining.length === 0) {
           isItemActive = true;
+          refreshPage(path, width);
           setRendering(false);
         }
       } else {

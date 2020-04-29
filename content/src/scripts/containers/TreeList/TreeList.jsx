@@ -50,6 +50,9 @@ function TreeList({ tree, width, getInitialTree, closeDir }) {
     } else {
       setRendering(true);
     }
+    window.onpopstate = function (event) {
+      setRendering(true);
+    };
     getInitialTree(
       URLDetails.dirURLParam,
       {

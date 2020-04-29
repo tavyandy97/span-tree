@@ -34,19 +34,11 @@ function loadPageContent(path, URLDetails) {
     });
 }
 
-export const refreshPage = (path, width, setRendering) => {
+export const refreshPage = (path, width) => {
   const URLDetails = fetchURLDetails();
   const URL = `https://www.gitlab.com/${URLDetails.dirFormatted}/blob/${
     URLDetails.branchName
   }/${path.join("/")}`;
-  history.pushState(
-    URL,
-    "",
-    `/${URLDetails.dirFormatted}/blob/${URLDetails.branchName}/${path.join(
-      "/"
-    )}`
-  );
-  setRendering(true);
   axios
     .get(URL)
     .then((res) => {
