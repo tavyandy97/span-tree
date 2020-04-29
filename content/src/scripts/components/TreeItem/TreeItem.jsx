@@ -7,54 +7,6 @@ import "./styles.css";
 
 const importFileIconCSS = `chrome-extension://${chrome.runtime.id}/libs/file-icon.css`;
 
-const tryTreeItemActiveBeforeReload = (
-  path,
-  remainingURL,
-  isTree,
-  name,
-  open,
-  setRendering
-) => {
-  let isItemActive = false;
-  if (remainingURL.length != 0) {
-    let activeIconName = remainingURL.split("/")[0];
-    let urlRemaining = remainingURL.substring(activeIconName.length + 1);
-    if (activeIconName === name) {
-      if (isTree && isTree.isOpen != true) {
-        isTree.isOpen = true;
-        open(path);
-      }
-      if (urlRemaining.length === 0) {
-        isItemActive = true;
-        setRendering(false);
-      }
-    } else {
-      urlRemaining = "";
-    }
-    return { urlRemaining, isItemActive };
-  } else {
-    return { urlRemaining: "", isItemActive };
-  }
-};
-
-const tryTreeItemActiveAfterReload = (path, remainingURL, isTree, name) => {
-  let isItemActive = false;
-  if (remainingURL.length != 0) {
-    let activeIconName = remainingURL.split("/")[0];
-    let urlRemaining = remainingURL.substring(activeIconName.length + 1);
-    if (activeIconName === name) {
-      if (urlRemaining.length === 0) {
-        isItemActive = true;
-      }
-    } else {
-      urlRemaining = "";
-    }
-    return { urlRemaining, isItemActive };
-  } else {
-    return { urlRemaining: "", isItemActive };
-  }
-};
-
 function TreeItem({
   width,
   name,
@@ -79,6 +31,54 @@ function TreeItem({
     }
   };
 
+  const tryTreeItemActiveBeforeReload = (
+    path,
+    remainingURL,
+    isTree,
+    name,
+    open,
+    setRendering
+  ) => {
+    let isItemActive = false;
+    if (remainingURL.length != 0) {
+      let activeIconName = remainingURL.split("/")[0];
+      let urlRemaining = remainingURL.substring(activeIconName.length + 1);
+      if (activeIconName === name) {
+        if (isTree && isTree.isOpen != true) {
+          isTree.isOpen = true;
+          open(path);
+        }
+        if (urlRemaining.length === 0) {
+          isItemActive = true;
+          setRendering(false);
+        }
+      } else {
+        urlRemaining = "";
+      }
+      return { urlRemaining, isItemActive };
+    } else {
+      return { urlRemaining: "", isItemActive };
+    }
+  };
+
+  const tryTreeItemActiveAfterReload = (remainingURL, name) => {
+    let isItemActive = false;
+    if (remainingURL.length != 0) {
+      let activeIconName = remainingURL.split("/")[0];
+      let urlRemaining = remainingURL.substring(activeIconName.length + 1);
+      if (activeIconName === name) {
+        if (urlRemaining.length === 0) {
+          isItemActive = true;
+        }
+      } else {
+        urlRemaining = "";
+      }
+      return { urlRemaining, isItemActive };
+    } else {
+      return { urlRemaining: "", isItemActive };
+    }
+  };
+
   let treeItemActive = null;
   if (rendering) {
     treeItemActive = tryTreeItemActiveBeforeReload(
@@ -90,12 +90,7 @@ function TreeItem({
       setRendering
     );
   } else {
-    treeItemActive = tryTreeItemActiveAfterReload(
-      path,
-      remainingURL,
-      isTree,
-      name
-    );
+    treeItemActive = tryTreeItemActiveAfterReload(remainingURL, name);
   }
 
   return (
