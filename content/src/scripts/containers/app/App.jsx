@@ -21,13 +21,11 @@ class App extends Component {
     this.state = {
       rendering: true,
       setRendering: (rendering) => {
-        console.log("Set Rendering Called");
         this.setState((prevState) => {
           return { rendering: rendering, setRendering: prevState.setRendering };
         });
       },
     };
-    console.log("State set");
   }
 
   componentDidMount() {
@@ -35,7 +33,6 @@ class App extends Component {
       console.log(this.state);
       this.state.setRendering(true);
     };
-    console.log("Reloaded");
     window.onpopstate = function (event) {
       bindToHistory();
     };
