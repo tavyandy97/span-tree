@@ -53,10 +53,6 @@ export default (state = initialState, action) => {
         draft[propName] = true;
       });
       return nextState;
-    // let objectPath = `${action.reducerDetails.repoName}.${action.reducerDetails.branchName}.`;
-    // objectPath += action.payload.join(".children.");
-    // objectPath += ".isTree.isOpen";
-    // return dotProp.set(state, objectPath, true);
     case UPDATE_TREE:
       objectPath = `${action.reducerDetails.repoName}.${action.reducerDetails.branchName}.`;
       objectPath += action.reducerDetails.path.join(".children.");
@@ -83,15 +79,25 @@ export default (state = initialState, action) => {
         }, {});
       return dotProp.set(state, objectPath, children);
     case CLOSE_DIR:
-      objectPath = `${action.reducerDetails.repoName}.${action.reducerDetails.branchName}.`;
-      objectPath += action.payload.join(".children.");
-      const intermediateState = dotProp.set(
-        state,
-        objectPath + ".children",
-        {}
-      );
-      objectPath += ".isTree.isOpen";
-      return dotProp.set(intermediateState, objectPath, false);
+      objectPath = [
+        action.reducerDetails.repoName,
+        action.reducerDetails.branchName,
+      ];
+      for (let i = 0; i < action.payload.length; i++) {
+        objectPath.push(action.payload[i]);
+        if (i !== action.payload.length - 1) {
+          objectPath.push("children");
+        }
+      }
+      // objectPath = [...objectPath, "isTree", "isOpen"];
+      propName = objectPath.pop();
+
+      nextState = produce(state, (draft) => {
+        draft = objectPath.reduce((it, prop) => it[prop], draft);
+        draft[propName]["isTree"]["isOpen"] = false;
+        draft[propName]["children"] = {};
+      });
+      return nextState;
 
     default:
       return state;
