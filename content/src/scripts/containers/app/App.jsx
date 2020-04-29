@@ -36,6 +36,7 @@ class App extends Component {
     const URLDetails = fetchURLDetails();
     if (!URLDetails.isRepo || !URLDetails.isTreeVisible) {
       if (this.props.opened) this.props.toggleOpened();
+      applyClosedPageStyling();
       return null;
     }
 
