@@ -1,3 +1,4 @@
+import produce from "immer";
 import dotProp from "dot-prop-immutable";
 
 import { FETCH_TREE, OPEN_DIR, CLOSE_DIR, UPDATE_TREE } from "../../types/API";
@@ -34,10 +35,28 @@ export default (state = initialState, action) => {
         },
       };
     case OPEN_DIR:
-      let objectPath = `${action.reducerDetails.repoName}.${action.reducerDetails.branchName}.`;
-      objectPath += action.payload.join(".children.");
-      objectPath += ".isTree.isOpen";
-      return dotProp.set(state, objectPath, true);
+      let objectPath = [
+        action.reducerDetails.repoName,
+        action.reducerDetails.branchName,
+      ];
+      for (let i = 0; i < action.payload.length; i++) {
+        objectPath.push(action.payload[i]);
+        if (i !== action.payload.length - 1) {
+          objectPath.push("children");
+        }
+      }
+      objectPath = [...objectPath, "isTree", "isOpen"];
+      let propName = objectPath.pop();
+
+      let nextState = produce(state, (draft) => {
+        draft = objectPath.reduce((it, prop) => it[prop], draft);
+        draft[propName] = true;
+      });
+      return nextState;
+    // let objectPath = `${action.reducerDetails.repoName}.${action.reducerDetails.branchName}.`;
+    // objectPath += action.payload.join(".children.");
+    // objectPath += ".isTree.isOpen";
+    // return dotProp.set(state, objectPath, true);
     case UPDATE_TREE:
       objectPath = `${action.reducerDetails.repoName}.${action.reducerDetails.branchName}.`;
       objectPath += action.reducerDetails.path.join(".children.");
