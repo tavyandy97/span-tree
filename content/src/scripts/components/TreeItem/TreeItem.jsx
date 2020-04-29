@@ -39,7 +39,6 @@ function TreeItem({
           "/"
         )}`
       );
-      setRendering(true);
     }
   };
 
@@ -65,6 +64,7 @@ function TreeItem({
           if (!isTree) {
             refreshPage(path, width);
           }
+          console.log("Rendering set false 3");
           setRendering(false);
         }
       } else {

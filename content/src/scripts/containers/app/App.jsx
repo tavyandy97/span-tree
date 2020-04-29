@@ -30,12 +30,19 @@ class App extends Component {
 
   componentDidMount() {
     const bindToHistory = () => {
-      console.log(this.state);
+      console.log("Rendering set True 4");
       this.state.setRendering(true);
     };
-    window.onpopstate = function (event) {
-      bindToHistory();
-    };
+    // window.onpopstate = function (event) {
+    //   bindToHistory();
+    // };
+    let prevHref = window.location.href;
+    setInterval(function () {
+      if (window.location.href !== prevHref) {
+        bindToHistory();
+      }
+      prevHref = window.location.href;
+    }, 10);
     if (this.props.opened) {
       applyOpenedPageStyling(this.props.width);
     } else {

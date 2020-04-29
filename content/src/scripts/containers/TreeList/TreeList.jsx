@@ -53,8 +53,10 @@ function TreeList({
   useEffect(() => {
     const URLDetails = fetchURLDetails();
     if (URLDetails.baseRemovedURL.length === 0) {
+      console.log("Rendering Set False 1");
       setRendering(false);
     } else {
+      console.log("Rendering Set True 2");
       setRendering(true);
     }
     // window.onpopstate = function (event) {
