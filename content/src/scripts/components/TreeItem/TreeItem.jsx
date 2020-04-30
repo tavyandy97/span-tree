@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { refreshPage } from "../../utils/refreshPage";
 import fileIcons from "../../utils/file-icons";
@@ -20,6 +20,8 @@ function TreeItem({
   rendering,
   setRendering,
 }) {
+  const [clicked, setClicked] = useState(false);
+
   const handleClick = (path, open, close, isTree) => {
     if (isTree) {
       if (isTree.isOpen) {
@@ -28,6 +30,7 @@ function TreeItem({
         open(path);
       }
     } else {
+      setClicked(true);
       const URLDetails = fetchURLDetails();
       const URL = `https://www.gitlab.com/${URLDetails.dirFormatted}/blob/${
         URLDetails.branchName
@@ -62,8 +65,9 @@ function TreeItem({
         }
         if (urlRemaining.length === 0) {
           isItemActive = true;
-          if (!isTree) {
+          if (!isTree && clicked) {
             refreshPage(path, width);
+            setClicked(false);
           }
           setRendering(false);
         }

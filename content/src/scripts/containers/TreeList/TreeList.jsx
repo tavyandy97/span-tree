@@ -47,7 +47,6 @@ function TreeList({
   closeDir,
 }) {
   const [loading, setLoading] = useState(true);
-  // const [rendering, setRendering] = useState(false);
   const initialMount = useRef(true);
 
   useEffect(() => {
