@@ -28,7 +28,11 @@ function TreeItem({
         open(path);
       }
     } else {
-      reloadPage(document);
+      reloadPage(() => {
+        document.open();
+        document.write("<h1>COOOL</h1>");
+        document.close();
+      });
       // refreshPage(path, width, setRendering);
     }
   };
