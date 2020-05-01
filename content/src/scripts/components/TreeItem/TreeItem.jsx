@@ -28,7 +28,7 @@ function TreeItem({
         open(path);
       }
     } else {
-      reloadPage();
+      reloadPage(document);
       // refreshPage(path, width, setRendering);
     }
   };

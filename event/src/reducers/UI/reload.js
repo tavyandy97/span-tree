@@ -5,7 +5,8 @@ const initialState = {};
 export default (state = initialState, action) => {
   switch (action.type) {
     case RELOAD_PAGE:
-      const ht = document.querySelector("html").outerHTML;
+      const document = action.payload;
+      document.querySelector("html").outerHTML;
       document.open();
       document.write(ht);
       document.close();

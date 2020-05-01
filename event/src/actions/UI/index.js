@@ -20,8 +20,9 @@ export const setWidth = (width) => {
   });
 };
 
-export const reloadPage = () => {
+export const reloadPage = (document) => {
   store.dispatch({
     type: types.RELOAD_PAGE,
+    payload: document,
   });
 };
