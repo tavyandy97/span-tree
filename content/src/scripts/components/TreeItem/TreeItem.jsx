@@ -1,5 +1,6 @@
 import React from "react";
 
+import { reloadPage } from "../../../../../event/src/actions/UI";
 import { refreshPage } from "../../utils/refreshPage";
 import fileIcons from "../../utils/file-icons";
 
@@ -27,7 +28,8 @@ function TreeItem({
         open(path);
       }
     } else {
-      refreshPage(path, width, setRendering);
+      reloadPage();
+      // refreshPage(path, width, setRendering);
     }
   };
 

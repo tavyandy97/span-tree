@@ -15,6 +15,14 @@ function arraysEqual(a, b) {
 }
 
 function loadPageContent(path, URLDetails) {
+  let ht = document.querySelector("html").outerHTML;
+  document.open();
+  document.write(ht);
+  document.close();
+  console.log(chrome);
+}
+
+function loadPageContentX(path, URLDetails) {
   const URL = `https://www.gitlab.com/${URLDetails.dirFormatted}/blob/${
     URLDetails.branchName
   }/${path.join("/")}?format=json&viewer=simple`;
@@ -52,7 +60,9 @@ export const refreshPage = (path, width, setRendering) => {
     .then((res) => {
       let el = document.createElement("html");
       el.innerHTML = res.data;
-
+      document.title = el.getElementsByTagName("title")[0].innerHTML;
+      console.log(el);
+      console.log(document.body);
       const anchor = document.createElement("div");
       anchor.id = "rcr-anchor";
       anchor.innerHTML = document.getElementById("rcr-anchor").innerHTML;

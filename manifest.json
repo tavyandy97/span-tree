@@ -7,7 +7,7 @@
     "scripts": ["event.js"],
     "persistent": true
   },
-  "permissions": ["https://www.gitlab.com/"],
+  "permissions": ["tabs", "background", "https://www.gitlab.com/"],
   "browser_action": {
     "default_title": "SpanTree",
     "default_popup": "popup.html"
@@ -15,7 +15,7 @@
   "web_accessible_resources": ["*.png", "*.woff2", "*.svg"],
   "content_scripts": [
     {
-      "matches": ["https://gitlab.com/*/*", "https://gitlab.com/*/*/-/tree/*"],
+      "matches": ["https://gitlab.com/*/*"],
       "css": ["libs/file-icons.css"],
       "js": ["content.js"]
     }
