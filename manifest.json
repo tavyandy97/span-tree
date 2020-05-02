@@ -9,8 +9,7 @@
   },
   "permissions": ["https://www.gitlab.com/"],
   "browser_action": {
-    "default_title": "SpanTree",
-    "default_popup": "popup.html"
+    "default_title": "SpanTree"
   },
   "web_accessible_resources": ["*.png", "*.woff2", "*.svg"],
   "content_scripts": [
