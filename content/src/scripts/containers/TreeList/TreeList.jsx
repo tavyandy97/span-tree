@@ -17,6 +17,7 @@ const renderTreeItems = (
   tree,
   width,
   clicked,
+  setClicked,
   close,
   open,
   rendering,
@@ -48,7 +49,14 @@ const renderTreeItems = (
   );
 };
 
-function TreeList({ tree, width, clicked, getInitialTree, closeDir }) {
+function TreeList({
+  tree,
+  width,
+  clicked,
+  setClicked,
+  getInitialTree,
+  closeDir,
+}) {
   const [loading, setLoading] = useState(true);
   const [rendering, setRendering] = useState(false);
   const initialMount = useRef(true);
@@ -60,7 +68,6 @@ function TreeList({ tree, width, clicked, getInitialTree, closeDir }) {
     } else {
       setRendering(true);
     }
-    console.log(clicked, tree);
     if (!clicked) {
       getInitialTree(
         URLDetails.dirURLParam,
@@ -119,6 +126,7 @@ function TreeList({ tree, width, clicked, getInitialTree, closeDir }) {
     tree[URLDetails.dirFormatted][URLDetails.branchName],
     width,
     clicked,
+    setClicked,
     closeDirectory,
     openDirectory,
     rendering,

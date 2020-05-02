@@ -4,7 +4,6 @@ import fileIcons from "../../utils/file-icons";
 
 import "./styles.css";
 import { fetchURLDetails } from "../../utils/url";
-import { setClicked } from "../../../../../event/src/actions/UI";
 
 const importFileIconCSS = `chrome-extension://${chrome.runtime.id}/libs/file-icon.css`;
 
@@ -21,7 +20,7 @@ function TreeItem({
   setRendering,
   setClicked,
 }) {
-  const handleClick = (path, open, close, isTree, setClicked) => {
+  const handleClick = () => {
     if (isTree) {
       if (isTree.isOpen) {
         close(path);
@@ -37,15 +36,7 @@ function TreeItem({
     }
   };
 
-  const tryTreeItemActiveBeforeReload = (
-    path,
-    remainingURL,
-    isTree,
-    name,
-    open,
-    setRendering,
-    setClicked
-  ) => {
+  const tryTreeItemActiveBeforeReload = () => {
     let isItemActive = false;
     if (remainingURL.length != 0) {
       let activeIconName = remainingURL.split("/")[0];
@@ -69,7 +60,7 @@ function TreeItem({
     }
   };
 
-  const tryTreeItemActiveAfterReload = (remainingURL, name) => {
+  const tryTreeItemActiveAfterReload = () => {
     let isItemActive = false;
     if (remainingURL.length != 0) {
       let activeIconName = remainingURL.split("/")[0];
@@ -89,26 +80,15 @@ function TreeItem({
 
   let treeItemActive = null;
   if (rendering) {
-    treeItemActive = tryTreeItemActiveBeforeReload(
-      path,
-      remainingURL,
-      isTree,
-      name,
-      open,
-      setRendering,
-      setClicked
-    );
+    treeItemActive = tryTreeItemActiveBeforeReload();
   } else {
-    treeItemActive = tryTreeItemActiveAfterReload(remainingURL, name);
+    treeItemActive = tryTreeItemActiveAfterReload();
   }
 
   return (
     <li>
       <link rel="stylesheet" type="text/css" href={importFileIconCSS} />
-      <div
-        className="tree-element"
-        onClick={() => handleClick(path, open, close, isTree, setClicked)}
-      >
+      <div className="tree-element" onClick={handleClick}>
         <div
           className={
             treeItemActive.isItemActive
