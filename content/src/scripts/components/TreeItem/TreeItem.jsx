@@ -1,9 +1,10 @@
 import React from "react";
 
-import { refreshPage } from "../../utils/refreshPage";
 import fileIcons from "../../utils/file-icons";
 
 import "./styles.css";
+import { fetchURLDetails } from "../../utils/url";
+import { setClicked } from "../../../../../event/src/actions/UI";
 
 const importFileIconCSS = `chrome-extension://${chrome.runtime.id}/libs/file-icon.css`;
 
@@ -18,8 +19,9 @@ function TreeItem({
   remainingURL,
   rendering,
   setRendering,
+  setClicked,
 }) {
-  const handleClick = (path, open, close, isTree) => {
+  const handleClick = (path, open, close, isTree, setClicked) => {
     if (isTree) {
       if (isTree.isOpen) {
         close(path);
@@ -27,7 +29,11 @@ function TreeItem({
         open(path);
       }
     } else {
-      refreshPage(path, width, setRendering);
+      setClicked(true);
+      let URLDetails = fetchURLDetails();
+      window.location.href = `https://www.gitlab.com/${
+        URLDetails.dirFormatted
+      }/blob/${URLDetails.branchName}/${path.join("/")}`;
     }
   };
 
@@ -37,7 +43,8 @@ function TreeItem({
     isTree,
     name,
     open,
-    setRendering
+    setRendering,
+    setClicked
   ) => {
     let isItemActive = false;
     if (remainingURL.length != 0) {
@@ -51,6 +58,7 @@ function TreeItem({
         if (urlRemaining.length === 0) {
           isItemActive = true;
           setRendering(false);
+          setClicked(false);
         }
       } else {
         urlRemaining = "";
@@ -87,7 +95,8 @@ function TreeItem({
       isTree,
       name,
       open,
-      setRendering
+      setRendering,
+      setClicked
     );
   } else {
     treeItemActive = tryTreeItemActiveAfterReload(remainingURL, name);
@@ -98,7 +107,7 @@ function TreeItem({
       <link rel="stylesheet" type="text/css" href={importFileIconCSS} />
       <div
         className="tree-element"
-        onClick={() => handleClick(path, open, close, isTree)}
+        onClick={() => handleClick(path, open, close, isTree, setClicked)}
       >
         <div
           className={
@@ -138,6 +147,7 @@ function TreeItem({
               remainingURL={treeItemActive.urlRemaining}
               rendering={rendering}
               setRendering={setRendering}
+              setClicked={setClicked}
             />
           ))}
         </ul>

@@ -19,3 +19,10 @@ export const setWidth = (width) => {
     payload: width,
   });
 };
+
+export const setClicked = (clicked) => {
+  store.dispatch({
+    type: types.SET_CLICKED,
+    payload: clicked,
+  });
+};
