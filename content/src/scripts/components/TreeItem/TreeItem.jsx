@@ -1,9 +1,9 @@
 import React from "react";
 
-import { refreshPage } from "../../utils/refreshPage";
 import fileIcons from "../../utils/file-icons";
 
 import "./styles.css";
+import { fetchURLDetails } from "../../utils/url";
 
 const importFileIconCSS = `chrome-extension://${chrome.runtime.id}/libs/file-icon.css`;
 
@@ -18,8 +18,9 @@ function TreeItem({
   remainingURL,
   rendering,
   setRendering,
+  setClicked,
 }) {
-  const handleClick = (path, open, close, isTree) => {
+  const handleClick = () => {
     if (isTree) {
       if (isTree.isOpen) {
         close(path);
@@ -27,18 +28,15 @@ function TreeItem({
         open(path);
       }
     } else {
-      refreshPage(path, width, setRendering);
+      setClicked(true);
+      let URLDetails = fetchURLDetails();
+      window.location.href = `https://www.gitlab.com/${
+        URLDetails.dirFormatted
+      }/blob/${URLDetails.branchName}/${path.join("/")}`;
     }
   };
 
-  const tryTreeItemActiveBeforeReload = (
-    path,
-    remainingURL,
-    isTree,
-    name,
-    open,
-    setRendering
-  ) => {
+  const tryTreeItemActiveBeforeReload = () => {
     let isItemActive = false;
     if (remainingURL.length != 0) {
       let activeIconName = remainingURL.split("/")[0];
@@ -51,6 +49,7 @@ function TreeItem({
         if (urlRemaining.length === 0) {
           isItemActive = true;
           setRendering(false);
+          setClicked(false);
         }
       } else {
         urlRemaining = "";
@@ -61,7 +60,7 @@ function TreeItem({
     }
   };
 
-  const tryTreeItemActiveAfterReload = (remainingURL, name) => {
+  const tryTreeItemActiveAfterReload = () => {
     let isItemActive = false;
     if (remainingURL.length != 0) {
       let activeIconName = remainingURL.split("/")[0];
@@ -81,25 +80,15 @@ function TreeItem({
 
   let treeItemActive = null;
   if (rendering) {
-    treeItemActive = tryTreeItemActiveBeforeReload(
-      path,
-      remainingURL,
-      isTree,
-      name,
-      open,
-      setRendering
-    );
+    treeItemActive = tryTreeItemActiveBeforeReload();
   } else {
-    treeItemActive = tryTreeItemActiveAfterReload(remainingURL, name);
+    treeItemActive = tryTreeItemActiveAfterReload();
   }
 
   return (
     <li>
       <link rel="stylesheet" type="text/css" href={importFileIconCSS} />
-      <div
-        className="tree-element"
-        onClick={() => handleClick(path, open, close, isTree)}
-      >
+      <div className="tree-element" onClick={handleClick}>
         <div
           className={
             treeItemActive.isItemActive
@@ -138,6 +127,7 @@ function TreeItem({
               remainingURL={treeItemActive.urlRemaining}
               rendering={rendering}
               setRendering={setRendering}
+              setClicked={setClicked}
             />
           ))}
         </ul>

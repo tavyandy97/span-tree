@@ -9,10 +9,20 @@ import {
   openDir,
   closeDir,
 } from "../../../../../event/src/actions/API";
+import { setClicked } from "../../../../../event/src/actions/UI";
 
 import "./styles.css";
 
-const renderTreeItems = (tree, width, close, open, rendering, setRendering) => {
+const renderTreeItems = (
+  tree,
+  width,
+  clicked,
+  setClicked,
+  close,
+  open,
+  rendering,
+  setRendering
+) => {
   const URLDetails = fetchURLDetails();
 
   return (
@@ -31,6 +41,7 @@ const renderTreeItems = (tree, width, close, open, rendering, setRendering) => {
             remainingURL={URLDetails.baseRemovedURL}
             rendering={rendering}
             setRendering={setRendering}
+            setClicked={setClicked}
           />
         ))}
       </ul>
@@ -38,7 +49,14 @@ const renderTreeItems = (tree, width, close, open, rendering, setRendering) => {
   );
 };
 
-function TreeList({ tree, width, getInitialTree, closeDir }) {
+function TreeList({
+  tree,
+  width,
+  clicked,
+  setClicked,
+  getInitialTree,
+  closeDir,
+}) {
   const [loading, setLoading] = useState(true);
   const [rendering, setRendering] = useState(false);
   const initialMount = useRef(true);
@@ -50,20 +68,22 @@ function TreeList({ tree, width, getInitialTree, closeDir }) {
     } else {
       setRendering(true);
     }
-    getInitialTree(
-      URLDetails.dirURLParam,
-      {
-        ref: URLDetails.branchNameURL,
-      },
-      {
-        repoName: URLDetails.dirFormatted,
-        branchName: URLDetails.branchName,
-      }
-    );
+    if (!clicked) {
+      getInitialTree(
+        URLDetails.dirURLParam,
+        {
+          ref: URLDetails.branchNameURL,
+        },
+        {
+          repoName: URLDetails.dirFormatted,
+          branchName: URLDetails.branchName,
+        }
+      );
+    }
   }, []);
 
   useEffect(() => {
-    if (initialMount.current) {
+    if (initialMount.current && !clicked) {
       initialMount.current = false;
     } else {
       setLoading(false);
@@ -105,6 +125,8 @@ function TreeList({ tree, width, getInitialTree, closeDir }) {
   return renderTreeItems(
     tree[URLDetails.dirFormatted][URLDetails.branchName],
     width,
+    clicked,
+    setClicked,
     closeDirectory,
     openDirectory,
     rendering,
@@ -116,9 +138,10 @@ const mapStateToProps = (state) => {
   return {
     tree: state.tree,
     width: state.width,
+    clicked: state.clicked,
   };
 };
 
-const mapDispatchToProps = { getInitialTree, closeDir };
+const mapDispatchToProps = { getInitialTree, closeDir, setClicked };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TreeList);
