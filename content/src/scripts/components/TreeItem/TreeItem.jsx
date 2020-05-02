@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import fileIcons from "../../utils/file-icons";
 
@@ -84,6 +84,16 @@ function TreeItem({
   } else {
     treeItemActive = tryTreeItemActiveAfterReload();
   }
+
+  useEffect(() => {
+    if (rendering === false && treeItemActive.isItemActive === true) {
+      const treeList = document.querySelector(".tree-list");
+      const activeItem = document.querySelector(".active-row");
+      document
+        .querySelector(".tree-list")
+        .scrollBy(0, activeItem.offsetTop - treeList.clientHeight / 2);
+    }
+  }, [rendering]);
 
   return (
     <li>
