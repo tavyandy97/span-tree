@@ -19,6 +19,8 @@ function TreeItem({
   rendering,
   setRendering,
   setClicked,
+  scrolling,
+  setScrolling,
 }) {
   const handleClick = () => {
     if (isTree) {
@@ -86,12 +88,17 @@ function TreeItem({
   }
 
   useEffect(() => {
-    if (rendering === false && treeItemActive.isItemActive === true) {
+    if (
+      rendering === false &&
+      treeItemActive.isItemActive === true &&
+      scrolling === true
+    ) {
       const treeList = document.querySelector(".tree-list");
       const activeItem = document.querySelector(".active-row");
       document
         .querySelector(".tree-list")
         .scrollTo(0, activeItem.offsetTop - treeList.clientHeight / 2);
+      setScrolling(false);
     }
   }, [rendering]);
 
@@ -138,6 +145,8 @@ function TreeItem({
               rendering={rendering}
               setRendering={setRendering}
               setClicked={setClicked}
+              scrolling={scrolling}
+              setScrolling={setScrolling}
             />
           ))}
         </ul>

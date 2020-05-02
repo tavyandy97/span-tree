@@ -21,7 +21,9 @@ const renderTreeItems = (
   close,
   open,
   rendering,
-  setRendering
+  setRendering,
+  scrolling,
+  setScrolling
 ) => {
   const URLDetails = fetchURLDetails();
 
@@ -42,6 +44,8 @@ const renderTreeItems = (
             rendering={rendering}
             setRendering={setRendering}
             setClicked={setClicked}
+            scrolling={scrolling}
+            setScrolling={setScrolling}
           />
         ))}
       </ul>
@@ -59,14 +63,17 @@ function TreeList({
 }) {
   const [loading, setLoading] = useState(true);
   const [rendering, setRendering] = useState(false);
+  const [scrolling, setScrolling] = useState(false);
   const initialMount = useRef(true);
 
   useEffect(() => {
     const URLDetails = fetchURLDetails();
     if (URLDetails.baseRemovedURL.length === 0) {
       setRendering(false);
+      setScrolling(false);
     } else {
       setRendering(true);
+      setScrolling(true);
     }
     if (!clicked) {
       getInitialTree(
@@ -130,7 +137,9 @@ function TreeList({
     closeDirectory,
     openDirectory,
     rendering,
-    setRendering
+    setRendering,
+    scrolling,
+    setScrolling
   );
 }
 
