@@ -91,7 +91,7 @@ function TreeItem({
       const activeItem = document.querySelector(".active-row");
       document
         .querySelector(".tree-list")
-        .scrollBy(0, activeItem.offsetTop - treeList.clientHeight / 2);
+        .scrollTo(0, activeItem.offsetTop - treeList.clientHeight / 2);
     }
   }, [rendering]);
 
