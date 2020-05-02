@@ -75,7 +75,7 @@ gulp.task("build", [
 ]);
 
 gulp.task("watch", ["default"], () => {
-  gulp.watch("popup/**/*", ["build"]);
+  // gulp.watch("popup/**/*", ["build"]);
   gulp.watch("content/**/*", ["build"]);
   gulp.watch("event/**/*", ["build"]);
 });
