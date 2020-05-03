@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 
 import { setWidth } from "../../../../../event/src/actions/UI";
+import { throttle } from "../../utils/throttle";
 
 import "./styles.css";
 
@@ -12,20 +13,22 @@ const Resizer = ({ width, setWidth }) => {
     document.body.style.userSelect = "none";
     setTransitionProps(document.querySelector(".nav-sidebar").style.transition);
     document.querySelector(".nav-sidebar").style.transition = "none";
-    document.addEventListener("mousemove", mouseMoveListener);
+    document.addEventListener("mousemove", throttledMouseMoveListener);
     document.addEventListener("mouseup", mouseUpListener);
   };
 
   const mouseUpListener = () => {
     document.body.style.userSelect = "auto";
     document.querySelector(".nav-sidebar").style.transition = transitionProps;
-    document.removeEventListener("mousemove", mouseMoveListener);
+    document.removeEventListener("mousemove", throttledMouseMoveListener);
     document.removeEventListener("mouseup", mouseUpListener);
   };
 
   const mouseMoveListener = (event) => {
     setWidth(event.clientX);
   };
+
+  const throttledMouseMoveListener = throttle(mouseMoveListener, 16);
 
   return (
     <div
