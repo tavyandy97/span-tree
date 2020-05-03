@@ -54,6 +54,8 @@ const renderTreeItems = (
 };
 
 function TreeList({
+  firstPageLoad,
+  setFirstPageLoad,
   tree,
   width,
   clicked,
@@ -75,7 +77,7 @@ function TreeList({
       setRendering(true);
       setScrolling(true);
     }
-    if (!clicked) {
+    if (shouldGetTree()) {
       getInitialTree(
         URLDetails.dirURLParam,
         {
@@ -87,15 +89,31 @@ function TreeList({
         }
       );
     }
+    setFirstPageLoad(false);
   }, []);
 
   useEffect(() => {
-    if (initialMount.current && !clicked) {
+    if (initialMount.current && shouldGetTree()) {
       initialMount.current = false;
     } else {
       setLoading(false);
     }
   }, [tree]);
+
+  const shouldGetTree = () => {
+    const URLDetails = fetchURLDetails();
+    if (
+      !tree ||
+      !tree[URLDetails.dirFormatted] ||
+      !tree[URLDetails.dirFormatted][URLDetails.branchName]
+    ) {
+      return true;
+    }
+    if (clicked) {
+      return false;
+    }
+    return firstPageLoad;
+  };
 
   if (loading)
     return (
