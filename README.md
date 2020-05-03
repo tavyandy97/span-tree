@@ -10,7 +10,7 @@ Pre-Requisites:
 
 1. Install Node.js (v10.17.0)
 
-2. Install gulp-cli
+2. Install gulp-cli 
 
    ```
    $ npm install -g gulp-cli
@@ -32,7 +32,7 @@ Steps:
    $ gulp watch
    ```
 
-(You'll observe a build folder being formed inside the project folder)
+   (You'll observe a build folder being formed inside the project folder)
 
 4. Load the chrome extension from the build folder. ( first enable developer mode inside Chrome)
 
