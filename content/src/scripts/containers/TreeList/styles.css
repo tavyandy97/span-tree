@@ -7,6 +7,7 @@
 }
 
 .tree-list {
+  scroll-behavior: smooth;
   overflow-y: auto;
   height: calc(100vh - 40px);
 }
