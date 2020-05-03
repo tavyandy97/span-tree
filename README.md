@@ -10,7 +10,7 @@ Pre-Requisites:
 
 1. Install Node.js (v10.17.0)
 
-2. Install gulp-cli
+2. Install gulp-cli 
 
    ```
    $ npm install -g gulp-cli
