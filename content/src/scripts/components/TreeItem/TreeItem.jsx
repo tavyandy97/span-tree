@@ -91,26 +91,27 @@ function TreeItem({
   }
 
   useEffect(() => {
-    if (!rendering && treeItemActive.isItemActive && scrolling) {
-      const treeList = document.querySelector(".tree-list");
-      const activeItem = document.querySelector(".active-row");
-      document
-        .querySelector(".tree-list")
-        .scrollTo(0, activeItem.offsetTop - treeList.clientHeight / 2);
-      setScrolling(false);
+    if (treeItemActive.isItemActive) {
+      setOpening(true);
     }
-  }, [rendering]);
+  }, []);
 
   useEffect(() => {
-    if (opening) {
+    if (opening && scrolling) {
       const treeList = document.querySelector(".tree-list");
       const openingItem = document.querySelector(".opening");
       document
         .querySelector(".tree-list")
-        .scrollTo(0, openingItem.offsetTop - treeList.clientHeight / 2);
+        .scrollTo(
+          openingItem.offsetLeft / 2,
+          openingItem.offsetTop - treeList.clientHeight / 2
+        );
       setOpening(false);
+      if (treeItemActive.isItemActive) {
+        setScrolling(false);
+      }
     }
-  }, []);
+  }, [opening]);
 
   return (
     <li>
