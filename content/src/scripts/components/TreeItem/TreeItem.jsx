@@ -45,7 +45,7 @@ function TreeItem({
     if (remainingURL.length != 0) {
       let activeIconName = remainingURL.split("/")[0];
       let urlRemaining = remainingURL.substring(activeIconName.length + 1);
-      if (activeIconName === name) {
+      if (activeIconName.replace(/%20/gi, " ") === name) {
         if (isTree && !isTree.isOpen) {
           isTree.isOpen = true;
           open(path);
@@ -70,7 +70,7 @@ function TreeItem({
     if (remainingURL.length != 0) {
       let activeIconName = remainingURL.split("/")[0];
       let urlRemaining = remainingURL.substring(activeIconName.length + 1);
-      if (activeIconName === name) {
+      if (activeIconName.replace(/%20/gi, " ") === name) {
         if (urlRemaining.length === 0) {
           isItemActive = true;
         }
