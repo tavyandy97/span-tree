@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import fileIcons from "../../utils/file-icons";
 
@@ -19,6 +19,8 @@ function TreeItem({
   rendering,
   setRendering,
   setClicked,
+  scrolling,
+  setScrolling,
 }) {
   const handleClick = () => {
     if (isTree) {
@@ -85,6 +87,17 @@ function TreeItem({
     treeItemActive = tryTreeItemActiveAfterReload();
   }
 
+  useEffect(() => {
+    if (!rendering && treeItemActive.isItemActive && scrolling) {
+      const treeList = document.querySelector(".tree-list");
+      const activeItem = document.querySelector(".active-row");
+      document
+        .querySelector(".tree-list")
+        .scrollTo(0, activeItem.offsetTop - treeList.clientHeight / 2);
+      setScrolling(false);
+    }
+  }, [rendering]);
+
   return (
     <li>
       <link rel="stylesheet" type="text/css" href={importFileIconCSS} />
@@ -128,6 +141,8 @@ function TreeItem({
               rendering={rendering}
               setRendering={setRendering}
               setClicked={setClicked}
+              scrolling={scrolling}
+              setScrolling={setScrolling}
             />
           ))}
         </ul>
