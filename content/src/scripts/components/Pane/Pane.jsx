@@ -27,7 +27,7 @@ function Pane({ toggleOpened, width }) {
       <div className="pane-main">
         <div className="pane-header">
           <div className="spread">
-            <div>
+            <div className="pane-details">
               <SVG
                 icon="repo"
                 height="12"
@@ -39,7 +39,7 @@ function Pane({ toggleOpened, width }) {
               <SVG icon="close" height="12" />
             </div>
           </div>
-          <div>
+          <div className="pane-details" style={{ width: width - 12 + "px" }}>
             <SVG
               icon="branch"
               height="12"

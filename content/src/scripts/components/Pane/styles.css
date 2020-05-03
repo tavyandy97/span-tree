@@ -44,3 +44,11 @@
   height: 100%;
   width: 100%;
 }
+
+.pane-details {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-weight: bold;
+}
