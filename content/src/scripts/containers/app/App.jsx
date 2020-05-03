@@ -16,6 +16,16 @@ import "./App.css";
 const parentDiv = document.querySelector("body");
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      firstPageLoad: true,
+    };
+    this.setFirstPageLoad = (firstPageLoad) => {
+      this.setState({ firstPageLoad });
+    };
+  }
+
   componentDidMount() {
     if (this.props.opened) {
       applyOpenedPageStyling(this.props.width);
@@ -45,6 +55,8 @@ class App extends Component {
           <Pane
             toggleOpened={this.props.toggleOpened}
             width={this.props.width}
+            firstPageLoad={this.state.firstPageLoad}
+            setFirstPageLoad={this.setFirstPageLoad}
           />,
           parentDiv
         )
