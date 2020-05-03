@@ -103,7 +103,7 @@ function TreeItem({
       document
         .querySelector(".tree-list")
         .scrollTo(
-          openingItem.offsetLeft / 2,
+          openingItem.offsetLeft - 25,
           openingItem.offsetTop - treeList.clientHeight / 2
         );
       setOpening(false);
