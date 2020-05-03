@@ -45,7 +45,7 @@ function TreeItem({
     if (remainingURL.length != 0) {
       let activeIconName = remainingURL.split("/")[0];
       let urlRemaining = remainingURL.substring(activeIconName.length + 1);
-      if (activeIconName === name) {
+      if (activeIconName.replace(/%20/gi, " ") === name) {
         if (isTree && !isTree.isOpen) {
           isTree.isOpen = true;
           open(path);
@@ -70,7 +70,7 @@ function TreeItem({
     if (remainingURL.length != 0) {
       let activeIconName = remainingURL.split("/")[0];
       let urlRemaining = remainingURL.substring(activeIconName.length + 1);
-      if (activeIconName === name) {
+      if (activeIconName.replace(/%20/gi, " ") === name) {
         if (urlRemaining.length === 0) {
           isItemActive = true;
         }
@@ -91,26 +91,27 @@ function TreeItem({
   }
 
   useEffect(() => {
-    if (!rendering && treeItemActive.isItemActive && scrolling) {
-      const treeList = document.querySelector(".tree-list");
-      const activeItem = document.querySelector(".active-row");
-      document
-        .querySelector(".tree-list")
-        .scrollTo(0, activeItem.offsetTop - treeList.clientHeight / 2);
-      setScrolling(false);
+    if (treeItemActive.isItemActive) {
+      setOpening(true);
     }
-  }, [rendering]);
+  }, []);
 
   useEffect(() => {
-    if (opening) {
+    if (opening && scrolling) {
       const treeList = document.querySelector(".tree-list");
       const openingItem = document.querySelector(".opening");
       document
         .querySelector(".tree-list")
-        .scrollTo(0, openingItem.offsetTop - treeList.clientHeight / 2);
+        .scrollTo(
+          openingItem.offsetLeft - 25,
+          openingItem.offsetTop - treeList.clientHeight / 2
+        );
       setOpening(false);
+      if (treeItemActive.isItemActive) {
+        setScrolling(false);
+      }
     }
-  }, []);
+  }, [opening]);
 
   return (
     <li>
