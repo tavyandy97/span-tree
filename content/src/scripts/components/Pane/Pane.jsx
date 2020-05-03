@@ -7,7 +7,7 @@ import { fetchURLDetails } from "../../utils/url";
 
 import "./styles.css";
 
-function Pane({ toggleOpened, width }) {
+function Pane({ toggleOpened, width, firstPageLoad, setFirstPageLoad }) {
   const [realoading, setRealoading] = useState(true);
   const [URLDetails, setURLDetails] = useState(fetchURLDetails());
 
@@ -49,7 +49,10 @@ function Pane({ toggleOpened, width }) {
           </div>
         </div>
         <div className="tree-body">
-          <TreeList />
+          <TreeList
+            firstPageLoad={firstPageLoad}
+            setFirstPageLoad={setFirstPageLoad}
+          />
         </div>
       </div>
       <Resizer />
