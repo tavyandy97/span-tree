@@ -103,9 +103,11 @@ function TreeList({
   const shouldGetTree = () => {
     const URLDetails = fetchURLDetails();
     if (
-      !tree ||
-      !tree[URLDetails.dirFormatted] ||
-      !tree[URLDetails.dirFormatted][URLDetails.branchName]
+      !(
+        tree &&
+        tree[URLDetails.dirFormatted] &&
+        tree[URLDetails.dirFormatted][URLDetails.branchName]
+      )
     ) {
       return true;
     }
