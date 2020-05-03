@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import fileIcons from "../../utils/file-icons";
 
@@ -22,6 +22,8 @@ function TreeItem({
   scrolling,
   setScrolling,
 }) {
+  const [opening, setOpening] = useState(false);
+
   const handleClick = () => {
     if (isTree) {
       if (isTree.isOpen) {
@@ -44,9 +46,10 @@ function TreeItem({
       let activeIconName = remainingURL.split("/")[0];
       let urlRemaining = remainingURL.substring(activeIconName.length + 1);
       if (activeIconName === name) {
-        if (isTree && isTree.isOpen != true) {
+        if (isTree && !isTree.isOpen) {
           isTree.isOpen = true;
           open(path);
+          setOpening(true);
         }
         if (urlRemaining.length === 0) {
           isItemActive = true;
@@ -98,10 +101,24 @@ function TreeItem({
     }
   }, [rendering]);
 
+  useEffect(() => {
+    if (opening) {
+      const treeList = document.querySelector(".tree-list");
+      const openingItem = document.querySelector(".opening");
+      document
+        .querySelector(".tree-list")
+        .scrollTo(0, openingItem.offsetTop - treeList.clientHeight / 2);
+      setOpening(false);
+    }
+  }, []);
+
   return (
     <li>
       <link rel="stylesheet" type="text/css" href={importFileIconCSS} />
-      <div className="tree-element" onClick={handleClick}>
+      <div
+        className={opening ? "tree-element opening" : "tree-element"}
+        onClick={handleClick}
+      >
         <div
           className={
             treeItemActive.isItemActive
