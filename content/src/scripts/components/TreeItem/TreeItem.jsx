@@ -88,11 +88,7 @@ function TreeItem({
   }
 
   useEffect(() => {
-    if (
-      rendering === false &&
-      treeItemActive.isItemActive === true &&
-      scrolling === true
-    ) {
+    if (!rendering && treeItemActive.isItemActive && scrolling) {
       const treeList = document.querySelector(".tree-list");
       const activeItem = document.querySelector(".active-row");
       document
