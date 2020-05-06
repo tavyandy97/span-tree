@@ -23,13 +23,17 @@ function TreeItem({
   setScrolling,
 }) {
   const [opening, setOpening] = useState(false);
+  const [childListClass, setChildListClass] = useState("child-list");
 
   const handleClick = () => {
     if (isTree) {
       if (isTree.isOpen) {
+        setChildListClass("child-list");
         close(path);
       } else {
         open(path);
+        let expandingClass = "ec-" + Math.floor(Math.random() * 1000) + 1;
+        setChildListClass("child-list expanding " + expandingClass);
       }
     } else {
       setClicked(true);
@@ -113,6 +117,36 @@ function TreeItem({
     }
   }, [opening]);
 
+  useEffect(() => {
+    if (
+      childListClass !== "child-list" &&
+      !(
+        Object.keys(children).length === 0 && children.constructor === Object
+      ) &&
+      isTree
+    ) {
+      let childListClassSplit = childListClass.split(" ");
+      let currProcess = childListClassSplit[1];
+      if (currProcess === "expanding") {
+        // console.log("EXPANDING");
+        let expandingClass =
+          childListClassSplit[childListClassSplit.length - 1];
+        let expandedHeight = document.querySelector("." + expandingClass)
+          .scrollHeight;
+        document.querySelector("." + expandingClass).style.height =
+          expandedHeight + "px";
+        setTimeout(function () {
+          document.querySelector("." + expandingClass).style.height = "auto";
+          setChildListClass("child-list");
+        }, 300);
+      }
+      // if (currProcess === "collapsing") {
+      //   console.log("COLLAPSING");
+      //   setChildListClass("child-list");
+      // }
+    }
+  }, [children]);
+
   return (
     <li>
       <link rel="stylesheet" type="text/css" href={importFileIconCSS} />
@@ -144,7 +178,7 @@ function TreeItem({
         <div className="item-name">{name}</div>
       </div>
       {isTree && isTree.isOpen && (
-        <ul className="child-list">
+        <ul className={childListClass}>
           {Object.keys(children).map((key) => (
             <TreeItem
               key={key}
