@@ -139,7 +139,7 @@ function TreeList({
       path,
       {
         ref: URLDetails.branchNameURL,
-        path: path.join("%2F"),
+        path: encodeURIComponent(path.join("/")),
       },
       {
         repoName: URLDetails.dirFormatted,

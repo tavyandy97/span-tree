@@ -41,9 +41,9 @@ export const fetchURLDetails = () => {
   return {
     dir,
     dirFormatted: dirFormatted,
-    dirURLParam: dir.join("%2F"),
+    dirURLParam: encodeURIComponent(dir.join("/")),
     branchName,
-    branchNameURL: branchName.split("/").join("%2F"),
+    branchNameURL: encodeURIComponent(branchName),
     isRepo: !(dir[0] === "dashboard" || dir[0] === "explore"),
     isTreeVisible,
     baseRemovedURL: baseRemovedURL,
