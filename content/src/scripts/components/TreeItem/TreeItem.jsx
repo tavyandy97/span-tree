@@ -128,7 +128,6 @@ function TreeItem({
       let childListClassSplit = childListClass.split(" ");
       let currProcess = childListClassSplit[1];
       if (currProcess === "expanding") {
-        // console.log("EXPANDING");
         let expandingClass =
           childListClassSplit[childListClassSplit.length - 1];
         let expandedHeight = document.querySelector("." + expandingClass)
@@ -140,10 +139,6 @@ function TreeItem({
           setChildListClass("child-list");
         }, 300);
       }
-      // if (currProcess === "collapsing") {
-      //   console.log("COLLAPSING");
-      //   setChildListClass("child-list");
-      // }
     }
   }, [children]);
 
