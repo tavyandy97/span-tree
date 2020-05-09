@@ -1,6 +1,6 @@
 ## About
 
-Browser extension that makes navigating a GitLab repository a breeze by providing a familiar tree directory structure. Link to chrome extension store coming soon...
+Browser extension that makes navigating a GitLab repository feel like a breeze by providing a familiar tree structure. [Link to chrome extension](https://chrome.google.com/webstore/detail/spantree-gitlab-tree/gcjikeldobhnaglcoaejmdlmbienoocg)
 
 ![](docs/demo.gif)
 
@@ -10,7 +10,7 @@ Pre-Requisites:
 
 1. Install Node.js (v10.17.0)
 
-2. Install gulp-cli 
+2. Install gulp-cli
 
    ```
    $ npm install -g gulp-cli
