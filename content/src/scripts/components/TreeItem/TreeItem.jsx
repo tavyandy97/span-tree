@@ -5,7 +5,7 @@ import fileIcons from "../../utils/file-icons";
 import "./styles.css";
 import { fetchURLDetails } from "../../utils/url";
 
-const importFileIconCSS = `moz-extension://${
+const importFileIconCSS = `${chrome ? "chrome" : "moz"}-extension://${
   chrome ? chrome.runtime.id : browser.runtime.id
 }/libs/file-icon.css`;
 
