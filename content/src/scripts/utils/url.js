@@ -1,7 +1,7 @@
 export const fetchURLDetails = () => {
-  const isRepo = () => {
-    return document.querySelector(".qa-branches-select") !== null;
-  };
+  // const isRepo = () => {
+  //   return document.querySelector(".qa-branches-select") !== null;
+  // };
   const pathName = window.location.pathname;
   const pathNameSplit = pathName
     .split("/")
@@ -47,7 +47,7 @@ export const fetchURLDetails = () => {
     dirURLParam: encodeURIComponent(dir.join("/")),
     branchName,
     branchNameURL: encodeURIComponent(branchName),
-    isRepo: isRepo(),
+    // isRepo: isRepo(),
     isTreeVisible,
     baseRemovedURL: baseRemovedURL,
   };

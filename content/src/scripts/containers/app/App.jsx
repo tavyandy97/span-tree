@@ -44,7 +44,9 @@ class App extends Component {
 
   render() {
     const URLDetails = fetchURLDetails();
-    if (!URLDetails.isRepo || !URLDetails.isTreeVisible) {
+    console.log(URLDetails);
+    // if (!URLDetails.isRepo || !URLDetails.isTreeVisible) {
+    if (!URLDetails.isTreeVisible) {
       if (this.props.opened) this.props.toggleOpened();
       applyClosedPageStyling();
       return null;
