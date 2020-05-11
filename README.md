@@ -36,7 +36,7 @@ Steps:
 
 4. Load the chrome extension from the build folder. ( first enable developer mode inside Chrome)
 
-   (For reference follow: https://thoughtbot.com/blog/how-to-make-a-moz-extension)
+   (For reference follow: https://thoughtbot.com/blog/how-to-make-a-chrome-extension)
 
 # Credits
 
