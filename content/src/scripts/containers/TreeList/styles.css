@@ -34,7 +34,7 @@
   font-size: 0.875rem;
   padding: 0px 0px 0px 8px;
   list-style-type: none;
-  width: fit-content;
+  width: max-content;
   min-width: 100%;
   position: relative;
 }
