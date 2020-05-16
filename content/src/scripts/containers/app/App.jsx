@@ -8,7 +8,6 @@ import {
   applyClosedPageStyling,
   applyOpenedPageStyling,
 } from "../../utils/styling";
-import { fetchURLDetails } from "../../utils/url";
 import { toggleOpened } from "../../../../../event/src/actions/UI";
 
 import "./App.css";
@@ -43,10 +42,9 @@ class App extends Component {
   }
 
   render() {
-    const URLDetails = fetchURLDetails();
-    console.log(URLDetails);
-    // if (!URLDetails.isRepo || !URLDetails.isTreeVisible) {
-    if (!URLDetails.isTreeVisible) {
+    const shouldShowSpanTree =
+      document.querySelector(".qa-branches-select") !== null;
+    if (!shouldShowSpanTree) {
       if (this.props.opened) this.props.toggleOpened();
       applyClosedPageStyling();
       return null;

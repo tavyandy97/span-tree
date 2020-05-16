@@ -14,7 +14,7 @@ const anchor = document.createElement("div");
 
 anchor.id = "rcr-anchor";
 
-if (document.querySelector(".qa-branches-select") !== null) {
+if (document.querySelector(".layout-page") !== null) {
   document
     .querySelector(".layout-page")
     .insertBefore(anchor, document.querySelector(".layout-page").childNodes[0]);
