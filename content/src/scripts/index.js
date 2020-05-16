@@ -14,17 +14,18 @@ const anchor = document.createElement("div");
 
 anchor.id = "rcr-anchor";
 
-document
-  .querySelector(".layout-page")
-  .insertBefore(anchor, document.querySelector(".layout-page").childNodes[0]);
-
-storeWithMiddleware.ready().then(() => {
-  render(
-    <Provider store={storeWithMiddleware}>
-      <App />
-    </Provider>,
-    document.getElementById("rcr-anchor")
-  );
-});
+if (document.querySelector(".layout-page") !== null) {
+  document
+    .querySelector(".layout-page")
+    .insertBefore(anchor, document.querySelector(".layout-page").childNodes[0]);
+  storeWithMiddleware.ready().then(() => {
+    render(
+      <Provider store={storeWithMiddleware}>
+        <App />
+      </Provider>,
+      document.getElementById("rcr-anchor")
+    );
+  });
+}
 
 export default storeWithMiddleware;

@@ -36,7 +36,7 @@ function TreeItem({
     } else {
       setClicked(true);
       let URLDetails = fetchURLDetails();
-      window.location.href = `https://www.gitlab.com/${
+      window.location.href = `${window.location.origin}/${
         URLDetails.dirFormatted
       }/blob/${URLDetails.branchName}/${path.join("/")}`;
     }

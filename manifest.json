@@ -6,14 +6,14 @@
   "background": {
     "scripts": ["event.js"]
   },
-  "permissions": ["https://www.gitlab.com/"],
+  "permissions": ["<all_urls>"],
   "browser_action": {
     "default_title": "SpanTree"
   },
   "web_accessible_resources": ["*.png", "*.woff2", "*.svg"],
   "content_scripts": [
     {
-      "matches": ["https://gitlab.com/*/*", "https://gitlab.com/*/*/-/tree/*"],
+      "matches": ["<all_urls>"],
       "css": ["libs/file-icons.css"],
       "js": ["content.js"]
     }

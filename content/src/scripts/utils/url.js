@@ -11,7 +11,6 @@ export const fetchURLDetails = () => {
     .split("/")
     .filter((pathSub) => pathSub.length !== 0);
   let branchFound = false;
-  let isTreeVisible = true;
   let treeOrBlobOrHyphenFound = false;
   let baseRemovedURLItems = [];
   for (let i = 0; i < pathNameSplit.length; i++) {
@@ -25,9 +24,6 @@ export const fetchURLDetails = () => {
       if (pathNameSplit[i] === "-") {
         treeOrBlobOrHyphenFound = true;
         i++;
-        if (!(pathNameSplit[i] === "tree" || pathNameSplit[i] === "blob")) {
-          isTreeVisible = false;
-        }
       } else if (pathNameSplit[i] === "blob" || pathNameSplit[i] === "tree") {
         treeOrBlobOrHyphenFound = true;
       } else {
@@ -44,8 +40,6 @@ export const fetchURLDetails = () => {
     dirURLParam: encodeURIComponent(dir.join("/")),
     branchName,
     branchNameURL: encodeURIComponent(branchName),
-    isRepo: !(dir[0] === "dashboard" || dir[0] === "explore"),
-    isTreeVisible,
     baseRemovedURL: baseRemovedURL,
   };
 };
