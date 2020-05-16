@@ -5,7 +5,9 @@ import fileIcons from "../../utils/file-icons";
 import "./styles.css";
 import { fetchURLDetails } from "../../utils/url";
 
-const importFileIconCSS = `chrome-extension://${chrome.runtime.id}/libs/file-icon.css`;
+const importFileIconCSS = `${chrome ? "chrome" : "moz"}-extension://${
+  chrome ? chrome.runtime.id : browser.runtime.id
+}/libs/file-icon.css`;
 
 function TreeItem({
   width,

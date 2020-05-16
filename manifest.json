@@ -4,8 +4,7 @@
   "description": "Tree for Gitlab",
   "version": "0.0.1.0",
   "background": {
-    "scripts": ["event.js"],
-    "persistent": true
+    "scripts": ["event.js"]
   },
   "permissions": ["<all_urls>"],
   "browser_action": {
