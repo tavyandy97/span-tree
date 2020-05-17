@@ -1,6 +1,6 @@
 # SpanTree
 
-![](https://img.shields.io/chrome-web-store/users/gcjikeldobhnaglcoaejmdlmbienoocg?style=for-the-badge)![](https://img.shields.io/github/stars/tavyandy97/span-tree?style=for-the-badge)[![](https://img.shields.io/chrome-web-store/v/gcjikeldobhnaglcoaejmdlmbienoocg?style=for-the-badge)](https://chrome.google.com/webstore/detail/spantree-gitlab-tree/gcjikeldobhnaglcoaejmdlmbienoocg)![](https://img.shields.io/badge/Made%20With-React-%2340D8FC?style=for-the-badge&logo=react)
+![](https://img.shields.io/chrome-web-store/users/gcjikeldobhnaglcoaejmdlmbienoocg?style=for-the-badge) ![](https://img.shields.io/github/stars/tavyandy97/span-tree?style=for-the-badge) [![](https://img.shields.io/chrome-web-store/v/gcjikeldobhnaglcoaejmdlmbienoocg?style=for-the-badge)](https://chrome.google.com/webstore/detail/spantree-gitlab-tree/gcjikeldobhnaglcoaejmdlmbienoocg) ![](https://img.shields.io/badge/Made%20With-React-%2340D8FC?style=for-the-badge&logo=react)
 
 
 
