@@ -132,9 +132,9 @@ function TreeItem({
         <div className="tree-icon">
           {isTree ? (
             isTree.isOpen ? (
-              <i className="arrow arrow-down" />
+              <i className="fa fa-chevron-down"></i>
             ) : (
-              <i className="arrow arrow-right" />
+              <i className="fa fa-chevron-right"></i>
             )
           ) : (
             " "

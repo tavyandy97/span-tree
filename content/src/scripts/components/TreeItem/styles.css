@@ -13,8 +13,9 @@
 
 .tree-icon {
   width: 16px;
-  text-align: left;
-  padding-bottom: 5px;
+  text-align: center;
+  margin-right: 5px;
+  padding-bottom: 2px;
 }
 
 .file-icon {
