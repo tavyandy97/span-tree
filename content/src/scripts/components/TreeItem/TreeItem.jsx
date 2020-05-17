@@ -38,7 +38,7 @@ function TreeItem({
       let URLDetails = fetchURLDetails();
       window.location.href = `${window.location.origin}/${
         URLDetails.dirFormatted
-      }/blob/${URLDetails.branchName}/${path.join("/")}`;
+      }/-/blob/${URLDetails.branchName}/${path.join("/")}`;
     }
   };
 
