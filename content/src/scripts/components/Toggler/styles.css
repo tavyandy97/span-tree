@@ -7,5 +7,7 @@
   border-radius: 0px 0px 4px 4px;
   cursor: pointer;
   z-index: 10;
-  box-shadow: 0px 0px 5px grey;
+  box-shadow: 0px 0px 5px #000000d9;
+  color: white;
+  background: rgb(77, 61, 146);
 }
