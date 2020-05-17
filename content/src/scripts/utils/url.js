@@ -11,10 +11,10 @@ export const fetchURLDetails = () => {
     .split("/")
     .filter((pathSub) => pathSub.length !== 0);
   let branchFound = false;
-  let treeOrBlobOrHyphenFound = false;
+  let findingBranch = false;
   let baseRemovedURLItems = [];
   for (let i = 0; i < pathNameSplit.length; i++) {
-    if (treeOrBlobOrHyphenFound) {
+    if (findingBranch) {
       if (!branchFound) {
         i += branchNameSplit.length;
         branchFound = true;
@@ -22,10 +22,10 @@ export const fetchURLDetails = () => {
       baseRemovedURLItems.push(pathNameSplit[i]);
     } else {
       if (pathNameSplit[i] === "-") {
-        treeOrBlobOrHyphenFound = true;
         i++;
-      } else if (pathNameSplit[i] === "blob" || pathNameSplit[i] === "tree") {
-        treeOrBlobOrHyphenFound = true;
+        findingBranch = true;
+      } else if (pathNameSplit[i] === "blob" || pathNameSplit[i] === "tree" || pathNameSplit[i] === "blame" || pathNameSplit[i] === "commits" || pathNameSplit[i] === "find_file") {
+        findingBranch = true;
       } else {
         dir.push(pathNameSplit[i]);
       }
