@@ -1,3 +1,9 @@
+# SpanTree
+
+[![](https://img.shields.io/github/stars/tavyandy97/span-tree?style=for-the-badge)](https://github.com/tavyandy97/span-tree) [![](https://img.shields.io/chrome-web-store/users/gcjikeldobhnaglcoaejmdlmbienoocg?style=for-the-badge)](https://chrome.google.com/webstore/detail/spantree-gitlab-tree/gcjikeldobhnaglcoaejmdlmbienoocg) [![](https://img.shields.io/chrome-web-store/v/gcjikeldobhnaglcoaejmdlmbienoocg?style=for-the-badge)](https://chrome.google.com/webstore/detail/spantree-gitlab-tree/gcjikeldobhnaglcoaejmdlmbienoocg) [![](https://img.shields.io/badge/Made%20With-React-%2340D8FC?style=for-the-badge&logo=react)](https://reactjs.org/)
+
+![](docs//banner.png)
+
 ## About
 
 Browser extension that makes navigating a GitLab repository feel like a breeze by providing a familiar tree structure. [Link to chrome extension](https://chrome.google.com/webstore/detail/spantree-gitlab-tree/gcjikeldobhnaglcoaejmdlmbienoocg)
