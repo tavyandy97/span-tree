@@ -12,6 +12,9 @@ import {
 import { setClicked } from "../../../../../event/src/actions/UI";
 
 import "./styles.css";
+const importFileIconCSS = `${chrome ? "chrome" : "moz"}-extension://${
+  chrome ? chrome.runtime.id : browser.runtime.id
+}/libs/file-icon.css`;
 
 const renderTreeItems = (
   tree,
@@ -29,6 +32,7 @@ const renderTreeItems = (
 
   return (
     <div className="tree-list">
+      <link rel="stylesheet" type="text/css" href={importFileIconCSS} />
       <ul className="parent-list">
         {Object.keys(tree).map((key) => (
           <TreeItem

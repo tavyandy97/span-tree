@@ -1,11 +1,8 @@
 .tree-pane {
   position: fixed;
   display: flex;
-  background-color: rgb(250, 250, 250);
-  /* border: 1px rgb(229, 229, 229) solid; */
   box-sizing: border-box;
   height: 100%;
-  /* margin-right: 20px; */
   right: 0px !important;
   top: 0px !important;
   bottom: 0px !important;
@@ -14,7 +11,7 @@
   z-index: 1000;
   transform: translate3d(0px, 0px, 0px);
   transition: transform 0.2s ease 0s;
-  box-shadow: 2px 0px 8px darkslategrey;
+  box-shadow: 2px 0px 8px #00000070;
 }
 
 .pane-main {
@@ -40,7 +37,6 @@
 }
 
 .tree-body {
-  border: 1px rgb(229, 229, 229) solid;
   height: 100%;
   width: 100%;
 }

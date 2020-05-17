@@ -5,10 +5,6 @@ import fileIcons from "../../utils/file-icons";
 import "./styles.css";
 import { fetchURLDetails } from "../../utils/url";
 
-const importFileIconCSS = `${chrome ? "chrome" : "moz"}-extension://${
-  chrome ? chrome.runtime.id : browser.runtime.id
-}/libs/file-icon.css`;
-
 function TreeItem({
   width,
   name,
@@ -117,7 +113,6 @@ function TreeItem({
 
   return (
     <li>
-      <link rel="stylesheet" type="text/css" href={importFileIconCSS} />
       <div
         className={opening ? "tree-element opening" : "tree-element"}
         onClick={handleClick}
@@ -132,9 +127,9 @@ function TreeItem({
         <div className="tree-icon">
           {isTree ? (
             isTree.isOpen ? (
-              <i className="arrow arrow-down" />
+              <i className="fa fa-chevron-right arrow arrow-down"></i>
             ) : (
-              <i className="arrow arrow-right" />
+              <i className="fa fa-chevron-right arrow"></i>
             )
           ) : (
             " "
