@@ -11,6 +11,6 @@ export const applyClosedPageStyling = () => {
   document.querySelector("header").style.left = "0";
   document.querySelector("body").style.marginLeft = "0";
   if(document.querySelector(".nav-sidebar") !== null){
-    document.querySelector(".nav-sidebar").style.left = "0px";
+    document.querySelector(".nav-sidebar").style.left = "0";
   }
 };
