@@ -1,7 +1,9 @@
 import React from "react";
+
 import Branch from "./assets/Branch";
 import Repo from "./assets/Repo";
 import Close from "./assets/Close";
+import Half from "./assets/Half";
 
 function SVG({ icon, height, style }) {
   switch (icon) {
@@ -11,6 +13,8 @@ function SVG({ icon, height, style }) {
       return <Repo height={height} style={style} />;
     case "close":
       return <Close height={height} style={style} />;
+    case "half":
+      return <Half height={height} style={style} />;
     default:
       return "faulty svg";
   }

@@ -29,6 +29,7 @@
 
 .close-button {
   cursor: pointer;
+  margin: 0 4px;
 }
 
 .spread {
