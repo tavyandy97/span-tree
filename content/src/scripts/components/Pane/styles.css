@@ -25,6 +25,9 @@
   background-color: rgb(77, 61, 146);
   color: white;
   padding: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .close-button {

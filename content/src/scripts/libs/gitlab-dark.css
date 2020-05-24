@@ -6699,3 +6699,15 @@ div[class *= 'mini-pipe'] li:hover [class *= 'dropdown-item'] {
   color: var(--light) !important;
   background-color: var(--darker) !important;
 }
+
+
+
+/*SpanTree Styles*/
+
+.pane-header {
+  height: 50px;
+}
+
+.tree-list {
+  height: calc(100vh - 50px);
+}
