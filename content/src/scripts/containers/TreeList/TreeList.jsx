@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import Loader from "../../components/Loader";
 import TreeItem from "../../components/TreeItem";
 import { fetchURLDetails } from "../../utils/url";
-import { browserKey, isChrome } from "../../utils/browser";
+import { browserKey } from "../../utils/browser";
 import {
   getInitialTree,
   openDir,
