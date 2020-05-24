@@ -16,9 +16,6 @@ import "./styles.css";
 const importFileIconCSS = `${browserKey()}-extension://${chrome.i18n.getMessage(
   "@@extension_id"
 )}/libs/file-icons.css`;
-const importGitlabDarkCSS = `${browserKey()}-extension://${chrome.i18n.getMessage(
-  "@@extension_id"
-)}/libs/gitlab-dark.css`;
 
 const renderTreeItems = (
   tree,
@@ -36,7 +33,6 @@ const renderTreeItems = (
   return (
     <div className="tree-list">
       <link rel="stylesheet" type="text/css" href={importFileIconCSS} />
-      <link rel="stylesheet" type="text/css" href={importGitlabDarkCSS} />
       <ul className="parent-list">
         {Object.keys(tree).map((key) => (
           <TreeItem
