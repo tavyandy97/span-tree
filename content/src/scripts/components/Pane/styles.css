@@ -52,3 +52,7 @@
   text-overflow: ellipsis;
   font-weight: bold;
 }
+
+.pane-icons{
+  min-width: 35px;
+}

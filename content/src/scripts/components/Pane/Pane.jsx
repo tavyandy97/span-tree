@@ -36,7 +36,7 @@ function Pane({ toggleOpened, width, firstPageLoad, setFirstPageLoad }) {
               />{" "}
               {URLDetails.dirFormatted}
             </div>
-            <div>
+            <div className="pane-icons">
               <span onClick={switchTheme} className="close-button">
                 <SVG icon="half" height="9" />
               </span>
