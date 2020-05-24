@@ -1,6 +1,10 @@
 # SpanTree
 
-[![](https://img.shields.io/github/stars/tavyandy97/span-tree?style=for-the-badge)](https://github.com/tavyandy97/span-tree) [![](https://img.shields.io/chrome-web-store/users/gcjikeldobhnaglcoaejmdlmbienoocg?style=for-the-badge)](https://chrome.google.com/webstore/detail/spantree-gitlab-tree/gcjikeldobhnaglcoaejmdlmbienoocg) [![](https://img.shields.io/chrome-web-store/v/gcjikeldobhnaglcoaejmdlmbienoocg?style=for-the-badge)](https://chrome.google.com/webstore/detail/spantree-gitlab-tree/gcjikeldobhnaglcoaejmdlmbienoocg) [![](https://img.shields.io/badge/Made%20With-React-%2340D8FC?style=for-the-badge&logo=react)](https://reactjs.org/)
+[![](https://img.shields.io/github/stars/tavyandy97/span-tree?color=red&style=for-the-badge)](https://github.com/tavyandy97/span-tree)&nbsp;&nbsp;
+[![](https://img.shields.io/chrome-web-store/users/gcjikeldobhnaglcoaejmdlmbienoocg?style=for-the-badge)](https://chrome.google.com/webstore/detail/spantree-gitlab-tree/gcjikeldobhnaglcoaejmdlmbienoocg)&nbsp;&nbsp;
+[![](https://img.shields.io/chrome-web-store/v/gcjikeldobhnaglcoaejmdlmbienoocg?style=for-the-badge)](https://chrome.google.com/webstore/detail/spantree-gitlab-tree/gcjikeldobhnaglcoaejmdlmbienoocg)&nbsp;&nbsp;
+[![](https://img.shields.io/amo/v/spantree-gitlab-tree?style=for-the-badge)](https://addons.mozilla.org/en-GB/firefox/addon/spantree-gitlab-tree/)&nbsp;&nbsp;
+[![](https://img.shields.io/badge/Made%20With-React-%2340D8FC?color=dodgerblue&style=for-the-badge&logo=react)](https://reactjs.org/)
 
 ![](docs//banner.png)
 
@@ -44,7 +48,7 @@ Steps:
 
    (For reference follow: https://thoughtbot.com/blog/how-to-make-a-chrome-extension)
 
-# Credits
+## Credits
 
 SpanTree uses the following open-source packages:
 
