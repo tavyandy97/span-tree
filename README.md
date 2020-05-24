@@ -1,9 +1,9 @@
 # SpanTree
 
-[![](https://img.shields.io/github/stars/tavyandy97/span-tree?color=red)](https://github.com/tavyandy97/span-tree)&nbsp;&nbsp;
-[![](https://img.shields.io/chrome-web-store/users/gcjikeldobhnaglcoaejmdlmbienoocg)](https://chrome.google.com/webstore/detail/spantree-gitlab-tree/gcjikeldobhnaglcoaejmdlmbienoocg)&nbsp;&nbsp;
-[![](https://img.shields.io/chrome-web-store/v/gcjikeldobhnaglcoaejmdlmbienoocg)](https://chrome.google.com/webstore/detail/spantree-gitlab-tree/gcjikeldobhnaglcoaejmdlmbienoocg)&nbsp;&nbsp;
-[![](https://img.shields.io/amo/v/spantree-gitlab-tree)](https://addons.mozilla.org/en-GB/firefox/addon/spantree-gitlab-tree/)&nbsp;&nbsp;
+[![](https://img.shields.io/github/stars/tavyandy97/span-tree?color=red)](https://github.com/tavyandy97/span-tree)&nbsp;
+[![](https://img.shields.io/chrome-web-store/users/gcjikeldobhnaglcoaejmdlmbienoocg)](https://chrome.google.com/webstore/detail/spantree-gitlab-tree/gcjikeldobhnaglcoaejmdlmbienoocg)&nbsp;
+[![](https://img.shields.io/chrome-web-store/v/gcjikeldobhnaglcoaejmdlmbienoocg)](https://chrome.google.com/webstore/detail/spantree-gitlab-tree/gcjikeldobhnaglcoaejmdlmbienoocg)&nbsp;
+[![](https://img.shields.io/amo/v/spantree-gitlab-tree)](https://addons.mozilla.org/en-GB/firefox/addon/spantree-gitlab-tree/)&nbsp;
 [![](https://img.shields.io/badge/Made%20With-React-%2340D8FC?color=dodgerblue&logo=react)](https://reactjs.org/)
 
 ![](docs//banner.png)
