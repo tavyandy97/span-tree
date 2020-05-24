@@ -10,10 +10,10 @@
 
 ## About
 
-Browser extension that makes navigating a GitLab repository feel like a breeze by providing a familiar tree structure.<br>
+Browser extension that makes navigating a GitLab repository feel like a breeze by providing a familiar tree structure.<br><br>
 Links:<br>
-[Chrome Extension](https://chrome.google.com/webstore/detail/spantree-gitlab-tree/gcjikeldobhnaglcoaejmdlmbienoocg)<br>
-[Firefox Add-on](https://addons.mozilla.org/en-GB/firefox/addon/spantree-gitlab-tree)<br>
+- [Chrome Extension](https://chrome.google.com/webstore/detail/spantree-gitlab-tree/gcjikeldobhnaglcoaejmdlmbienoocg)<br>
+- [Firefox Add-on](https://addons.mozilla.org/en-GB/firefox/addon/spantree-gitlab-tree)<br>
 
 ![](docs/demo.gif)
 
