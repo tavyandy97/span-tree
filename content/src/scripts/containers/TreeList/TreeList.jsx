@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Loader from "../../components/Loader";
 import TreeItem from "../../components/TreeItem";
 import { fetchURLDetails } from "../../utils/url";
+import { browserKey } from "../../utils/browser";
 import {
   getInitialTree,
   openDir,
@@ -12,14 +13,13 @@ import {
 import { setClicked } from "../../../../../event/src/actions/UI";
 
 import "./styles.css";
-const importFileIconCSS = `${chrome ? "chrome" : "moz"}-extension://${
-  chrome ? chrome.runtime.id : browser.runtime.id
-}/libs/file-icon.css`;
+const importFileIconCSS = `${browserKey()}-extension://${chrome.i18n.getMessage(
+  "@@extension_id"
+)}/libs/file-icons.css`;
 
 const renderTreeItems = (
   tree,
   width,
-  clicked,
   setClicked,
   close,
   open,
@@ -156,7 +156,6 @@ function TreeList({
   return renderTreeItems(
     tree[URLDetails.dirFormatted][URLDetails.branchName],
     width,
-    clicked,
     setClicked,
     closeDirectory,
     openDirectory,
