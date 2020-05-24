@@ -3,9 +3,8 @@
   "version": "0.0.1",
   "description": "Tree for Gitlab",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "./node_modules/.bin/gulp",
-    "export": "CHROME_EXTENSION=production gulp watch"
+    "export": "CHROME_EXTENSION=production npm start"
   },
   "author": "Taveesh Anand",
   "dependencies": {
