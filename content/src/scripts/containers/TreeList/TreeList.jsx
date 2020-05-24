@@ -13,9 +13,9 @@ import {
 import { setClicked } from "../../../../../event/src/actions/UI";
 
 import "./styles.css";
-const importFileIconCSS = `${browserKey()}-extension://${
-  isChrome() ? chrome.runtime.id : browser.runtime.id
-}/libs/file-icons.css`;
+const importFileIconCSS = `${browserKey()}-extension://${chrome.i18n.getMessage(
+  "@@extension_id"
+)}/libs/file-icons.css`;
 
 const renderTreeItems = (
   tree,

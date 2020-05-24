@@ -14,7 +14,7 @@ export const browserKey = () => {
   return "chrome";
 };
 
-export const isChrome = () => {
+const isChrome = () => {
   const match = /google inc/.test(vendor)
     ? userAgent.match(/(?:chrome|crios)\/(\d+)/)
     : null;
