@@ -10,11 +10,11 @@
   "browser_action": {
     "default_title": "SpanTree"
   },
-  "web_accessible_resources": ["*.png", "*.woff2", "*.svg"],
+  "web_accessible_resources": ["*.png", "*.woff2", "*.svg", "*.css"],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "css": ["libs/file-icons.css"],
+      "css": [],
       "js": ["content.js"]
     }
   ],
