@@ -23,10 +23,13 @@ class App extends Component {
     this.setFirstPageLoad = (firstPageLoad) => {
       this.setState({ firstPageLoad });
     };
+    this.shouldShowSpanTree = () => {
+      return ((document.querySelector(".qa-branches-select") !== null) && (document.querySelector(".nav-sidebar") !== null));
+    };
   }
 
   componentDidMount() {
-    if (this.props.opened) {
+    if (this.props.opened && this.shouldShowSpanTree()) {
       applyOpenedPageStyling(this.props.width);
     } else {
       applyClosedPageStyling();
@@ -34,7 +37,7 @@ class App extends Component {
   }
 
   componentDidUpdate(_prevProps, _prevState) {
-    if (this.props.opened) {
+    if (this.props.opened && this.shouldShowSpanTree()) {
       applyOpenedPageStyling(this.props.width);
     } else {
       applyClosedPageStyling();
@@ -42,9 +45,7 @@ class App extends Component {
   }
 
   render() {
-    const shouldShowSpanTree =
-      document.querySelector(".qa-branches-select") !== null;
-    if (!shouldShowSpanTree) {
+    if (!this.shouldShowSpanTree()) {
       if (this.props.opened) this.props.toggleOpened();
       applyClosedPageStyling();
       return null;
