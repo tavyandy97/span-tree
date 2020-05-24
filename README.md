@@ -1,12 +1,18 @@
 # SpanTree
 
-[![](https://img.shields.io/github/stars/tavyandy97/span-tree?style=for-the-badge)](https://github.com/tavyandy97/span-tree) [![](https://img.shields.io/chrome-web-store/users/gcjikeldobhnaglcoaejmdlmbienoocg?style=for-the-badge)](https://chrome.google.com/webstore/detail/spantree-gitlab-tree/gcjikeldobhnaglcoaejmdlmbienoocg) [![](https://img.shields.io/chrome-web-store/v/gcjikeldobhnaglcoaejmdlmbienoocg?style=for-the-badge)](https://chrome.google.com/webstore/detail/spantree-gitlab-tree/gcjikeldobhnaglcoaejmdlmbienoocg) [![](https://img.shields.io/badge/Made%20With-React-%2340D8FC?style=for-the-badge&logo=react)](https://reactjs.org/)
+[![](https://img.shields.io/github/stars/tavyandy97/span-tree?color=red&style=for-the-badge)](https://github.com/tavyandy97/span-tree)&nbsp;
+[![](https://img.shields.io/chrome-web-store/users/gcjikeldobhnaglcoaejmdlmbienoocg?style=for-the-badge)](https://chrome.google.com/webstore/detail/spantree-gitlab-tree/gcjikeldobhnaglcoaejmdlmbienoocg)&nbsp;
+[![](https://img.shields.io/chrome-web-store/v/gcjikeldobhnaglcoaejmdlmbienoocg?style=for-the-badge)](https://chrome.google.com/webstore/detail/spantree-gitlab-tree/gcjikeldobhnaglcoaejmdlmbienoocg)&nbsp;
+[![](https://img.shields.io/amo/v/spantree-gitlab-tree?style=for-the-badge)](https://addons.mozilla.org/en-GB/firefox/addon/spantree-gitlab-tree/)&nbsp;
+[![](https://img.shields.io/badge/Made%20With-React-%2340D8FC?color=dodgerblue&logo=react&style=for-the-badge)](https://reactjs.org/)
 
 ![](docs//banner.png)
 
 ## About
 
-Browser extension that makes navigating a GitLab repository feel like a breeze by providing a familiar tree structure. [Link to chrome extension](https://chrome.google.com/webstore/detail/spantree-gitlab-tree/gcjikeldobhnaglcoaejmdlmbienoocg)
+Browser extension that makes navigating a GitLab repository feel like a breeze by providing a familiar tree structure.<br>
+- [Chrome Extension](https://chrome.google.com/webstore/detail/spantree-gitlab-tree/gcjikeldobhnaglcoaejmdlmbienoocg)<br>
+- [Firefox Add-on](https://addons.mozilla.org/en-GB/firefox/addon/spantree-gitlab-tree)<br>
 
 ![](docs/demo.gif)
 
@@ -44,7 +50,7 @@ Steps:
 
    (For reference follow: https://thoughtbot.com/blog/how-to-make-a-chrome-extension)
 
-# Credits
+## Credits
 
 SpanTree uses the following open-source packages:
 
