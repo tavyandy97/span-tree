@@ -38,7 +38,7 @@ function Pane({ toggleOpened, width, firstPageLoad, setFirstPageLoad }) {
             </div>
             <div>
               <span onClick={switchTheme} className="close-button">
-                <SVG icon="half" height="12" />
+                <SVG icon="half" height="9" />
               </span>
               <span onClick={toggleOpened} className="close-button">
                 <SVG icon="close" height="12" />
