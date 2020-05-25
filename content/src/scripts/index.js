@@ -2,26 +2,12 @@ import React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
 import { Store, applyMiddleware } from "webext-redux";
-import { browserKey } from "./utils/browser";
 import thunkMiddleware from "redux-thunk";
 import App from "./containers/app/App";
-import { isPresentInThemeList } from "./utils/themeList";
 
 const proxyStore = new Store();
 const middleware = [thunkMiddleware];
 const storeWithMiddleware = applyMiddleware(proxyStore, ...middleware);
-
-const darkGitlab = document.createElement("link");
-darkGitlab.id = "spantree-theme";
-darkGitlab.disabled = !isPresentInThemeList();
-darkGitlab.rel = "stylesheet";
-darkGitlab.type = "text/css";
-darkGitlab.href = `${browserKey()}-extension://${chrome.i18n.getMessage(
-  "@@extension_id"
-)}/libs/gitlab-dark.css`;
-document
-  .querySelector("body")
-  .insertBefore(darkGitlab, document.querySelector("body").childNodes[0]);
 
 const anchor = document.createElement("div");
 anchor.id = "rcr-anchor";
