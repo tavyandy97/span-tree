@@ -70,11 +70,6 @@ function fireContentLoadedEvent () {
     .querySelector("body")
     .insertBefore(darkGitlab, document.querySelector("body").childNodes[0]);
 
-
-  // Remove CSS from Head
-
-  document
-    .querySelector("#spantree-theme-temp").outerHTML="";
 }
 
 
