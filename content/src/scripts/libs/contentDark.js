@@ -46,17 +46,17 @@ const isOpera = () => {
 
 // Insert CSS into Head
 
-const darkGitlab = document.createElement("link");
-darkGitlab.id = "spantree-theme-temp";
-darkGitlab.disabled = !isPresentInThemeList();
-darkGitlab.rel = "stylesheet";
-darkGitlab.type = "text/css";
-darkGitlab.href = `${browserKey()}-extension://${chrome.i18n.getMessage(
+const darkGitlabTemp = document.createElement("link");
+darkGitlabTemp.id = "spantree-theme-temp";
+darkGitlabTemp.disabled = !isPresentInThemeList();
+darkGitlabTemp.rel = "stylesheet";
+darkGitlabTemp.type = "text/css";
+darkGitlabTemp.href = `${browserKey()}-extension://${chrome.i18n.getMessage(
   "@@extension_id"
 )}/libs/gitlab-dark.css`;
 document
   .querySelector("html")
-  .insertBefore(darkGitlab, document.querySelector("html").childNodes[0]);
+  .insertBefore(darkGitlabTemp, document.querySelector("html").childNodes[0]);
 
 
 document.addEventListener('DOMContentLoaded', fireContentLoadedEvent, false);
@@ -65,10 +65,25 @@ function fireContentLoadedEvent () {
 
   // Insert CSS into Body
 
+  const darkGitlab = document.createElement("link");
   darkGitlab.id = "spantree-theme";
+  darkGitlab.disabled = !isPresentInThemeList();
+  darkGitlab.rel = "stylesheet";
+  darkGitlab.type = "text/css";
+  darkGitlab.href = `${browserKey()}-extension://${chrome.i18n.getMessage(
+    "@@extension_id"
+  )}/libs/gitlab-dark.css`;
   document
     .querySelector("body")
     .insertBefore(darkGitlab, document.querySelector("body").childNodes[0]);
+
+
+  // Remove CSS from Head
+
+  document.body.onload = () => {
+    document.querySelector("#spantree-theme-temp").remove();
+  };
+
 
 }
 
