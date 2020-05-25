@@ -13,8 +13,11 @@
 }
 
 .tree-list::-webkit-scrollbar-track {
-  background-color: rgba(0, 0, 0, 0.21);
-  border-radius: 10px;
+  background-color: #c9c9c9;
+}
+
+.tree-list::-webkit-scrollbar-corner {
+  background-color: #c9c9c9;
 }
 
 .tree-list::-webkit-scrollbar {
