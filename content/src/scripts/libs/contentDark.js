@@ -41,6 +41,8 @@ const isOpera = () => {
 };
 
 function fireContentLoadedEvent () {
+  // Remove event listener
+  document.removeEventListener('DOMContentLoaded', fireContentLoadedEvent);
 
   // Insert CSS into Body
   const darkGitlab = document.createElement("link");
