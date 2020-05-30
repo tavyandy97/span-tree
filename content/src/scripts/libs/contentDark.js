@@ -2,7 +2,7 @@
 // As the main content.js is loaded on "document_idle", the dark theme needs to be loaded at the very beginning of
 // tab load to prevent a common phenomenon found in Chrome themes known as white flash. So this contentDark.js is
 // loaded on "document_start" and adds the darkGitlab.css to the <html> before the page starts loading.
-// Note: This file is not processed by gitlab but is copied by gulp to the build folder as is.
+// Note: This file is not processed by webpack but is copied by gulp to the build/libs folder as is.
 
 // themeList.js
 const isPresentInThemeList = () => {
