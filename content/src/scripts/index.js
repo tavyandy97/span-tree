@@ -3,6 +3,7 @@ import { render } from "react-dom";
 import { Provider } from "react-redux";
 import { Store, applyMiddleware } from "webext-redux";
 import thunkMiddleware from "redux-thunk";
+
 import App from "./containers/app/App";
 
 const proxyStore = new Store();
