@@ -25,10 +25,14 @@
   background-color: rgb(77, 61, 146);
   color: white;
   padding: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .close-button {
   cursor: pointer;
+  margin: 0 4px;
 }
 
 .spread {
@@ -47,4 +51,8 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   font-weight: bold;
+}
+
+.pane-icons{
+  min-width: 35px;
 }

@@ -15,7 +15,7 @@ module.exports = {
   },
 
   plugins:
-    process.env.CHROME_EXTENSION === "production"
+    process.env.NODE_ENV === "production"
       ? [new MinifyPlugin({}, {})]
       : [],
 

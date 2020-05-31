@@ -4,6 +4,7 @@ import SVG from "../SVG";
 import TreeList from "../../containers/TreeList/TreeList";
 import Resizer from "../../containers/Resizer/Resizer";
 import { fetchURLDetails } from "../../utils/url";
+import { switchTheme } from "../../utils/themeList";
 
 import "./styles.css";
 
@@ -35,8 +36,13 @@ function Pane({ toggleOpened, width, firstPageLoad, setFirstPageLoad }) {
               />{" "}
               {URLDetails.dirFormatted}
             </div>
-            <div onClick={toggleOpened} className="close-button">
-              <SVG icon="close" height="12" />
+            <div className="pane-icons">
+              <span onClick={switchTheme} className="close-button">
+                <SVG icon="half" height="9" />
+              </span>
+              <span onClick={toggleOpened} className="close-button">
+                <SVG icon="close" height="12" />
+              </span>
             </div>
           </div>
           <div className="pane-details" style={{ width: width - 12 + "px" }}>

@@ -11,7 +11,6 @@ const middleware = [thunkMiddleware];
 const storeWithMiddleware = applyMiddleware(proxyStore, ...middleware);
 
 const anchor = document.createElement("div");
-
 anchor.id = "rcr-anchor";
 
 if (document.querySelector(".layout-page") !== null) {
