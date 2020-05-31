@@ -4,7 +4,7 @@
   "description": "Tree for Gitlab",
   "scripts": {
     "start": "./node_modules/.bin/gulp",
-    "export": "CHROME_EXTENSION=production npm start"
+    "export": "NODE_ENV=production npm start"
   },
   "author": "Taveesh Anand",
   "dependencies": {
