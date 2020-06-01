@@ -1,10 +1,10 @@
 .options {
   width: 220px;
   height: 40px;
+  margin: 0px;
   background-color: rgb(77, 61, 146);
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  align-items: center;
 }
