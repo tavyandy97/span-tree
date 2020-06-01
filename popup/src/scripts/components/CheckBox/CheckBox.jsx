@@ -2,7 +2,7 @@ import React from "react";
 
 import "./styles.css";
 
-function CheckBox({ name: name, key: key }) {
+function CheckBox({ name: name, keyName: keyName, defaultVal: defaultVal }) {
   return (
     <div
       className="option"

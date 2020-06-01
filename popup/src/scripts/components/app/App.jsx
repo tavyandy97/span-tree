@@ -9,15 +9,20 @@ class App extends Component {
     this.options = [
       {
         name: "Compatibility Mode",
-        key: "compatibility-mode",
+        keyName: "compatibility-mode",
         type: "checkBox",
+        defaultVal: false,
       },
     ];
     this.renderOptions = () => {
       return (
         <ul className="options">
           {this.options.map((option) => (
-            <CheckBox name={option.name} />
+            <CheckBox
+              name={option.name}
+              keyName={option.keyName}
+              defaultVal={option.defaultVal}
+            />
           ))}
         </ul>
       );
