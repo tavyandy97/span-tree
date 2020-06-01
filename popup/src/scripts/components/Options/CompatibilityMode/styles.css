@@ -22,11 +22,15 @@
   border-width: 1px;
 }
 
+.checkbox:hover {
+  cursor: pointer;
+}
+
 .ticked {
   background-color: #cd3f28;
 }
 
-.unticked {
+.un-ticked {
   background-color: white;
 }
 
