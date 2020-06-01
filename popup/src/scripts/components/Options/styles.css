@@ -1,4 +1,4 @@
-.options{
+.options {
   width: 220px;
   height: 40px;
   background-color: rgb(77, 61, 146);
@@ -7,12 +7,4 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-}
-
-.option{
-  width: 90%;
-  font-size: 14px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
 }

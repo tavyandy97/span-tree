@@ -1,7 +1,42 @@
 .option {
   width: 90%;
-  font-size: 14px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.option-text {
+  font-size: 16px;
+  align-items: center;
+}
+
+.checkbox {
+  height: 15px;
+  width: 15px;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: solid white;
+  border-width: 1px;
+}
+
+.ticked {
+  background-color: #cd3f28;
+}
+
+.unticked {
+  background-color: white;
+}
+
+.check {
+  height: 7px;
+  width: 14px;
+  border: solid white;
+  border-width: 0px 0px 3px 3px;
+  -webkit-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  box-sizing: border-box;
 }
