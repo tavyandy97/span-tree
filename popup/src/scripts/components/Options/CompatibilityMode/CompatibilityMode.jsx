@@ -9,7 +9,7 @@ function CompatibilityMode() {
       title="For compatibility with Gitlab versions < 13 which do not support '-' (hyphen) separated URLs "
     >
       <div className="option-text">Compatibility Mode</div>
-      <div className="checkbox un-ticked">
+      <div className="checkbox ticked">
         <div className="check"></div>
       </div>
     </div>
