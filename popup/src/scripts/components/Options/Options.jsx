@@ -5,7 +5,9 @@ import "./styles.css";
 function Options() {
   return (
     <div className="options">
-      Hyphen Separated
+      <div className="option">
+        Hyphen Separated <input type="checkbox"/>
+      </div>
     </div>
   );
 }
