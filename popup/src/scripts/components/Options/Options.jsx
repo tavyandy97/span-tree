@@ -1,13 +1,12 @@
 import React from "react";
 
 import "./styles.css";
+import CompatibilityMode from "./CompatibilityMode";
 
 function Options() {
   return (
     <div className="options">
-      <div className="option">
-        Compatibility Mode <input type="checkbox"/>
-      </div>
+      <CompatibilityMode />
     </div>
   );
 }
