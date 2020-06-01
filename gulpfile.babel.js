@@ -41,7 +41,7 @@ gulp.task("content-js", ["clean"], (cb) => {
 
 gulp.task("popup-html", ["clean"], () => {
   return gulp
-    .src("popup/src/index.js")
+    .src("popup/src/index.html")
     .pipe(plugins.rename("popup.html"))
     .pipe(gulp.dest("./build"));
 });
