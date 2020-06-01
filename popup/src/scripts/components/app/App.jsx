@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import Options from "../Options";
 
 class App extends Component {
   constructor(props) {
@@ -7,26 +7,15 @@ class App extends Component {
   }
 
   componentDidMount() {
-    document.addEventListener('click', () => {
-      this.props.dispatch({
-        type: 'ADD_COUNT'
-      });
-    });
+    console.log("Pop-up Mounted")
   }
 
   render() {
     return (
-      <div>
-        Click Count: {this.props.count}
-      </div>
+      <Options/>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    count: state.count
-  };
-};
 
-export default connect(mapStateToProps)(App);
+export default App;

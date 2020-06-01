@@ -8,7 +8,8 @@
   },
   "permissions": ["<all_urls>"],
   "browser_action": {
-    "default_title": "SpanTree"
+    "default_title": "SpanTree",
+    "default_popup": "popup.html"
   },
   "web_accessible_resources": ["*.png", "*.woff2", "*.svg", "*.css"],
   "content_scripts": [

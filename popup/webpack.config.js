@@ -13,12 +13,13 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.js', '.jsx', '.scss', '.json'],
+    extensions: ['.js', '.jsx', '.css', '.json'],
     modules: ['node_modules']
   },
 
   module: {
     loaders: [
+      { test: /\.css$/, loader: "style-loader!css-loader" },
       {
         test: /\.(jsx|js)?$/,
         loader: 'babel-loader',
