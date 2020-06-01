@@ -6,7 +6,7 @@ function Options() {
   return (
     <div className="options">
       <div className="option">
-        Hyphen Separated <input type="checkbox"/>
+        Compatibility Mode <input type="checkbox"/>
       </div>
     </div>
   );
