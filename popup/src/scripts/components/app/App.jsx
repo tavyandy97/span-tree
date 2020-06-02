@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
 class App extends Component {
   constructor(props) {
@@ -7,25 +7,21 @@ class App extends Component {
   }
 
   componentDidMount() {
-    document.addEventListener('click', () => {
+    document.addEventListener("click", () => {
       this.props.dispatch({
-        type: 'ADD_COUNT'
+        type: "ADD_COUNT",
       });
     });
   }
 
   render() {
-    return (
-      <div>
-        Click Count: {this.props.count}
-      </div>
-    );
+    return <div>Click Count: {this.props.count}</div>;
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    count: state.count
+    count: state.count,
   };
 };
 
