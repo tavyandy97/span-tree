@@ -1,8 +1,8 @@
 import { SET_CLICKED } from "../../types/UI";
 
-const initialClicked = false;
+const initialState = false;
 
-export default (state = initialClicked, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case SET_CLICKED:
       return action.payload;
