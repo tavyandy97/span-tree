@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
-import CheckBox from "../CheckBox/CheckBox";
+import Options from "../options";
+
 import "./styles.css";
 
 class App extends Component {
@@ -14,26 +15,17 @@ class App extends Component {
         defaultVal: false,
       },
     ];
-    this.renderOptions = () => {
-      return (
-        <ul className="spantree-options">
-          {this.options.map((option) => (
-            <CheckBox
-              name={option.name}
-              keyName={option.keyName}
-              defaultVal={option.defaultVal}
-            />
-          ))}
-        </ul>
-      );
-    };
+  }
+
+  componentDidMount() {
+    console.log("MOUNTED");
   }
 
   render() {
     return (
       <div className="spantree-popup">
         <div className="spantree-options-heading">SpanTree Options</div>
-        {this.renderOptions()}
+        <Options options={this.options} />
       </div>
     );
   }

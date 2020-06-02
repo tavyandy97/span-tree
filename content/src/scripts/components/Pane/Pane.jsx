@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import SVG from "../SVG";
 
 import TreeList from "../../containers/TreeList/TreeList";
-import Resizer from "../../containers/Resizer/Resizer";
+import Resizer from "../../containers/Resizer";
 import { fetchURLDetails } from "../../utils/url";
 import { switchTheme } from "../../utils/themeList";
 
