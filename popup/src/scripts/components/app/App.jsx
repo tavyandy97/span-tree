@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
-import "./styles.css";
 import CheckBox from "../CheckBox/CheckBox";
+import "./styles.css";
 
 class App extends Component {
   constructor(props) {
@@ -10,13 +10,13 @@ class App extends Component {
       {
         name: "Compatibility Mode",
         keyName: "compatibility-mode",
-        type: "checkBox",
+        type: "CheckBox",
         defaultVal: false,
       },
     ];
     this.renderOptions = () => {
       return (
-        <ul className="options">
+        <ul className="spantree-options">
           {this.options.map((option) => (
             <CheckBox
               name={option.name}
@@ -29,12 +29,13 @@ class App extends Component {
     };
   }
 
-  componentDidMount() {
-    console.log("Pop-up Mounted");
-  }
-
   render() {
-    return this.renderOptions();
+    return (
+      <div className="spantree-popup">
+        <div className="spantree-options-heading">SpanTree Options</div>
+        {this.renderOptions()}
+      </div>
+    );
   }
 }
 
