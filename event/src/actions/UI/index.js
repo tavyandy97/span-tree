@@ -26,10 +26,3 @@ export const setClicked = (clicked) => {
     payload: clicked,
   });
 };
-
-export const changeOptions = () => {
-  store.dispatch({
-    type: types.OPTIONS_CHANGED,
-    payload: options,
-  });
-};
