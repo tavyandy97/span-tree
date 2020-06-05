@@ -3,15 +3,17 @@ import React from "react";
 function Option({ id, value, label, type, handleChange }) {
   switch (type) {
     case "CheckBox":
-      <label>
-        <input
-          type="checkbox"
-          value={label}
-          checked={value}
-          onChange={() => handleChange(id, !value)}
-        />
-        {label}
-      </label>;
+      return (
+        <label>
+          <input
+            type="checkbox"
+            value={label}
+            checked={value}
+            onChange={() => handleChange(id, !value)}
+          />
+          {label}
+        </label>
+      );
     default:
       return null;
   }
@@ -28,7 +30,7 @@ function Options({ options, optionList, changeOptions }) {
   return optionList.map((option) => (
     <Option
       id={option.keyName}
-      value={options[option.keyName]}
+      value={option.keyName in options ? options[option.keyName] : false}
       label={option.name}
       type={option.type}
       handleChange={handleChangeOptions}

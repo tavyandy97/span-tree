@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import store from "../../../../../content/src/scripts";
 import Options from "../options";
 
 import "./styles.css";
@@ -16,12 +17,19 @@ class App extends Component {
         defaultVal: false,
       },
     ];
-    this.changeOptions = (options) => {
-      this.props.dispatch({
+    this.changeOptions = (newOptions) => {
+      store.dispatch({
         type: "OPTIONS_CHANGED",
-        payload: options,
+        payload: newOptions,
       });
     };
+  }
+
+  componentDidMount() {
+    this.props.dispatch({
+      type: "OPTIONS_CHANGED",
+      payload: options,
+    });
   }
 
   render() {
