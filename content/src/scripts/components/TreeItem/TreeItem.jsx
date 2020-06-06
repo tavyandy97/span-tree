@@ -12,6 +12,7 @@ function TreeItem({
   path,
   close,
   open,
+  options,
   children,
   remainingURL,
   rendering,
@@ -32,9 +33,15 @@ function TreeItem({
     } else {
       setClicked(true);
       let URLDetails = fetchURLDetails();
-      window.location.href = `${window.location.origin}/${
-        URLDetails.dirFormatted
-      }/-/blob/${URLDetails.branchName}/${path.join("/")}`;
+      if ("compatibility-mode" in options && options["compatibility-mode"]) {
+        window.location.href = `${window.location.origin}/${
+          URLDetails.dirFormatted
+        }/blob/${URLDetails.branchName}/${path.join("/")}`;
+      } else {
+        window.location.href = `${window.location.origin}/${
+          URLDetails.dirFormatted
+        }/-/blob/${URLDetails.branchName}/${path.join("/")}`;
+      }
     }
   };
 

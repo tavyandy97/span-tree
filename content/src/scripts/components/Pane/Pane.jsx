@@ -12,7 +12,7 @@ function Pane({ toggleOpened, width, firstPageLoad, setFirstPageLoad }) {
   const [realoading, setRealoading] = useState(true);
   const [URLDetails, setURLDetails] = useState(fetchURLDetails());
 
-  window.addEventListener("popstate", (event) => {
+  window.addEventListener("popstate", (_event) => {
     setRealoading(true);
   });
 
