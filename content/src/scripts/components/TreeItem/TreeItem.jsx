@@ -159,6 +159,7 @@ function TreeItem({
               children={children[key].children}
               open={open}
               close={close}
+              options={options}
               remainingURL={treeItemActive.urlRemaining}
               rendering={rendering}
               setRendering={setRendering}
