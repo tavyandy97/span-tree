@@ -16,3 +16,5 @@ proxyStore.ready().then(() => {
     document.getElementById("app")
   );
 });
+
+export default proxyStore;

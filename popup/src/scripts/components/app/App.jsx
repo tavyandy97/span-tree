@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import store from "../../../../../content/src/scripts";
 import Options from "../options";
 
 import "./styles.css";
@@ -17,19 +16,6 @@ class App extends Component {
         defaultVal: false,
       },
     ];
-    this.changeOptions = (newOptions) => {
-      store.dispatch({
-        type: "OPTIONS_CHANGED",
-        payload: newOptions,
-      });
-    };
-  }
-
-  componentDidMount() {
-    this.props.dispatch({
-      type: "OPTIONS_CHANGED",
-      payload: options,
-    });
   }
 
   render() {
@@ -39,7 +25,12 @@ class App extends Component {
         <Options
           options={this.props.options}
           optionList={this.optionList}
-          changeOptions={this.changeOptions}
+          changeOptions={(newOptions) => {
+            this.props.dispatch({
+              type: "OPTIONS_CHANGED",
+              payload: newOptions,
+            });
+          }}
         />
       </div>
     );
@@ -52,6 +43,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);
