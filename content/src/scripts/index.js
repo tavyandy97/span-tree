@@ -1,14 +1,11 @@
 import React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
-import { Store, applyMiddleware } from "webext-redux";
-import thunkMiddleware from "redux-thunk";
+import { Store } from "webext-redux";
 
 import App from "./containers/app/App";
 
 const proxyStore = new Store();
-const middleware = [thunkMiddleware];
-const storeWithMiddleware = applyMiddleware(proxyStore, ...middleware);
 
 const anchor = document.createElement("div");
 anchor.id = "rcr-anchor";
@@ -17,9 +14,9 @@ if (document.querySelector(".layout-page") !== null) {
   document
     .querySelector(".layout-page")
     .insertBefore(anchor, document.querySelector(".layout-page").childNodes[0]);
-  storeWithMiddleware.ready().then(() => {
+  proxyStore.ready().then(() => {
     render(
-      <Provider store={storeWithMiddleware}>
+      <Provider store={proxyStore}>
         <App />
       </Provider>,
       document.getElementById("rcr-anchor")
@@ -27,4 +24,4 @@ if (document.querySelector(".layout-page") !== null) {
   });
 }
 
-export default storeWithMiddleware;
+export default proxyStore;

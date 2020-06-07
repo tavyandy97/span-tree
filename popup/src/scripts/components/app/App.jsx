@@ -1,23 +1,37 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+
+import Options from "../options";
+
+import "./styles.css";
 
 class App extends Component {
   constructor(props) {
     super(props);
-  }
-
-  componentDidMount() {
-    document.addEventListener('click', () => {
-      this.props.dispatch({
-        type: 'ADD_COUNT'
-      });
-    });
+    this.optionList = [
+      {
+        name: "Compatibility Mode",
+        keyName: "compatibility-mode",
+        type: "CheckBox",
+        defaultVal: false,
+      },
+    ];
   }
 
   render() {
     return (
-      <div>
-        Click Count: {this.props.count}
+      <div className="spantree-popup">
+        <div className="spantree-options-heading">SpanTree Options</div>
+        <Options
+          options={this.props.options}
+          optionList={this.optionList}
+          changeOptions={(newOptions) => {
+            this.props.dispatch({
+              type: "OPTIONS_CHANGED",
+              payload: newOptions,
+            });
+          }}
+        />
       </div>
     );
   }
@@ -25,7 +39,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    count: state.count
+    options: state.options,
   };
 };
 

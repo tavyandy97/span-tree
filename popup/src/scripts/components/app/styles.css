@@ -1,0 +1,27 @@
+body {
+  margin: 0;
+}
+
+.spantree-popup {
+  font-family: Arial, Helvetica, sans-serif;
+  width: 200px;
+  padding: 0;
+  margin: 0;
+}
+
+.spantree-options-heading {
+  background-color: rgb(77, 61, 146);
+  font-size: 20px;
+  font-weight: bold;
+  padding: 8px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  user-select: none;
+}
+
+.spantree-options {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}

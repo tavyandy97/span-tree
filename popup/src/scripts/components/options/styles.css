@@ -1,0 +1,18 @@
+.option {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 8px;
+}
+
+.option:hover {
+  cursor: pointer;
+}
+
+.option input:hover {
+  cursor: pointer;
+}
+.option-name {
+  font-size: 14px;
+  user-select: none;
+}

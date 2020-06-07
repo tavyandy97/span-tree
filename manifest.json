@@ -2,13 +2,14 @@
   "manifest_version": 2,
   "name": "SpanTree - GitLab Tree",
   "description": "Tree for Gitlab",
-  "version": "0.0.2.3",
+  "version": "0.0.2.4",
   "background": {
     "scripts": ["event.js"]
   },
   "permissions": ["<all_urls>"],
   "browser_action": {
-    "default_title": "SpanTree"
+    "default_title": "SpanTree",
+    "default_popup": "popup.html"
   },
   "web_accessible_resources": ["*.png", "*.woff2", "*.svg", "*.css"],
   "content_scripts": [

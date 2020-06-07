@@ -5,6 +5,7 @@ import pinned from "./UI/pinned";
 import tree from "./API/tree";
 import width from "./UI/width";
 import clicked from "./UI/clicked";
+import options from "./UI/options";
 
 export default combineReducers({
   opened,
@@ -12,4 +13,5 @@ export default combineReducers({
   tree,
   width,
   clicked,
+  options,
 });

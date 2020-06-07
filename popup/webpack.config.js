@@ -1,33 +1,35 @@
-const path = require('path');
+const path = require("path");
+const MinifyPlugin = require("babel-minify-webpack-plugin");
 
 module.exports = {
-
-  entry: [
-    './popup/src/scripts/index.js'
-  ],
+  entry: ["./popup/src/scripts/index.js"],
 
   output: {
-    filename: 'popup.js',
-    path: path.join(__dirname, '../', 'build'),
-    publicPath: '/'
+    filename: "popup.js",
+    path: path.join(__dirname, "../", "build"),
+    publicPath: "/",
   },
 
   resolve: {
-    extensions: ['.js', '.jsx', '.scss', '.json'],
-    modules: ['node_modules']
+    extensions: [".js", ".jsx", ".css", ".json"],
+    modules: ["node_modules"],
   },
+
+  plugins:
+    process.env.NODE_ENV === "production" ? [new MinifyPlugin({}, {})] : [],
 
   module: {
     loaders: [
+      { test: /\.css$/, loader: "style-loader!css-loader" },
       {
         test: /\.(jsx|js)?$/,
-        loader: 'babel-loader',
+        loader: "babel-loader",
         exclude: /(node_modules)/,
-        include: path.join(__dirname, 'src'),
+        include: path.join(__dirname, "src"),
         query: {
-          presets: ['es2015', 'react']
-        }
-      }
-    ]
-  }
+          presets: ["es2015", "react"],
+        },
+      },
+    ],
+  },
 };
