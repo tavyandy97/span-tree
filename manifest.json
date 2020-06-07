@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "SpanTree - GitLab Tree",
   "description": "Tree for Gitlab",
-  "version": "0.0.2.4",
+  "version": "0.0.2.5",
   "background": {
     "scripts": ["event.js"]
   },
