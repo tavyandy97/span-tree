@@ -16,6 +16,7 @@ body {
   color: white;
   display: flex;
   justify-content: center;
+  user-select: none;
 }
 
 .spantree-options {
