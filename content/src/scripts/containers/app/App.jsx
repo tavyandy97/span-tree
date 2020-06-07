@@ -24,7 +24,10 @@ class App extends Component {
       this.setState({ firstPageLoad });
     };
     this.shouldShowSpanTree = () => {
-      return ((document.querySelector(".qa-branches-select") !== null) && (document.querySelector(".nav-sidebar") !== null));
+      return (
+        document.querySelector(".qa-branches-select") !== null &&
+        document.querySelector(".nav-sidebar") !== null
+      );
     };
   }
 

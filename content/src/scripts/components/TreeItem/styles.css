@@ -31,11 +31,11 @@
   width: max-content;
 }
 
-.arrow{
+.arrow {
   transition: all 0.2s;
 }
 
-.arrow-down{
+.arrow-down {
   transform: rotate(90deg);
 }
 

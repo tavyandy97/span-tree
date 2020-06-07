@@ -24,7 +24,13 @@ export const fetchURLDetails = () => {
       if (pathNameSplit[i] === "-") {
         i++;
         findingBranch = true;
-      } else if (pathNameSplit[i] === "blob" || pathNameSplit[i] === "tree" || pathNameSplit[i] === "blame" || pathNameSplit[i] === "commits" || pathNameSplit[i] === "find_file") {
+      } else if (
+        pathNameSplit[i] === "blob" ||
+        pathNameSplit[i] === "tree" ||
+        pathNameSplit[i] === "blame" ||
+        pathNameSplit[i] === "commits" ||
+        pathNameSplit[i] === "find_file"
+      ) {
         findingBranch = true;
       } else {
         dir.push(pathNameSplit[i]);
