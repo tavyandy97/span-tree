@@ -62,15 +62,17 @@ function fireContentLoadedEvent() {
 }
 
 // Insert CSS into HTML
-const darkGitlabTemp = document.createElement("link");
-darkGitlabTemp.id = "spantree-theme-temp";
-darkGitlabTemp.disabled = !isPresentInThemeList();
-darkGitlabTemp.rel = "stylesheet";
-darkGitlabTemp.type = "text/css";
-darkGitlabTemp.href = `${browserKey()}-extension://${chrome.i18n.getMessage(
-  "@@extension_id"
-)}/libs/gitlab-dark.css`;
-document
-  .querySelector("html")
-  .insertBefore(darkGitlabTemp, document.querySelector("html").childNodes[0]);
-document.addEventListener("DOMContentLoaded", fireContentLoadedEvent, false);
+if (isPresentInThemeList()) {
+  const darkGitlabTemp = document.createElement("link");
+  darkGitlabTemp.id = "spantree-theme-temp";
+  darkGitlabTemp.disabled = !isPresentInThemeList();
+  darkGitlabTemp.rel = "stylesheet";
+  darkGitlabTemp.type = "text/css";
+  darkGitlabTemp.href = `${browserKey()}-extension://${chrome.i18n.getMessage(
+    "@@extension_id"
+  )}/libs/gitlab-dark.css`;
+  document
+    .querySelector("html")
+    .insertBefore(darkGitlabTemp, document.querySelector("html").childNodes[0]);
+  document.addEventListener("DOMContentLoaded", fireContentLoadedEvent, false);
+}
