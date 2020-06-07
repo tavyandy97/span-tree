@@ -15,9 +15,7 @@ module.exports = {
   },
 
   plugins:
-    process.env.NODE_ENV === "production"
-      ? [new MinifyPlugin({}, {})]
-      : [],
+    process.env.NODE_ENV === "production" ? [new MinifyPlugin({}, {})] : [],
 
   module: {
     loaders: [
