@@ -40,9 +40,9 @@ const isOpera = () => {
   return match !== null;
 };
 
-function fireContentLoadedEvent () {
+function fireContentLoadedEvent() {
   // Remove event listener
-  document.removeEventListener('DOMContentLoaded', fireContentLoadedEvent);
+  document.removeEventListener("DOMContentLoaded", fireContentLoadedEvent);
 
   // Insert CSS into Body
   const darkGitlab = document.createElement("link");
@@ -75,4 +75,4 @@ darkGitlabTemp.href = `${browserKey()}-extension://${chrome.i18n.getMessage(
 document
   .querySelector("html")
   .insertBefore(darkGitlabTemp, document.querySelector("html").childNodes[0]);
-document.addEventListener('DOMContentLoaded', fireContentLoadedEvent, false);
+document.addEventListener("DOMContentLoaded", fireContentLoadedEvent, false);
