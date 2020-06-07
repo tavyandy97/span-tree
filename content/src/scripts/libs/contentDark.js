@@ -44,7 +44,7 @@ function fireContentLoadedEvent() {
   // Remove event listener
   document.removeEventListener("DOMContentLoaded", fireContentLoadedEvent);
 
-  // Insert CSS into Body
+  // Insert CSS into Head
   const darkGitlab = document.createElement("link");
   darkGitlab.id = "spantree-theme";
   darkGitlab.disabled = !isPresentInThemeList();
@@ -53,26 +53,26 @@ function fireContentLoadedEvent() {
   darkGitlab.href = `${browserKey()}-extension://${chrome.i18n.getMessage(
     "@@extension_id"
   )}/libs/gitlab-dark.css`;
-  document
-    .querySelector("body")
-    .insertBefore(darkGitlab, document.querySelector("body").childNodes[0]);
+  document.querySelector("head").appendChild(darkGitlab);
 
-  // Remove CSS from Head
+  // Remove CSS from HTML
   document.body.onload = () => {
     document.querySelector("#spantree-theme-temp").remove();
   };
 }
 
-// Insert CSS into Head
-const darkGitlabTemp = document.createElement("link");
-darkGitlabTemp.id = "spantree-theme-temp";
-darkGitlabTemp.disabled = !isPresentInThemeList();
-darkGitlabTemp.rel = "stylesheet";
-darkGitlabTemp.type = "text/css";
-darkGitlabTemp.href = `${browserKey()}-extension://${chrome.i18n.getMessage(
-  "@@extension_id"
-)}/libs/gitlab-dark.css`;
-document
-  .querySelector("html")
-  .insertBefore(darkGitlabTemp, document.querySelector("html").childNodes[0]);
-document.addEventListener("DOMContentLoaded", fireContentLoadedEvent, false);
+// Insert CSS into HTML
+if (isPresentInThemeList()) {
+  const darkGitlabTemp = document.createElement("link");
+  darkGitlabTemp.id = "spantree-theme-temp";
+  darkGitlabTemp.disabled = !isPresentInThemeList();
+  darkGitlabTemp.rel = "stylesheet";
+  darkGitlabTemp.type = "text/css";
+  darkGitlabTemp.href = `${browserKey()}-extension://${chrome.i18n.getMessage(
+    "@@extension_id"
+  )}/libs/gitlab-dark.css`;
+  document
+    .querySelector("html")
+    .insertBefore(darkGitlabTemp, document.querySelector("html").childNodes[0]);
+  document.addEventListener("DOMContentLoaded", fireContentLoadedEvent, false);
+}
