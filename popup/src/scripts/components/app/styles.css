@@ -3,7 +3,7 @@ body {
 }
 
 .spantree-popup {
-  width: 220px;
+  width: 180px;
   padding: 0;
   margin: 0;
 }
@@ -14,6 +14,8 @@ body {
   font-weight: bold;
   padding: 8px;
   color: white;
+  display: flex;
+  justify-content: center;
 }
 
 .spantree-options {

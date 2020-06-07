@@ -1,17 +1,19 @@
 import React from "react";
 
+import "./styles.css"
+
 function Option({ id, value, label, type, handleChange }) {
   switch (type) {
     case "CheckBox":
       return (
-        <label>
+        <label className="option">
+          <div className="option-name">{label}</div>
           <input
             type="checkbox"
             value={label}
             checked={value}
             onChange={() => handleChange(id, !value)}
           />
-          {label}
         </label>
       );
     default:

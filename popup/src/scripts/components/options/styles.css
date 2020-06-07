@@ -1,0 +1,10 @@
+.option{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 8px;
+}
+
+.option-name{
+  font-size: 14px;
+}
