@@ -9,6 +9,7 @@
   "author": "Taveesh Anand",
   "dependencies": {
     "axios": "^0.19.2",
+    "fzy.js": "^0.4.1",
     "immer": "^6.0.3",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",

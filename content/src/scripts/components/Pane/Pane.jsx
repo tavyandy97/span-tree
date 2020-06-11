@@ -8,20 +8,26 @@ import { switchTheme } from "../../utils/themeList";
 
 import "./styles.css";
 
-function Pane({ toggleOpened, width, firstPageLoad, setFirstPageLoad }) {
-  const [realoading, setRealoading] = useState(true);
+function Pane({
+  toggleOpened,
+  width,
+  firstPageLoad,
+  setFirstPageLoad,
+  reloading,
+  setReloading,
+}) {
   const [URLDetails, setURLDetails] = useState(fetchURLDetails());
 
   window.addEventListener("popstate", (_event) => {
-    setRealoading(true);
+    setReloading(true);
   });
 
   useEffect(() => {
-    if (realoading) {
+    if (reloading) {
       setURLDetails(fetchURLDetails());
-      setRealoading(false);
+      setReloading(false);
     }
-  }, [realoading]);
+  }, [reloading]);
 
   return (
     <div className="tree-pane" style={{ width: width + "px" }}>

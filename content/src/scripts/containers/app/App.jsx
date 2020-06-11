@@ -1,9 +1,10 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 
 import Toggler from "../../components/Toggler";
 import Pane from "../../components/Pane";
+import SearchBar from "../../components/SearchBar";
 import {
   applyClosedPageStyling,
   applyOpenedPageStyling,
@@ -19,9 +20,13 @@ class App extends Component {
     super(props);
     this.state = {
       firstPageLoad: true,
+      reloading: true,
     };
     this.setFirstPageLoad = (firstPageLoad) => {
       this.setState({ firstPageLoad });
+    };
+    this.setReloading = (reloading) => {
+      this.setState({ reloading });
     };
     this.shouldShowSpanTree = () => {
       return (
@@ -54,23 +59,33 @@ class App extends Component {
       return null;
     }
 
-    return this.props.opened
-      ? ReactDOM.createPortal(
-          <Pane
-            toggleOpened={this.props.toggleOpened}
-            width={this.props.width}
-            firstPageLoad={this.state.firstPageLoad}
-            setFirstPageLoad={this.setFirstPageLoad}
-          />,
-          parentDiv
-        )
-      : ReactDOM.createPortal(
-          <Toggler
-            handleClick={this.props.toggleOpened}
-            pinned={this.props.pinned}
-          />,
-          document.getElementById("rcr-anchor")
-        );
+    return (
+      <Fragment>
+        {this.props.opened
+          ? ReactDOM.createPortal(
+              <Pane
+                toggleOpened={this.props.toggleOpened}
+                width={this.props.width}
+                firstPageLoad={this.state.firstPageLoad}
+                setFirstPageLoad={this.setFirstPageLoad}
+                reloading={this.state.reloading}
+                setReloading={this.setReloading}
+              />,
+              parentDiv
+            )
+          : ReactDOM.createPortal(
+              <Toggler
+                handleClick={this.props.toggleOpened}
+                pinned={this.props.pinned}
+              />,
+              document.getElementById("rcr-anchor")
+            )}
+        <SearchBar
+          reloading={this.state.reloading}
+          setReloading={this.setReloading}
+        />
+      </Fragment>
+    );
   }
 }
 
