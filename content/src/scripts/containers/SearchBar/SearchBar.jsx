@@ -2,6 +2,8 @@ import React, { useState, useEffect, Fragment } from "react";
 import { connect } from "react-redux";
 import fzy from "fzy.js";
 
+import "./styles.css";
+
 import Backdrop from "../../components/Backdrop";
 
 function SearchBar({ reloading, setReloading }) {
@@ -48,7 +50,7 @@ function SearchBar({ reloading, setReloading }) {
         showSearchbar={showSearchbar}
         setShowSearchbar={setShowSearchbar}
       />
-      <div className="spantree-searchbar">SEARCHBAR COMES HERE</div>
+      <div className="spantree-search">SEARCHBAR COMES HERE</div>
     </Fragment>
   );
 }

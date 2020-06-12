@@ -1,6 +1,6 @@
-.spantree-searchbar {
+.spantree-search {
   position: fixed;
-  z-index: 500;
+  z-index: 6000;
   background-color: white;
   width: 70%;
   border: 1px solid #ccc;
