@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
+import { connect } from "react-redux";
 import fzy from "fzy.js";
+
+import Backdrop from "../../components/Backdrop";
 
 function SearchBar({ reloading, setReloading }) {
   const [showSearchbar, setShowSearchbar] = useState(false);
@@ -31,12 +34,28 @@ function SearchBar({ reloading, setReloading }) {
       // Toggle up
     } else if (event.key === "ArrowDown" && showSearchbar) {
       // Toggle down
+    } else if (event.key === "Escape" && showSearchbar) {
+      setShowSearchbar(false);
     }
   };
 
   if (!showSearchbar) return null;
 
-  return <div>TAVEESH ANAND</div>;
+  return (
+    <Fragment>
+      <Backdrop
+        showSearchbar={showSearchbar}
+        setShowSearchbar={setShowSearchbar}
+      />
+      <div className="spantree-searchbar">SEARCHBAR COMES HERE</div>
+    </Fragment>
+  );
 }
 
-export default SearchBar;
+const mapStateToProps = (state) => {
+  return {};
+};
+
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);

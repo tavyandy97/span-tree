@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import Toggler from "../../components/Toggler";
 import Pane from "../../components/Pane";
-import SearchBar from "../../components/SearchBar";
+import SearchBar from "../SearchBar";
 import {
   applyClosedPageStyling,
   applyOpenedPageStyling,
