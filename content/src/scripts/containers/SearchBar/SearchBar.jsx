@@ -8,11 +8,12 @@ function SearchBar({ reloading, setReloading }) {
   const [showSearchbar, setShowSearchbar] = useState(false);
 
   useEffect(() => {
+    document.removeEventListener("keydown", handleKeyDown);
     document.addEventListener("keydown", handleKeyDown);
     return () => {
       // document.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [showSearchbar]);
 
   const isMac = ["Macintosh", "MacIntel", "MacPPC", "Mac68K"].reduce(
     (accumulator, currentValue) => {
