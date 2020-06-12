@@ -2,12 +2,31 @@ import React, { useState, useEffect, Fragment } from "react";
 import { connect } from "react-redux";
 import fzy from "fzy.js";
 
+import { getSearchTerms } from "../../../../../event/src/actions/API";
+import { fetchURLDetails } from "../../utils/url";
+
 import "./styles.css";
 
 import Backdrop from "../../components/Backdrop";
 
-function SearchBar({ reloading, setReloading }) {
+function SearchBar({
+  reloading,
+  setReloading,
+  searchTerms,
+  getSearchTerms,
+  options,
+}) {
   const [showSearchbar, setShowSearchbar] = useState(false);
+
+  useEffect(() => {
+    const URLDetails = fetchURLDetails();
+    getSearchTerms({
+      repoName: URLDetails.dirFormatted,
+      branchName: URLDetails.branchName,
+      compatibilityMode:
+        "compatibility-mode" in options && options["compatibility-mode"],
+    });
+  }, []);
 
   useEffect(() => {
     document.removeEventListener("keydown", handleKeyDown);
@@ -56,9 +75,12 @@ function SearchBar({ reloading, setReloading }) {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    searchTerms: state.searchTerms,
+    options: state.options,
+  };
 };
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = { getSearchTerms };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
