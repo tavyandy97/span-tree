@@ -7,6 +7,7 @@ import { getSearchTerms } from "../../../../../event/src/actions/API";
 import { fetchURLDetails } from "../../utils/url";
 
 import "./styles.css";
+import fileIcons from "../../utils/file-icons";
 
 function getSearchResults(searchTerms, URLDetails, query) {
   if (
@@ -45,7 +46,12 @@ function SearchBarResult({ term }) {
   let fileName = fileLocation.splice(-1);
   return (
     <div className="spantree-search-result">
-      <div className="spantree-search-filename">{fileName}</div>
+      <div className="spantree-search-file">
+        <div className="file-icon">
+          <i className={fileIcons.getClassWithColor(fileName, false)}></i>
+        </div>
+        <div className="spantree-search-filename">{fileName}</div>
+      </div>
       <div className="spantree-search-filelocation">{term}</div>
     </div>
   );

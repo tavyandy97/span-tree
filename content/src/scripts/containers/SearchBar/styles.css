@@ -36,10 +36,15 @@
   height: 0px;
 }
 
+.spantree-search-file {
+  display: flex;
+}
+
 .spantree-search-filename {
   font-weight: 600;
 }
 
 .spantree-search-filelocation {
   color: darkslategrey;
+  padding-left: 2px;
 }

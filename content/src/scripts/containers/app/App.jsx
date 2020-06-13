@@ -12,6 +12,7 @@ import {
 import { toggleOpened } from "../../../../../event/src/actions/UI";
 
 import "./App.css";
+import { browserKey } from "../../utils/browser";
 
 const parentDiv = document.querySelector("body");
 
@@ -59,8 +60,13 @@ class App extends Component {
       return null;
     }
 
+    const importFileIconCSS = `${browserKey()}-extension://${chrome.i18n.getMessage(
+      "@@extension_id"
+    )}/libs/file-icons.css`;
+
     return (
       <Fragment>
+        <link rel="stylesheet" type="text/css" href={importFileIconCSS} />
         {this.props.opened
           ? ReactDOM.createPortal(
               <Pane
