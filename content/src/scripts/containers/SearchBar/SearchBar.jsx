@@ -47,7 +47,6 @@ function SearchBarResult({ index, term, activeResult, setActiveResult }) {
     index === activeResult
       ? "spantree-search-result spantree-result-active"
       : "spantree-search-result";
-  console.log(fileName, resultClass, index, activeResult);
   return (
     <div
       className={resultClass}
@@ -112,9 +111,9 @@ function SearchBar({
     } else if (isActionKey && event.key === "Enter" && showSearchbar) {
       // Redirect to page
     } else if (event.key === "ArrowUp" && showSearchbar) {
-      // Toggle up
+      setActiveResult((activeResult) => activeResult - 1);
     } else if (event.key === "ArrowDown" && showSearchbar) {
-      // Toggle down
+      setActiveResult((activeResult) => activeResult + 1);
     } else if (event.key === "Escape" && showSearchbar) {
       setShowSearchbar(false);
     }
