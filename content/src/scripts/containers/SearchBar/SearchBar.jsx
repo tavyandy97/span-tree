@@ -117,8 +117,10 @@ function SearchBar({
         ).innerText
       );
     } else if (event.key === "ArrowUp" && showSearchbarRef.current) {
+      event.preventDefault();
       setActiveResult((activeResult) => activeResult - 1);
     } else if (event.key === "ArrowDown" && showSearchbarRef.current) {
+      event.preventDefault();
       setActiveResult((activeResult) => activeResult + 1);
     } else if (event.key === "Escape" && showSearchbarRef.current) {
       setShowSearchbar(false);
