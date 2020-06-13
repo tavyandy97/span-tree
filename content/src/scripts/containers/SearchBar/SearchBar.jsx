@@ -111,7 +111,6 @@ function SearchBarResult({
           );
         })}
         <span className="search-term">{term}</span>
-        {/*{term}*/}
       </div>
     </div>
   );
@@ -154,7 +153,6 @@ function SearchBar({
   );
 
   const handleKeyDown = (event) => {
-    console.log("Key Pressed", event.key);
     const isActionKey = isMac ? event.metaKey : event.ctrlKey;
     if (isActionKey && (event.key === "p" || event.key === "P")) {
       event.preventDefault();
