@@ -29,13 +29,12 @@ function getSearchResults(searchTerms, URLDetails, query) {
         .join(".*"),
       "i"
     );
-    console.log("before sort");
     let resultArray = searchTerms[URLDetails.dirFormatted][
       URLDetails.branchName
     ].filter((ele) => ele.match(regex));
-    // resultArray.sort((a, b) => fzy.score(query, b) - fzy.score(query, a));
+    query = query.replace(/ /g, "");
+    resultArray.sort((a, b) => fzy.score(query, b) - fzy.score(query, a));
     resultArray.splice(100);
-    console.log("after sort");
     return resultArray;
   }
   return [];

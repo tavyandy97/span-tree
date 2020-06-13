@@ -5,14 +5,18 @@ import { connect } from "react-redux";
 import Toggler from "../../components/Toggler";
 import Pane from "../../components/Pane";
 import SearchBar from "../SearchBar";
+import { toggleOpened } from "../../../../../event/src/actions/UI";
 import {
   applyClosedPageStyling,
   applyOpenedPageStyling,
 } from "../../utils/styling";
-import { toggleOpened } from "../../../../../event/src/actions/UI";
+import { browserKey } from "../../utils/browser";
 
 import "./App.css";
-import { browserKey } from "../../utils/browser";
+
+const importFileIconCSS = `${browserKey()}-extension://${chrome.i18n.getMessage(
+  "@@extension_id"
+)}/libs/file-icons.css`;
 
 const parentDiv = document.querySelector("body");
 
@@ -59,10 +63,6 @@ class App extends Component {
       applyClosedPageStyling();
       return null;
     }
-
-    const importFileIconCSS = `${browserKey()}-extension://${chrome.i18n.getMessage(
-      "@@extension_id"
-    )}/libs/file-icons.css`;
 
     return (
       <Fragment>
