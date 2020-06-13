@@ -33,20 +33,28 @@ function getSearchResults(searchTerms, URLDetails, query) {
       URLDetails.branchName
     ].filter((ele) => ele.match(regex));
     query = query.replace(/ /g, "");
-    resultArray.sort((a, b) => fzy.score(query, b) - fzy.score(query, a));
-    resultArray.splice(100);
+    // resultArray.sort((a, b) => fzy.score(query, b) - fzy.score(query, a));
+    resultArray.splice(25);
     return resultArray;
   }
   return [];
 }
 
-function SearchBarResult({ index, term, activeResult, setActiveResult }) {
+function SearchBarResult({
+  index,
+  term,
+  query,
+  activeResult,
+  setActiveResult,
+}) {
   let fileLocation = term.split("/");
   let fileName = fileLocation.splice(-1);
   let resultClass =
     index === activeResult
       ? "spantree-search-result spantree-result-active"
       : "spantree-search-result";
+  let charLocations = fzy.positions(query.replace(/ /g, ""), term);
+  let processingIndex = 0;
   return (
     <div
       className={resultClass}
@@ -63,7 +71,21 @@ function SearchBarResult({ index, term, activeResult, setActiveResult }) {
         </div>
         <div className="spantree-search-filename">{fileName}</div>
       </div>
-      <div className="spantree-search-filelocation">{term}</div>
+      <div className="spantree-search-filelocation">
+        {term.split("").map((char, index) => {
+          let charClass = "";
+          if (index === charLocations[processingIndex]) {
+            processingIndex++;
+            charClass = "in-fzy";
+          }
+          return (
+            <span key={index} className={charClass}>
+              {char}
+            </span>
+          );
+        })}
+        {/*{term}*/}
+      </div>
     </div>
   );
 }
@@ -152,6 +174,7 @@ function SearchBar({
                 <SearchBarResult
                   key={index}
                   index={index}
+                  query={searchFor}
                   term={resultTerm}
                   activeResult={activeResult}
                   setActiveResult={setActiveResult}
