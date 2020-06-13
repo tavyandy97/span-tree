@@ -73,3 +73,7 @@
   color: rgb(77, 61, 146);
   font-weight: bold;
 }
+
+.search-term {
+  margin-right: 10px;
+}
