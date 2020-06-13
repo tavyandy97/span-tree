@@ -43,11 +43,10 @@ function getSearchResults(searchTerms, URLDetails, query) {
 function SearchBarResult({ term }) {
   let fileLocation = term.split("/");
   let fileName = fileLocation.splice(-1);
-  fileLocation = fileLocation.join("/").concat("/");
   return (
     <div className="spantree-search-result">
       <div className="spantree-search-filename">{fileName}</div>
-      <div className="spantree-search-filelocation">{fileLocation}</div>
+      <div className="spantree-search-filelocation">{term}</div>
     </div>
   );
 }
