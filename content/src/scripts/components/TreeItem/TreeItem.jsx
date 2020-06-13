@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 
+import { fetchURLDetails } from "../../utils/url";
 import fileIcons from "../../utils/file-icons";
 
 import "./styles.css";
-import { fetchURLDetails } from "../../utils/url";
 
 function TreeItem({
   width,

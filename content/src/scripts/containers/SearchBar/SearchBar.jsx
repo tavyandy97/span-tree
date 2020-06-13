@@ -1,13 +1,38 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { connect } from "react-redux";
-import fzy from "fzy.js";
+import * as fzy from "fzy.js";
 
+import Backdrop from "../../components/Backdrop";
 import { getSearchTerms } from "../../../../../event/src/actions/API";
 import { fetchURLDetails } from "../../utils/url";
 
 import "./styles.css";
 
-import Backdrop from "../../components/Backdrop";
+function getSearchResults(searchTerms, URLDetails, query) {
+  if (
+    searchTerms &&
+    searchTerms[URLDetails.dirFormatted] &&
+    searchTerms[URLDetails.dirFormatted][URLDetails.branchName]
+  ) {
+    const regex = new RegExp(
+      query
+        .split("")
+        .filter((x) => x !== " ")
+        .join(".*")
+    );
+    let resultArray = searchTerms[URLDetails.dirFormatted][
+      URLDetails.branchName
+    ].filter((ele) => ele.match(regex));
+    resultArray.sort((a, b) => fzy.score(query, b) - fzy.score(query, a));
+    resultArray.slice(0, 20);
+    return resultArray;
+  }
+  return [];
+}
+
+function SearchBarResult({ term }) {
+  return <div className="spantree-search-result">{term}</div>;
+}
 
 function SearchBar({
   reloading,
@@ -17,6 +42,7 @@ function SearchBar({
   options,
 }) {
   const [showSearchbar, setShowSearchbar] = useState(false);
+  const [searchFor, setSearchFor] = useState("");
 
   useEffect(() => {
     const URLDetails = fetchURLDetails();
@@ -31,9 +57,6 @@ function SearchBar({
   useEffect(() => {
     document.removeEventListener("keydown", handleKeyDown);
     document.addEventListener("keydown", handleKeyDown);
-    return () => {
-      // document.removeEventListener("keydown", handleKeyDown);
-    };
   }, [showSearchbar]);
 
   const isMac = ["Macintosh", "MacIntel", "MacPPC", "Mac68K"].reduce(
@@ -69,7 +92,21 @@ function SearchBar({
         showSearchbar={showSearchbar}
         setShowSearchbar={setShowSearchbar}
       />
-      <div className="spantree-search">SEARCHBAR COMES HERE</div>
+      <div className="spantree-search">
+        <input
+          type="text"
+          className="spantree-searchbar"
+          value={searchFor}
+          placeholder="🔍 Search In Repoitory Branch"
+          onChange={(e) => setSearchFor(e.target.value)}
+          autoFocus
+        />
+        {getSearchResults(searchTerms, fetchURLDetails(), searchFor).map(
+          (resultTerm, index) => {
+            return <SearchBarResult key={index} term={resultTerm} />;
+          }
+        )}
+      </div>
     </Fragment>
   );
 }

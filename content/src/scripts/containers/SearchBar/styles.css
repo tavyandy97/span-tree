@@ -2,12 +2,20 @@
   position: fixed;
   z-index: 6000;
   background-color: white;
-  width: 70%;
+  width: 40%;
   border: 1px solid #ccc;
   box-shadow: 1px 1px 1px black;
-  padding: 16px;
-  left: 15%;
-  top: 30%;
+  left: 30%;
+  top: 15%;
   box-sizing: border-box;
   transition: all 0.3s ease-out;
+}
+
+.spantree-searchbar {
+  width: 100%;
+  padding: 8px;
+}
+
+.spantree-search-result {
+  color: black;
 }
