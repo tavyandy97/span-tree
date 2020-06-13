@@ -108,8 +108,12 @@ function SearchBar({
     if (isActionKey && (event.key === "p" || event.key === "P")) {
       event.preventDefault();
       setShowSearchbar(true);
-    } else if (isActionKey && event.key === "Enter" && showSearchbar) {
-      // Redirect to page
+    } else if (event.key === "Enter" && showSearchbar) {
+      console.log(
+        document.querySelector(
+          "div.spantree-result-active > div.spantree-search-filelocation"
+        ).innerText
+      );
     } else if (event.key === "ArrowUp" && showSearchbar) {
       setActiveResult((activeResult) => activeResult - 1);
     } else if (event.key === "ArrowDown" && showSearchbar) {
