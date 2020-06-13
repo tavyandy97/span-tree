@@ -34,7 +34,7 @@ function getSearchResults(searchTerms, URLDetails, query) {
     ].filter((ele) => ele.match(regex));
     query = query.replace(/ /g, "");
     // resultArray.sort((a, b) => fzy.score(query, b) - fzy.score(query, a));
-    resultArray.splice(50);
+    resultArray.splice(25);
     return resultArray;
   }
   return [];
