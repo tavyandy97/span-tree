@@ -33,7 +33,7 @@ function getSearchResults(searchTerms, URLDetails, query) {
       URLDetails.branchName
     ].filter((ele) => ele.match(regex));
     query = query.replace(/ /g, "");
-    // resultArray.sort((a, b) => fzy.score(query, b) - fzy.score(query, a));
+    resultArray.sort((a, b) => fzy.score(query, b) - fzy.score(query, a));
     resultArray.splice(25);
     return resultArray;
   }
@@ -54,8 +54,6 @@ function SearchBarResult({
       ? "spantree-search-result spantree-result-active"
       : "spantree-search-result";
   query = query.replace(/ /g, "");
-  let charLocations = fzy.positions(query, term);
-  let processingIndex = 0;
   const getAlternatingArray = (arr) => {
     let l = 1;
     let i = 1;
@@ -74,8 +72,12 @@ function SearchBarResult({
     res.push(l);
     return res;
   };
-
-  let alternatingArray = getAlternatingArray(charLocations);
+  let charLocations = [];
+  let alternatingArray = [];
+  if (query.length !== 0) {
+    charLocations = fzy.positions(query, term);
+    alternatingArray = getAlternatingArray(charLocations);
+  }
   let isFzy = false;
   return (
     <div
@@ -94,22 +96,20 @@ function SearchBarResult({
         <div className="spantree-search-filename">{fileName}</div>
       </div>
       <div className="spantree-search-filelocation">
-        {query.length === 0
-          ? ""
-          : alternatingArray.map((len, index) => {
-              let charClass = "";
-              if (isFzy) {
-                charClass = "in-fzy";
-              }
-              isFzy = !isFzy;
-              const currString = term.substr(0, len);
-              term = term.substr(len);
-              return (
-                <span key={index} className={charClass}>
-                  {currString}
-                </span>
-              );
-            })}
+        {alternatingArray.map((len, index) => {
+          let charClass = "";
+          if (isFzy) {
+            charClass = "in-fzy";
+          }
+          isFzy = !isFzy;
+          const currString = term.substr(0, len);
+          term = term.substr(len);
+          return (
+            <span key={index} className={charClass}>
+              {currString}
+            </span>
+          );
+        })}
         <span className="search-term">{term}</span>
         {/*{term}*/}
       </div>
