@@ -25,7 +25,8 @@ function getSearchResults(searchTerms, URLDetails, query) {
         .split("")
         .filter((x) => x !== " ")
         .map(escapeRegExp)
-        .join(".*")
+        .join(".*"),
+      "i"
     );
     let resultArray = searchTerms[URLDetails.dirFormatted][
       URLDetails.branchName
