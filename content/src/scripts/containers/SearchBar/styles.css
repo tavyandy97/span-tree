@@ -4,18 +4,42 @@
   background-color: white;
   width: 40%;
   border: 1px solid #ccc;
-  box-shadow: 1px 1px 1px black;
+  box-shadow: 0px 0px 5px #00000080;
   left: 30%;
-  top: 15%;
+  top: 20%;
+  padding: 5px;
   box-sizing: border-box;
+  border-radius: 3px;
   transition: all 0.3s ease-out;
 }
 
 .spantree-searchbar {
   width: 100%;
   padding: 8px;
+  border: 1px solid rgb(77, 61, 146);
+}
+
+.spantree-search-results {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 50vh;
 }
 
 .spantree-search-result {
   color: black;
+  overflow-x: scroll;
+  border-bottom: 1px solid lightgrey;
+  padding: 2px 5px;
+}
+
+.spantree-search-result::-webkit-scrollbar {
+  height: 0px;
+}
+
+.spantree-search-filename {
+  font-weight: 600;
+}
+
+.spantree-search-filelocation {
+  color: darkslategrey;
 }

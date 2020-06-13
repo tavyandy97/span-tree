@@ -28,18 +28,28 @@ function getSearchResults(searchTerms, URLDetails, query) {
         .join(".*"),
       "i"
     );
+    console.log("before sort");
     let resultArray = searchTerms[URLDetails.dirFormatted][
       URLDetails.branchName
     ].filter((ele) => ele.match(regex));
-    resultArray.sort((a, b) => fzy.score(query, b) - fzy.score(query, a));
-    resultArray.slice(0, 20);
+    // resultArray.sort((a, b) => fzy.score(query, b) - fzy.score(query, a));
+    resultArray.splice(100);
+    console.log("after sort");
     return resultArray;
   }
   return [];
 }
 
 function SearchBarResult({ term }) {
-  return <div className="spantree-search-result">{term}</div>;
+  let fileLocation = term.split("/");
+  let fileName = fileLocation.splice(-1);
+  fileLocation = fileLocation.join("/").concat("/");
+  return (
+    <div className="spantree-search-result">
+      <div className="spantree-search-filename">{fileName}</div>
+      <div className="spantree-search-filelocation">{fileLocation}</div>
+    </div>
+  );
 }
 
 function SearchBar({
@@ -105,15 +115,20 @@ function SearchBar({
           type="text"
           className="spantree-searchbar"
           value={searchFor}
-          placeholder="🔍 Search In Repoitory Branch"
+          placeholder="🔍 Search In Repository Branch"
           onChange={(e) => setSearchFor(e.target.value)}
           autoFocus
         />
-        {getSearchResults(searchTerms, fetchURLDetails(), searchFor).map(
-          (resultTerm, index) => {
-            return <SearchBarResult key={index} term={resultTerm} />;
-          }
-        )}
+        <div className="spantree-search-results">
+          {getSearchResults(searchTerms, fetchURLDetails(), searchFor).map(
+            (resultTerm, index) => {
+              return <SearchBarResult key={index} term={resultTerm} />;
+            }
+          )}
+          <div className="only-top-result">
+            Showing only the top 100 results
+          </div>
+        </div>
       </div>
     </Fragment>
   );
