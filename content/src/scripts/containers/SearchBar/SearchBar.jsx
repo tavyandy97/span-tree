@@ -14,10 +14,17 @@ function getSearchResults(searchTerms, URLDetails, query) {
     searchTerms[URLDetails.dirFormatted] &&
     searchTerms[URLDetails.dirFormatted][URLDetails.branchName]
   ) {
+    const reRegExpChar = /[\\^$.*+?()[\]{}|]/g,
+      reHasRegExpChar = RegExp(reRegExpChar.source);
+    const escapeRegExp = (string) =>
+      reHasRegExpChar.test(string)
+        ? string.replace(reRegExpChar, "\\$&")
+        : string;
     const regex = new RegExp(
       query
         .split("")
         .filter((x) => x !== " ")
+        .map(escapeRegExp)
         .join(".*")
     );
     let resultArray = searchTerms[URLDetails.dirFormatted][
