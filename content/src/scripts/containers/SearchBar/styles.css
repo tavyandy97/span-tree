@@ -7,16 +7,24 @@
   box-shadow: 0px 0px 10px #00000040;
   left: 30%;
   top: 20%;
-  padding: 5px;
   box-sizing: border-box;
   border-radius: 3px;
   transition: all 0.3s ease-out;
 }
 
 .spantree-searchbar {
+  padding: 10px;
+}
+
+.spantree-searchbar input {
   width: 100%;
   padding: 8px;
-  border: 1px solid rgb(77, 61, 146);
+  border: 2px solid lightslategrey;
+  box-sizing: border-box;
+}
+
+.spantree-searchbar input:focus {
+  border: 2px solid rgb(77, 61, 146);
 }
 
 .spantree-search-results {
@@ -28,8 +36,13 @@
 .spantree-search-result {
   color: black;
   overflow-x: scroll;
-  border-bottom: 1px solid lightgrey;
-  padding: 2px 5px;
+  /*border-bottom: 1px solid lightgrey;*/
+  padding: 5px 15px;
+}
+
+.spantree-search-result:hover {
+  background: rgba(211, 211, 211, 0.75);
+  cursor: pointer;
 }
 
 .spantree-search-result::-webkit-scrollbar {

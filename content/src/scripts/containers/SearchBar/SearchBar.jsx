@@ -115,14 +115,15 @@ function SearchBar({
         setShowSearchbar={setShowSearchbar}
       />
       <div className="spantree-search">
-        <input
-          type="text"
-          className="spantree-searchbar"
-          value={searchFor}
-          placeholder="🔍 Search In Repository Branch"
-          onChange={(e) => setSearchFor(e.target.value)}
-          autoFocus
-        />
+        <div className="spantree-searchbar">
+          <input
+            type="text"
+            value={searchFor}
+            placeholder="🔍 Search In Repository Branch"
+            onChange={(e) => setSearchFor(e.target.value)}
+            autoFocus
+          />
+        </div>
         <div className="spantree-search-results">
           {getSearchResults(searchTerms, fetchURLDetails(), searchFor).map(
             (resultTerm, index) => {
