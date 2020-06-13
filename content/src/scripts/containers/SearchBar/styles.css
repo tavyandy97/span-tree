@@ -41,8 +41,11 @@
 }
 
 .spantree-search-result:hover {
-  background: rgba(211, 211, 211, 0.75);
   cursor: pointer;
+}
+
+.spantree-result-active {
+  background: rgba(211, 211, 211, 0.75);
 }
 
 .spantree-search-result::-webkit-scrollbar {

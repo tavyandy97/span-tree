@@ -40,11 +40,24 @@ function getSearchResults(searchTerms, URLDetails, query) {
   return [];
 }
 
-function SearchBarResult({ term }) {
+function SearchBarResult({ index, term, activeResult, setActiveResult }) {
   let fileLocation = term.split("/");
   let fileName = fileLocation.splice(-1);
+  let resultClass =
+    index === activeResult
+      ? "spantree-search-result spantree-result-active"
+      : "spantree-search-result";
+  console.log(fileName, resultClass, index, activeResult);
   return (
-    <div className="spantree-search-result">
+    <div
+      className={resultClass}
+      onClick={() => {
+        console.log(fileName);
+      }}
+      onMouseEnter={() => {
+        setActiveResult(index);
+      }}
+    >
       <div className="spantree-search-file">
         <div className="file-icon">
           <i className={fileIcons.getClassWithColor(fileName, false)}></i>
@@ -65,6 +78,7 @@ function SearchBar({
 }) {
   const [showSearchbar, setShowSearchbar] = useState(false);
   const [searchFor, setSearchFor] = useState("");
+  const [activeResult, setActiveResult] = useState(0);
 
   useEffect(() => {
     const URLDetails = fetchURLDetails();
@@ -127,7 +141,15 @@ function SearchBar({
         <div className="spantree-search-results">
           {getSearchResults(searchTerms, fetchURLDetails(), searchFor).map(
             (resultTerm, index) => {
-              return <SearchBarResult key={index} term={resultTerm} />;
+              return (
+                <SearchBarResult
+                  key={index}
+                  index={index}
+                  term={resultTerm}
+                  activeResult={activeResult}
+                  setActiveResult={setActiveResult}
+                />
+              );
             }
           )}
           <div className="only-top-result">
