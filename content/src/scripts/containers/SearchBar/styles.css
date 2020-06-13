@@ -6,7 +6,7 @@
   border: 1px solid #ccc;
   box-shadow: 0px 0px 10px #00000040;
   left: 30%;
-  top: 20%;
+  top: 12%;
   box-sizing: border-box;
   border-radius: 3px;
   transition: all 0.3s ease-out;
@@ -19,12 +19,14 @@
 .spantree-searchbar input {
   width: 100%;
   padding: 8px;
-  border: 2px solid lightslategrey;
+  border: 1px solid #bbbbbb;
   box-sizing: border-box;
 }
 
 .spantree-searchbar input:focus {
-  border: 2px solid rgb(77, 61, 146);
+  border: 1px solid rgb(77, 61, 146);
+  outline: none;
+  box-shadow: 0px 0px 10px rgba(77, 61, 146, 0.25);
 }
 
 .spantree-search-results {
@@ -45,7 +47,7 @@
 }
 
 .spantree-result-active {
-  background: rgba(211, 211, 211, 0.75);
+  background: rgba(211, 211, 211, 0.5);
 }
 
 .spantree-search-result::-webkit-scrollbar {
@@ -54,13 +56,15 @@
 
 .spantree-search-file {
   display: flex;
+  font-size: 15px;
 }
 
 .spantree-search-filename {
   font-weight: 600;
+  padding-left: 2px;
 }
 
 .spantree-search-filelocation {
-  color: darkslategrey;
-  padding-left: 2px;
+  color: #919191;
+  padding-left: 23px;
 }
