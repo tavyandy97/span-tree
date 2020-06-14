@@ -11,6 +11,8 @@ import {
   applyOpenedPageStyling,
 } from "../../utils/styling";
 import { browserKey } from "../../utils/browser";
+import workerJS from "./../../utils/worker";
+import WebWorker from "../SearchBar/WebWorker";
 
 import "./App.css";
 
@@ -39,6 +41,8 @@ class App extends Component {
         document.querySelector(".nav-sidebar") !== null
       );
     };
+    this.worker = new WebWorker(workerJS);
+    console.log("Web worker Created");
   }
 
   componentDidMount() {
@@ -86,10 +90,7 @@ class App extends Component {
               />,
               document.getElementById("rcr-anchor")
             )}
-        <SearchBar
-          reloading={this.state.reloading}
-          setReloading={this.setReloading}
-        />
+        <SearchBar worker={this.worker} />
       </Fragment>
     );
   }

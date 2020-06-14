@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, Fragment } from "react";
 import { connect } from "react-redux";
-import * as fzy from "fzy.js";
+// import * as fzy from "fzy.js";
 
 import Backdrop from "../../components/Backdrop";
 import SearchBarResult from "./SearchBarResult";
@@ -9,44 +9,7 @@ import { fetchURLDetails } from "../../utils/url";
 
 import "./styles.css";
 
-function getSearchResults(searchTerms, URLDetails, query) {
-  if (
-    searchTerms &&
-    searchTerms[URLDetails.dirFormatted] &&
-    searchTerms[URLDetails.dirFormatted][URLDetails.branchName]
-  ) {
-    const reRegExpChar = /[\\^$.*+?()[\]{}|]/g,
-      reHasRegExpChar = RegExp(reRegExpChar.source);
-    const escapeRegExp = (string) =>
-      reHasRegExpChar.test(string)
-        ? string.replace(reRegExpChar, "\\$&")
-        : string;
-    const regex = new RegExp(
-      query
-        .split("")
-        .filter((x) => x !== " ")
-        .map(escapeRegExp)
-        .join(".*"),
-      "i"
-    );
-    let resultArray = searchTerms[URLDetails.dirFormatted][
-      URLDetails.branchName
-    ].filter((ele) => ele.match(regex));
-    query = query.replace(/ /g, "");
-    resultArray.sort((a, b) => fzy.score(query, b) - fzy.score(query, a));
-    resultArray.splice(25);
-    return resultArray;
-  }
-  return [];
-}
-
-function SearchBar({
-  reloading,
-  setReloading,
-  searchTerms,
-  getSearchTerms,
-  options,
-}) {
+function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
   const [showSearchbar, _setShowSearchbar] = useState(false);
   const showSearchbarRef = useRef(showSearchbar);
   const [searchResults, setSearchResults] = useState([]);
@@ -67,12 +30,19 @@ function SearchBar({
         "compatibility-mode" in options && options["compatibility-mode"],
     });
     document.addEventListener("keydown", handleKeyDown);
+    worker.addEventListener("message", (event) => {
+      const searchResultsFromWorker = event.data;
+      setSearchResults(searchResultsFromWorker);
+    });
+    console.log("Worker listener added");
   }, []);
 
   useEffect(() => {
-    setSearchResults(
-      getSearchResults(searchTerms, fetchURLDetails(), searchFor)
-    );
+    worker.postMessage({
+      searchTerms: searchTerms,
+      URLDetails: fetchURLDetails(),
+      query: searchFor,
+    });
   }, [searchFor]);
 
   const isMac = ["Macintosh", "MacIntel", "MacPPC", "Mac68K"].reduce(
