@@ -34,7 +34,7 @@ export default () => {
         let i = 0;
         while (i < 100000) {
           let j = 0;
-          while (j < 100000) {
+          while (j < 10000) {
             j++;
           }
           i++;

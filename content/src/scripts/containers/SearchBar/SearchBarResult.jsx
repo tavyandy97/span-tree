@@ -38,7 +38,7 @@ function SearchBarResult({
   };
   let charLocations = [];
   let alternatingArray = [];
-  if (!resultsLoading) {
+  if (resultsLoading <= 0) {
     if (query.length !== 0) {
       charLocations = fzy.positions(query, term);
       alternatingArray = getAlternatingArray(charLocations);
