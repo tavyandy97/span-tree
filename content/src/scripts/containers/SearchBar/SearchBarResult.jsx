@@ -9,6 +9,7 @@ function SearchBarResult({
   query,
   activeResult,
   setActiveResult,
+  resultsLoading,
 }) {
   let fileLocation = term.split("/");
   let fileName = fileLocation.splice(-1);
@@ -37,9 +38,11 @@ function SearchBarResult({
   };
   let charLocations = [];
   let alternatingArray = [];
-  if (query.length !== 0) {
-    charLocations = fzy.positions(query, term);
-    alternatingArray = getAlternatingArray(charLocations);
+  if (!resultsLoading) {
+    if (query.length !== 0) {
+      charLocations = fzy.positions(query, term);
+      alternatingArray = getAlternatingArray(charLocations);
+    }
   }
   let isFzy = false;
   return (

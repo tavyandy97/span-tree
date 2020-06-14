@@ -15,6 +15,7 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
   const [searchResults, setSearchResults] = useState([]);
   const [searchFor, setSearchFor] = useState("");
   const [activeResult, setActiveResult] = useState(0);
+  const [resultsLoading, setResultsLoading] = useState(false);
 
   const setShowSearchbar = (data) => {
     showSearchbarRef.current = data;
@@ -33,11 +34,14 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
     worker.addEventListener("message", (event) => {
       const searchResultsFromWorker = event.data;
       setSearchResults(searchResultsFromWorker);
+      setResultsLoading(false);
     });
     console.log("Worker listener added");
   }, []);
 
   useEffect(() => {
+    console.log("worker Called");
+    setResultsLoading(true);
     worker.postMessage({
       searchTerms: searchTerms,
       URLDetails: fetchURLDetails(),
@@ -94,7 +98,13 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
             autoFocus
           />
         </div>
-        <div className="spantree-search-results">
+        <div
+          className={
+            resultsLoading
+              ? "spantree-search-results results-loading"
+              : "spantree-search-results"
+          }
+        >
           {searchResults.map((resultTerm, index) => {
             return (
               <SearchBarResult
@@ -104,6 +114,7 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
                 term={resultTerm}
                 activeResult={activeResult}
                 setActiveResult={setActiveResult}
+                resultsLoading={resultsLoading}
               />
             );
           })}
