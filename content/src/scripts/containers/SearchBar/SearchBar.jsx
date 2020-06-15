@@ -47,6 +47,7 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
   }, [searchTerms]);
 
   useEffect(() => {
+    setActiveResult(0);
     debouncedWorkerCall();
   }, [searchFor.replace(/ /g, "")]);
 
