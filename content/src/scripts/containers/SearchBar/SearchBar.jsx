@@ -103,7 +103,7 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
           searchResultsLength.current
       );
       document.querySelector(".spantree-result-active").scrollIntoView({
-        behavior: "smooth", // Defines the transition animation.
+        behavior: "auto", // Defines the transition animation.
         block: "nearest", // Defines vertical alignment.
         inline: "start", // Defines horizontal alignment.
       });
@@ -115,7 +115,7 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
           searchResultsLength.current
       );
       document.querySelector(".spantree-result-active").scrollIntoView({
-        behavior: "smooth", // Defines the transition animation.
+        behavior: "auto", // Defines the transition animation.
         block: "nearest", // Defines vertical alignment.
         inline: "start", // Defines horizontal alignment.
       });
