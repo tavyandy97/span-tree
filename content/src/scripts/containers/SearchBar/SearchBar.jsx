@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef, Fragment } from "react";
 import { connect } from "react-redux";
-// import * as fzy from "fzy.js";
 
 import Backdrop from "../../components/Backdrop";
 import SearchBarResult from "./SearchBarResult";
