@@ -126,25 +126,12 @@ export default () => {
             ? string.replace(reRegExpChar, "\\$&")
             : string;
         const regex = new RegExp(
-          query
-            .split("")
-            .filter((x) => x !== " ")
-            .map(escapeRegExp)
-            .join(".*"),
+          query.split("").map(escapeRegExp).join(".*"),
           "i"
         );
         let resultArray = searchTerms[URLDetails.dirFormatted][
           URLDetails.branchName
         ].filter((ele) => ele.match(regex));
-        query = query.replace(/ /g, "");
-        // let i = 0;
-        // while (i < 100000) {
-        //   let j = 0;
-        //   while (j < 10000) {
-        //     j++;
-        //   }
-        //   i++;
-        // }
         resultArray.sort((a, b) => fzyScore(query, b) - fzyScore(query, a));
         resultArray.splice(25);
         return resultArray;

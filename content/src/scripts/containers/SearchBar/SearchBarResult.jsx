@@ -17,7 +17,6 @@ function SearchBarResult({
     index === activeResult
       ? "spantree-search-result spantree-result-active"
       : "spantree-search-result";
-  query = query.replace(/ /g, "");
   const getAlternatingArray = (arr) => {
     let l = 1;
     let i = 1;
