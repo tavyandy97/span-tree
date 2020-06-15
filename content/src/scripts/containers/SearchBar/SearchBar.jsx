@@ -14,7 +14,6 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
   const showSearchbarRef = useRef(showSearchbar);
   const [searchResults, setSearchResults] = useState([]);
   const [searchFor, setSearchFor] = useState("");
-  const [query, setQuery] = useState("");
   const [activeResult, setActiveResult] = useState(0);
   const [resultsLoading, setResultsLoading] = useState(0);
 
@@ -46,13 +45,9 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
     worker.postMessage({
       searchTerms: searchTerms,
       URLDetails: fetchURLDetails(),
-      query: query,
+      query: searchFor.replace(/ /g, ""),
     });
-  }, [query]);
-
-  useEffect(() => {
-    setQuery(searchFor.replace(/ /g, ""));
-  }, [searchFor]);
+  }, [searchFor.replace(/ /g, "")]);
 
   const isMac = ["Macintosh", "MacIntel", "MacPPC", "Mac68K"].reduce(
     (accumulator, currentValue) => {
@@ -115,7 +110,7 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
               <SearchBarResult
                 key={index}
                 index={index}
-                query={query}
+                query={searchFor.replace(/ /g, "")}
                 term={resultTerm}
                 activeResult={activeResult}
                 setActiveResult={setActiveResult}
