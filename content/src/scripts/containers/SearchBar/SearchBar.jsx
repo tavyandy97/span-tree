@@ -38,6 +38,11 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
   }, []);
 
   useEffect(() => {
+    console.log("searchTerms changed", searchTerms);
+    workerCall();
+  }, [searchTerms]);
+
+  useEffect(() => {
     debouncedWorkerCall();
   }, [searchFor.replace(/ /g, "")]);
 
