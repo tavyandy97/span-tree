@@ -132,7 +132,10 @@ export default () => {
         let resultArray = searchTerms[URLDetails.dirFormatted][
           URLDetails.branchName
         ].filter((ele) => ele.match(regex));
-        resultArray.sort((a, b) => fzyScore(query, b) - fzyScore(query, a));
+        if (query.length !== 0) {
+          //Sort
+          resultArray.sort((a, b) => fzyScore(query, b) - fzyScore(query, a));
+        }
         resultArray.splice(25);
         return resultArray;
       }

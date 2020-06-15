@@ -42,7 +42,6 @@ class App extends Component {
       );
     };
     this.worker = new WebWorker(workerJS);
-    console.log("Web worker Created");
   }
 
   componentDidMount() {

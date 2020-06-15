@@ -15,7 +15,7 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
   const [searchFor, setSearchFor] = useState("");
   const [activeResult, setActiveResult] = useState(0);
   const [resultsLoading, setResultsLoading] = useState(0);
-
+  const [debounceTimerId, setDebounceTimerId] = useState(null);
   const setShowSearchbar = (data) => {
     showSearchbarRef.current = data;
     _setShowSearchbar(data);
@@ -35,17 +35,10 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
       setSearchResults(searchResultsFromWorker);
       setResultsLoading((resultsLoading) => resultsLoading - 1);
     });
-    console.log("Worker listener added");
   }, []);
 
   useEffect(() => {
-    setResultsLoading((resultsLoading) => resultsLoading + 1);
-    console.log("Worker Called. Results Loading", resultsLoading);
-    worker.postMessage({
-      searchTerms: searchTerms,
-      URLDetails: fetchURLDetails(),
-      query: searchFor.replace(/ /g, ""),
-    });
+    debouncedWorkerCall();
   }, [searchFor.replace(/ /g, "")]);
 
   const isMac = ["Macintosh", "MacIntel", "MacPPC", "Mac68K"].reduce(
@@ -56,6 +49,30 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
     },
     false
   );
+
+  const workerCall = () => {
+    setResultsLoading((resultsLoading) => resultsLoading + 1);
+    worker.postMessage({
+      searchTerms: searchTerms,
+      URLDetails: fetchURLDetails(),
+      query: searchFor.replace(/ /g, ""),
+    });
+  };
+
+  const debouncedWorkerCall = () => {
+    setResultsLoading((resultsLoading) => resultsLoading + 1);
+    if (debounceTimerId) {
+      clearTimeout(debounceTimerId);
+      setResultsLoading((resultsLoading) => resultsLoading - 1);
+    }
+    setDebounceTimerId(
+      setTimeout(() => {
+        workerCall();
+        setDebounceTimerId(null);
+        setResultsLoading((resultsLoading) => resultsLoading - 1);
+      }, 500)
+    );
+  };
 
   const handleKeyDown = (event) => {
     const isActionKey = isMac ? event.metaKey : event.ctrlKey;
@@ -117,9 +134,6 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
               />
             );
           })}
-          {/* <div className="only-top-result">
-            Showing only the top 100 results
-          </div> */}
         </div>
       </div>
     </Fragment>
