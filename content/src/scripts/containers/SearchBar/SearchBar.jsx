@@ -11,7 +11,8 @@ import "./styles.css";
 function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
   const [showSearchbar, _setShowSearchbar] = useState(false);
   const showSearchbarRef = useRef(showSearchbar);
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, _setSearchResults] = useState([]);
+  const searchResultsLength = useRef(searchResults.length);
   const [searchFor, setSearchFor] = useState("");
   const [activeResult, setActiveResult] = useState(0);
   const [resultsLoading, setResultsLoading] = useState(0);
@@ -19,6 +20,10 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
   const setShowSearchbar = (data) => {
     showSearchbarRef.current = data;
     _setShowSearchbar(data);
+  };
+  const setSearchResults = (data) => {
+    searchResultsLength.current = data.length;
+    _setSearchResults(data);
   };
 
   useEffect(() => {
@@ -38,7 +43,6 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
   }, []);
 
   useEffect(() => {
-    console.log("searchTerms changed", searchTerms);
     workerCall();
   }, [searchTerms]);
 
@@ -92,7 +96,11 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
       );
     } else if (event.key === "ArrowUp" && showSearchbarRef.current) {
       event.preventDefault();
-      setActiveResult((activeResult) => activeResult - 1);
+      setActiveResult(
+        (activeResult) =>
+          (searchResultsLength.current + activeResult - 1) %
+          searchResultsLength.current
+      );
       document.querySelector(".spantree-result-active").scrollIntoView({
         behavior: "smooth", // Defines the transition animation.
         block: "nearest", // Defines vertical alignment.
@@ -100,7 +108,11 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
       });
     } else if (event.key === "ArrowDown" && showSearchbarRef.current) {
       event.preventDefault();
-      setActiveResult((activeResult) => activeResult + 1);
+      setActiveResult(
+        (activeResult) =>
+          (searchResultsLength.current + activeResult + 1) %
+          searchResultsLength.current
+      );
       document.querySelector(".spantree-result-active").scrollIntoView({
         behavior: "smooth", // Defines the transition animation.
         block: "nearest", // Defines vertical alignment.
