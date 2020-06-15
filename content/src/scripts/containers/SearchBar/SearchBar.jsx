@@ -93,9 +93,19 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
     } else if (event.key === "ArrowUp" && showSearchbarRef.current) {
       event.preventDefault();
       setActiveResult((activeResult) => activeResult - 1);
+      document.querySelector(".spantree-result-active").scrollIntoView({
+        behavior: "smooth", // Defines the transition animation.
+        block: "nearest", // Defines vertical alignment.
+        inline: "start", // Defines horizontal alignment.
+      });
     } else if (event.key === "ArrowDown" && showSearchbarRef.current) {
       event.preventDefault();
       setActiveResult((activeResult) => activeResult + 1);
+      document.querySelector(".spantree-result-active").scrollIntoView({
+        behavior: "smooth", // Defines the transition animation.
+        block: "nearest", // Defines vertical alignment.
+        inline: "start", // Defines horizontal alignment.
+      });
     } else if (event.key === "Escape" && showSearchbarRef.current) {
       setShowSearchbar(false);
     }
