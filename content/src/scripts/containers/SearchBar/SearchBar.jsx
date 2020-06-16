@@ -43,6 +43,7 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
   }, []);
 
   useEffect(() => {
+    setResultsLoading((resultsLoading) => resultsLoading + 1);
     workerCall();
   }, [searchTerms]);
 
@@ -50,6 +51,17 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
     setActiveResult(0);
     debouncedWorkerCall();
   }, [searchFor.replace(/ /g, "")]);
+
+  useEffect(() => {
+    const activeItem = document.querySelector(".spantree-result-active");
+    if (activeItem) {
+      activeItem.scrollIntoView({
+        behavior: "auto", // Defines the transition animation.
+        block: "nearest", // Defines vertical alignment.
+        inline: "start", // Defines horizontal alignment.
+      });
+    }
+  }, [activeResult]);
 
   const isMac = ["Macintosh", "MacIntel", "MacPPC", "Mac68K"].reduce(
     (accumulator, currentValue) => {
@@ -61,7 +73,6 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
   );
 
   const workerCall = () => {
-    setResultsLoading((resultsLoading) => resultsLoading + 1);
     worker.postMessage({
       searchTerms: searchTerms,
       URLDetails: fetchURLDetails(),
@@ -79,7 +90,6 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
       setTimeout(() => {
         workerCall();
         setDebounceTimerId(null);
-        setResultsLoading((resultsLoading) => resultsLoading - 1);
       }, 500)
     );
   };
@@ -102,11 +112,6 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
           (searchResultsLength.current + activeResult - 1) %
           searchResultsLength.current
       );
-      document.querySelector(".spantree-result-active").scrollIntoView({
-        behavior: "auto", // Defines the transition animation.
-        block: "nearest", // Defines vertical alignment.
-        inline: "start", // Defines horizontal alignment.
-      });
     } else if (event.key === "ArrowDown" && showSearchbarRef.current) {
       event.preventDefault();
       setActiveResult(
@@ -114,11 +119,6 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
           (searchResultsLength.current + activeResult + 1) %
           searchResultsLength.current
       );
-      document.querySelector(".spantree-result-active").scrollIntoView({
-        behavior: "auto", // Defines the transition animation.
-        block: "nearest", // Defines vertical alignment.
-        inline: "start", // Defines horizontal alignment.
-      });
     } else if (event.key === "Escape" && showSearchbarRef.current) {
       setShowSearchbar(false);
     }
