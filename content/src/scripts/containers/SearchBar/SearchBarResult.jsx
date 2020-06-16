@@ -1,7 +1,53 @@
-import React from "react";
+import React, { Fragment } from "react";
 import * as fzy from "fzy.js";
 
 import fileIcons from "../../utils/file-icons";
+
+function getAlternatingArray(resultsLoading, query, term) {
+  const arr = fzy.positions(query, term);
+  if (resultsLoading > 0 || query.length === 0) {
+    return [];
+  }
+  let l = 1;
+  const res = [arr[0]];
+  for (let i = 1; i <= arr.length - 1; i++) {
+    let diff = arr[i] - arr[i - 1];
+    if (diff === 1) {
+      l++;
+    } else {
+      res.push(l);
+      res.push(diff - 1);
+      l = 1;
+    }
+  }
+  res.push(l);
+
+  return res;
+}
+
+function renderHighlightedFileLocation(resultsLoading, query, term) {
+  const arr = getAlternatingArray(resultsLoading, query, term);
+  let isFzy = false;
+  return (
+    <Fragment>
+      {arr.map((len, i) => {
+        let charClass = "";
+        if (isFzy) {
+          charClass = "in-fzy";
+        }
+        isFzy = !isFzy;
+        const currString = term.substr(0, len);
+        term = term.substr(len);
+        return currString.length === 0 ? null : (
+          <span key={i} className={charClass}>
+            {currString}
+          </span>
+        );
+      })}
+      {term.length === 0 ? null : <span className="search-term">{term}</span>}
+    </Fragment>
+  );
+}
 
 function SearchBarResult({
   index,
@@ -9,39 +55,15 @@ function SearchBarResult({
   query,
   activeResult,
   setActiveResult,
+  resultsLoading,
 }) {
-  let fileLocation = term.split("/");
-  let fileName = fileLocation.splice(-1);
-  let resultClass =
+  const fileLocation = term.split("/");
+  const fileName = fileLocation.splice(-1);
+  const resultClass =
     index === activeResult
       ? "spantree-search-result spantree-result-active"
       : "spantree-search-result";
-  query = query.replace(/ /g, "");
-  const getAlternatingArray = (arr) => {
-    let l = 1;
-    let i = 1;
-    let res = [arr[0]];
-    while (i <= arr.length - 1) {
-      let diff = arr[i] - arr[i - 1];
-      if (diff === 1) {
-        l++;
-      } else {
-        res.push(l);
-        res.push(diff - 1);
-        l = 1;
-      }
-      i++;
-    }
-    res.push(l);
-    return res;
-  };
-  let charLocations = [];
-  let alternatingArray = [];
-  if (query.length !== 0) {
-    charLocations = fzy.positions(query, term);
-    alternatingArray = getAlternatingArray(charLocations);
-  }
-  let isFzy = false;
+
   return (
     <div
       className={resultClass}
@@ -59,21 +81,7 @@ function SearchBarResult({
         <div className="spantree-search-filename">{fileName}</div>
       </div>
       <div className="spantree-search-filelocation">
-        {alternatingArray.map((len, i) => {
-          let charClass = "";
-          if (isFzy) {
-            charClass = "in-fzy";
-          }
-          isFzy = !isFzy;
-          const currString = term.substr(0, len);
-          term = term.substr(len);
-          return (
-            <span key={i} className={charClass}>
-              {currString}
-            </span>
-          );
-        })}
-        <span className="search-term">{term}</span>
+        {renderHighlightedFileLocation(resultsLoading, query, term)}
       </div>
     </div>
   );

@@ -35,10 +35,12 @@
   max-height: 50vh;
 }
 
+.results-loading {
+  color: grey;
+}
+
 .spantree-search-result {
-  color: black;
   overflow-x: scroll;
-  /*border-bottom: 1px solid lightgrey;*/
   padding: 5px 15px;
 }
 

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef, Fragment } from "react";
 import { connect } from "react-redux";
-import * as fzy from "fzy.js";
 
 import Backdrop from "../../components/Backdrop";
 import SearchBarResult from "./SearchBarResult";
@@ -9,53 +8,22 @@ import { fetchURLDetails } from "../../utils/url";
 
 import "./styles.css";
 
-function getSearchResults(searchTerms, URLDetails, query) {
-  if (
-    searchTerms &&
-    searchTerms[URLDetails.dirFormatted] &&
-    searchTerms[URLDetails.dirFormatted][URLDetails.branchName]
-  ) {
-    const reRegExpChar = /[\\^$.*+?()[\]{}|]/g,
-      reHasRegExpChar = RegExp(reRegExpChar.source);
-    const escapeRegExp = (string) =>
-      reHasRegExpChar.test(string)
-        ? string.replace(reRegExpChar, "\\$&")
-        : string;
-    const regex = new RegExp(
-      query
-        .split("")
-        .filter((x) => x !== " ")
-        .map(escapeRegExp)
-        .join(".*"),
-      "i"
-    );
-    let resultArray = searchTerms[URLDetails.dirFormatted][
-      URLDetails.branchName
-    ].filter((ele) => ele.match(regex));
-    query = query.replace(/ /g, "");
-    resultArray.sort((a, b) => fzy.score(query, b) - fzy.score(query, a));
-    resultArray.splice(25);
-    return resultArray;
-  }
-  return [];
-}
-
-function SearchBar({
-  reloading,
-  setReloading,
-  searchTerms,
-  getSearchTerms,
-  options,
-}) {
+function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
   const [showSearchbar, _setShowSearchbar] = useState(false);
   const showSearchbarRef = useRef(showSearchbar);
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, _setSearchResults] = useState([]);
+  const searchResultsLength = useRef(searchResults.length);
   const [searchFor, setSearchFor] = useState("");
   const [activeResult, setActiveResult] = useState(0);
-
+  const [resultsLoading, setResultsLoading] = useState(0);
+  const [debounceTimerId, setDebounceTimerId] = useState(null);
   const setShowSearchbar = (data) => {
     showSearchbarRef.current = data;
     _setShowSearchbar(data);
+  };
+  const setSearchResults = (data) => {
+    searchResultsLength.current = data.length;
+    _setSearchResults(data);
   };
 
   useEffect(() => {
@@ -67,13 +35,33 @@ function SearchBar({
         "compatibility-mode" in options && options["compatibility-mode"],
     });
     document.addEventListener("keydown", handleKeyDown);
+    worker.addEventListener("message", (event) => {
+      const searchResultsFromWorker = event.data;
+      setSearchResults(searchResultsFromWorker);
+      setResultsLoading((resultsLoading) => resultsLoading - 1);
+    });
   }, []);
 
   useEffect(() => {
-    setSearchResults(
-      getSearchResults(searchTerms, fetchURLDetails(), searchFor)
-    );
-  }, [searchFor]);
+    setResultsLoading((resultsLoading) => resultsLoading + 1);
+    workerCall();
+  }, [searchTerms]);
+
+  useEffect(() => {
+    setActiveResult(0);
+    debouncedWorkerCall();
+  }, [searchFor.replace(/ /g, "")]);
+
+  useEffect(() => {
+    const activeItem = document.querySelector(".spantree-result-active");
+    if (activeItem) {
+      activeItem.scrollIntoView({
+        behavior: "auto", // Defines the transition animation.
+        block: "nearest", // Defines vertical alignment.
+        inline: "start", // Defines horizontal alignment.
+      });
+    }
+  }, [activeResult]);
 
   const isMac = ["Macintosh", "MacIntel", "MacPPC", "Mac68K"].reduce(
     (accumulator, currentValue) => {
@@ -83,6 +71,29 @@ function SearchBar({
     },
     false
   );
+
+  const workerCall = () => {
+    worker.postMessage({
+      searchTerms: searchTerms,
+      URLDetails: fetchURLDetails(),
+      query: searchFor.replace(/ /g, ""),
+    });
+  };
+
+  const debouncedWorkerCall = () => {
+    if (debounceTimerId) {
+      clearTimeout(debounceTimerId);
+    } else {
+      setResultsLoading((resultsLoading) => resultsLoading + 1);
+    }
+
+    setDebounceTimerId(
+      setTimeout(() => {
+        workerCall();
+        setDebounceTimerId(null);
+      }, 500)
+    );
+  };
 
   const handleKeyDown = (event) => {
     const isActionKey = isMac ? event.metaKey : event.ctrlKey;
@@ -97,10 +108,18 @@ function SearchBar({
       );
     } else if (event.key === "ArrowUp" && showSearchbarRef.current) {
       event.preventDefault();
-      setActiveResult((activeResult) => activeResult - 1);
+      setActiveResult(
+        (activeResult) =>
+          (searchResultsLength.current + activeResult - 1) %
+          searchResultsLength.current
+      );
     } else if (event.key === "ArrowDown" && showSearchbarRef.current) {
       event.preventDefault();
-      setActiveResult((activeResult) => activeResult + 1);
+      setActiveResult(
+        (activeResult) =>
+          (searchResultsLength.current + activeResult + 1) %
+          searchResultsLength.current
+      );
     } else if (event.key === "Escape" && showSearchbarRef.current) {
       setShowSearchbar(false);
     }
@@ -124,22 +143,26 @@ function SearchBar({
             autoFocus
           />
         </div>
-        <div className="spantree-search-results">
+        <div
+          className={
+            resultsLoading <= 0
+              ? "spantree-search-results"
+              : "spantree-search-results  results-loading"
+          }
+        >
           {searchResults.map((resultTerm, index) => {
             return (
               <SearchBarResult
                 key={index}
                 index={index}
-                query={searchFor}
+                query={searchFor.replace(/ /g, "")}
                 term={resultTerm}
                 activeResult={activeResult}
                 setActiveResult={setActiveResult}
+                resultsLoading={resultsLoading}
               />
             );
           })}
-          {/* <div className="only-top-result">
-            Showing only the top 100 results
-          </div> */}
         </div>
       </div>
     </Fragment>
