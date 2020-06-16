@@ -81,11 +81,12 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
   };
 
   const debouncedWorkerCall = () => {
-    setResultsLoading((resultsLoading) => resultsLoading + 1);
     if (debounceTimerId) {
       clearTimeout(debounceTimerId);
-      setResultsLoading((resultsLoading) => resultsLoading - 1);
+    } else {
+      setResultsLoading((resultsLoading) => resultsLoading + 1);
     }
+
     setDebounceTimerId(
       setTimeout(() => {
         workerCall();
