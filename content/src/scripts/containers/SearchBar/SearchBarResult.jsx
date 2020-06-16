@@ -38,13 +38,13 @@ function renderHighlightedFileLocation(resultsLoading, query, term) {
         isFzy = !isFzy;
         const currString = term.substr(0, len);
         term = term.substr(len);
-        return (
+        return currString.length === 0 ? null : (
           <span key={i} className={charClass}>
             {currString}
           </span>
         );
       })}
-      <span className="search-term">{term}</span>
+      {term.length === 0 ? null : <span className="search-term">{term}</span>}
     </Fragment>
   );
 }
