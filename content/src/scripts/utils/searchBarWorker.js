@@ -113,6 +113,24 @@ export default () => {
       return M[n - 1][m - 1];
     };
 
+    const topNElements = (arr, n) => {
+      if (arr.length <= n) {
+        arr.sort((a, b) => fzyScore(query, b) - fzyScore(query, a));
+        return arr;
+      }
+      for (let i = 0; i < n - 1; i++) {
+        let maxIndex = i;
+        for (let j = i + 1; j < arr.length; j++)
+          if (fzyScore(query, arr[j]) > fzyScore(query, arr[maxIndex]))
+            maxIndex = j;
+        let temp = arr[maxIndex];
+        arr[maxIndex] = arr[i];
+        arr[i] = temp;
+      }
+      arr.splice(n);
+      return arr;
+    };
+
     const getSearchResults = (searchTerms, URLDetails, query) => {
       if (
         searchTerms &&
@@ -132,8 +150,8 @@ export default () => {
         let resultArray = searchTerms[URLDetails.dirFormatted][
           URLDetails.branchName
         ].filter((ele) => ele.match(regex));
+        // return topNElements(resultArray, 25);
         if (query.length !== 0) {
-          //Sort
           resultArray.sort((a, b) => fzyScore(query, b) - fzyScore(query, a));
         }
         resultArray.splice(25);
