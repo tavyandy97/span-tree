@@ -118,11 +118,8 @@ export default () => {
         arr.sort((a, b) => fzyScore(query, b) - fzyScore(query, a));
         return arr;
       }
-      const fzyScores = [arr.length];
-      for (let i = 0; i < arr.length; i++) {
-        fzyScores[i] = fzyScore(query, arr[i]);
-      }
-      const result = [n];
+      const fzyScores = arr.map((x) => fzyScore(query, x));
+      const result = [];
       for (let i = 0; i < n; i++) {
         let largestScoreIdx = -1;
         for (let j = 0; j < fzyScores.length; j++) {
@@ -136,7 +133,7 @@ export default () => {
             }
           }
         }
-        result[i] = arr[largestScoreIdx];
+        result.push(arr[largestScoreIdx]);
         fzyScores[largestScoreIdx] = null;
       }
       return result;
