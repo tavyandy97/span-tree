@@ -159,11 +159,6 @@ export default () => {
           URLDetails.branchName
         ].filter((ele) => ele.match(regex));
         return topNElements(resultArray, 25);
-        // if (query.length !== 0) {
-        //   resultArray.sort((a, b) => fzyScore(query, b) - fzyScore(query, a));
-        // }
-        // resultArray.splice(25);
-        // return resultArray;
       }
       return [];
     };
