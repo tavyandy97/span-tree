@@ -118,17 +118,28 @@ export default () => {
         arr.sort((a, b) => fzyScore(query, b) - fzyScore(query, a));
         return arr;
       }
-      for (let i = 0; i < n - 1; i++) {
-        let maxIndex = i;
-        for (let j = i + 1; j < arr.length; j++)
-          if (fzyScore(query, arr[j]) > fzyScore(query, arr[maxIndex]))
-            maxIndex = j;
-        let temp = arr[maxIndex];
-        arr[maxIndex] = arr[i];
-        arr[i] = temp;
+      const fzyScores = [arr.length];
+      for (let i = 0; i < arr.length; i++) {
+        fzyScores[i] = fzyScore(query, arr[i]);
       }
-      arr.splice(n);
-      return arr;
+      const result = [n];
+      for (let i = 0; i < n; i++) {
+        let largestScoreIdx = -1;
+        for (let j = 0; j < fzyScores.length; j++) {
+          if (fzyScores[j]) {
+            if (largestScoreIdx === -1) {
+              largestScoreIdx = j;
+              continue;
+            }
+            if (fzyScores[j] > fzyScores[largestScoreIdx]) {
+              largestScoreIdx = j;
+            }
+          }
+        }
+        result[i] = arr[largestScoreIdx];
+        fzyScores[largestScoreIdx] = null;
+      }
+      return result;
     };
 
     const getSearchResults = (searchTerms, URLDetails, query) => {
@@ -150,12 +161,12 @@ export default () => {
         let resultArray = searchTerms[URLDetails.dirFormatted][
           URLDetails.branchName
         ].filter((ele) => ele.match(regex));
-        // return topNElements(resultArray, 25);
-        if (query.length !== 0) {
-          resultArray.sort((a, b) => fzyScore(query, b) - fzyScore(query, a));
-        }
-        resultArray.splice(25);
-        return resultArray;
+        return topNElements(resultArray, 25);
+        // if (query.length !== 0) {
+        //   resultArray.sort((a, b) => fzyScore(query, b) - fzyScore(query, a));
+        // }
+        // resultArray.splice(25);
+        // return resultArray;
       }
       return [];
     };
