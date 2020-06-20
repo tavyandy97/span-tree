@@ -1,30 +1,27 @@
-import React, { useState, useEffect, useRef, Fragment } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  Fragment,
+} from "react";
 import { connect } from "react-redux";
 
 import Backdrop from "../../components/Backdrop";
 import SearchBarResult from "./SearchBarResult";
 import { getSearchTerms } from "../../../../../event/src/actions/API";
 import { fetchURLDetails } from "../../utils/url";
+import useEventListener from "../../utils/useEventListener";
 
 import "./styles.css";
 
 function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
-  const [showSearchbar, _setShowSearchbar] = useState(false);
-  const showSearchbarRef = useRef(showSearchbar);
-  const [searchResults, _setSearchResults] = useState([]);
-  const searchResultsLength = useRef(searchResults.length);
+  const [showSearchbar, setShowSearchbar] = useState(false);
+  const [searchResults, setSearchResults] = useState([]);
   const [searchFor, setSearchFor] = useState("");
   const [activeResult, setActiveResult] = useState(0);
   const [resultsLoading, setResultsLoading] = useState(0);
   const [debounceTimerId, setDebounceTimerId] = useState(null);
-  const setShowSearchbar = (data) => {
-    showSearchbarRef.current = data;
-    _setShowSearchbar(data);
-  };
-  const setSearchResults = (data) => {
-    searchResultsLength.current = data.length;
-    _setSearchResults(data);
-  };
 
   useEffect(() => {
     const URLDetails = fetchURLDetails();
@@ -34,13 +31,41 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
       compatibilityMode:
         "compatibility-mode" in options && options["compatibility-mode"],
     });
-    document.addEventListener("keydown", handleKeyDown);
     worker.addEventListener("message", (event) => {
       const searchResultsFromWorker = event.data;
       setSearchResults(searchResultsFromWorker);
       setResultsLoading((resultsLoading) => resultsLoading - 1);
     });
   }, []);
+
+  const handleKeyDown = useCallback(
+    (event) => {
+      const isActionKey = isMac ? event.metaKey : event.ctrlKey;
+      if (isActionKey && (event.key === "p" || event.key === "P")) {
+        event.preventDefault();
+        setShowSearchbar(true);
+      } else if (event.key === "Enter" && showSearchbar) {
+        console.log(searchResults, activeResult);
+      } else if (event.key === "ArrowUp" && showSearchbar) {
+        event.preventDefault();
+        setActiveResult(
+          (activeResult) =>
+            (searchResults.length + activeResult - 1) % searchResults.length
+        );
+      } else if (event.key === "ArrowDown" && showSearchbar) {
+        event.preventDefault();
+        setActiveResult(
+          (activeResult) =>
+            (searchResults.length + activeResult + 1) % searchResults.length
+        );
+      } else if (event.key === "Escape" && showSearchbar) {
+        setShowSearchbar(false);
+      }
+    },
+    [showSearchbar, activeResult, searchResults]
+  );
+
+  useEventListener("keydown", handleKeyDown);
 
   useEffect(() => {
     setResultsLoading((resultsLoading) => resultsLoading + 1);
@@ -93,36 +118,6 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
         setDebounceTimerId(null);
       }, 500)
     );
-  };
-
-  const handleKeyDown = (event) => {
-    const isActionKey = isMac ? event.metaKey : event.ctrlKey;
-    if (isActionKey && (event.key === "p" || event.key === "P")) {
-      event.preventDefault();
-      setShowSearchbar(true);
-    } else if (event.key === "Enter" && showSearchbarRef.current) {
-      console.log(
-        document.querySelector(
-          "div.spantree-result-active > div.spantree-search-filelocation"
-        ).innerText
-      );
-    } else if (event.key === "ArrowUp" && showSearchbarRef.current) {
-      event.preventDefault();
-      setActiveResult(
-        (activeResult) =>
-          (searchResultsLength.current + activeResult - 1) %
-          searchResultsLength.current
-      );
-    } else if (event.key === "ArrowDown" && showSearchbarRef.current) {
-      event.preventDefault();
-      setActiveResult(
-        (activeResult) =>
-          (searchResultsLength.current + activeResult + 1) %
-          searchResultsLength.current
-      );
-    } else if (event.key === "Escape" && showSearchbarRef.current) {
-      setShowSearchbar(false);
-    }
   };
 
   if (!showSearchbar) return null;
