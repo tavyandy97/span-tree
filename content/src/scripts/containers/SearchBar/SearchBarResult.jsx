@@ -56,6 +56,7 @@ function SearchBarResult({
   activeResult,
   setActiveResult,
   resultsLoading,
+  handleRedirect,
 }) {
   const fileLocation = term.split("/");
   const fileName = fileLocation.splice(-1);
@@ -68,7 +69,7 @@ function SearchBarResult({
     <div
       className={resultClass}
       onClick={() => {
-        console.log(fileName);
+        handleRedirect(index);
       }}
       onMouseEnter={() => {
         setActiveResult(index);

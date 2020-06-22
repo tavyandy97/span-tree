@@ -32,7 +32,7 @@ function TreeItem({
       }
     } else {
       setClicked(true);
-      let URLDetails = fetchURLDetails();
+      const URLDetails = fetchURLDetails();
       if ("compatibility-mode" in options && options["compatibility-mode"]) {
         window.location.href = `${window.location.origin}/${
           URLDetails.dirFormatted

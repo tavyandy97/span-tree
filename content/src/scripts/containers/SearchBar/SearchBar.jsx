@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  useCallback,
-  Fragment,
-} from "react";
+import React, { useState, useEffect, useCallback, Fragment } from "react";
 import { connect } from "react-redux";
 
 import Backdrop from "../../components/Backdrop";
@@ -38,6 +32,21 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
     });
   }, []);
 
+  const handleRedirect = (id) => {
+    const URLDetails = fetchURLDetails();
+    if ("compatibility-mode" in options && options["compatibility-mode"]) {
+      window.location.href = `${window.location.origin}/${
+        URLDetails.dirFormatted
+      }/blob/${URLDetails.branchName}/${encodeURIComponent(searchResults[id])}`;
+    } else {
+      window.location.href = `${window.location.origin}/${
+        URLDetails.dirFormatted
+      }/-/blob/${URLDetails.branchName}/${encodeURIComponent(
+        searchResults[id]
+      )}`;
+    }
+  };
+
   const handleKeyDown = useCallback(
     (event) => {
       const isActionKey = isMac ? event.metaKey : event.ctrlKey;
@@ -45,7 +54,7 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
         event.preventDefault();
         setShowSearchbar(true);
       } else if (event.key === "Enter" && showSearchbar) {
-        console.log(searchResults, activeResult);
+        handleRedirect(activeResult);
       } else if (event.key === "ArrowUp" && showSearchbar) {
         event.preventDefault();
         setActiveResult(
@@ -155,6 +164,7 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
                 activeResult={activeResult}
                 setActiveResult={setActiveResult}
                 resultsLoading={resultsLoading}
+                handleRedirect={handleRedirect}
               />
             );
           })}
