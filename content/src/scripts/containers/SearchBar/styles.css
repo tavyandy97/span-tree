@@ -79,3 +79,12 @@
 .search-term {
   margin-right: 10px;
 }
+
+.spantree-search-help {
+  padding: 8px;
+  border-top: 1px solid gray;
+}
+
+.spantree-search-help-item {
+  padding-right: 16px;
+}

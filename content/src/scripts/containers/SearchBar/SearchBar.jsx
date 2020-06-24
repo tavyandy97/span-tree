@@ -64,8 +64,7 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
       } else if (event.key === "ArrowDown" && showSearchbar) {
         event.preventDefault();
         setActiveResult(
-          (activeResult) =>
-            (searchResults.length + activeResult + 1) % searchResults.length
+          (activeResult) => (activeResult + 1) % searchResults.length
         );
       } else if (event.key === "Escape" && showSearchbar) {
         setShowSearchbar(false);
@@ -168,6 +167,17 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
               />
             );
           })}
+        </div>
+        <div className="spantree-search-help">
+          <span className="spantree-search-help-item">
+            <code>{isMac ? "⌘" : "Ctrl"} + P</code> to Search
+          </span>
+          <span className="spantree-search-help-item">
+            <code>{isMac ? "return" : "Enter"}</code> to Open
+          </span>
+          <span className="spantree-search-help-item">
+            <code>↑ ↓</code> to Navigate
+          </span>
         </div>
       </div>
     </Fragment>
