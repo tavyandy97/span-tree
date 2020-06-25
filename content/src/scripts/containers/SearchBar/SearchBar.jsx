@@ -37,13 +37,11 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
     if ("compatibility-mode" in options && options["compatibility-mode"]) {
       window.location.href = `${window.location.origin}/${
         URLDetails.dirFormatted
-      }/blob/${URLDetails.branchName}/${encodeURIComponent(searchResults[id])}`;
+      }/blob/${URLDetails.branchName}/${encodeURI(searchResults[id])}`;
     } else {
       window.location.href = `${window.location.origin}/${
         URLDetails.dirFormatted
-      }/-/blob/${URLDetails.branchName}/${encodeURIComponent(
-        searchResults[id]
-      )}`;
+      }/-/blob/${URLDetails.branchName}/${encodeURI(searchResults[id])}`;
     }
   };
 
