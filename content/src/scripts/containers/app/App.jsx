@@ -28,6 +28,7 @@ class App extends Component {
     this.state = {
       firstPageLoad: true,
       reloading: true,
+      showSearchbar: false,
     };
     this.setFirstPageLoad = (firstPageLoad) => {
       this.setState({ firstPageLoad });
@@ -40,6 +41,9 @@ class App extends Component {
         document.querySelector(".qa-branches-select") !== null &&
         document.querySelector(".nav-sidebar") !== null
       );
+    };
+    this.setShowSearchbar = (showSearchbar) => {
+      this.setState({ showSearchbar });
     };
     this.searchBarWorker = new WebWorker(searchBarWorkerJS);
   }
@@ -79,6 +83,7 @@ class App extends Component {
                 setFirstPageLoad={this.setFirstPageLoad}
                 reloading={this.state.reloading}
                 setReloading={this.setReloading}
+                setShowSearchbarTrue={() => this.setShowSearchbar(true)}
               />,
               parentDiv
             )
@@ -89,7 +94,11 @@ class App extends Component {
               />,
               document.getElementById("rcr-anchor")
             )}
-        <SearchBar worker={this.searchBarWorker} />
+        <SearchBar
+          worker={this.searchBarWorker}
+          showSearchbar={this.state.showSearchbar}
+          setShowSearchbar={this.setShowSearchbar}
+        />
       </Fragment>
     );
   }

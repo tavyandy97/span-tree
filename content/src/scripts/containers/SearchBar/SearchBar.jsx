@@ -9,8 +9,14 @@ import useEventListener from "../../utils/useEventListener";
 
 import "./styles.css";
 
-function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
-  const [showSearchbar, setShowSearchbar] = useState(false);
+function SearchBar({
+  worker,
+  showSearchbar,
+  setShowSearchbar,
+  searchTerms,
+  getSearchTerms,
+  options,
+}) {
   const [searchResults, setSearchResults] = useState([]);
   const [searchFor, setSearchFor] = useState("");
   const [activeResult, setActiveResult] = useState(0);

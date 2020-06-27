@@ -13,6 +13,7 @@ function Pane({
   width,
   firstPageLoad,
   setFirstPageLoad,
+  setShowSearchbarTrue,
   reloading,
   setReloading,
 }) {
@@ -51,13 +52,18 @@ function Pane({
               </span>
             </div>
           </div>
-          <div className="pane-details" style={{ width: width - 12 + "px" }}>
-            <SVG
-              icon="branch"
-              height="12"
-              style={{ verticalAlign: "middle" }}
-            />{" "}
-            {URLDetails.branchName}
+          <div className="spread">
+            <div className="pane-details" style={{ width: width - 12 + "px" }}>
+              <SVG
+                icon="branch"
+                height="12"
+                style={{ verticalAlign: "middle" }}
+              />{" "}
+              {URLDetails.branchName}
+            </div>
+            <span onClick={setShowSearchbarTrue} className="close-button">
+              <SVG icon="search" height="9" />
+            </span>
           </div>
         </div>
         <div className="tree-body">
