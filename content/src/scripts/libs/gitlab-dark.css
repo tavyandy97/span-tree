@@ -6722,3 +6722,7 @@ html {
 .in-fzy {
   color: rgb(146, 122, 249) !important;
 }
+
+.spantree-search-help {
+  border-top: 1px solid darkslategray !important;
+}
