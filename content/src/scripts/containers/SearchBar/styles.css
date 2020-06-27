@@ -32,7 +32,7 @@
 .spantree-search-results {
   overflow-y: scroll;
   overflow-x: hidden;
-  max-height: 55vh;
+  max-height: 35vh;
 }
 
 .results-loading {
@@ -99,5 +99,5 @@
 }
 
 .mac-icon-offset {
-  top: 2.5px;
+  top: 2px;
 }
