@@ -2,7 +2,7 @@
   position: fixed;
   z-index: 6000;
   background-color: white;
-  width: 40%;
+  min-width: 40%;
   border: 1px solid #ccc;
   box-shadow: 0px 0px 10px #00000040;
   left: 30%;
@@ -97,8 +97,5 @@
 .spantree-search-help-item-icon {
   position: relative;
   font-size: 18px;
-}
-
-.mac-icon-offset {
   top: 2px;
 }

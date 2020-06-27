@@ -180,9 +180,7 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
           <span className="spantree-search-help-item">
             <code>
               {isMac ? (
-                <span className="spantree-search-help-item-icon mac-icon-offset">
-                  ⌘
-                </span>
+                <span className="spantree-search-help-item-icon">⌘</span>
               ) : (
                 "Ctrl"
               )}{" "}
@@ -195,9 +193,14 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
           </span>
           <span className="spantree-search-help-item">
             <code>
-              <span className="spantree-search-help-item-icon">↑ ↓</span>
+              {isMac ? (
+                <span className="spantree-search-help-item-icon">⌘</span>
+              ) : (
+                "Ctrl"
+              )}{" "}
+              + {isMac ? "return" : "Enter"}
             </code>{" "}
-            to Navigate
+            to Open in New Tab
           </span>
         </div>
       </div>
