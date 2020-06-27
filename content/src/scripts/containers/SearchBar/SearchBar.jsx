@@ -32,16 +32,24 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
     });
   }, []);
 
-  const handleRedirect = (id) => {
+  const handleRedirect = (id, inNewTab) => {
     const URLDetails = fetchURLDetails();
+    let finalURL = null;
     if ("compatibility-mode" in options && options["compatibility-mode"]) {
-      window.location.href = `${window.location.origin}/${
-        URLDetails.dirFormatted
-      }/blob/${URLDetails.branchName}/${encodeURI(searchResults[id])}`;
+      finalURL = `${window.location.origin}/${URLDetails.dirFormatted}/blob/${
+        URLDetails.branchName
+      }/${encodeURI(searchResults[id])}`;
     } else {
-      window.location.href = `${window.location.origin}/${
-        URLDetails.dirFormatted
-      }/-/blob/${URLDetails.branchName}/${encodeURI(searchResults[id])}`;
+      finalURL = `${window.location.origin}/${URLDetails.dirFormatted}/-/blob/${
+        URLDetails.branchName
+      }/${encodeURI(searchResults[id])}`;
+    }
+    if (inNewTab) {
+      window.open(finalURL, "_blank");
+      // for overwriting default behavior on Firefox
+      window.focus();
+    } else {
+      window.location.href = finalURL;
     }
   };
 
@@ -51,8 +59,10 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
       if (isActionKey && (event.key === "p" || event.key === "P")) {
         event.preventDefault();
         setShowSearchbar(true);
+      } else if (isActionKey && event.key === "Enter" && showSearchbar) {
+        handleRedirect(activeResult, true);
       } else if (event.key === "Enter" && showSearchbar) {
-        handleRedirect(activeResult);
+        handleRedirect(activeResult, false);
       } else if (event.key === "ArrowUp" && showSearchbar) {
         event.preventDefault();
         setActiveResult(
