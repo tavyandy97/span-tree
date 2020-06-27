@@ -168,13 +168,26 @@ function SearchBar({ worker, searchTerms, getSearchTerms, options }) {
         </div>
         <div className="spantree-search-help">
           <span className="spantree-search-help-item">
-            <code>{isMac ? "⌘" : "Ctrl"} + P</code> to Search
+            <code>
+              {isMac ? (
+                <span className="spantree-search-help-item-icon mac-icon-offset">
+                  ⌘
+                </span>
+              ) : (
+                "Ctrl"
+              )}{" "}
+              + P
+            </code>{" "}
+            to Search
           </span>
           <span className="spantree-search-help-item">
             <code>{isMac ? "return" : "Enter"}</code> to Open
           </span>
           <span className="spantree-search-help-item">
-            <code>↑ ↓</code> to Navigate
+            <code>
+              <span className="spantree-search-help-item-icon">↑ ↓</span>
+            </code>{" "}
+            to Navigate
           </span>
         </div>
       </div>

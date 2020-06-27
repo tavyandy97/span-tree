@@ -81,10 +81,23 @@
 }
 
 .spantree-search-help {
-  padding: 8px;
-  border-top: 1px solid gray;
+  padding: 3px 8px 6px 8px;
+  border-top: 1px solid #dddddd;
+  font-size: 14px;
+}
+.spantree-search-help code {
+  padding: 4px 6px;
 }
 
 .spantree-search-help-item {
   padding-right: 16px;
+}
+
+.spantree-search-help-item-icon {
+  position: relative;
+  font-size: 18px;
+}
+
+.mac-icon-offset {
+  top: 2.5px;
 }
