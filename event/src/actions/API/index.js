@@ -1,3 +1,5 @@
+import axiosOriginal from "axios";
+
 import * as types from "../../types/API";
 import store from "../../../../content/src/scripts";
 import axios from "../../../axios";
@@ -17,7 +19,7 @@ export const getInitialTree = (id, params, reducerDetails) => {
         reducerDetails,
       });
     })
-    .catch((err) => {});
+    .catch((_err) => {});
 };
 
 export const openDir = (id, path, params, reducerDetails) => {
@@ -40,7 +42,7 @@ export const openDir = (id, path, params, reducerDetails) => {
         reducerDetails,
       });
     })
-    .catch((err) => {});
+    .catch((_err) => {});
 };
 
 export const closeDir = (path, reducerDetails) => {
@@ -49,4 +51,23 @@ export const closeDir = (path, reducerDetails) => {
     payload: path,
     reducerDetails,
   });
+};
+
+export const getSearchTerms = (reducerDetails) => {
+  let url = `${window.location.origin}/${reducerDetails.repoName}/`;
+  if (!reducerDetails.compatibilityMode) {
+    url += "-/";
+  }
+  url += `files/${reducerDetails.branchName}?format=json`;
+
+  axiosOriginal
+    .get(url)
+    .then((res) => {
+      store.dispatch({
+        type: types.FETCH_SEARCH_TERMS,
+        payload: res.data,
+        reducerDetails,
+      });
+    })
+    .catch((_err) => {});
 };

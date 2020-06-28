@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 
+import { fetchURLDetails } from "../../utils/url";
 import fileIcons from "../../utils/file-icons";
 
 import "./styles.css";
-import { fetchURLDetails } from "../../utils/url";
 
 function TreeItem({
   width,
@@ -32,7 +32,7 @@ function TreeItem({
       }
     } else {
       setClicked(true);
-      let URLDetails = fetchURLDetails();
+      const URLDetails = fetchURLDetails();
       if ("compatibility-mode" in options && options["compatibility-mode"]) {
         window.location.href = `${window.location.origin}/${
           URLDetails.dirFormatted

@@ -8,20 +8,27 @@ import { switchTheme } from "../../utils/themeList";
 
 import "./styles.css";
 
-function Pane({ toggleOpened, width, firstPageLoad, setFirstPageLoad }) {
-  const [realoading, setRealoading] = useState(true);
+function Pane({
+  toggleOpened,
+  width,
+  firstPageLoad,
+  setFirstPageLoad,
+  setShowSearchbarTrue,
+  reloading,
+  setReloading,
+}) {
   const [URLDetails, setURLDetails] = useState(fetchURLDetails());
 
   window.addEventListener("popstate", (_event) => {
-    setRealoading(true);
+    setReloading(true);
   });
 
   useEffect(() => {
-    if (realoading) {
+    if (reloading) {
       setURLDetails(fetchURLDetails());
-      setRealoading(false);
+      setReloading(false);
     }
-  }, [realoading]);
+  }, [reloading]);
 
   return (
     <div className="tree-pane" style={{ width: width + "px" }}>
@@ -45,13 +52,18 @@ function Pane({ toggleOpened, width, firstPageLoad, setFirstPageLoad }) {
               </span>
             </div>
           </div>
-          <div className="pane-details" style={{ width: width - 12 + "px" }}>
-            <SVG
-              icon="branch"
-              height="12"
-              style={{ verticalAlign: "middle" }}
-            />{" "}
-            {URLDetails.branchName}
+          <div className="spread">
+            <div className="pane-details" style={{ width: width - 12 + "px" }}>
+              <SVG
+                icon="branch"
+                height="12"
+                style={{ verticalAlign: "middle" }}
+              />{" "}
+              {URLDetails.branchName}
+            </div>
+            <span onClick={setShowSearchbarTrue} className="close-button">
+              <SVG icon="search" height="9" />
+            </span>
           </div>
         </div>
         <div className="tree-body">

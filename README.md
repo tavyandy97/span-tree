@@ -61,3 +61,4 @@ SpanTree uses the following open-source packages:
 - [dark-gitlab](https://gitlab.com/vednoc/dark-gitlab)
 - [axios](https://github.com/axios/axios)
 - [immer](https://github.com/immerjs/immer)
+- [fzy.js](https://github.com/jhawthorn/fzy.js)

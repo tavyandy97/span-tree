@@ -1,16 +1,24 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 
 import Toggler from "../../components/Toggler";
 import Pane from "../../components/Pane";
+import SearchBar from "../SearchBar";
+import { toggleOpened } from "../../../../../event/src/actions/UI";
 import {
   applyClosedPageStyling,
   applyOpenedPageStyling,
 } from "../../utils/styling";
-import { toggleOpened } from "../../../../../event/src/actions/UI";
+import { browserKey } from "../../utils/browser";
+import searchBarWorkerJS from "../../utils/searchBarWorker";
+import WebWorker from "./WebWorker";
 
 import "./App.css";
+
+const importFileIconCSS = `${browserKey()}-extension://${chrome.i18n.getMessage(
+  "@@extension_id"
+)}/libs/file-icons.css`;
 
 const parentDiv = document.querySelector("body");
 
@@ -19,9 +27,14 @@ class App extends Component {
     super(props);
     this.state = {
       firstPageLoad: true,
+      reloading: true,
+      showSearchbar: false,
     };
     this.setFirstPageLoad = (firstPageLoad) => {
       this.setState({ firstPageLoad });
+    };
+    this.setReloading = (reloading) => {
+      this.setState({ reloading });
     };
     this.shouldShowSpanTree = () => {
       return (
@@ -29,6 +42,10 @@ class App extends Component {
         document.querySelector(".nav-sidebar") !== null
       );
     };
+    this.setShowSearchbar = (showSearchbar) => {
+      this.setState({ showSearchbar });
+    };
+    this.searchBarWorker = new WebWorker(searchBarWorkerJS);
   }
 
   componentDidMount() {
@@ -54,23 +71,36 @@ class App extends Component {
       return null;
     }
 
-    return this.props.opened
-      ? ReactDOM.createPortal(
-          <Pane
-            toggleOpened={this.props.toggleOpened}
-            width={this.props.width}
-            firstPageLoad={this.state.firstPageLoad}
-            setFirstPageLoad={this.setFirstPageLoad}
-          />,
-          parentDiv
-        )
-      : ReactDOM.createPortal(
-          <Toggler
-            handleClick={this.props.toggleOpened}
-            pinned={this.props.pinned}
-          />,
-          document.getElementById("rcr-anchor")
-        );
+    return (
+      <Fragment>
+        <link rel="stylesheet" type="text/css" href={importFileIconCSS} />
+        {this.props.opened
+          ? ReactDOM.createPortal(
+              <Pane
+                toggleOpened={this.props.toggleOpened}
+                width={this.props.width}
+                firstPageLoad={this.state.firstPageLoad}
+                setFirstPageLoad={this.setFirstPageLoad}
+                reloading={this.state.reloading}
+                setReloading={this.setReloading}
+                setShowSearchbarTrue={() => this.setShowSearchbar(true)}
+              />,
+              parentDiv
+            )
+          : ReactDOM.createPortal(
+              <Toggler
+                handleClick={this.props.toggleOpened}
+                pinned={this.props.pinned}
+              />,
+              document.getElementById("rcr-anchor")
+            )}
+        <SearchBar
+          worker={this.searchBarWorker}
+          showSearchbar={this.state.showSearchbar}
+          setShowSearchbar={this.setShowSearchbar}
+        />
+      </Fragment>
+    );
   }
 }
 
