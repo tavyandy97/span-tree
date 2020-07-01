@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
+import { TabIdentifierClient } from "chrome-tab-identifier";
 
 import Loader from "../../components/Loader";
 import TreeItem from "../../components/TreeItem";
 import { fetchURLDetails } from "../../utils/url";
-import { browserKey } from "../../utils/browser";
 import {
   getInitialTree,
   openDir,
@@ -13,6 +13,8 @@ import {
 import { setClicked } from "../../../../../event/src/actions/UI";
 
 import "./styles.css";
+
+const tabIdClient = new TabIdentifierClient();
 
 const renderTreeItems = (
   tree,
@@ -69,31 +71,41 @@ function TreeList({
   const [loading, setLoading] = useState(true);
   const [rendering, setRendering] = useState(false);
   const [scrolling, setScrolling] = useState(false);
+  const [tabId, setTabId] = useState();
   const initialMount = useRef(true);
 
   useEffect(() => {
-    const URLDetails = fetchURLDetails();
-    if (URLDetails.baseRemovedURL.length === 0) {
-      setRendering(false);
-      setScrolling(false);
-    } else {
-      setRendering(true);
-      setScrolling(true);
-    }
-    if (shouldGetTree()) {
-      getInitialTree(
-        URLDetails.dirURLParam,
-        {
-          ref: URLDetails.branchNameURL,
-        },
-        {
-          repoName: URLDetails.dirFormatted,
-          branchName: URLDetails.branchName,
-        }
-      );
-    }
-    setFirstPageLoad(false);
+    tabIdClient.getTabId().then((tab) => {
+      setTabId(tab);
+    });
   }, []);
+
+  useEffect(() => {
+    if (tabId) {
+      const URLDetails = fetchURLDetails();
+      if (URLDetails.baseRemovedURL.length === 0) {
+        setRendering(false);
+        setScrolling(false);
+      } else {
+        setRendering(true);
+        setScrolling(true);
+      }
+      if (shouldGetTree()) {
+        getInitialTree(
+          URLDetails.dirURLParam,
+          {
+            ref: URLDetails.branchNameURL,
+          },
+          {
+            repoName: URLDetails.dirFormatted,
+            branchName: URLDetails.branchName,
+            tabId,
+          }
+        );
+      }
+      setFirstPageLoad(false);
+    }
+  }, [tabId]);
 
   useEffect(() => {
     if (initialMount.current && shouldGetTree()) {
@@ -133,6 +145,7 @@ function TreeList({
     closeDir(path, {
       repoName: URLDetails.dirFormatted,
       branchName: URLDetails.branchName,
+      tabId,
     });
   };
 
@@ -148,12 +161,13 @@ function TreeList({
         repoName: URLDetails.dirFormatted,
         branchName: URLDetails.branchName,
         path: path,
+        tabId,
       }
     );
   };
 
   return renderTreeItems(
-    tree[URLDetails.dirFormatted][URLDetails.branchName],
+    tree[tabId],
     width,
     options,
     setClicked,
