@@ -1,20 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
-import { connect } from "react-redux";
-import { TabIdentifierClient } from "chrome-tab-identifier";
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { connect } from 'react-redux';
 
-import Loader from "../../components/Loader";
-import TreeItem from "../../components/TreeItem";
-import { fetchURLDetails } from "../../utils/url";
-import {
-  getInitialTree,
-  openDir,
-  closeDir,
-} from "../../../../../event/src/actions/API";
-import { setClicked } from "../../../../../event/src/actions/UI";
+import Loader from '../../components/Loader';
+import TreeItem from '../../components/TreeItem';
+import { fetchURLDetails } from '../../utils/url';
+import { getInitialTree, openDir, closeDir } from '../../../../../event/src/actions/API';
+import { setClicked } from '../../../../../event/src/actions/UI';
 
-import "./styles.css";
-
-const tabIdClient = new TabIdentifierClient();
+import './styles.css';
 
 const renderTreeItems = (
   tree,
@@ -60,6 +53,7 @@ const renderTreeItems = (
 function TreeList({
   firstPageLoad,
   setFirstPageLoad,
+  tabId,
   tree,
   width,
   clicked,
@@ -71,59 +65,13 @@ function TreeList({
   const [loading, setLoading] = useState(true);
   const [rendering, setRendering] = useState(false);
   const [scrolling, setScrolling] = useState(false);
-  const [tabId, setTabId] = useState();
   const initialMount = useRef(true);
 
-  useEffect(() => {
-    tabIdClient.getTabId().then((tab) => {
-      setTabId(tab);
-    });
-  }, []);
-
-  useEffect(() => {
-    if (tabId) {
-      const URLDetails = fetchURLDetails();
-      if (URLDetails.baseRemovedURL.length === 0) {
-        setRendering(false);
-        setScrolling(false);
-      } else {
-        setRendering(true);
-        setScrolling(true);
-      }
-      if (shouldGetTree()) {
-        getInitialTree(
-          URLDetails.dirURLParam,
-          {
-            ref: URLDetails.branchNameURL,
-          },
-          {
-            repoName: URLDetails.dirFormatted,
-            branchName: URLDetails.branchName,
-            tabId,
-          }
-        );
-      }
-      setFirstPageLoad(false);
-    }
-  }, [tabId]);
-
-  useEffect(() => {
-    if (initialMount.current && shouldGetTree()) {
-      initialMount.current = false;
-    } else {
-      setLoading(false);
-    }
-  }, [tree]);
+  const URLDetails = fetchURLDetails();
 
   const shouldGetTree = () => {
-    const URLDetails = fetchURLDetails();
-    if (
-      !(
-        tree &&
-        tree[URLDetails.dirFormatted] &&
-        tree[URLDetails.dirFormatted][URLDetails.branchName]
-      )
-    ) {
+    console.log(tree, tabId, clicked);
+    if (!(tree && tree[tabId])) {
       return true;
     }
     if (clicked) {
@@ -132,14 +80,44 @@ function TreeList({
     return firstPageLoad;
   };
 
+  useEffect(() => {
+    if (URLDetails.baseRemovedURL.length === 0) {
+      setRendering(false);
+      setScrolling(false);
+    } else {
+      setRendering(true);
+      setScrolling(true);
+    }
+    if (shouldGetTree()) {
+      getInitialTree(
+        URLDetails.dirURLParam,
+        {
+          ref: URLDetails.branchNameURL,
+        },
+        {
+          repoName: URLDetails.dirFormatted,
+          branchName: URLDetails.branchName,
+          tabId,
+        }
+      );
+    }
+    setFirstPageLoad(false);
+  }, []);
+
+  useEffect(() => {
+    if (initialMount.current && shouldGetTree()) {
+      initialMount.current = false;
+    } else if (loading) {
+      setLoading(false);
+    }
+  }, [tree]);
+
   if (loading)
     return (
       <div className="loader-wrapper">
         <Loader size="64px" />
       </div>
     );
-
-  const URLDetails = fetchURLDetails();
 
   const closeDirectory = (path) => {
     closeDir(path, {
@@ -155,7 +133,7 @@ function TreeList({
       path,
       {
         ref: URLDetails.branchNameURL,
-        path: encodeURIComponent(path.join("/")),
+        path: encodeURIComponent(path.join('/')),
       },
       {
         repoName: URLDetails.dirFormatted,
