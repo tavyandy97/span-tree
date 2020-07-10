@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
-import SVG from "../SVG";
+import { TabIdentifierClient } from "chrome-tab-identifier";
 
+import SVG from "../SVG";
 import TreeList from "../../containers/TreeList/TreeList";
 import Resizer from "../../containers/Resizer";
 import { fetchURLDetails } from "../../utils/url";
 import { switchTheme } from "../../utils/themeList";
+import useEventListener from "../../utils/useEventListener";
 
 import "./styles.css";
+
+const tabIdClient = new TabIdentifierClient();
 
 function Pane({
   toggleOpened,
@@ -17,18 +21,25 @@ function Pane({
   reloading,
   setReloading,
 }) {
-  const [URLDetails, setURLDetails] = useState(fetchURLDetails());
+  const [tabId, setTabId] = useState();
 
-  window.addEventListener("popstate", (_event) => {
-    setReloading(true);
-  });
+  useEffect(() => {
+    tabIdClient.getTabId().then((tab) => {
+      setTabId(tab);
+    });
+  }, []);
 
   useEffect(() => {
     if (reloading) {
-      setURLDetails(fetchURLDetails());
       setReloading(false);
     }
   }, [reloading]);
+
+  useEventListener("popstate", () => {
+    setReloading(true);
+  });
+
+  const URLDetails = fetchURLDetails();
 
   return (
     <div className="tree-pane" style={{ width: width + "px" }}>
@@ -67,10 +78,13 @@ function Pane({
           </div>
         </div>
         <div className="tree-body">
-          <TreeList
-            firstPageLoad={firstPageLoad}
-            setFirstPageLoad={setFirstPageLoad}
-          />
+          {tabId ? (
+            <TreeList
+              firstPageLoad={firstPageLoad}
+              setFirstPageLoad={setFirstPageLoad}
+              tabId={tabId}
+            />
+          ) : null}
         </div>
       </div>
       <Resizer />

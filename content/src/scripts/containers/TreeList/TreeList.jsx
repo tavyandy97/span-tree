@@ -1,18 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
-import { connect } from "react-redux";
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { connect } from 'react-redux';
 
-import Loader from "../../components/Loader";
-import TreeItem from "../../components/TreeItem";
-import { fetchURLDetails } from "../../utils/url";
-import { browserKey } from "../../utils/browser";
-import {
-  getInitialTree,
-  openDir,
-  closeDir,
-} from "../../../../../event/src/actions/API";
-import { setClicked } from "../../../../../event/src/actions/UI";
+import Loader from '../../components/Loader';
+import TreeItem from '../../components/TreeItem';
+import { fetchURLDetails } from '../../utils/url';
+import { getInitialTree, openDir, closeDir } from '../../../../../event/src/actions/API';
+import { setClicked } from '../../../../../event/src/actions/UI';
 
-import "./styles.css";
+import './styles.css';
 
 const renderTreeItems = (
   tree,
@@ -58,6 +53,7 @@ const renderTreeItems = (
 function TreeList({
   firstPageLoad,
   setFirstPageLoad,
+  tabId,
   tree,
   width,
   clicked,
@@ -71,8 +67,20 @@ function TreeList({
   const [scrolling, setScrolling] = useState(false);
   const initialMount = useRef(true);
 
+  const URLDetails = fetchURLDetails();
+
+  const shouldGetTree = () => {
+    console.log(tree, tabId, clicked);
+    if (!(tree && tree[tabId])) {
+      return true;
+    }
+    if (clicked) {
+      return false;
+    }
+    return firstPageLoad;
+  };
+
   useEffect(() => {
-    const URLDetails = fetchURLDetails();
     if (URLDetails.baseRemovedURL.length === 0) {
       setRendering(false);
       setScrolling(false);
@@ -89,6 +97,7 @@ function TreeList({
         {
           repoName: URLDetails.dirFormatted,
           branchName: URLDetails.branchName,
+          tabId,
         }
       );
     }
@@ -98,27 +107,10 @@ function TreeList({
   useEffect(() => {
     if (initialMount.current && shouldGetTree()) {
       initialMount.current = false;
-    } else {
+    } else if (loading) {
       setLoading(false);
     }
   }, [tree]);
-
-  const shouldGetTree = () => {
-    const URLDetails = fetchURLDetails();
-    if (
-      !(
-        tree &&
-        tree[URLDetails.dirFormatted] &&
-        tree[URLDetails.dirFormatted][URLDetails.branchName]
-      )
-    ) {
-      return true;
-    }
-    if (clicked) {
-      return false;
-    }
-    return firstPageLoad;
-  };
 
   if (loading)
     return (
@@ -127,12 +119,11 @@ function TreeList({
       </div>
     );
 
-  const URLDetails = fetchURLDetails();
-
   const closeDirectory = (path) => {
     closeDir(path, {
       repoName: URLDetails.dirFormatted,
       branchName: URLDetails.branchName,
+      tabId,
     });
   };
 
@@ -142,18 +133,19 @@ function TreeList({
       path,
       {
         ref: URLDetails.branchNameURL,
-        path: encodeURIComponent(path.join("/")),
+        path: encodeURIComponent(path.join('/')),
       },
       {
         repoName: URLDetails.dirFormatted,
         branchName: URLDetails.branchName,
         path: path,
+        tabId,
       }
     );
   };
 
   return renderTreeItems(
-    tree[URLDetails.dirFormatted][URLDetails.branchName],
+    tree[tabId],
     width,
     options,
     setClicked,

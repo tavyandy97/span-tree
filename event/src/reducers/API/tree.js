@@ -9,35 +9,29 @@ export default (state = initialState, action) => {
     case FETCH_TREE:
       return {
         ...state,
-        [action.reducerDetails.repoName]: {
-          ...state[action.reducerDetails.repoName],
-          [action.reducerDetails.branchName]: action.payload
-            .map((node) => {
-              return {
-                name: node.name,
-                path: node.path
-                  .split("/")
-                  .filter((pathSub) => pathSub.length !== 0),
-                isTree:
-                  node.type === "tree"
-                    ? {
-                        isOpen: false,
-                      }
-                    : false,
-                children: node.type === "tree" ? {} : undefined,
-              };
-            })
-            .reduce((map, obj) => {
-              map[obj.name] = obj;
-              return map;
-            }, {}),
-        },
+        [action.reducerDetails.tabId]: action.payload
+          .map((node) => {
+            return {
+              name: node.name,
+              path: node.path
+                .split("/")
+                .filter((pathSub) => pathSub.length !== 0),
+              isTree:
+                node.type === "tree"
+                  ? {
+                      isOpen: false,
+                    }
+                  : false,
+              children: node.type === "tree" ? {} : undefined,
+            };
+          })
+          .reduce((map, obj) => {
+            map[obj.name] = obj;
+            return map;
+          }, {}),
       };
     case OPEN_DIR:
-      let objectPath = [
-        action.reducerDetails.repoName,
-        action.reducerDetails.branchName,
-      ];
+      let objectPath = [action.reducerDetails.tabId];
       for (let i = 0; i < action.payload.length; i++) {
         objectPath.push(action.payload[i]);
         if (i !== action.payload.length - 1) {
@@ -53,10 +47,7 @@ export default (state = initialState, action) => {
       });
       return nextState;
     case UPDATE_TREE:
-      objectPath = [
-        action.reducerDetails.repoName,
-        action.reducerDetails.branchName,
-      ];
+      objectPath = [action.reducerDetails.tabId];
       for (let i = 0; i < action.reducerDetails.path.length; i++) {
         objectPath.push(action.reducerDetails.path[i]);
         if (i !== action.reducerDetails.path.length - 1) {
@@ -95,10 +86,7 @@ export default (state = initialState, action) => {
       });
       return nextState;
     case CLOSE_DIR:
-      objectPath = [
-        action.reducerDetails.repoName,
-        action.reducerDetails.branchName,
-      ];
+      objectPath = [action.reducerDetails.tabId];
       for (let i = 0; i < action.payload.length; i++) {
         objectPath.push(action.payload[i]);
         if (i !== action.payload.length - 1) {
