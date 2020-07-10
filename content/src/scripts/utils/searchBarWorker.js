@@ -1,9 +1,13 @@
 export default () => {
-  self.addEventListener("message", (e) => {
+  self.addEventListener('message', (e) => {
     if (!e) return;
     let searchTerms = e.data.searchTerms;
     let URLDetails = e.data.URLDetails;
     let query = e.data.query;
+
+    const max = (a, b) => {
+      return a > b ? a : b;
+    };
 
     const fzyIsLower = (s) => {
       return s.toLowerCase() === s;
@@ -22,15 +26,15 @@ export default () => {
       let m = haystack.length;
       let match_bonus = new Array(m);
 
-      let last_ch = "/";
+      let last_ch = '/';
       for (let i = 0; i < m; i++) {
         let ch = haystack[i];
 
-        if (last_ch === "/") {
+        if (last_ch === '/') {
           match_bonus[i] = SCORE_MATCH_SLASH;
-        } else if (last_ch === "-" || last_ch === "_" || last_ch === " ") {
+        } else if (last_ch === '-' || last_ch === '_' || last_ch === ' ') {
           match_bonus[i] = SCORE_MATCH_WORD;
-        } else if (last_ch === ".") {
+        } else if (last_ch === '.') {
           match_bonus[i] = SCORE_MATCH_DOT;
         } else if (fzyIsLower(last_ch) && fzyIsUpper(ch)) {
           match_bonus[i] = SCORE_MATCH_CAPITAL;
@@ -73,13 +77,13 @@ export default () => {
               score = j * SCORE_GAP_LEADING + match_bonus[j];
             } else if (j) {
               /* i > 0 && j > 0*/
-              score = Math.max(
+              score = max(
                 M[i - 1][j - 1] + match_bonus[j],
                 D[i - 1][j - 1] + SCORE_MATCH_CONSECUTIVE
               );
             }
             D[i][j] = score;
-            M[i][j] = prev_score = Math.max(score, prev_score + gap_score);
+            M[i][j] = prev_score = max(score, prev_score + gap_score);
           } else {
             D[i][j] = SCORE_MIN;
             M[i][j] = prev_score = prev_score + gap_score;
@@ -148,13 +152,8 @@ export default () => {
         const reRegExpChar = /[\\^$.*+?()[\]{}|]/g,
           reHasRegExpChar = RegExp(reRegExpChar.source);
         const escapeRegExp = (string) =>
-          reHasRegExpChar.test(string)
-            ? string.replace(reRegExpChar, "\\$&")
-            : string;
-        const regex = new RegExp(
-          query.split("").map(escapeRegExp).join(".*"),
-          "i"
-        );
+          reHasRegExpChar.test(string) ? string.replace(reRegExpChar, '\\$&') : string;
+        const regex = new RegExp(query.split('').map(escapeRegExp).join('.*'), 'i');
         let resultArray = searchTerms[URLDetails.dirFormatted][
           URLDetails.branchName
         ].filter((ele) => ele.match(regex));

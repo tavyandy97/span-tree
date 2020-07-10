@@ -70,7 +70,6 @@ function TreeList({
   const URLDetails = fetchURLDetails();
 
   const shouldGetTree = () => {
-    console.log(tree, tabId, clicked);
     if (!(tree && tree[tabId])) {
       return true;
     }
