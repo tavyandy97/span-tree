@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { connect } from "react-redux";
 
-import Loader from '../../components/Loader';
-import TreeItem from '../../components/TreeItem';
-import { fetchURLDetails } from '../../utils/url';
-import { getInitialTree, openDir, closeDir } from '../../../../../event/src/actions/API';
-import { setClicked } from '../../../../../event/src/actions/UI';
+import Loader from "../../components/Loader";
+import TreeItem from "../../components/TreeItem";
+import { fetchURLDetails } from "../../utils/url";
+import { getInitialTree, openDir, closeDir } from "../../../../../event/src/actions/API";
+import { setClicked } from "../../../../../event/src/actions/UI";
 
-import './styles.css';
+import "./styles.css";
 
 const renderTreeItems = (
   tree,
@@ -106,10 +106,10 @@ function TreeList({
   useEffect(() => {
     if (initialMount.current && shouldGetTree()) {
       initialMount.current = false;
-    } else if (loading) {
+    } else if (loading && tree && tree[tabId]) {
       setLoading(false);
     }
-  }, [tree]);
+  }, [tree[tabId]]);
 
   if (loading)
     return (
@@ -132,7 +132,7 @@ function TreeList({
       path,
       {
         ref: URLDetails.branchNameURL,
-        path: encodeURIComponent(path.join('/')),
+        path: encodeURIComponent(path.join("/")),
       },
       {
         repoName: URLDetails.dirFormatted,
