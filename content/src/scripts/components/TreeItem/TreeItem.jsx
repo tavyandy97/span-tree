@@ -34,13 +34,13 @@ function TreeItem({
       setClicked(true);
       const URLDetails = fetchURLDetails();
       if ("compatibility-mode" in options && options["compatibility-mode"]) {
-        window.location.href = `${window.location.origin}/${
-          URLDetails.dirFormatted
-        }/blob/${URLDetails.branchName}/${path.join("/")}`;
+        window.location.href = `${window.location.origin}/${URLDetails.dirFormatted}/blob/${
+          URLDetails.branchName
+        }/${path.join("/")}`;
       } else {
-        window.location.href = `${window.location.origin}/${
-          URLDetails.dirFormatted
-        }/-/blob/${URLDetails.branchName}/${path.join("/")}`;
+        window.location.href = `${window.location.origin}/${URLDetails.dirFormatted}/-/blob/${
+          URLDetails.branchName
+        }/${path.join("/")}`;
       }
     }
   };
@@ -103,14 +103,11 @@ function TreeItem({
 
   useEffect(() => {
     if (opening && scrolling) {
-      const treeList = document.querySelector(".tree-list");
+      const treeList = document.querySelector(".spantree-tree-list");
       const openingItem = document.querySelector(".opening");
       document
-        .querySelector(".tree-list")
-        .scrollTo(
-          openingItem.offsetLeft - 25,
-          openingItem.offsetTop - treeList.clientHeight / 2
-        );
+        .querySelector(".spantree-tree-list")
+        .scrollTo(openingItem.offsetLeft - 25, openingItem.offsetTop - treeList.clientHeight / 2);
       setOpening(false);
       if (treeItemActive.isItemActive) {
         setScrolling(false);
@@ -120,16 +117,9 @@ function TreeItem({
 
   return (
     <li>
-      <div
-        className={opening ? "tree-element opening" : "tree-element"}
-        onClick={handleClick}
-      >
+      <div className={opening ? "tree-element opening" : "tree-element"} onClick={handleClick}>
         <div
-          className={
-            treeItemActive.isItemActive
-              ? "full-width-row active-row"
-              : "full-width-row"
-          }
+          className={treeItemActive.isItemActive ? "full-width-row active-row" : "full-width-row"}
         ></div>
         <div className="tree-icon">
           {isTree ? (

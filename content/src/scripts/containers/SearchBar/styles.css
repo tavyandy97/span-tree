@@ -35,7 +35,7 @@
   max-height: 35vh;
 }
 
-.results-loading {
+.spantree-results-loading {
   color: grey;
 }
 
@@ -71,12 +71,12 @@
   padding-left: 23px;
 }
 
-.in-fzy {
+.spantree-in-fzy {
   color: rgb(77, 61, 146);
   font-weight: bold;
 }
 
-.search-term {
+.spantree-search-term {
   margin-right: 10px;
 }
 

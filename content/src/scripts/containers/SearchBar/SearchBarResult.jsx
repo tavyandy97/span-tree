@@ -33,7 +33,7 @@ function renderHighlightedFileLocation(resultsLoading, query, term) {
       {arr.map((len, i) => {
         let charClass = "";
         if (isFzy) {
-          charClass = "in-fzy";
+          charClass = "spantree-in-fzy";
         }
         isFzy = !isFzy;
         const currString = term.substr(0, len);
@@ -44,7 +44,7 @@ function renderHighlightedFileLocation(resultsLoading, query, term) {
           </span>
         );
       })}
-      {term.length === 0 ? null : <span className="search-term">{term}</span>}
+      {term.length === 0 ? null : <span className="spantree-search-term">{term}</span>}
     </Fragment>
   );
 }

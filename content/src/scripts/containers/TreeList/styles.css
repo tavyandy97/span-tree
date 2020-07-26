@@ -1,4 +1,4 @@
-.loader-wrapper {
+.spantree-loader-wrapper {
   height: 100%;
   display: flex;
   justify-content: center;
@@ -6,32 +6,32 @@
   align-items: center;
 }
 
-.tree-list {
+.spantree-tree-list {
   scroll-behavior: smooth;
   overflow-y: auto;
   height: calc(100vh - 40px);
 }
 
-.tree-list::-webkit-scrollbar-track {
+.spantree-tree-list::-webkit-scrollbar-track {
   background-color: #c9c9c9;
 }
 
-.tree-list::-webkit-scrollbar-corner {
+.spantree-tree-list::-webkit-scrollbar-corner {
   background-color: #c9c9c9;
 }
 
-.tree-list::-webkit-scrollbar {
+.spantree-tree-list::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
-.tree-list::-webkit-scrollbar-thumb {
+.spantree-tree-list::-webkit-scrollbar-thumb {
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.parent-list {
+.spantree-parent-list {
   font-size: 0.875rem;
   padding: 0px 0px 0px 5px;
   list-style-type: none;

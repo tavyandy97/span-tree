@@ -32,7 +32,7 @@ const Resizer = ({ width, setWidth }) => {
 
   return (
     <div
-      className="resizer"
+      className="spantree-resizer"
       unselectable="on"
       style={{ left: width + "px" }}
       onMouseDown={mouseDownListener}

@@ -26,14 +26,12 @@
   --bshadow: 0 2px 4px var(--shadow);
   --t: transparent !important;
   --avatar: 25%;
-  --ui-font: "font_name", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Noto Sans", Ubuntu, Cantarell, "Helvetica Neue", var(--emoji-font),
-    sans-serif;
-  --mono-font: "font_name", "Menlo", "DejaVu Sans Mono", "Liberation Mono",
-    "Consolas", "Ubuntu Mono", "Courier New", "andale mono", "lucida console",
-    monospace;
-  --emoji-font: "font_name", "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol", "Noto Color Emoji";
+  --ui-font: "font_name", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", Ubuntu,
+    Cantarell, "Helvetica Neue", var(--emoji-font), sans-serif;
+  --mono-font: "font_name", "Menlo", "DejaVu Sans Mono", "Liberation Mono", "Consolas",
+    "Ubuntu Mono", "Courier New", "andale mono", "lucida console", monospace;
+  --emoji-font: "font_name", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji";
   --white: #fff;
   --bb: #222;
   --dark: #181818;
@@ -877,16 +875,10 @@ table:not(.code):not(#z):not(.shortcut-mappings)
   > th:not(:first-child):not(last-child) {
   border-left: none;
 }
-table:not(.code):not(#z):not(.shortcut-mappings)
-  tbody
-  > tr:first-child
-  > th:first-child {
+table:not(.code):not(#z):not(.shortcut-mappings) tbody > tr:first-child > th:first-child {
   border-radius: 4px 0 0 0;
 }
-table:not(.code):not(#z):not(.shortcut-mappings)
-  tbody
-  > tr:first-child
-  > th:last-child {
+table:not(.code):not(#z):not(.shortcut-mappings) tbody > tr:first-child > th:last-child {
   border-radius: 0 4px 0 0;
 }
 table:not(.code):not(#z):not(.shortcut-mappings)
@@ -901,16 +893,10 @@ table:not(.code):not(#z) tbody:first-child > tr:first-child > td:first-child {
 table:not(.code):not(#z) tbody:first-child > tr:first-child > td:last-child {
   border-radius: 0 4px 0 0;
 }
-table:not(.code):not(#z)
-  tbody:first-child
-  > tr:first-child:last-child
-  > td:first-child {
+table:not(.code):not(#z) tbody:first-child > tr:first-child:last-child > td:first-child {
   border-radius: 4px 0 0 4px;
 }
-table:not(.code):not(#z)
-  tbody:first-child
-  > tr:first-child:last-child
-  > td:last-child {
+table:not(.code):not(#z) tbody:first-child > tr:first-child:last-child > td:last-child {
   border-radius: 0 4px 4px 0;
 }
 table:not(.code):not(#z).grid-all > caption {
@@ -2108,12 +2094,7 @@ ul.content-list .snippet-info {
 .nav-sidebar .sidebar-top-level-items > li.active > a svg {
   fill: var(--light) !important;
 }
-.nav-sidebar
-  .sidebar-top-level-items
-  > li.active:not(.is-over)
-  > ul
-  > li.active
-  > a {
+.nav-sidebar .sidebar-top-level-items > li.active:not(.is-over) > ul > li.active > a {
   background-color: var(--darker) !important;
   box-shadow: inset 4px 0 var(--accent) !important;
 }
@@ -2372,8 +2353,7 @@ ul.content-list .snippet-info {
 .row-content-block.footer-block {
   background-color: var(--t) !important;
 }
-.row-content-block
-  .btn:not(.btn-link):not(.btn-success):not(.btn-danger):not(.btn-info),
+.row-content-block .btn:not(.btn-link):not(.btn-success):not(.btn-danger):not(.btn-info),
 .row-content-block .btn-default {
   background-color: var(--dark) !important;
 }
@@ -2486,9 +2466,7 @@ ul.content-list .snippet-info {
 .gitlab-tabs + .gitlab-tab-content .select2-choices {
   background-color: var(--dark) !important;
 }
-.gitlab-tabs
-  + .gitlab-tab-content
-  [class*="input-group"]:not(.template-input-group) {
+.gitlab-tabs + .gitlab-tab-content [class*="input-group"]:not(.template-input-group) {
   border-radius: 3px 0 0 3px;
   color: var(--light) !important;
   border-color: var(--darker) !important;
@@ -2815,20 +2793,10 @@ div.content_list > .event-item {
   background-color: var(--darker) !important;
 }
 .animation-container [class*="skeleton-line-"]::after {
-  background-image: linear-gradient(
-    90deg,
-    var(--darker) 0%,
-    var(--darken) 50%,
-    var(--darker)
-  );
+  background-image: linear-gradient(90deg, var(--darker) 0%, var(--darken) 50%, var(--darker));
 }
 [class*="card-skeleton-"]::after {
-  background-image: linear-gradient(
-    90deg,
-    var(--darker) 0%,
-    var(--darken) 50%,
-    var(--darker)
-  );
+  background-image: linear-gradient(90deg, var(--darker) 0%, var(--darken) 50%, var(--darker));
 }
 .gl-spinner.gl-spinner-dark {
   border-color: var(--darker) !important;
@@ -4328,13 +4296,7 @@ div[class*="mini-pipe"] li:hover [class*="dropdown-item"] {
   border: none !important;
   border-radius: 0 0 3px 3px !important;
 }
-.mr-state-widget
-  .mr-widget-extension
-  + .border-top
-  > table:not(#z)
-  thead
-  > tr
-  > th {
+.mr-state-widget .mr-widget-extension + .border-top > table:not(#z) thead > tr > th {
   background-color: var(--bb) !important;
 }
 .mr-state-widget .mr-section-container {
@@ -5067,12 +5029,8 @@ div[class*="mini-pipe"] li:hover [class*="dropdown-item"] {
 .code.none .line_holder.diff-expanded + :not(.diff-expanded) > td {
   border-color: var(--darker) !important;
 }
-.code.white
-  .line_holder[class*="holder"]:not(.new):not(.old):hover
-  > td[class*="line"]::before,
-.code.none
-  .line_holder[class*="holder"]:not(.new):not(.old):hover
-  > td[class*="line"]::before {
+.code.white .line_holder[class*="holder"]:not(.new):not(.old):hover > td[class*="line"]::before,
+.code.none .line_holder[class*="holder"]:not(.new):not(.old):hover > td[class*="line"]::before {
   content: "";
   z-index: -1;
   opacity: 0.5;
@@ -5090,18 +5048,10 @@ div[class*="mini-pipe"] li:hover [class*="dropdown-item"] {
 .code.none .line_holder.new:hover > .diff-line-num::after {
   opacity: 0.3 !important;
 }
-.code.white
-  .line_holder.old:hover
-  > td[class*="line"]:not([class*="num"])::after,
-.code.none
-  .line_holder.old:hover
-  > td[class*="line"]:not([class*="num"])::after,
-.code.white
-  .line_holder.new:hover
-  > td[class*="line"]:not([class*="num"])::after,
-.code.none
-  .line_holder.new:hover
-  > td[class*="line"]:not([class*="num"])::after {
+.code.white .line_holder.old:hover > td[class*="line"]:not([class*="num"])::after,
+.code.none .line_holder.old:hover > td[class*="line"]:not([class*="num"])::after,
+.code.white .line_holder.new:hover > td[class*="line"]:not([class*="num"])::after,
+.code.none .line_holder.new:hover > td[class*="line"]:not([class*="num"])::after {
   opacity: 0.3 !important;
 }
 .code.white.white,
@@ -5199,10 +5149,7 @@ div[class*="mini-pipe"] li:hover [class*="dropdown-item"] {
 .user-profile .activities-block [data-href] .hide:first-child:last-child > div {
   display: none;
 }
-.user-profile
-  .activities-block
-  [data-href]
-  .hide:first-child:last-child::before {
+.user-profile .activities-block [data-href] .hide:first-child:last-child::before {
   content: "No recent activities";
   font-size: 15px;
   color: var(--light) !important;
@@ -5219,11 +5166,7 @@ div[class*="mini-pipe"] li:hover [class*="dropdown-item"] {
 .roadmap-container .timeline-header-blank::before {
   border-color: var(--darker) !important;
   box-shadow: none !important;
-  background: linear-gradient(
-    to bottom,
-    var(--shadow) 0%,
-    var(--t) 100%
-  ) !important;
+  background: linear-gradient(to bottom, var(--shadow) 0%, var(--t) 100%) !important;
 }
 .roadmap-container .timeline-header-item .item-label {
   color: var(--light) !important;
@@ -5346,24 +5289,13 @@ div[class*="mini-pipe"] li:hover [class*="dropdown-item"] {
 .notes.timeline > .timeline-entry .note-text + .flex-list div[class*="toggle"] {
   color: var(--accent) !important;
 }
-.notes.timeline
-  > .timeline-entry
-  .note-text
-  + .description-version
-  > pre.wrapper {
+.notes.timeline > .timeline-entry .note-text + .description-version > pre.wrapper {
   border-radius: 4px;
 }
-.notes.timeline
-  > .timeline-entry
-  .note-actions-item
-  > [class*="button"]:hover::before {
+.notes.timeline > .timeline-entry .note-actions-item > [class*="button"]:hover::before {
   content: unset !important;
 }
-.notes.timeline
-  > .timeline-entry
-  .note-actions-item
-  > [class*="button"]:hover
-  svg {
+.notes.timeline > .timeline-entry .note-actions-item > [class*="button"]:hover svg {
   fill: var(--light) !important;
 }
 .notes.timeline > .timeline-entry .edited-text,
@@ -6683,16 +6615,16 @@ html {
 .pane-header {
   height: 50px !important;
 }
-.tree-list {
+.spantree-tree-list {
   height: calc(100vh - 50px) !important;
 }
-.tree-list::-webkit-scrollbar-thumb {
+.spantree-tree-list::-webkit-scrollbar-thumb {
   background-color: rgba(130, 130, 130, 0.5) !important;
 }
-.tree-list::-webkit-scrollbar-track {
+.spantree-tree-list::-webkit-scrollbar-track {
   background-color: var(--darken) !important;
 }
-.tree-list::-webkit-scrollbar-corner {
+.spantree-tree-list::-webkit-scrollbar-corner {
   background-color: var(--darken) !important;
 }
 .backdrop {
@@ -6719,7 +6651,7 @@ html {
 .spantree-result-active {
   background: var(--darker) !important;
 }
-.in-fzy {
+.spantree-in-fzy {
   color: rgb(146, 122, 249) !important;
 }
 

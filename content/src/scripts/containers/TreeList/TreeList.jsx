@@ -19,13 +19,13 @@ const renderTreeItems = (
   rendering,
   setRendering,
   scrolling,
-  setScrolling
+  setScrolling,
 ) => {
   const URLDetails = fetchURLDetails();
 
   return (
-    <div className="tree-list">
-      <ul className="parent-list">
+    <div className="spantree-tree-list">
+      <ul className="spantree-parent-list">
         {Object.keys(tree).map((key) => (
           <TreeItem
             width={width}
@@ -97,7 +97,7 @@ function TreeList({
           repoName: URLDetails.dirFormatted,
           branchName: URLDetails.branchName,
           tabId,
-        }
+        },
       );
     }
     setFirstPageLoad(false);
@@ -113,7 +113,7 @@ function TreeList({
 
   if (loading)
     return (
-      <div className="loader-wrapper">
+      <div className="spantree-loader-wrapper">
         <Loader size="64px" />
       </div>
     );
@@ -139,7 +139,7 @@ function TreeList({
         branchName: URLDetails.branchName,
         path: path,
         tabId,
-      }
+      },
     );
   };
 
@@ -153,7 +153,7 @@ function TreeList({
     rendering,
     setRendering,
     scrolling,
-    setScrolling
+    setScrolling,
   );
 }
 
