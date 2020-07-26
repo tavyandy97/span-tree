@@ -4,7 +4,11 @@ import { connect } from "react-redux";
 import Loader from "../../components/Loader";
 import TreeItem from "../../components/TreeItem";
 import { fetchURLDetails } from "../../utils/url";
-import { getInitialTree, openDir, closeDir } from "../../../../../event/src/actions/API";
+import {
+  getInitialTree,
+  openDir,
+  closeDir,
+} from "../../../../../event/src/actions/API";
 import { setClicked } from "../../../../../event/src/actions/UI";
 
 import "./styles.css";
@@ -19,7 +23,7 @@ const renderTreeItems = (
   rendering,
   setRendering,
   scrolling,
-  setScrolling,
+  setScrolling
 ) => {
   const URLDetails = fetchURLDetails();
 
@@ -97,7 +101,7 @@ function TreeList({
           repoName: URLDetails.dirFormatted,
           branchName: URLDetails.branchName,
           tabId,
-        },
+        }
       );
     }
     setFirstPageLoad(false);
@@ -139,7 +143,7 @@ function TreeList({
         branchName: URLDetails.branchName,
         path: path,
         tabId,
-      },
+      }
     );
   };
 
@@ -153,7 +157,7 @@ function TreeList({
     rendering,
     setRendering,
     scrolling,
-    setScrolling,
+    setScrolling
   );
 }
 

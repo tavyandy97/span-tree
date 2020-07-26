@@ -12,7 +12,7 @@ function Loader({ size }) {
         width: size,
         height: size,
       }}
-      className="loader"
+      className="spantree-loader"
     ></div>
   );
 }

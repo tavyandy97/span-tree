@@ -1,5 +1,5 @@
 export default () => {
-  self.addEventListener('message', (e) => {
+  self.addEventListener("message", (e) => {
     if (!e) return;
     let searchTerms = e.data.searchTerms;
     let URLDetails = e.data.URLDetails;
@@ -26,15 +26,15 @@ export default () => {
       let m = haystack.length;
       let match_bonus = new Array(m);
 
-      let last_ch = '/';
+      let last_ch = "/";
       for (let i = 0; i < m; i++) {
         let ch = haystack[i];
 
-        if (last_ch === '/') {
+        if (last_ch === "/") {
           match_bonus[i] = SCORE_MATCH_SLASH;
-        } else if (last_ch === '-' || last_ch === '_' || last_ch === ' ') {
+        } else if (last_ch === "-" || last_ch === "_" || last_ch === " ") {
           match_bonus[i] = SCORE_MATCH_WORD;
-        } else if (last_ch === '.') {
+        } else if (last_ch === ".") {
           match_bonus[i] = SCORE_MATCH_DOT;
         } else if (fzyIsLower(last_ch) && fzyIsUpper(ch)) {
           match_bonus[i] = SCORE_MATCH_CAPITAL;
@@ -152,8 +152,13 @@ export default () => {
         const reRegExpChar = /[\\^$.*+?()[\]{}|]/g,
           reHasRegExpChar = RegExp(reRegExpChar.source);
         const escapeRegExp = (string) =>
-          reHasRegExpChar.test(string) ? string.replace(reRegExpChar, '\\$&') : string;
-        const regex = new RegExp(query.split('').map(escapeRegExp).join('.*'), 'i');
+          reHasRegExpChar.test(string)
+            ? string.replace(reRegExpChar, "\\$&")
+            : string;
+        const regex = new RegExp(
+          query.split("").map(escapeRegExp).join(".*"),
+          "i"
+        );
         let resultArray = searchTerms[URLDetails.dirFormatted][
           URLDetails.branchName
         ].filter((ele) => ele.match(regex));

@@ -1,4 +1,4 @@
-.tree-element {
+.spantree-tree-element {
   padding: 2px 15px 2px 0px;
   display: flex;
   height: 24px;
@@ -6,40 +6,40 @@
   width: max-content;
 }
 
-.child-list {
+.spantree-child-list {
   list-style-type: none;
   padding: 0px 0px 0px 20px;
 }
 
-.tree-icon {
+.spantree-tree-icon {
   width: 16px;
   text-align: center;
   margin-right: 5px;
   padding-bottom: 2px;
 }
 
-.file-icon {
+.spantree-file-icon {
   width: 22px;
   text-align: left;
 }
 
-.file-icon i {
+.spantree-file-icon i {
   font-style: normal;
 }
 
-.item-name {
+.spantree-item-name {
   width: max-content;
 }
 
-.arrow {
+.spantree-arrow {
   transition: all 0.2s;
 }
 
-.arrow-down {
+.spantree-arrow-down {
   transform: rotate(90deg);
 }
 
-.full-width-row {
+.spantree-full-width-row {
   position: absolute;
   height: 24px;
   width: 100%;
@@ -51,16 +51,16 @@
   box-sizing: border-box;
 }
 
-.active-row {
-  border: 3px solid black;
-  background: darkslategrey;
-}
-
-.full-width-row:hover {
+.spantree-full-width-row:hover {
   background: #6464ff;
   cursor: pointer;
 }
 
-.full-width-row:active {
+.spantree-full-width-row:active {
   background: blue;
+}
+
+.spantree-active-row {
+  border: 3px solid black;
+  background: darkslategrey;
 }

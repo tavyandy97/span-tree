@@ -44,7 +44,9 @@ function renderHighlightedFileLocation(resultsLoading, query, term) {
           </span>
         );
       })}
-      {term.length === 0 ? null : <span className="spantree-search-term">{term}</span>}
+      {term.length === 0 ? null : (
+        <span className="spantree-search-term">{term}</span>
+      )}
     </Fragment>
   );
 }
@@ -76,7 +78,7 @@ function SearchBarResult({
       }}
     >
       <div className="spantree-search-file">
-        <div className="file-icon">
+        <div className="spantree-file-icon">
           <i className={fileIcons.getClassWithColor(fileName, false)}></i>
         </div>
         <div className="spantree-search-filename">{fileName}</div>

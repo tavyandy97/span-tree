@@ -1,4 +1,4 @@
-.tree-pane {
+.spantree-tree-pane {
   position: fixed;
   display: flex;
   box-sizing: border-box;
@@ -14,13 +14,13 @@
   box-shadow: 2px 0px 8px #00000070;
 }
 
-.pane-main {
+.spantree-pane-main {
   height: 100%;
   width: 100%;
   position: absolute;
 }
 
-.pane-header {
+.spantree-pane-header {
   height: 40px;
   background-color: rgb(77, 61, 146);
   color: white;
@@ -30,22 +30,22 @@
   justify-content: space-around;
 }
 
-.close-button {
+.spantree-close-button {
   cursor: pointer;
   margin: 0 4px;
 }
 
-.spread {
+.spantree-spread {
   display: flex;
   justify-content: space-between;
 }
 
-.tree-body {
+.spantree-tree-body {
   height: 100%;
   width: 100%;
 }
 
-.pane-details {
+.spantree-pane-details {
   display: inline-block;
   overflow: hidden;
   white-space: nowrap;
@@ -53,6 +53,6 @@
   font-weight: bold;
 }
 
-.pane-icons {
+.spantree-pane-icons {
   min-width: 35px;
 }

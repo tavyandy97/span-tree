@@ -28,7 +28,8 @@ function SearchBar({
     getSearchTerms({
       repoName: URLDetails.dirFormatted,
       branchName: URLDetails.branchName,
-      compatibilityMode: "compatibility-mode" in options && options["compatibility-mode"],
+      compatibilityMode:
+        "compatibility-mode" in options && options["compatibility-mode"],
     });
     worker.addEventListener("message", (event) => {
       const searchResultsFromWorker = event.data;
@@ -71,16 +72,19 @@ function SearchBar({
       } else if (event.key === "ArrowUp" && showSearchbar) {
         event.preventDefault();
         setActiveResult(
-          (activeResult) => (searchResults.length + activeResult - 1) % searchResults.length,
+          (activeResult) =>
+            (searchResults.length + activeResult - 1) % searchResults.length
         );
       } else if (event.key === "ArrowDown" && showSearchbar) {
         event.preventDefault();
-        setActiveResult((activeResult) => (activeResult + 1) % searchResults.length);
+        setActiveResult(
+          (activeResult) => (activeResult + 1) % searchResults.length
+        );
       } else if (event.key === "Escape" && showSearchbar) {
         setShowSearchbar(false);
       }
     },
-    [showSearchbar, activeResult, searchResults],
+    [showSearchbar, activeResult, searchResults]
   );
 
   useEventListener("keydown", handleKeyDown);
@@ -108,9 +112,11 @@ function SearchBar({
 
   const isMac = ["Macintosh", "MacIntel", "MacPPC", "Mac68K"].reduce(
     (accumulator, currentValue) => {
-      return window.navigator.platform.indexOf(currentValue) !== -1 || accumulator;
+      return (
+        window.navigator.platform.indexOf(currentValue) !== -1 || accumulator
+      );
     },
-    false,
+    false
   );
 
   const workerCall = () => {
@@ -132,7 +138,7 @@ function SearchBar({
       setTimeout(() => {
         workerCall();
         setDebounceTimerId(null);
-      }, 500),
+      }, 500)
     );
   };
 
@@ -140,7 +146,10 @@ function SearchBar({
 
   return (
     <Fragment>
-      <Backdrop showSearchbar={showSearchbar} setShowSearchbar={setShowSearchbar} />
+      <Backdrop
+        showSearchbar={showSearchbar}
+        setShowSearchbar={setShowSearchbar}
+      />
       <div className="spantree-search">
         <div className="spantree-searchbar">
           <input
@@ -176,7 +185,12 @@ function SearchBar({
         <div className="spantree-search-help">
           <span className="spantree-search-help-item">
             <code>
-              {isMac ? <span className="spantree-search-help-item-icon">⌘</span> : "Ctrl"} + P
+              {isMac ? (
+                <span className="spantree-search-help-item-icon">⌘</span>
+              ) : (
+                "Ctrl"
+              )}{" "}
+              + P
             </code>{" "}
             to Search
           </span>
@@ -185,8 +199,12 @@ function SearchBar({
           </span>
           <span className="spantree-search-help-item">
             <code>
-              {isMac ? <span className="spantree-search-help-item-icon">⌘</span> : "Ctrl"} +{" "}
-              {isMac ? "return" : "Enter"}
+              {isMac ? (
+                <span className="spantree-search-help-item-icon">⌘</span>
+              ) : (
+                "Ctrl"
+              )}{" "}
+              + {isMac ? "return" : "Enter"}
             </code>{" "}
             to Open in New Tab
           </span>

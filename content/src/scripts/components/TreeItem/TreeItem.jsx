@@ -34,13 +34,13 @@ function TreeItem({
       setClicked(true);
       const URLDetails = fetchURLDetails();
       if ("compatibility-mode" in options && options["compatibility-mode"]) {
-        window.location.href = `${window.location.origin}/${URLDetails.dirFormatted}/blob/${
-          URLDetails.branchName
-        }/${path.join("/")}`;
+        window.location.href = `${window.location.origin}/${
+          URLDetails.dirFormatted
+        }/blob/${URLDetails.branchName}/${path.join("/")}`;
       } else {
-        window.location.href = `${window.location.origin}/${URLDetails.dirFormatted}/-/blob/${
-          URLDetails.branchName
-        }/${path.join("/")}`;
+        window.location.href = `${window.location.origin}/${
+          URLDetails.dirFormatted
+        }/-/blob/${URLDetails.branchName}/${path.join("/")}`;
       }
     }
   };
@@ -107,7 +107,10 @@ function TreeItem({
       const openingItem = document.querySelector(".opening");
       document
         .querySelector(".spantree-tree-list")
-        .scrollTo(openingItem.offsetLeft - 25, openingItem.offsetTop - treeList.clientHeight / 2);
+        .scrollTo(
+          openingItem.offsetLeft - 25,
+          openingItem.offsetTop - treeList.clientHeight / 2
+        );
       setOpening(false);
       if (treeItemActive.isItemActive) {
         setScrolling(false);
@@ -117,28 +120,37 @@ function TreeItem({
 
   return (
     <li>
-      <div className={opening ? "tree-element opening" : "tree-element"} onClick={handleClick}>
+      <div
+        className={
+          opening ? "spantree-tree-element opening" : "spantree-tree-element"
+        }
+        onClick={handleClick}
+      >
         <div
-          className={treeItemActive.isItemActive ? "full-width-row active-row" : "full-width-row"}
+          className={
+            treeItemActive.isItemActive
+              ? "spantree-full-width-row spantree-active-row"
+              : "spantree-full-width-row"
+          }
         ></div>
-        <div className="tree-icon">
+        <div className="spantree-tree-icon">
           {isTree ? (
             isTree.isOpen ? (
-              <i className="fa fa-chevron-right arrow arrow-down"></i>
+              <i className="fa fa-chevron-right spantree-arrow spantree-arrow-down"></i>
             ) : (
-              <i className="fa fa-chevron-right arrow"></i>
+              <i className="fa fa-chevron-right spantree-arrow"></i>
             )
           ) : (
             " "
           )}
         </div>
-        <div className="file-icon">
+        <div className="spantree-file-icon">
           <i className={fileIcons.getClassWithColor(name, isTree)}></i>
         </div>
-        <div className="item-name">{name}</div>
+        <div className="spantree-item-name">{name}</div>
       </div>
       {isTree && isTree.isOpen && (
-        <ul className="child-list">
+        <ul className="spantree-child-list">
           {Object.keys(children).map((key) => (
             <TreeItem
               key={key}
