@@ -136,9 +136,9 @@ function TreeItem({
         <div className="spantree-tree-icon">
           {isTree ? (
             isTree.isOpen ? (
-              <i className="tree-arrow-icon spantree-arrow spantree-arrow-down"></i>
+              <i className="tree-arrow-down-icon spantree-arrow"></i>
             ) : (
-              <i className="tree-arrow-icon spantree-arrow"></i>
+              <i className="tree-arrow-right-icon spantree-arrow"></i>
             )
           ) : (
             " "

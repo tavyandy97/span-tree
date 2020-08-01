@@ -14,7 +14,7 @@
 .spantree-tree-icon {
   width: 16px;
   text-align: center;
-  margin-right: 5px;
+  margin-right: 2px;
   padding-bottom: 2px;
 }
 
@@ -33,11 +33,7 @@
 
 .spantree-arrow {
   font-style: normal;
-  transition: all 0.2s;
-}
-
-.spantree-arrow-down {
-  transform: rotate(90deg);
+  transition: all 1s;
 }
 
 .spantree-full-width-row {

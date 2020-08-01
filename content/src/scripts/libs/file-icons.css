@@ -460,10 +460,17 @@
   font-size: 15px;
   top: 2px;
 }
-.tree-arrow-icon:before {
+.tree-arrow-right-icon:before {
   font-family: FontAwesome;
   font-size: 10px;
   content: "\f054";
+  font-size: 12px;
+  top: 5px;
+}
+.tree-arrow-down-icon:before {
+  font-family: FontAwesome;
+  font-size: 10px;
+  content: "\f078";
   font-size: 12px;
   top: 5px;
 }
