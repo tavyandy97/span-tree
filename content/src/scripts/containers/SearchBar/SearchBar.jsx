@@ -164,7 +164,7 @@ function SearchBar({
           className={
             resultsLoading <= 0
               ? "spantree-search-results"
-              : "spantree-search-results  results-loading"
+              : "spantree-search-results  spantree-results-loading"
           }
         >
           {searchResults.map((resultTerm, index) => {

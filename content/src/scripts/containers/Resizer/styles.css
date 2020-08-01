@@ -1,10 +1,10 @@
-.resizer {
+.spantree-resizer {
   /*background: red;*/
   width: 8px;
   position: relative;
   opacity: 100%;
 }
 
-.resizer:hover {
+.spantree-resizer:hover {
   cursor: col-resize;
 }

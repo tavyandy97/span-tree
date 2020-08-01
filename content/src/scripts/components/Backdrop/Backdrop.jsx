@@ -4,7 +4,10 @@ import "./styles.css";
 
 function Backdrop({ showSearchbar, setShowSearchbar }) {
   return showSearchbar ? (
-    <div className="backdrop" onClick={() => setShowSearchbar(false)}></div>
+    <div
+      className="spantree-backdrop"
+      onClick={() => setShowSearchbar(false)}
+    ></div>
   ) : null;
 }
 

@@ -42,11 +42,11 @@ function Pane({
   const URLDetails = fetchURLDetails();
 
   return (
-    <div className="tree-pane" style={{ width: width + "px" }}>
-      <div className="pane-main">
-        <div className="pane-header">
-          <div className="spread">
-            <div className="pane-details">
+    <div className="spantree-tree-pane" style={{ width: width + "px" }}>
+      <div className="spantree-pane-main">
+        <div className="spantree-pane-header">
+          <div className="spantree-spread">
+            <div className="spantree-pane-details">
               <SVG
                 icon="repo"
                 height="12"
@@ -54,17 +54,20 @@ function Pane({
               />{" "}
               {URLDetails.dirFormatted}
             </div>
-            <div className="pane-icons">
-              <span onClick={switchTheme} className="close-button">
+            <div className="spantree-pane-icons">
+              <span onClick={switchTheme} className="spantree-close-button">
                 <SVG icon="half" height="9" />
               </span>
-              <span onClick={toggleOpened} className="close-button">
+              <span onClick={toggleOpened} className="spantree-close-button">
                 <SVG icon="close" height="12" />
               </span>
             </div>
           </div>
-          <div className="spread">
-            <div className="pane-details" style={{ width: width - 12 + "px" }}>
+          <div className="spantree-spread">
+            <div
+              className="spantree-pane-details"
+              style={{ width: width - 12 + "px" }}
+            >
               <SVG
                 icon="branch"
                 height="12"
@@ -72,12 +75,15 @@ function Pane({
               />{" "}
               {URLDetails.branchName}
             </div>
-            <span onClick={setShowSearchbarTrue} className="close-button">
+            <span
+              onClick={setShowSearchbarTrue}
+              className="spantree-close-button"
+            >
               <SVG icon="search" height="9" />
             </span>
           </div>
         </div>
-        <div className="tree-body">
+        <div className="spantree-tree-body">
           {tabId ? (
             <TreeList
               firstPageLoad={firstPageLoad}

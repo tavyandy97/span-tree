@@ -4,7 +4,11 @@ import { connect } from "react-redux";
 import Loader from "../../components/Loader";
 import TreeItem from "../../components/TreeItem";
 import { fetchURLDetails } from "../../utils/url";
-import { getInitialTree, openDir, closeDir } from "../../../../../event/src/actions/API";
+import {
+  getInitialTree,
+  openDir,
+  closeDir,
+} from "../../../../../event/src/actions/API";
 import { setClicked } from "../../../../../event/src/actions/UI";
 
 import "./styles.css";
@@ -24,8 +28,8 @@ const renderTreeItems = (
   const URLDetails = fetchURLDetails();
 
   return (
-    <div className="tree-list">
-      <ul className="parent-list">
+    <div className="spantree-tree-list">
+      <ul className="spantree-parent-list">
         {Object.keys(tree).map((key) => (
           <TreeItem
             width={width}
@@ -113,7 +117,7 @@ function TreeList({
 
   if (loading)
     return (
-      <div className="loader-wrapper">
+      <div className="spantree-loader-wrapper">
         <Loader size="64px" />
       </div>
     );

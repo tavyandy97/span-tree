@@ -6680,22 +6680,22 @@ html {
 }
 
 /*SpanTree Styles*/
-.pane-header {
+.spantree-pane-header {
   height: 50px !important;
 }
-.tree-list {
+.spantree-tree-list {
   height: calc(100vh - 50px) !important;
 }
-.tree-list::-webkit-scrollbar-thumb {
+.spantree-tree-list::-webkit-scrollbar-thumb {
   background-color: rgba(130, 130, 130, 0.5) !important;
 }
-.tree-list::-webkit-scrollbar-track {
+.spantree-tree-list::-webkit-scrollbar-track {
   background-color: var(--darken) !important;
 }
-.tree-list::-webkit-scrollbar-corner {
+.spantree-tree-list::-webkit-scrollbar-corner {
   background-color: var(--darken) !important;
 }
-.backdrop {
+.spantree-backdrop {
   background-color: rgba(0, 0, 0, 0.51);
 }
 .spantree-search {
@@ -6719,7 +6719,7 @@ html {
 .spantree-result-active {
   background: var(--darker) !important;
 }
-.in-fzy {
+.spantree-in-fzy {
   color: rgb(146, 122, 249) !important;
 }
 

@@ -103,10 +103,10 @@ function TreeItem({
 
   useEffect(() => {
     if (opening && scrolling) {
-      const treeList = document.querySelector(".tree-list");
+      const treeList = document.querySelector(".spantree-tree-list");
       const openingItem = document.querySelector(".opening");
       document
-        .querySelector(".tree-list")
+        .querySelector(".spantree-tree-list")
         .scrollTo(
           openingItem.offsetLeft - 25,
           openingItem.offsetTop - treeList.clientHeight / 2
@@ -121,34 +121,36 @@ function TreeItem({
   return (
     <li>
       <div
-        className={opening ? "tree-element opening" : "tree-element"}
+        className={
+          opening ? "spantree-tree-element opening" : "spantree-tree-element"
+        }
         onClick={handleClick}
       >
         <div
           className={
             treeItemActive.isItemActive
-              ? "full-width-row active-row"
-              : "full-width-row"
+              ? "spantree-full-width-row spantree-active-row"
+              : "spantree-full-width-row"
           }
         ></div>
-        <div className="tree-icon">
+        <div className="spantree-tree-icon">
           {isTree ? (
             isTree.isOpen ? (
-              <i className="fa fa-chevron-right arrow arrow-down"></i>
+              <i className="tree-arrow-down-icon spantree-arrow"></i>
             ) : (
-              <i className="fa fa-chevron-right arrow"></i>
+              <i className="tree-arrow-right-icon spantree-arrow"></i>
             )
           ) : (
             " "
           )}
         </div>
-        <div className="file-icon">
+        <div className="spantree-file-icon">
           <i className={fileIcons.getClassWithColor(name, isTree)}></i>
         </div>
-        <div className="item-name">{name}</div>
+        <div className="spantree-item-name">{name}</div>
       </div>
       {isTree && isTree.isOpen && (
-        <ul className="child-list">
+        <ul className="spantree-child-list">
           {Object.keys(children).map((key) => (
             <TreeItem
               key={key}
