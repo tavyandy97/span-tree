@@ -460,6 +460,13 @@
   font-size: 15px;
   top: 2px;
 }
+.tree-arrow-icon:before {
+  font-family: FontAwesome;
+  font-size: 10px;
+  content: "\f054";
+  font-size: 12px;
+  top: 5px;
+}
 .twig-icon:before {
   font-family: FontAwesome;
   font-size: 13px;
