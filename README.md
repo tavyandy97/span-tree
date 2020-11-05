@@ -1,4 +1,4 @@
-# SpanTree
+# 🌳 SpanTree
 
 [![](https://img.shields.io/github/stars/tavyandy97/span-tree?color=red&style=for-the-badge)](https://github.com/tavyandy97/span-tree)&nbsp;
 [![](https://img.shields.io/chrome-web-store/users/gcjikeldobhnaglcoaejmdlmbienoocg?style=for-the-badge)](https://chrome.google.com/webstore/detail/spantree-gitlab-tree/gcjikeldobhnaglcoaejmdlmbienoocg)&nbsp;
@@ -8,7 +8,7 @@
 
 ![](docs//banner.png)
 
-## About
+## 📖 About
 
 Browser extension that makes navigating a GitLab repository feel like a breeze by providing a familiar tree structure.<br>
 - [Chrome Extension](https://chrome.google.com/webstore/detail/spantree-gitlab-tree/gcjikeldobhnaglcoaejmdlmbienoocg)<br>
@@ -16,7 +16,11 @@ Browser extension that makes navigating a GitLab repository feel like a breeze b
 
 ![](docs/demo.gif)
 
-## Development Setup
+## ✨ Stargazers
+
+[![Stargazers repo roster for @tavyandy97/span-tree](https://reporoster.com/stars/tavyandy97/span-tree)](https://github.com/tavyandy97/span-tree/stargazers)
+
+## 💻 Development Setup
 
 Pre-Requisites:
 
@@ -50,7 +54,7 @@ Steps:
 
    (For reference follow: https://thoughtbot.com/blog/how-to-make-a-chrome-extension)
 
-## Credits
+## 💳 Credits
 
 SpanTree uses the following open-source packages:
 
