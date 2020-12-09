@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { connect } from "react-redux";
 
-import Loader from '../../components/Loader';
-import TreeItem from '../../components/TreeItem';
-import { fetchURLDetails } from '../../utils/url';
-import { getInitialTree, openDir, closeDir } from '../../../../../event/src/actions/API';
-import { setClicked } from '../../../../../event/src/actions/UI';
+import Loader from "../../components/Loader";
+import TreeItem from "../../components/TreeItem";
+import { fetchURLDetails } from "../../utils/url";
+import { getInitialTree, openDir, closeDir } from "../../../../../event/src/actions/API";
+import { setClicked } from "../../../../../event/src/actions/UI";
 
-import './styles.css';
+import "./styles.css";
 
 const renderTreeItems = (
   tree,
@@ -24,8 +24,8 @@ const renderTreeItems = (
   const URLDetails = fetchURLDetails();
 
   return (
-    <div className='spantree-tree-list'>
-      <ul className='spantree-parent-list'>
+    <div className="spantree-tree-list">
+      <ul className="spantree-parent-list">
         {Object.keys(tree).map((key) => (
           <TreeItem
             width={width}
@@ -69,7 +69,7 @@ function TreeList({
 
   const URLDetails = fetchURLDetails();
 
-  const defaultOptions = { 'auto-theme': false, 'compatibility-mode': true };
+  const defaultOptions = { "auto-theme": false, "compatibility-mode": true };
 
   const shouldGetTree = () => {
     if (!(tree && tree[tabId])) {
@@ -115,8 +115,8 @@ function TreeList({
 
   if (loading)
     return (
-      <div className='spantree-loader-wrapper'>
-        <Loader size='64px' />
+      <div className="spantree-loader-wrapper">
+        <Loader size="64px" />
       </div>
     );
 
@@ -134,7 +134,7 @@ function TreeList({
       path,
       {
         ref: URLDetails.branchNameURL,
-        path: encodeURIComponent(path.join('/')),
+        path: encodeURIComponent(path.join("/")),
       },
       {
         repoName: URLDetails.dirFormatted,
