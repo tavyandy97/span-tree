@@ -32,7 +32,9 @@ function Options({ options, optionList, changeOptions }) {
   return optionList.map((option) => (
     <Option
       id={option.keyName}
-      value={option.keyName in options ? options[option.keyName] : option.defaultVal}
+      value={
+        option.keyName in options ? options[option.keyName] : option.defaultVal
+      }
       label={option.name}
       type={option.type}
       handleChange={handleChangeOptions}

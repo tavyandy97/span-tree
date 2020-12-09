@@ -45,10 +45,17 @@ function Pane({
   return (
     <div className="spantree-tree-pane" style={{ width: width + "px" }}>
       <div className="spantree-pane-main">
-        <div className="spantree-pane-header" style={getHeaderBackgroundColor()}>
+        <div
+          className="spantree-pane-header"
+          style={getHeaderBackgroundColor()}
+        >
           <div className="spantree-spread">
             <div className="spantree-pane-details">
-              <SVG icon="repo" height="12" style={{ verticalAlign: "middle" }} />{" "}
+              <SVG
+                icon="repo"
+                height="12"
+                style={{ verticalAlign: "middle" }}
+              />{" "}
               {URLDetails.dirFormatted}
             </div>
             <div className="spantree-pane-icons">
@@ -61,11 +68,21 @@ function Pane({
             </div>
           </div>
           <div className="spantree-spread">
-            <div className="spantree-pane-details" style={{ width: width - 12 + "px" }}>
-              <SVG icon="branch" height="12" style={{ verticalAlign: "middle" }} />{" "}
+            <div
+              className="spantree-pane-details"
+              style={{ width: width - 12 + "px" }}
+            >
+              <SVG
+                icon="branch"
+                height="12"
+                style={{ verticalAlign: "middle" }}
+              />{" "}
               {URLDetails.branchName}
             </div>
-            <span onClick={setShowSearchbarTrue} className="spantree-close-button">
+            <span
+              onClick={setShowSearchbarTrue}
+              className="spantree-close-button"
+            >
               <SVG icon="search" height="9" />
             </span>
           </div>
