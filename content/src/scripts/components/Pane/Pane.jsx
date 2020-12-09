@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { TabIdentifierClient } from "chrome-tab-identifier";
 
 import SVG from "../SVG";
 import TreeList from "../../containers/TreeList/TreeList";
 import Resizer from "../../containers/Resizer";
+import { OptionsContext } from "../../contexts/OptionsContext";
 import { fetchURLDetails } from "../../utils/url";
 import { switchTheme } from "../../utils/themeList";
 import getHeaderBackgroundColor from "../../utils/backgroundColor";
@@ -22,7 +23,11 @@ function Pane({
   reloading,
   setReloading,
 }) {
+  const { options } = useContext(OptionsContext);
   const [tabId, setTabId] = useState();
+  const [headerStyle, setHeaderStyle] = useState(
+    getHeaderBackgroundColor(options),
+  );
 
   useEffect(() => {
     tabIdClient.getTabId().then((tab) => {
@@ -45,10 +50,7 @@ function Pane({
   return (
     <div className="spantree-tree-pane" style={{ width: width + "px" }}>
       <div className="spantree-pane-main">
-        <div
-          className="spantree-pane-header"
-          style={getHeaderBackgroundColor()}
-        >
+        <div className="spantree-pane-header" style={headerStyle}>
           <div className="spantree-spread">
             <div className="spantree-pane-details">
               <SVG
@@ -59,7 +61,15 @@ function Pane({
               {URLDetails.dirFormatted}
             </div>
             <div className="spantree-pane-icons">
-              <span onClick={switchTheme} className="spantree-close-button">
+              <span
+                onClick={() => {
+                  switchTheme();
+                  setTimeout(() => {
+                    setHeaderStyle(getHeaderBackgroundColor(options));
+                  }, 100);
+                }}
+                className="spantree-close-button"
+              >
                 <SVG icon="half" height="9" />
               </span>
               <span onClick={toggleOpened} className="spantree-close-button">

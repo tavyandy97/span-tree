@@ -1,10 +1,4 @@
-import { useContext } from "react";
-
-import { OptionsContext } from "../contexts/OptionsContext";
-
-const getHeaderBackgroundColor = () => {
-  const { options } = useContext(OptionsContext);
-
+const getHeaderBackgroundColor = (options) => {
   if ("auto-theme" in options && options["auto-theme"]) {
     const fetchedValue = window
       .getComputedStyle(document.querySelector("header"))
