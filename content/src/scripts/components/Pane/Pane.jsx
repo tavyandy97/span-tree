@@ -45,6 +45,10 @@ function Pane({
     setReloading(true);
   });
 
+  useEffect(() => {
+    setHeaderStyle(getHeaderBackgroundColor(options));
+  }, [options]);
+
   const URLDetails = fetchURLDetails();
 
   return (
