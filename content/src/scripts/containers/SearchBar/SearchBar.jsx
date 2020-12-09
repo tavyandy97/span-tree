@@ -23,13 +23,21 @@ function SearchBar({
   const [resultsLoading, setResultsLoading] = useState(0);
   const [debounceTimerId, setDebounceTimerId] = useState(null);
 
+  const defaultOptions = { "auto-theme": false, "compatibility-mode": true };
+  Object.keys(defaultOptions).forEach((key) => {
+    if (key in options) {
+      defaultOptions[key] = options[key];
+    }
+  });
+
   useEffect(() => {
     const URLDetails = fetchURLDetails();
     getSearchTerms({
       repoName: URLDetails.dirFormatted,
       branchName: URLDetails.branchName,
       compatibilityMode:
-        "compatibility-mode" in options && options["compatibility-mode"],
+        "compatibility-mode" in defaultOptions &&
+        defaultOptions["compatibility-mode"],
     });
     worker.addEventListener("message", (event) => {
       const searchResultsFromWorker = event.data;
@@ -41,7 +49,10 @@ function SearchBar({
   const handleRedirect = (id, inNewTab) => {
     const URLDetails = fetchURLDetails();
     let finalURL = null;
-    if ("compatibility-mode" in options && options["compatibility-mode"]) {
+    if (
+      "compatibility-mode" in defaultOptions &&
+      defaultOptions["compatibility-mode"]
+    ) {
       finalURL = `${window.location.origin}/${URLDetails.dirFormatted}/blob/${
         URLDetails.branchName
       }/${encodeURI(searchResults[id])}`;
@@ -73,18 +84,18 @@ function SearchBar({
         event.preventDefault();
         setActiveResult(
           (activeResult) =>
-            (searchResults.length + activeResult - 1) % searchResults.length
+            (searchResults.length + activeResult - 1) % searchResults.length,
         );
       } else if (event.key === "ArrowDown" && showSearchbar) {
         event.preventDefault();
         setActiveResult(
-          (activeResult) => (activeResult + 1) % searchResults.length
+          (activeResult) => (activeResult + 1) % searchResults.length,
         );
       } else if (event.key === "Escape" && showSearchbar) {
         setShowSearchbar(false);
       }
     },
-    [showSearchbar, activeResult, searchResults]
+    [showSearchbar, activeResult, searchResults],
   );
 
   useEventListener("keydown", handleKeyDown);
@@ -116,7 +127,7 @@ function SearchBar({
         window.navigator.platform.indexOf(currentValue) !== -1 || accumulator
       );
     },
-    false
+    false,
   );
 
   const workerCall = () => {
@@ -138,7 +149,7 @@ function SearchBar({
       setTimeout(() => {
         workerCall();
         setDebounceTimerId(null);
-      }, 500)
+      }, 500),
     );
   };
 

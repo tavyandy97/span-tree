@@ -16,7 +16,6 @@ import "./styles.css";
 const renderTreeItems = (
   tree,
   width,
-  options,
   setClicked,
   close,
   open,
@@ -38,7 +37,6 @@ const renderTreeItems = (
             isTree={tree[key].isTree}
             path={tree[key].path}
             children={tree[key].children}
-            options={options}
             open={open}
             close={close}
             remainingURL={URLDetails.baseRemovedURL}
@@ -61,7 +59,6 @@ function TreeList({
   tree,
   width,
   clicked,
-  options,
   setClicked,
   getInitialTree,
   closeDir,
@@ -72,8 +69,6 @@ function TreeList({
   const initialMount = useRef(true);
 
   const URLDetails = fetchURLDetails();
-
-  const defaultOptions = { "auto-theme": false, "compatibility-mode": true };
 
   const shouldGetTree = () => {
     if (!(tree && tree[tabId])) {
@@ -152,7 +147,6 @@ function TreeList({
   return renderTreeItems(
     tree[tabId],
     width,
-    Object.keys(options) <= 0 ? defaultOptions : options,
     setClicked,
     closeDirectory,
     openDirectory,
@@ -168,7 +162,6 @@ const mapStateToProps = (state) => {
     tree: state.tree,
     width: state.width,
     clicked: state.clicked,
-    options: state.options,
   };
 };
 

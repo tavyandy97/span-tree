@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { Store } from "webext-redux";
 
 import App from "./containers/app/App";
+import { OptionsProvider } from "./contexts/OptionsContext";
 
 const proxyStore = new Store();
 
@@ -17,9 +18,11 @@ if (document.querySelector(".layout-page") !== null) {
   proxyStore.ready().then(() => {
     render(
       <Provider store={proxyStore}>
-        <App />
+        <OptionsProvider>
+          <App />
+        </OptionsProvider>
       </Provider>,
-      document.getElementById("rcr-anchor")
+      document.getElementById("rcr-anchor"),
     );
   });
 }

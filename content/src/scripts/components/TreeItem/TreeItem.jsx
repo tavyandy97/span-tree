@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 
+import { OptionsContext } from "../../contexts/OptionsContext";
 import { fetchURLDetails } from "../../utils/url";
 import fileIcons from "../../utils/file-icons";
 
@@ -12,7 +13,6 @@ function TreeItem({
   path,
   close,
   open,
-  options,
   children,
   remainingURL,
   rendering,
@@ -22,6 +22,7 @@ function TreeItem({
   setScrolling,
 }) {
   const [opening, setOpening] = useState(false);
+  const { options } = useContext(OptionsContext);
 
   const handleClick = () => {
     if (isTree) {
@@ -109,7 +110,7 @@ function TreeItem({
         .querySelector(".spantree-tree-list")
         .scrollTo(
           openingItem.offsetLeft - 25,
-          openingItem.offsetTop - treeList.clientHeight / 2
+          openingItem.offsetTop - treeList.clientHeight / 2,
         );
       setOpening(false);
       if (treeItemActive.isItemActive) {
@@ -161,7 +162,6 @@ function TreeItem({
               children={children[key].children}
               open={open}
               close={close}
-              options={options}
               remainingURL={treeItemActive.urlRemaining}
               rendering={rendering}
               setRendering={setRendering}
