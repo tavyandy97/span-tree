@@ -6,6 +6,7 @@ import TreeList from "../../containers/TreeList/TreeList";
 import Resizer from "../../containers/Resizer";
 import { fetchURLDetails } from "../../utils/url";
 import { switchTheme } from "../../utils/themeList";
+import getHeaderBackgroundColor from "../../utils/backgroundColor";
 import useEventListener from "../../utils/useEventListener";
 
 import "./styles.css";
@@ -44,7 +45,10 @@ function Pane({
   return (
     <div className="spantree-tree-pane" style={{ width: width + "px" }}>
       <div className="spantree-pane-main">
-        <div className="spantree-pane-header">
+        <div
+          className="spantree-pane-header"
+          style={getHeaderBackgroundColor()}
+        >
           <div className="spantree-spread">
             <div className="spantree-pane-details">
               <SVG

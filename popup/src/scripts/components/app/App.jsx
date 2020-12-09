@@ -13,6 +13,12 @@ class App extends Component {
         name: "Compatibility Mode",
         keyName: "compatibility-mode",
         type: "CheckBox",
+        defaultVal: true,
+      },
+      {
+        name: "Auto Theme",
+        keyName: "auto-theme",
+        type: "CheckBox",
         defaultVal: false,
       },
     ];

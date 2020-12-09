@@ -16,14 +16,13 @@ import "./styles.css";
 const renderTreeItems = (
   tree,
   width,
-  options,
   setClicked,
   close,
   open,
   rendering,
   setRendering,
   scrolling,
-  setScrolling
+  setScrolling,
 ) => {
   const URLDetails = fetchURLDetails();
 
@@ -38,7 +37,6 @@ const renderTreeItems = (
             isTree={tree[key].isTree}
             path={tree[key].path}
             children={tree[key].children}
-            options={options}
             open={open}
             close={close}
             remainingURL={URLDetails.baseRemovedURL}
@@ -61,7 +59,6 @@ function TreeList({
   tree,
   width,
   clicked,
-  options,
   setClicked,
   getInitialTree,
   closeDir,
@@ -101,7 +98,7 @@ function TreeList({
           repoName: URLDetails.dirFormatted,
           branchName: URLDetails.branchName,
           tabId,
-        }
+        },
       );
     }
     setFirstPageLoad(false);
@@ -143,21 +140,20 @@ function TreeList({
         branchName: URLDetails.branchName,
         path: path,
         tabId,
-      }
+      },
     );
   };
 
   return renderTreeItems(
     tree[tabId],
     width,
-    options,
     setClicked,
     closeDirectory,
     openDirectory,
     rendering,
     setRendering,
     scrolling,
-    setScrolling
+    setScrolling,
   );
 }
 
@@ -166,7 +162,6 @@ const mapStateToProps = (state) => {
     tree: state.tree,
     width: state.width,
     clicked: state.clicked,
-    options: state.options,
   };
 };
 
