@@ -10,16 +10,7 @@
 @license      MIT
 ==/UserStyle== */
 
-/*
- * NOTE: Modifying the code will put auto-update feature of Stylus on pause in
- * order to preserve your local changes. That means you need to manually update
- * Dark-GitLab and re-do your modifications in order to stay up-to-date.
- *
- * A way to add domains without modifying the code doesn't exist yet.
- * Relevant issue: https://github.com/openstyles/stylus/issues/307
- *
- * Make sure you have the latest version before submitting bug reports.
- */
+/****************************** GITLAB-DARK-END ******************************/
 
 :root {
   --note: "Dark-GitLab v1.3.2";
@@ -6652,6 +6643,8 @@ div[class*="mini-pipe"] li:hover [class*="dropdown-item"] {
   color: var(--light) !important;
   background-color: var(--darker) !important;
 }
+
+/****************************** GITLAB-DARK-END ******************************/
 
 /*Gitlab Tweaks*/
 html {
