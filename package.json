@@ -8,7 +8,7 @@
   },
   "author": "Taveesh Anand",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "chrome-tab-identifier": "0.0.1",
     "fzy.js": "^0.4.1",
     "immer": "^6.0.3",
