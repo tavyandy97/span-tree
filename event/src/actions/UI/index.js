@@ -7,9 +7,10 @@ export const togglePinned = () => {
   });
 };
 
-export const toggleOpened = () => {
+export const toggleOpened = (reducerDetails) => {
   store.dispatch({
     type: types.TOGGLE_OPENED,
+    reducerDetails,
   });
 };
 
