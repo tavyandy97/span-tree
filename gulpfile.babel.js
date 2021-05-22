@@ -9,7 +9,7 @@ import popupWebpackConfig from "./popup/webpack.config";
 import eventWebpackConfig from "./event/webpack.config";
 import contentWebpackConfig from "./content/webpack.config";
 
-gulp.task("popup-js", ["clean"], (cb) => {
+const popupJs = (cb) => {
   webpack(popupWebpackConfig, (err, stats) => {
     if (err) throw new plugins.util.PluginError("webpack", err);
 
@@ -17,9 +17,9 @@ gulp.task("popup-js", ["clean"], (cb) => {
 
     cb();
   });
-});
+};
 
-gulp.task("event-js", ["clean"], (cb) => {
+const eventJs = (cb) => {
   webpack(eventWebpackConfig, (err, stats) => {
     if (err) throw new plugins.util.PluginError("webpack", err);
 
@@ -27,9 +27,9 @@ gulp.task("event-js", ["clean"], (cb) => {
 
     cb();
   });
-});
+};
 
-gulp.task("content-js", ["clean"], (cb) => {
+const contentJs = (cb) => {
   webpack(contentWebpackConfig, (err, stats) => {
     if (err) throw new plugins.util.PluginError("webpack", err);
 
@@ -37,47 +37,48 @@ gulp.task("content-js", ["clean"], (cb) => {
 
     cb();
   });
-});
+};
 
-gulp.task("popup-html", ["clean"], () => {
+const popupHtml = () => {
   return gulp
     .src("popup/src/index.html")
     .pipe(plugins.rename("popup.html"))
     .pipe(gulp.dest("./build"));
-});
+};
 
-gulp.task("copy-manifest", ["clean"], () => {
+const copyManifest = () => {
   return gulp.src("manifest.json").pipe(gulp.dest("./build"));
-});
+};
 
-gulp.task("clean", (cb) => {
+const clean = (cb) => {
   rimraf("./build", cb);
-});
+};
 
-gulp.task("copy-libs", ["clean"], () => {
+const copyLibs = () => {
   return gulp
     .src("./content/src/scripts/libs/**/*")
     .pipe(gulp.dest("./build/libs"));
-});
+};
 
-gulp.task("copy-icons", ["clean"], () => {
+const copyIcons = () => {
   return gulp.src("./icons/**/*").pipe(gulp.dest("./build/icons"));
-});
+};
 
-gulp.task("build", [
-  "copy-libs",
-  "copy-icons",
-  "copy-manifest",
-  "popup-js",
-  "popup-html",
-  "event-js",
-  "content-js",
-]);
+const build = gulp.series(
+  clean,
+  gulp.parallel(
+    copyLibs,
+    copyIcons,
+    copyManifest,
+    popupJs,
+    popupHtml,
+    eventJs,
+    contentJs,
+  ),
+);
 
-gulp.task("watch", ["default"], () => {
-  gulp.watch("popup/**/*", ["build"]);
-  gulp.watch("content/**/*", ["build"]);
-  gulp.watch("event/**/*", ["build"]);
-});
+gulp.task("watch", build, () =>
+  gulp.watch(["popup/**/*", "content/**/*", "event/**/*"], build),
+);
 
-gulp.task("default", ["build"]);
+gulp.task("default", build);
