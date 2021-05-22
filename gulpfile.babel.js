@@ -77,7 +77,7 @@ const build = gulp.series(
   ),
 );
 
-gulp.task("watch", build, () =>
+gulp.task("watch", () =>
   gulp.watch(["popup/**/*", "content/**/*", "event/**/*"], build),
 );
 

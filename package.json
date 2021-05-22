@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Tree for Gitlab",
   "scripts": {
-    "start": "./node_modules/.bin/gulp",
+    "start": "gulp && gulp watch",
     "export": "NODE_ENV=production npm start"
   },
   "author": "Taveesh Anand",
