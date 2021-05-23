@@ -166,7 +166,7 @@ function SearchBar({
           <input
             type="text"
             value={searchFor}
-            placeholder="🔍 Search In Repository Branch"
+            placeholder="🔍  Search in Repository Branch"
             onChange={(e) => setSearchFor(e.target.value)}
             autoFocus
           />

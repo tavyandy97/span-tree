@@ -1,7 +1,9 @@
 const path = require("path");
-const MinifyPlugin = require("babel-minify-webpack-plugin");
 
 module.exports = {
+  mode: process.env.NODE_ENV === "production" ? "production" : "development",
+  devtool: "cheap-module-source-map",
+
   entry: ["./event/src/index.js"],
 
   output: {
@@ -14,18 +16,17 @@ module.exports = {
     modules: ["node_modules"],
   },
 
-  plugins:
-    process.env.NODE_ENV === "production" ? [new MinifyPlugin({}, {})] : [],
-
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.(js)?$/,
-        loader: "babel-loader",
         exclude: /(node_modules)/,
         include: path.join(__dirname, "src"),
-        query: {
-          presets: ["es2015", "react"],
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["es2015", "react"],
+          },
         },
       },
     ],

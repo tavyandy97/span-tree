@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
+import { TabIdentifierClient } from "chrome-tab-identifier";
 
 import Toggler from "../../components/Toggler";
 import Pane from "../../components/Pane";
@@ -17,9 +18,9 @@ import WebWorker from "./WebWorker";
 import "./App.css";
 
 const importFileIconCSS = `${browserKey()}-extension://${chrome.i18n.getMessage(
-  "@@extension_id"
+  "@@extension_id",
 )}/libs/file-icons.css`;
-
+const tabIdClient = new TabIdentifierClient();
 const parentDiv = document.querySelector("body");
 
 class App extends Component {
@@ -29,6 +30,12 @@ class App extends Component {
       firstPageLoad: true,
       reloading: true,
       showSearchbar: false,
+      tabId: null,
+    };
+    this.toggleOpenedThisTab = () => {
+      this.props.toggleOpened({
+        tabId: this.state.tabId,
+      });
     };
     this.setFirstPageLoad = (firstPageLoad) => {
       this.setState({ firstPageLoad });
@@ -49,24 +56,37 @@ class App extends Component {
   }
 
   componentDidMount() {
-    if (this.props.opened && this.shouldShowSpanTree()) {
-      applyOpenedPageStyling(this.props.width);
-    } else {
-      applyClosedPageStyling();
-    }
+    tabIdClient.getTabId().then((tab) => {
+      this.setState({
+        tabId: tab,
+      });
+    });
   }
 
-  componentDidUpdate(_prevProps, _prevState) {
-    if (this.props.opened && this.shouldShowSpanTree()) {
-      applyOpenedPageStyling(this.props.width);
-    } else {
-      applyClosedPageStyling();
+  componentDidUpdate(_prevProps, prevState) {
+    const { tabId } = this.state;
+    if (tabId !== prevState.tabId) {
+      if (this.props.opened[tabId] && this.shouldShowSpanTree()) {
+        applyOpenedPageStyling(this.props.width);
+      } else {
+        applyClosedPageStyling();
+      }
+    }
+
+    if (tabId) {
+      if (this.props.opened[tabId] && this.shouldShowSpanTree()) {
+        applyOpenedPageStyling(this.props.width);
+      } else {
+        applyClosedPageStyling();
+      }
     }
   }
 
   render() {
+    const { tabId } = this.state;
+    if (!tabId) return null;
     if (!this.shouldShowSpanTree()) {
-      if (this.props.opened) this.props.toggleOpened();
+      if (this.props.opened[tabId]) this.toggleOpenedThisTab();
       applyClosedPageStyling();
       return null;
     }
@@ -74,10 +94,10 @@ class App extends Component {
     return (
       <Fragment>
         <link rel="stylesheet" type="text/css" href={importFileIconCSS} />
-        {this.props.opened
+        {this.props.opened[tabId]
           ? ReactDOM.createPortal(
               <Pane
-                toggleOpened={this.props.toggleOpened}
+                toggleOpened={this.toggleOpenedThisTab}
                 width={this.props.width}
                 firstPageLoad={this.state.firstPageLoad}
                 setFirstPageLoad={this.setFirstPageLoad}
@@ -85,14 +105,14 @@ class App extends Component {
                 setReloading={this.setReloading}
                 setShowSearchbarTrue={() => this.setShowSearchbar(true)}
               />,
-              parentDiv
+              parentDiv,
             )
           : ReactDOM.createPortal(
               <Toggler
-                handleClick={this.props.toggleOpened}
+                handleClick={this.toggleOpenedThisTab}
                 pinned={this.props.pinned}
               />,
-              document.getElementById("rcr-anchor")
+              document.getElementById("rcr-anchor"),
             )}
         <SearchBar
           worker={this.searchBarWorker}
