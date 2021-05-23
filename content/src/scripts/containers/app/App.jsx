@@ -86,7 +86,7 @@ class App extends Component {
     const { tabId } = this.state;
     if (!tabId) return null;
     if (!this.shouldShowSpanTree()) {
-      if (this.props[tabId].opened) this.toggleOpenedThisTab();
+      if (this.props.opened[tabId]) this.toggleOpenedThisTab();
       applyClosedPageStyling();
       return null;
     }

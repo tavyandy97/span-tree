@@ -10,7 +10,7 @@ export default (state = initialState, action) => {
         [action.reducerDetails.tabId]:
           action.reducerDetails.tabId in state
             ? !state[action.reducerDetails.tabId]
-            : false,
+            : true,
       };
     default:
       return state;
