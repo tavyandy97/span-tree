@@ -90,7 +90,7 @@ function TreeList({
     }
     if (shouldGetTree()) {
       getInitialTree(
-        URLDetails.dirURLParam,
+        URLDetails.projectId ? URLDetails.projectId : URLDetails.dirURLParam,
         {
           ref: URLDetails.branchNameURL,
         },
@@ -129,7 +129,7 @@ function TreeList({
 
   const openDirectory = (path) => {
     openDir(
-      URLDetails.dirURLParam,
+      URLDetails.projectId ? URLDetails.projectId : URLDetails.dirURLParam,
       path,
       {
         ref: URLDetails.branchNameURL,

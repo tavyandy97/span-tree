@@ -40,6 +40,8 @@ export const fetchURLDetails = () => {
   const dirFormatted = dir.join("/");
   const baseRemovedURL = baseRemovedURLItems.join("/");
 
+  const projectId = document.body.getAttribute("data-project-id");
+
   return {
     dir,
     dirFormatted: dirFormatted,
@@ -47,5 +49,6 @@ export const fetchURLDetails = () => {
     branchName,
     branchNameURL: encodeURIComponent(branchName),
     baseRemovedURL: baseRemovedURL,
+    projectId,
   };
 };
