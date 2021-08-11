@@ -40,7 +40,7 @@
 }
 
 .spantree-search-result {
-  overflow-x: scroll;
+  overflow-x: auto;
   padding: 5px 15px;
 }
 
