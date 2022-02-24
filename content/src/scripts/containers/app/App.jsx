@@ -15,6 +15,11 @@ import { browserKey } from "../../utils/browser";
 import searchBarWorkerJS from "../../utils/searchBarWorker";
 import WebWorker from "./WebWorker";
 
+import {
+  isRepositoryShown,
+  isMergeRequestShown
+} from "../../../../../event/src/actions/API";
+
 import "./App.css";
 
 const importFileIconCSS = `${browserKey()}-extension://${chrome.i18n.getMessage(
@@ -45,7 +50,7 @@ class App extends Component {
     };
     this.shouldShowSpanTree = () => {
       return (
-        document.querySelector(".qa-branches-select") !== null &&
+        (isRepositoryShown() || isMergeRequestShown()) &&
         document.querySelector(".nav-sidebar") !== null
       );
     };

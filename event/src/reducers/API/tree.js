@@ -9,26 +9,7 @@ export default (state = initialState, action) => {
     case FETCH_TREE:
       return {
         ...state,
-        [action.reducerDetails.tabId]: action.payload
-          .map((node) => {
-            return {
-              name: node.name,
-              path: node.path
-                .split("/")
-                .filter((pathSub) => pathSub.length !== 0),
-              isTree:
-                node.type === "tree"
-                  ? {
-                      isOpen: false,
-                    }
-                  : false,
-              children: node.type === "tree" ? {} : undefined,
-            };
-          })
-          .reduce((map, obj) => {
-            map[obj.name] = obj;
-            return map;
-          }, {}),
+        [action.reducerDetails.tabId]: mapNodesFromResult(action),
       };
     case OPEN_DIR:
       let objectPath = [action.reducerDetails.tabId];
@@ -67,8 +48,8 @@ export default (state = initialState, action) => {
             isTree:
               node.type === "tree"
                 ? {
-                    isOpen: false,
-                  }
+                  isOpen: false,
+                }
                 : false,
             children: node.type === "tree" ? {} : undefined,
           };
@@ -106,3 +87,43 @@ export default (state = initialState, action) => {
       return state;
   }
 };
+function mapNodesFromResult(action) {
+  if (action.dataUrl.toString().includes('/merge_requests/')) {
+    return action.payload['changes']
+      .map((node) => {
+        return {
+          name: node.old_path,
+          path: node.old_path,
+          isTree: false,
+          children: false,
+        };
+      })
+      .reduce((map, obj) => {
+        map[obj.name] = obj;
+        return map;
+      }, {});
+  } else {
+    return action.payload
+      .map((node) => {
+        return {
+          name: node.name,
+          path: node.path
+            .split("/")
+            .filter((pathSub) => pathSub.length !== 0),
+          isTree: node.type === "tree"
+            ? {
+              isOpen: false,
+            }
+            : false,
+          children: node.type === "tree" ? {} : undefined,
+        };
+      })
+      .reduce((map, obj) => {
+        map[obj.name] = obj;
+        return map;
+      }, {});
+  }
+
+};
+
+
