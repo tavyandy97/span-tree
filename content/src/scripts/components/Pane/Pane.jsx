@@ -10,6 +10,11 @@ import { switchTheme } from "../../utils/themeList";
 import getHeaderBackgroundColor from "../../utils/backgroundColor";
 import useEventListener from "../../utils/useEventListener";
 
+import {
+  isRepositoryShown,
+  isMergeRequestShown
+} from "../../../../../event/src/actions/API";
+
 import "./styles.css";
 
 const tabIdClient = new TabIdentifierClient();
@@ -22,6 +27,10 @@ function Pane({
   setShowSearchbarTrue,
   reloading,
   setReloading,
+  toggleFilterTests,
+  toggleFilterRemoved,
+  toggleFilterRenamed,
+  toggleFilterImports
 }) {
   const { options } = useContext(OptionsContext);
   const [tabId, setTabId] = useState();
@@ -107,12 +116,32 @@ function Pane({
               firstPageLoad={firstPageLoad}
               setFirstPageLoad={setFirstPageLoad}
               tabId={tabId}
+              toggleFilterTests={toggleFilterTests}
+              toggleFilterRemoved={toggleFilterRemoved}
+              toggleFilterRenamed={toggleFilterRenamed}
+              toggleFilterImports={toggleFilterImports}
             />
           ) : null}
+          {isMergeRequestShown() ? (
+            <div className="spantree-filter-header">
+              Filter out: <br />
+              <input type="checkbox" id="tests" name="tests" onChange={toggleFilterTests} />
+              <label style={{ padding: "5px" }} >src/test</label>
+
+              <input type="checkbox" id="removed" name="removed" onChange={toggleFilterRemoved} />
+              <label style={{ padding: "5px" }} >removed</label>
+
+              <input type="checkbox" id="renamed" name="renamed" onChange={toggleFilterRenamed} />
+              <label style={{ padding: "5px" }} >renamed</label>
+
+              <input type="checkbox" id="imports" name="imports" onChange={toggleFilterImports} />
+              <label style={{ padding: "5px" }} > imports</label >
+            </div >
+          ) : null}
         </div>
-      </div>
+      </div >
       <Resizer />
-    </div>
+    </div >
   );
 }
 

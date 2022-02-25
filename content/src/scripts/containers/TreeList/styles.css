@@ -9,7 +9,7 @@
 .spantree-tree-list {
   scroll-behavior: smooth;
   overflow-y: auto;
-  height: calc(100vh - 40px);
+  height: calc(100vh - 90px);
 }
 
 .spantree-tree-list::-webkit-scrollbar-track {

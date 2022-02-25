@@ -89,11 +89,15 @@ export default (state = initialState, action) => {
 };
 function mapNodesFromResult(action) {
   if (action.dataUrl.toString().includes('/merge_requests/')) {
+    //alert('filter tests ' + action.filters.tests);
     return action.payload['changes']
+      // .filter((node) => {
+      //   !node.new_path.includes('src/test/')
+      //  })
       .map((node) => {
         return {
-          name: node.old_path,
-          path: node.old_path,
+          name: node.new_path,
+          path: node.new_path,
           isTree: false,
           children: false,
         };

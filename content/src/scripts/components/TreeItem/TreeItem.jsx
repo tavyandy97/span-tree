@@ -5,6 +5,7 @@ import { fetchURLDetails } from "../../utils/url";
 import fileIcons from "../../utils/file-icons";
 
 import "./styles.css";
+import { isMergeRequestShown, isRepositoryShown } from "../../../../../event/src/actions/API";
 
 function TreeItem({
   width,
@@ -33,15 +34,18 @@ function TreeItem({
       }
     } else {
       setClicked(true);
-      const URLDetails = fetchURLDetails();
-      if ("compatibility-mode" in options && options["compatibility-mode"]) {
-        window.location.href = `${window.location.origin}/${
-          URLDetails.dirFormatted
-        }/blob/${URLDetails.branchName}/${path.join("/")}`;
-      } else {
-        window.location.href = `${window.location.origin}/${
-          URLDetails.dirFormatted
-        }/-/blob/${URLDetails.branchName}/${path.join("/")}`;
+      if (isRepositoryShown()) {
+        const URLDetails = fetchURLDetails();
+        if ("compatibility-mode" in options && options["compatibility-mode"]) {
+          window.location.href = `${window.location.origin}/${URLDetails.dirFormatted
+            }/blob/${URLDetails.branchName}/${path.join("/")}`;
+        } else {
+          window.location.href = `${window.location.origin}/${URLDetails.dirFormatted
+            }/-/blob/${URLDetails.branchName}/${path.join("/")}`;
+        }
+      } else if (isMergeRequestShown()) {
+        let element = document.querySelectorAll("div[data-path='" + path + "']");
+        element[0].scrollIntoView();
       }
     }
   };
