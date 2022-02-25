@@ -135,7 +135,7 @@ function Pane({
               <label style={{ padding: "5px" }} >renamed</label>
 
               <input type="checkbox" id="imports" name="imports" onChange={toggleFilterImports} />
-              <label style={{ padding: "5px" }} > imports</label >
+              <label style={{ padding: "5px" }} >imports</label >
             </div >
           ) : null}
         </div>

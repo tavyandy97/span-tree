@@ -36,6 +36,10 @@ class App extends Component {
       reloading: true,
       showSearchbar: false,
       tabId: null,
+      filterTests: false,
+      filterRemoved: false,
+      filterRenamed: false,
+      filterImports: false,
     };
     this.toggleOpenedThisTab = () => {
       this.props.toggleOpened({
@@ -57,6 +61,7 @@ class App extends Component {
     this.setShowSearchbar = (showSearchbar) => {
       this.setState({ showSearchbar });
     };
+
     this.searchBarWorker = new WebWorker(searchBarWorkerJS);
   }
 
@@ -101,24 +106,28 @@ class App extends Component {
         <link rel="stylesheet" type="text/css" href={importFileIconCSS} />
         {this.props.opened[tabId]
           ? ReactDOM.createPortal(
-              <Pane
-                toggleOpened={this.toggleOpenedThisTab}
-                width={this.props.width}
-                firstPageLoad={this.state.firstPageLoad}
-                setFirstPageLoad={this.setFirstPageLoad}
-                reloading={this.state.reloading}
-                setReloading={this.setReloading}
-                setShowSearchbarTrue={() => this.setShowSearchbar(true)}
-              />,
-              parentDiv,
-            )
+            <Pane
+              toggleOpened={this.toggleOpenedThisTab}
+              width={this.props.width}
+              firstPageLoad={this.state.firstPageLoad}
+              setFirstPageLoad={this.setFirstPageLoad}
+              reloading={this.state.reloading}
+              setReloading={this.setReloading}
+              setShowSearchbarTrue={() => this.setShowSearchbar(true)}
+              toggleFilterTests={() => this.toggleFilterTests()}
+              toggleFilterRemoved={() => this.toggleFilterRemoved()}
+              toggleFilterRenamed={() => this.toggleFilterRenamed()}
+              toggleFilterImports={() => this.toggleFilterImports()}
+            />,
+            parentDiv,
+          )
           : ReactDOM.createPortal(
-              <Toggler
-                handleClick={this.toggleOpenedThisTab}
-                pinned={this.props.pinned}
-              />,
-              document.getElementById("rcr-anchor"),
-            )}
+            <Toggler
+              handleClick={this.toggleOpenedThisTab}
+              pinned={this.props.pinned}
+            />,
+            document.getElementById("rcr-anchor"),
+          )}
         <SearchBar
           worker={this.searchBarWorker}
           showSearchbar={this.state.showSearchbar}

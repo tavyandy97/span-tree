@@ -44,7 +44,7 @@ function TreeItem({
             }/-/blob/${URLDetails.branchName}/${path.join("/")}`;
         }
       } else if (isMergeRequestShown()) {
-        let element = document.querySelectorAll("div[data-path='" + path + "']");
+        let element = document.querySelectorAll(`div[data-path='${path}']`);
         element[0].scrollIntoView();
       }
     }
