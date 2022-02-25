@@ -62,10 +62,6 @@ function TreeList({
   setClicked,
   getInitialTree,
   closeDir,
-  toggleFilterTests,
-  toggleFilterRemoved,
-  toggleFilterRenamed,
-  toggleFilterImports
 }) {
   const [loading, setLoading] = useState(true);
   const [rendering, setRendering] = useState(false);
@@ -102,12 +98,6 @@ function TreeList({
           repoName: URLDetails.dirFormatted,
           branchName: URLDetails.branchName,
           tabId,
-        },
-        {
-          tests: toggleFilterTests,
-          removed: toggleFilterRemoved,
-          renamed: toggleFilterRenamed,
-          imports: toggleFilterImports,
         },
       );
     }

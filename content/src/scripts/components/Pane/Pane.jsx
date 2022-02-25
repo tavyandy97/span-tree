@@ -27,10 +27,6 @@ function Pane({
   setShowSearchbarTrue,
   reloading,
   setReloading,
-  toggleFilterTests,
-  toggleFilterRemoved,
-  toggleFilterRenamed,
-  toggleFilterImports
 }) {
   const { options } = useContext(OptionsContext);
   const [tabId, setTabId] = useState();
@@ -116,25 +112,21 @@ function Pane({
               firstPageLoad={firstPageLoad}
               setFirstPageLoad={setFirstPageLoad}
               tabId={tabId}
-              toggleFilterTests={toggleFilterTests}
-              toggleFilterRemoved={toggleFilterRemoved}
-              toggleFilterRenamed={toggleFilterRenamed}
-              toggleFilterImports={toggleFilterImports}
             />
           ) : null}
           {isMergeRequestShown() ? (
             <div className="spantree-filter-header">
               Filter out: <br />
-              <input type="checkbox" id="tests" name="tests" onChange={toggleFilterTests} />
+              <input type="checkbox" id="tests" name="tests" />
               <label style={{ padding: "5px" }} >src/test</label>
 
-              <input type="checkbox" id="removed" name="removed" onChange={toggleFilterRemoved} />
+              <input type="checkbox" id="removed" name="removed" />
               <label style={{ padding: "5px" }} >removed</label>
 
-              <input type="checkbox" id="renamed" name="renamed" onChange={toggleFilterRenamed} />
+              <input type="checkbox" id="renamed" name="renamed" />
               <label style={{ padding: "5px" }} >renamed</label>
 
-              <input type="checkbox" id="imports" name="imports" onChange={toggleFilterImports} />
+              <input type="checkbox" id="imports" name="imports" />
               <label style={{ padding: "5px" }} >imports</label >
             </div >
           ) : null}
