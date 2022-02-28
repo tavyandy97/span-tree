@@ -89,11 +89,7 @@ export default (state = initialState, action) => {
 };
 function mapNodesFromResult(action) {
   if (action.dataUrl.toString().includes('/merge_requests/')) {
-    //alert('filter tests ' + action.filters.tests);
-    return action.payload['changes']
-      // .filter((node) => {
-      //   !node.new_path.includes('src/test/')
-      //  })
+    return filterData(action)
       .map((node) => {
         return {
           name: node.new_path,
@@ -130,4 +126,33 @@ function mapNodesFromResult(action) {
 
 };
 
+function filterData(action) {
+  let data = action.payload['changes'];
+  if (action.filtersEnabled['test']) {
+    data = data.filter((node) => {
+      return !node.new_path.includes('src/test/');
+    })
+  }
+  if (action.filtersEnabled['renamed']) {
+    data = data.filter((node) => {
+      return !node.renamed_file;
+    })
+  }
+  if (action.filtersEnabled['removed']) {
+    data = data.filter((node) => {
+      return !node.deleted_file;
+    })
+  }
+  if (action.filtersEnabled['newFile']) {
+    data = data.filter((node) => {
+      return !node.new_file;
+    })
+  }
+  if (action.filtersEnabled['imports']) {
+    data = data.filter((node) => {
+      return !node.new_file;
+    })
+  }
+  return data;
+};
 

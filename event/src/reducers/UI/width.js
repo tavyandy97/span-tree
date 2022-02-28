@@ -1,6 +1,6 @@
 import { SET_WIDTH } from "../../types/UI";
 
-const initialWidth = 250;
+const initialWidth = 300;
 
 export default (state = initialWidth, action) => {
   switch (action.type) {

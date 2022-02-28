@@ -62,6 +62,7 @@ function TreeList({
   setClicked,
   getInitialTree,
   closeDir,
+  filtersEnabled,
 }) {
   const [loading, setLoading] = useState(true);
   const [rendering, setRendering] = useState(false);
@@ -79,6 +80,16 @@ function TreeList({
     }
     return firstPageLoad;
   };
+
+  const buildFilterMap = () => {
+    let map = new Map();
+    map['test'] = document.getElementById('filterTests').checked;
+    map['removed'] = document.getElementById('filterRemoved').checked;
+    map['renamed'] = document.getElementById('filterRenamed').checked;
+    map['imports'] = document.getElementById('filteredImports').checked;
+    map['newFile'] = document.getElementById('filteredNewFiles').checked;
+    return map;
+  }
 
   useEffect(() => {
     if (URLDetails.baseRemovedURL.length === 0) {
@@ -99,6 +110,7 @@ function TreeList({
           branchName: URLDetails.branchName,
           tabId,
         },
+        buildFilterMap(),
       );
     }
     setFirstPageLoad(false);

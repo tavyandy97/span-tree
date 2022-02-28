@@ -116,18 +116,22 @@ function Pane({
           ) : null}
           {isMergeRequestShown() ? (
             <div className="spantree-filter-header">
-              Filter out: <br />
-              <input type="checkbox" id="tests" name="tests" />
-              <label style={{ padding: "5px" }} >src/test</label>
+              <input type="checkbox" id="filterTests" name="tests" />
+              <label style={{ paddingRight: "5px" }} >filter src/test</label>
 
-              <input type="checkbox" id="removed" name="removed" />
-              <label style={{ padding: "5px" }} >removed</label>
+              <input type="checkbox" id="filterRemoved" name="removed" />
+              <label style={{ paddingRight: "5px" }} >filter removed</label>
 
-              <input type="checkbox" id="renamed" name="renamed" />
-              <label style={{ padding: "5px" }} >renamed</label>
+              <input type="checkbox" id="filterRenamed" name="renamed" />
+              <label style={{ paddingRight: "5px" }} >filter renamed</label>
 
-              <input type="checkbox" id="imports" name="imports" />
-              <label style={{ padding: "5px" }} >imports</label >
+              <br />
+
+              <input type="checkbox" id="filteredNewFiles" name="new files" />
+              <label style={{ paddingRight: "5px" }} >filter new files</label>
+
+              <input type="checkbox" id="filteredImports" name="imports" />
+              <label style={{ paddingRight: "5px" }} >filter imports</label >
             </div >
           ) : null}
         </div>

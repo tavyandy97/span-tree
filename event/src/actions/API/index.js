@@ -34,7 +34,7 @@ export const getUrl = (id) => {
   }
 };
 
-export const getInitialTree = (id, params, reducerDetails) => {
+export const getInitialTree = (id, params, reducerDetails, filtersEnabled) => {
   let url = getUrl(id);
   for (let param in params) {
     url += `&${param}=${params[param]}`;
@@ -47,6 +47,7 @@ export const getInitialTree = (id, params, reducerDetails) => {
         dataUrl: res.request.responseURL,
         payload: res.data,
         reducerDetails,
+        filtersEnabled,
       });
     })
     .catch((_err) => { });
