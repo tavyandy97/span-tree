@@ -15,6 +15,11 @@ import { browserKey } from "../../utils/browser";
 import searchBarWorkerJS from "../../utils/searchBarWorker";
 import WebWorker from "./WebWorker";
 
+import {
+  isRepositoryShown,
+  isMergeRequestShown
+} from "../../../../../event/src/actions/API";
+
 import "./App.css";
 
 const importFileIconCSS = `${browserKey()}-extension://${chrome.i18n.getMessage(
@@ -45,7 +50,7 @@ class App extends Component {
     };
     this.shouldShowSpanTree = () => {
       return (
-        document.querySelector(".qa-branches-select") !== null &&
+        (isRepositoryShown() || isMergeRequestShown()) &&
         document.querySelector(".nav-sidebar") !== null
       );
     };
@@ -96,24 +101,24 @@ class App extends Component {
         <link rel="stylesheet" type="text/css" href={importFileIconCSS} />
         {this.props.opened[tabId]
           ? ReactDOM.createPortal(
-              <Pane
-                toggleOpened={this.toggleOpenedThisTab}
-                width={this.props.width}
-                firstPageLoad={this.state.firstPageLoad}
-                setFirstPageLoad={this.setFirstPageLoad}
-                reloading={this.state.reloading}
-                setReloading={this.setReloading}
-                setShowSearchbarTrue={() => this.setShowSearchbar(true)}
-              />,
-              parentDiv,
-            )
+            <Pane
+              toggleOpened={this.toggleOpenedThisTab}
+              width={this.props.width}
+              firstPageLoad={this.state.firstPageLoad}
+              setFirstPageLoad={this.setFirstPageLoad}
+              reloading={this.state.reloading}
+              setReloading={this.setReloading}
+              setShowSearchbarTrue={() => this.setShowSearchbar(true)}
+            />,
+            parentDiv,
+          )
           : ReactDOM.createPortal(
-              <Toggler
-                handleClick={this.toggleOpenedThisTab}
-                pinned={this.props.pinned}
-              />,
-              document.getElementById("rcr-anchor"),
-            )}
+            <Toggler
+              handleClick={this.toggleOpenedThisTab}
+              pinned={this.props.pinned}
+            />,
+            document.getElementById("rcr-anchor"),
+          )}
         <SearchBar
           worker={this.searchBarWorker}
           showSearchbar={this.state.showSearchbar}

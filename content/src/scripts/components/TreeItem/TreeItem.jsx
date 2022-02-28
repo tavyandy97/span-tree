@@ -5,6 +5,8 @@ import { fetchURLDetails } from "../../utils/url";
 import fileIcons from "../../utils/file-icons";
 
 import "./styles.css";
+import { isMergeRequestShown, isRepositoryShown, grabMergeRequestIdFromCurrentUrl } from "../../../../../event/src/actions/API";
+import { sha1 } from ".";
 
 function TreeItem({
   width,
@@ -34,14 +36,23 @@ function TreeItem({
     } else {
       setClicked(true);
       const URLDetails = fetchURLDetails();
-      if ("compatibility-mode" in options && options["compatibility-mode"]) {
-        window.location.href = `${window.location.origin}/${
-          URLDetails.dirFormatted
-        }/blob/${URLDetails.branchName}/${path.join("/")}`;
-      } else {
-        window.location.href = `${window.location.origin}/${
-          URLDetails.dirFormatted
-        }/-/blob/${URLDetails.branchName}/${path.join("/")}`;
+      if (isRepositoryShown()) {
+        if ("compatibility-mode" in options && options["compatibility-mode"]) {
+          window.location.href = `${window.location.origin}/${URLDetails.dirFormatted
+            }/blob/${URLDetails.branchName}/${path.join("/")}`;
+        } else {
+          window.location.href = `${window.location.origin}/${URLDetails.dirFormatted
+            }/-/blob/${URLDetails.branchName}/${path.join("/")}`;
+        }
+      } else if (isMergeRequestShown()) {
+        let hash = sha1(path);
+        let mergeRequestId = grabMergeRequestIdFromCurrentUrl();
+        if (!window.location.href.includes('diffs')) {
+          window.location.href = (window.location.origin + "/" + URLDetails.dirFormatted + "/-/merge_requests/" + mergeRequestId + "/diffs#" + hash);
+        } else {
+          window.location.hash = hash;
+          window.location.reload();
+        }
       }
     }
   };

@@ -3,6 +3,7 @@ import { TabIdentifierClient } from "chrome-tab-identifier";
 
 import SVG from "../SVG";
 import TreeList from "../../containers/TreeList/TreeList";
+import Filter from "../../containers/Filter/Filter";
 import Resizer from "../../containers/Resizer";
 import { OptionsContext } from "../../contexts/OptionsContext";
 import { fetchURLDetails } from "../../utils/url";
@@ -109,10 +110,11 @@ function Pane({
               tabId={tabId}
             />
           ) : null}
+          <Filter />
         </div>
-      </div>
+      </div >
       <Resizer />
-    </div>
+    </div >
   );
 }
 
