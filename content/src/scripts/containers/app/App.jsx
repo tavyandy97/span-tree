@@ -101,24 +101,24 @@ class App extends Component {
         <link rel="stylesheet" type="text/css" href={importFileIconCSS} />
         {this.props.opened[tabId]
           ? ReactDOM.createPortal(
-              <Pane
-                toggleOpened={this.toggleOpenedThisTab}
-                width={this.props.width}
-                firstPageLoad={this.state.firstPageLoad}
-                setFirstPageLoad={this.setFirstPageLoad}
-                reloading={this.state.reloading}
-                setReloading={this.setReloading}
-                setShowSearchbarTrue={() => this.setShowSearchbar(true)}
-              />,
-              parentDiv,
-            )
+            <Pane
+              toggleOpened={this.toggleOpenedThisTab}
+              width={this.props.width}
+              firstPageLoad={this.state.firstPageLoad}
+              setFirstPageLoad={this.setFirstPageLoad}
+              reloading={this.state.reloading}
+              setReloading={this.setReloading}
+              setShowSearchbarTrue={() => this.setShowSearchbar(true)}
+            />,
+            parentDiv,
+          )
           : ReactDOM.createPortal(
-              <Toggler
-                handleClick={this.toggleOpenedThisTab}
-                pinned={this.props.pinned}
-              />,
-              document.getElementById("rcr-anchor"),
-            )}
+            <Toggler
+              handleClick={this.toggleOpenedThisTab}
+              pinned={this.props.pinned}
+            />,
+            document.getElementById("rcr-anchor"),
+          )}
         <SearchBar
           worker={this.searchBarWorker}
           showSearchbar={this.state.showSearchbar}

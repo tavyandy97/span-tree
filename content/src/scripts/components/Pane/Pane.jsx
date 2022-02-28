@@ -3,17 +3,13 @@ import { TabIdentifierClient } from "chrome-tab-identifier";
 
 import SVG from "../SVG";
 import TreeList from "../../containers/TreeList/TreeList";
+import Filter from "../../containers/Filter/Filter";
 import Resizer from "../../containers/Resizer";
 import { OptionsContext } from "../../contexts/OptionsContext";
 import { fetchURLDetails } from "../../utils/url";
 import { switchTheme } from "../../utils/themeList";
 import getHeaderBackgroundColor from "../../utils/backgroundColor";
 import useEventListener from "../../utils/useEventListener";
-
-import {
-  isRepositoryShown,
-  isMergeRequestShown
-} from "../../../../../event/src/actions/API";
 
 import "./styles.css";
 
@@ -114,26 +110,7 @@ function Pane({
               tabId={tabId}
             />
           ) : null}
-          {isMergeRequestShown() ? (
-            <div className="spantree-filter-header">
-              <input type="checkbox" id="filterTests" name="tests" />
-              <label style={{ paddingRight: "5px" }} >filter src/test</label>
-
-              <input type="checkbox" id="filterRemoved" name="removed" />
-              <label style={{ paddingRight: "5px" }} >filter removed</label>
-
-              <input type="checkbox" id="filterRenamed" name="renamed" />
-              <label style={{ paddingRight: "5px" }} >filter renamed</label>
-
-              <br />
-
-              <input type="checkbox" id="filteredNewFiles" name="new files" />
-              <label style={{ paddingRight: "5px" }} >filter new files</label>
-
-              <input type="checkbox" id="filteredImports" name="imports" />
-              <label style={{ paddingRight: "5px" }} >filter imports</label >
-            </div >
-          ) : null}
+          <Filter />
         </div>
       </div >
       <Resizer />
