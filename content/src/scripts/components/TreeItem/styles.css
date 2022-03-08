@@ -4,6 +4,13 @@
   height: 24px;
   align-items: center;
   width: max-content;
+  text-decoration: none;
+  color: inherit;
+}
+
+.spantree-tree-element:hover {
+  text-decoration: none;
+  color: inherit;
 }
 
 .spantree-child-list {

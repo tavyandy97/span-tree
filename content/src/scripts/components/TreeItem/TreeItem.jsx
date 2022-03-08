@@ -24,8 +24,20 @@ function TreeItem({
   const [opening, setOpening] = useState(false);
   const { options } = useContext(OptionsContext);
 
-  const handleClick = () => {
+  const getItemURL = () => {
+    const URLDetails = fetchURLDetails();
+    return ("compatibility-mode" in options && options["compatibility-mode"]) ?
+      `${window.location.origin}/${
+        URLDetails.dirFormatted
+      }/blob/${URLDetails.branchName}/${path.join("/")}`:
+      `${window.location.origin}/${
+        URLDetails.dirFormatted
+      }/-/blob/${URLDetails.branchName}/${path.join("/")}`;
+  }
+
+  const handleClick = (event) => {
     if (isTree) {
+      event.preventDefault();
       if (isTree.isOpen) {
         close(path);
       } else {
@@ -33,16 +45,6 @@ function TreeItem({
       }
     } else {
       setClicked(true);
-      const URLDetails = fetchURLDetails();
-      if ("compatibility-mode" in options && options["compatibility-mode"]) {
-        window.location.href = `${window.location.origin}/${
-          URLDetails.dirFormatted
-        }/blob/${URLDetails.branchName}/${path.join("/")}`;
-      } else {
-        window.location.href = `${window.location.origin}/${
-          URLDetails.dirFormatted
-        }/-/blob/${URLDetails.branchName}/${path.join("/")}`;
-      }
     }
   };
 
@@ -121,7 +123,7 @@ function TreeItem({
 
   return (
     <li>
-      <div
+      <a href={getItemURL()}
         className={
           opening ? "spantree-tree-element opening" : "spantree-tree-element"
         }
@@ -149,7 +151,7 @@ function TreeItem({
           <i className={fileIcons.getClassWithColor(name, isTree)}></i>
         </div>
         <div className="spantree-item-name">{name}</div>
-      </div>
+      </a>
       {isTree && isTree.isOpen && (
         <ul className="spantree-child-list">
           {Object.keys(children).map((key) => (
