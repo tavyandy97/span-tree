@@ -1,8 +1,11 @@
 import axiosOriginal from "axios";
 
+import { fetchURLDetails } from "../../../../content/src/scripts/utils/url";
 import * as types from "../../types/API";
 import store from "../../../../content/src/scripts";
 import axios from "../../../axios";
+
+const baseUrl = fetchURLDetails().baseURL || window.location.origin;
 
 export const getInitialTree = (id, params, reducerDetails) => {
   let url = `${id}/repository/tree`;
@@ -54,7 +57,7 @@ export const closeDir = (path, reducerDetails) => {
 };
 
 export const getSearchTerms = (reducerDetails) => {
-  let url = `${window.location.origin}/${reducerDetails.repoName}/`;
+  let url = `${baseUrl}${reducerDetails.repoName}/`;
   if (!reducerDetails.compatibilityMode) {
     url += "-/";
   }

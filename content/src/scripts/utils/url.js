@@ -42,8 +42,11 @@ export const fetchURLDetails = () => {
 
   const projectId = document.body.getAttribute("data-project-id");
 
+  const baseURL = window.location.href.split(document.body.dataset.group)[0];
+
   return {
     dir,
+    baseURL,
     dirFormatted: dirFormatted,
     dirURLParam: encodeURIComponent(dir.join("/")),
     branchName,
