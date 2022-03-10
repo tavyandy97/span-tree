@@ -42,7 +42,13 @@ export const fetchURLDetails = () => {
 
   const projectId = document.body.getAttribute("data-project-id");
 
-  const baseURL = window.location.href.split(document.body.dataset.group)[0];
+  let baseURL = window.location.origin;
+  if (
+    document.body.dataset.group &&
+    window.location.href.split(document.body.dataset.group).length > 0
+  ) {
+    baseURL = window.location.href.split(document.body.dataset.group)[0];
+  }
 
   return {
     dir,

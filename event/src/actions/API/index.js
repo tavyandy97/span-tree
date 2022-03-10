@@ -5,7 +5,7 @@ import * as types from "../../types/API";
 import store from "../../../../content/src/scripts";
 import axios from "../../../axios";
 
-const baseUrl = fetchURLDetails().baseURL || window.location.origin;
+const baseUrl = fetchURLDetails().baseURL;
 
 export const getInitialTree = (id, params, reducerDetails) => {
   let url = `${id}/repository/tree`;

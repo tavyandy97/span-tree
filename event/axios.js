@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { fetchURLDetails } from "../content/src/scripts/utils/url";
 
-const baseUrl = fetchURLDetails().baseURL || window.location.origin;
+const baseUrl = fetchURLDetails().baseURL;
 
 const options = {
   baseURL: `${baseUrl}api/v4/projects/`,
