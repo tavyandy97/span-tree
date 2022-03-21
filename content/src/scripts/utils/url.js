@@ -1,5 +1,5 @@
 export const fetchURLDetails = () => {
-  const pathName = window.location.pathname;
+  const pathName = document.body.dataset.findFile;
   const pathNameSplit = pathName
     .split("/")
     .filter((pathSub) => pathSub.length !== 0);
@@ -43,11 +43,8 @@ export const fetchURLDetails = () => {
   const projectId = document.body.getAttribute("data-project-id");
 
   let baseURL = window.location.origin;
-  if (
-    document.body.dataset.group &&
-    window.location.href.split(document.body.dataset.group).length > 0
-  ) {
-    baseURL = window.location.href.split(document.body.dataset.group)[0];
+  if (dirFormatted) {
+    baseURL = window.location.href.split(dirFormatted)[0];
   }
 
   return {
