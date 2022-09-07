@@ -45,7 +45,7 @@ class App extends Component {
     };
     this.shouldShowSpanTree = () => {
       return (
-        document.querySelector(".qa-branches-select") !== null &&
+        (document.querySelector(".qa-branches-select") !== null || document.querySelector("[data-qa-selector='branches_dropdown']").children[0] !== null) &&
         document.querySelector(".nav-sidebar") !== null
       );
     };
