@@ -1,9 +1,9 @@
 import gulp from "gulp";
-import loadPlugins from "gulp-load-plugins";
 import webpack from "webpack";
 import rimraf from "rimraf";
-
-const plugins = loadPlugins();
+import log from "fancy-log";
+import PluginError from "plugin-error";
+import rename from "gulp-rename";
 
 import popupWebpackConfig from "./popup/webpack.config";
 import eventWebpackConfig from "./event/webpack.config";
@@ -11,9 +11,9 @@ import contentWebpackConfig from "./content/webpack.config";
 
 const popupJs = (cb) => {
   webpack(popupWebpackConfig, (err, stats) => {
-    if (err) throw new plugins.util.PluginError("webpack", err);
+    if (err) throw new PluginError("webpack", err);
 
-    plugins.util.log("[webpack]", stats.toString());
+    log("[webpack]", stats.toString());
 
     cb();
   });
@@ -21,9 +21,9 @@ const popupJs = (cb) => {
 
 const eventJs = (cb) => {
   webpack(eventWebpackConfig, (err, stats) => {
-    if (err) throw new plugins.util.PluginError("webpack", err);
+    if (err) throw new PluginError("webpack", err);
 
-    plugins.util.log("[webpack]", stats.toString());
+    log("[webpack]", stats.toString());
 
     cb();
   });
@@ -31,9 +31,9 @@ const eventJs = (cb) => {
 
 const contentJs = (cb) => {
   webpack(contentWebpackConfig, (err, stats) => {
-    if (err) throw new plugins.util.PluginError("webpack", err);
+    if (err) throw new PluginError("webpack", err);
 
-    plugins.util.log("[webpack]", stats.toString());
+    log("[webpack]", stats.toString());
 
     cb();
   });
@@ -42,7 +42,7 @@ const contentJs = (cb) => {
 const popupHtml = () => {
   return gulp
     .src("popup/src/index.html")
-    .pipe(plugins.rename("popup.html"))
+    .pipe(rename("popup.html"))
     .pipe(gulp.dest("./build"));
 };
 
@@ -73,12 +73,12 @@ const build = gulp.series(
     popupJs,
     popupHtml,
     eventJs,
-    contentJs,
-  ),
+    contentJs
+  )
 );
 
 gulp.task("watch", () =>
-  gulp.watch(["popup/**/*", "content/**/*", "event/**/*"], build),
+  gulp.watch(["popup/**/*", "content/**/*", "event/**/*"], build)
 );
 
 gulp.task("default", build);
