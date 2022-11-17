@@ -1,28 +1,47 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "SpanTree - GitLab Tree",
   "description": "Tree for Gitlab",
   "version": "0.0.4.4",
   "background": {
-    "scripts": ["event.js"]
+    "service_worker": "event.js"
   },
-  "permissions": ["<all_urls>"],
+  "host_permissions": [
+    "<all_urls>"
+  ],
   "browser_action": {
     "default_title": "SpanTree",
     "default_popup": "popup.html"
   },
-  "web_accessible_resources": ["*.png", "*.woff2", "*.svg", "*.css"],
+  "web_accessible_resources": [
+    {
+      "matches": [
+        "*.png",
+        "*.woff2",
+        "*.svg",
+        "*.css"
+      ]
+    }
+  ],
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
+      "matches": [
+        "<all_urls>"
+      ],
       "css": [],
-      "js": ["content.js"]
+      "js": [
+        "content.js"
+      ]
     },
     {
       "run_at": "document_start",
-      "matches": ["<all_urls>"],
+      "matches": [
+        "<all_urls>"
+      ],
       "css": [],
-      "js": ["libs/contentDark.js"]
+      "js": [
+        "libs/contentDark.js"
+      ]
     }
   ],
   "icons": {
