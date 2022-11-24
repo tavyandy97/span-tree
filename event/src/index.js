@@ -1,7 +1,7 @@
 import thunk from "redux-thunk";
 import { createStore } from "redux";
-import rootReducer from "./reducers";
 import { TabIdentifier } from "chrome-tab-identifier";
+import rootReducer from "./reducers";
 
 const tabIdentifier = new TabIdentifier();
 
