@@ -45,6 +45,7 @@ const App = ({ dispatch, options }) => {
         options={options}
         optionList={optionList}
         changeOptions={(newOptions) => {
+          localforage.setItem("spantree-options", newOptions);
           dispatch({
             type: "OPTIONS_CHANGED",
             payload: newOptions,
