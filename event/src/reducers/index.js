@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
-import createIdbStorage from "@piotr-cz/redux-persist-idb-storage";
+import storage from "redux-persist-indexeddb-storage";
 
 import opened from "./UI/opened";
 import pinned from "./UI/pinned";
@@ -18,10 +18,7 @@ export default combineReducers({
   options: persistReducer(
     {
       key: "root",
-      storage: createIdbStorage({
-        name: "spantree-options",
-        storeName: "spantree-options",
-      }),
+      storage: storage("spantree-options"),
     },
     options
   ),
