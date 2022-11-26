@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import localforage from "localforage";
 import { connect } from "react-redux";
 
 import Options from "../options";
@@ -21,20 +20,16 @@ const optionList = [
   },
 ];
 
+const SPANTREE_OPTIONS_CONSTANT = "spantree-options";
+
 const App = ({ dispatch, options }) => {
   useEffect(() => {
-    localforage.getItem("spantree-options", function (err, value) {
-      if (err || !value) {
-        dispatch({
-          type: "OPTIONS_CHANGED",
-          payload: optionList,
-        });
-      } else {
-        dispatch({
-          type: "OPTIONS_CHANGED",
-          payload: value,
-        });
-      }
+    chrome.storage.local.get([SPANTREE_OPTIONS_CONSTANT], (result) => {
+      const optionsFromStorage = result[SPANTREE_OPTIONS_CONSTANT];
+      dispatch({
+        type: "OPTIONS_CHANGED",
+        payload: optionsFromStorage || optionList,
+      });
     });
   }, []);
 
@@ -45,7 +40,7 @@ const App = ({ dispatch, options }) => {
         options={options}
         optionList={optionList}
         changeOptions={(newOptions) => {
-          localforage.setItem("spantree-options", newOptions);
+          chrome.storage.local.set({ [SPANTREE_OPTIONS_CONSTANT]: newOptions });
           dispatch({
             type: "OPTIONS_CHANGED",
             payload: newOptions,
