@@ -1,6 +1,4 @@
 import { combineReducers } from "redux";
-import { persistReducer } from "redux-persist";
-import storage from "redux-persist-indexeddb-storage";
 
 import opened from "./UI/opened";
 import pinned from "./UI/pinned";
@@ -15,13 +13,7 @@ export default combineReducers({
   pinned,
   width,
   clicked,
-  options: persistReducer(
-    {
-      key: "root",
-      storage: storage("spantree-options"),
-    },
-    options
-  ),
+  options,
   tree,
   searchTerms,
 });
