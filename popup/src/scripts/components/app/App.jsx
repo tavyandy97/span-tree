@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 
 import Options from "../options";
@@ -20,27 +20,14 @@ const optionList = [
   },
 ];
 
-const SPANTREE_OPTIONS_CONSTANT = "spantree-options";
-
 const App = ({ dispatch, options }) => {
-  useEffect(() => {
-    chrome.storage.local.get([SPANTREE_OPTIONS_CONSTANT], (result) => {
-      const optionsFromStorage = result[SPANTREE_OPTIONS_CONSTANT];
-      dispatch({
-        type: "OPTIONS_CHANGED",
-        payload: optionsFromStorage || optionList,
-      });
-    });
-  }, []);
-
   return (
     <div className="spantree-popup">
       <div className="spantree-options-heading">SpanTree Options</div>
       <Options
-        options={options}
+        options={options.data}
         optionList={optionList}
         changeOptions={(newOptions) => {
-          chrome.storage.local.set({ [SPANTREE_OPTIONS_CONSTANT]: newOptions });
           dispatch({
             type: "OPTIONS_CHANGED",
             payload: newOptions,

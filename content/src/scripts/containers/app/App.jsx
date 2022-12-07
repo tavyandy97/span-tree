@@ -6,7 +6,10 @@ import { TabIdentifierClient } from "chrome-tab-identifier";
 import Toggler from "../../components/Toggler";
 import Pane from "../../components/Pane";
 import SearchBar from "../SearchBar";
-import { toggleOpened } from "../../../../../event/src/actions/UI";
+import {
+  toggleOpened,
+  optionsChanged,
+} from "../../../../../event/src/actions/UI";
 import {
   applyClosedPageStyling,
   applyOpenedPageStyling,
@@ -16,9 +19,10 @@ import searchBarWorkerJS from "../../utils/searchBarWorker";
 import WebWorker from "./WebWorker";
 
 import "./App.css";
+import { defaultOptions } from "../../contexts/OptionsContext";
 
 const importFileIconCSS = `${browserKey()}-extension://${chrome.i18n.getMessage(
-  "@@extension_id",
+  "@@extension_id"
 )}/libs/file-icons.css`;
 const tabIdClient = new TabIdentifierClient();
 const parentDiv = document.querySelector("body");
@@ -45,7 +49,9 @@ class App extends Component {
     };
     this.shouldShowSpanTree = () => {
       return (
-        (document.querySelector(".qa-branches-select") !== null || document.querySelector("[data-qa-selector='branches_dropdown']").children[0] !== null) &&
+        (document.querySelector(".qa-branches-select") !== null ||
+          document.querySelector("[data-qa-selector='branches_dropdown']")
+            .children[0] !== null) &&
         document.querySelector(".nav-sidebar") !== null
       );
     };
@@ -61,9 +67,14 @@ class App extends Component {
         tabId: tab,
       });
     });
+    if (!this.props.options.version || this.props.options.version === 0) {
+      const initialState =
+        JSON.parse(localStorage.getItem("spantree-options")) || defaultOptions;
+      this.props.optionsChanged(initialState);
+    }
   }
 
-  componentDidUpdate(_prevProps, prevState) {
+  componentDidUpdate(prevProps, prevState) {
     const { tabId } = this.state;
     if (tabId !== prevState.tabId) {
       if (this.props.opened[tabId] && this.shouldShowSpanTree()) {
@@ -79,6 +90,13 @@ class App extends Component {
       } else {
         applyClosedPageStyling();
       }
+    }
+
+    if (prevProps.options !== this.props.options) {
+      localStorage.setItem(
+        "spantree-options",
+        JSON.stringify(this.props.options)
+      );
     }
   }
 
@@ -105,14 +123,14 @@ class App extends Component {
                 setReloading={this.setReloading}
                 setShowSearchbarTrue={() => this.setShowSearchbar(true)}
               />,
-              parentDiv,
+              parentDiv
             )
           : ReactDOM.createPortal(
               <Toggler
                 handleClick={this.toggleOpenedThisTab}
                 pinned={this.props.pinned}
               />,
-              document.getElementById("rcr-anchor"),
+              document.getElementById("rcr-anchor")
             )}
         <SearchBar
           worker={this.searchBarWorker}
@@ -129,9 +147,10 @@ const mapStateToProps = (state) => {
     opened: state.opened,
     pinned: state.pinned,
     width: state.width,
+    options: state.options,
   };
 };
 
-const mapDispatchToProps = { toggleOpened };
+const mapDispatchToProps = { toggleOpened, optionsChanged };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
