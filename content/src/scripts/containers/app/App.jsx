@@ -95,7 +95,7 @@ class App extends Component {
     if (prevProps.options !== this.props.options) {
       localStorage.setItem(
         "spantree-options",
-        JSON.stringify(this.props.options)
+        JSON.stringify(this.props.options.data)
       );
     }
   }
