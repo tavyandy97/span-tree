@@ -26,7 +26,7 @@ function SearchBar({
   const defaultOptions = { "auto-theme": false, "compatibility-mode": true };
   Object.keys(defaultOptions).forEach((key) => {
     if (key in options) {
-      defaultOptions[key] = options[key];
+      defaultOptions[key] = options.data[key];
     }
   });
 
@@ -84,18 +84,18 @@ function SearchBar({
         event.preventDefault();
         setActiveResult(
           (activeResult) =>
-            (searchResults.length + activeResult - 1) % searchResults.length,
+            (searchResults.length + activeResult - 1) % searchResults.length
         );
       } else if (event.key === "ArrowDown" && showSearchbar) {
         event.preventDefault();
         setActiveResult(
-          (activeResult) => (activeResult + 1) % searchResults.length,
+          (activeResult) => (activeResult + 1) % searchResults.length
         );
       } else if (event.key === "Escape" && showSearchbar) {
         setShowSearchbar(false);
       }
     },
-    [showSearchbar, activeResult, searchResults],
+    [showSearchbar, activeResult, searchResults]
   );
 
   useEventListener("keydown", handleKeyDown);
@@ -127,7 +127,7 @@ function SearchBar({
         window.navigator.platform.indexOf(currentValue) !== -1 || accumulator
       );
     },
-    false,
+    false
   );
 
   const workerCall = () => {
@@ -149,7 +149,7 @@ function SearchBar({
       setTimeout(() => {
         workerCall();
         setDebounceTimerId(null);
-      }, 500),
+      }, 500)
     );
   };
 
