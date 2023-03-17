@@ -4,9 +4,11 @@ export const fetchURLDetails = () => {
     .split("/")
     .filter((pathSub) => pathSub.length !== 0);
   let dir = [];
-  let branchName = document.querySelector(".dropdown-toggle-text")
-    ? document.querySelector(".dropdown-toggle-text").innerText
-    : "master";
+  let branchName = "master";
+  if (document.querySelector(".dropdown-toggle-text"))
+    branchName = document.querySelector(".dropdown-toggle-text").innerText;
+  if (document.querySelector(".ref-selector"))
+    branchName = document.querySelector(".ref-selector").innerText;
   let branchNameSplit = branchName
     .split("/")
     .filter((pathSub) => pathSub.length !== 0);

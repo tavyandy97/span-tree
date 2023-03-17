@@ -18,7 +18,7 @@ import WebWorker from "./WebWorker";
 import "./App.css";
 
 const importFileIconCSS = `${browserKey()}-extension://${chrome.i18n.getMessage(
-  "@@extension_id",
+  "@@extension_id"
 )}/libs/file-icons.css`;
 const tabIdClient = new TabIdentifierClient();
 const parentDiv = document.querySelector("body");
@@ -45,7 +45,10 @@ class App extends Component {
     };
     this.shouldShowSpanTree = () => {
       return (
-        (document.querySelector(".qa-branches-select") !== null || document.querySelector("[data-qa-selector='branches_dropdown']").children[0] !== null) &&
+        (document.querySelector(".qa-branches-select") !== null ||
+          document.querySelector(".ref-selector") !== null ||
+          document.querySelector("[data-qa-selector='branches_dropdown']")
+            .children[0] !== null) &&
         document.querySelector(".nav-sidebar") !== null
       );
     };
@@ -105,14 +108,14 @@ class App extends Component {
                 setReloading={this.setReloading}
                 setShowSearchbarTrue={() => this.setShowSearchbar(true)}
               />,
-              parentDiv,
+              parentDiv
             )
           : ReactDOM.createPortal(
               <Toggler
                 handleClick={this.toggleOpenedThisTab}
                 pinned={this.props.pinned}
               />,
-              document.getElementById("rcr-anchor"),
+              document.getElementById("rcr-anchor")
             )}
         <SearchBar
           worker={this.searchBarWorker}
