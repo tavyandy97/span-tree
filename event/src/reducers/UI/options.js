@@ -1,12 +1,11 @@
 import { OPTIONS_CHANGED } from "../../types/UI";
 
-export default (
-  state = {
-    data: {},
-    version: 0,
-  },
-  action
-) => {
+export const intitialState = {
+  data: {},
+  version: 0,
+};
+
+export default (state = intitialState, action) => {
   switch (action.type) {
     case OPTIONS_CHANGED: {
       const newData = {

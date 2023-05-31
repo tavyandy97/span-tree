@@ -5,8 +5,8 @@ import rootReducer from "./reducers";
 
 const tabIdentifier = new TabIdentifier();
 
-import { wrapStore, applyMiddleware } from "webext-redux";
+import { wrapStore, applyMiddleware } from "@eduardoac-skimlinks/webext-redux";
 
-const store = createStore(rootReducer, {});
+const store = createStore(rootReducer);
 
 wrapStore(applyMiddleware(store, thunk));

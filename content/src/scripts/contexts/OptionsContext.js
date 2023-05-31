@@ -34,11 +34,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = {};
-
-const ConnectedOptionsConext = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(OptionsProvider);
+const ConnectedOptionsConext = connect(mapStateToProps)(OptionsProvider);
 
 export { ConnectedOptionsConext as OptionsProvider, OptionsContext };
