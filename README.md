@@ -61,7 +61,7 @@ SpanTree uses the following open-source packages:
 
 - [react](https://github.com/facebook/react)
 - [redux](https://github.com/reduxjs/redux)
-- [webext-redux](https://github.com/tshaddix/webext-redux) (Now using [a fork](https://github.com/eduardoacskimlinks/webext-redux))
+- [webext-redux](https://github.com/tshaddix/webext-redux) (Now using [a fork](https://github.com/eduardoacskimlinks/webext-redux) - [ref](https://github.com/tshaddix/webext-redux/issues/244))
 - [file-icons](https://github.com/file-icons/atom)
 - [dark-gitlab](https://gitlab.com/vednoc/dark-gitlab)
 - [axios](https://github.com/axios/axios)
