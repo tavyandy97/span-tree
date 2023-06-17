@@ -1,12 +1,19 @@
 import { OPTIONS_CHANGED } from "../../types/UI";
 
-const initialState = JSON.parse(localStorage.getItem("spantree-options")) || {};
+export const intitialState = {
+  data: {},
+  version: 0,
+};
 
-export default (state = initialState, action) => {
+export default (state = intitialState, action) => {
   switch (action.type) {
-    case OPTIONS_CHANGED:
-      localStorage.setItem("spantree-options", JSON.stringify(action.payload));
-      return action.payload;
+    case OPTIONS_CHANGED: {
+      const newData = {
+        data: action.payload,
+        version: !isNaN(state.version) ? state.version + 1 : 0,
+      };
+      return newData;
+    }
     default:
       return state;
   }

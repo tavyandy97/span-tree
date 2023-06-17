@@ -6,7 +6,10 @@ import { TabIdentifierClient } from "chrome-tab-identifier";
 import Toggler from "../../components/Toggler";
 import Pane from "../../components/Pane";
 import SearchBar from "../SearchBar";
-import { toggleOpened } from "../../../../../event/src/actions/UI";
+import {
+  toggleOpened,
+  optionsChanged,
+} from "../../../../../event/src/actions/UI";
 import {
   applyClosedPageStyling,
   applyOpenedPageStyling,
@@ -16,6 +19,7 @@ import searchBarWorkerJS from "../../utils/searchBarWorker";
 import WebWorker from "./WebWorker";
 
 import "./App.css";
+import { defaultOptions } from "../../contexts/OptionsContext";
 
 const importFileIconCSS = `${browserKey()}-extension://${chrome.i18n.getMessage(
   "@@extension_id"
@@ -64,9 +68,14 @@ class App extends Component {
         tabId: tab,
       });
     });
+    if (!this.props.options.version || this.props.options.version === 0) {
+      const initialState =
+        JSON.parse(localStorage.getItem("spantree-options")) || defaultOptions;
+      this.props.optionsChanged(initialState);
+    }
   }
 
-  componentDidUpdate(_prevProps, prevState) {
+  componentDidUpdate(prevProps, prevState) {
     const { tabId } = this.state;
     if (tabId !== prevState.tabId) {
       if (this.props.opened[tabId] && this.shouldShowSpanTree()) {
@@ -82,6 +91,13 @@ class App extends Component {
       } else {
         applyClosedPageStyling();
       }
+    }
+
+    if (prevProps.options !== this.props.options) {
+      localStorage.setItem(
+        "spantree-options",
+        JSON.stringify(this.props.options.data)
+      );
     }
   }
 
@@ -132,9 +148,10 @@ const mapStateToProps = (state) => {
     opened: state.opened,
     pinned: state.pinned,
     width: state.width,
+    options: state.options,
   };
 };
 
-const mapDispatchToProps = { toggleOpened };
+const mapDispatchToProps = { toggleOpened, optionsChanged };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

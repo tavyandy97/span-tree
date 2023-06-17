@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
-import { Store } from "webext-redux";
+import { Store } from "@eduardoac-skimlinks/webext-redux";
 
 import App from "./containers/app/App";
 import { OptionsProvider } from "./contexts/OptionsContext";
@@ -22,7 +22,7 @@ if (document.querySelector(".layout-page") !== null) {
           <App />
         </OptionsProvider>
       </Provider>,
-      document.getElementById("rcr-anchor"),
+      document.getElementById("rcr-anchor")
     );
   });
 }

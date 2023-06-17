@@ -3,7 +3,7 @@ import { render } from "react-dom";
 
 import App from "./components/app/App";
 
-import { Store } from "webext-redux";
+import { Store } from "@eduardoac-skimlinks/webext-redux";
 import { Provider } from "react-redux";
 
 const proxyStore = new Store();

@@ -5,11 +5,15 @@ const OptionsContext = createContext({
   options: {},
 });
 
+export const defaultOptions = {
+  "auto-theme": false,
+  "compatibility-mode": true,
+};
+
 function OptionsProvider({ children, options }) {
-  const defaultOptions = { "auto-theme": false, "compatibility-mode": true };
   Object.keys(defaultOptions).forEach((key) => {
-    if (key in options) {
-      defaultOptions[key] = options[key];
+    if (key in options.data) {
+      defaultOptions[key] = options.data[key];
     }
   });
 
@@ -30,11 +34,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = {};
-
-const ConnectedOptionsConext = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(OptionsProvider);
+const ConnectedOptionsConext = connect(mapStateToProps)(OptionsProvider);
 
 export { ConnectedOptionsConext as OptionsProvider, OptionsContext };
